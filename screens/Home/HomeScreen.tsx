@@ -19,6 +19,8 @@ import {colors} from '../utils/Colors';
 import AppHeaders from './components/AppHeaders';
 import SearchComponents from './components/SearchComponents';
 import RecommendedCard from './components/RecommendedCard';
+import HomeBanner from './components/CustomSlider';
+import CustomSlider from './components/CustomSlider';
 import InstantBookingCard from './components/InstantBookings';
 
 const {width} = Dimensions.get('window');
@@ -150,14 +152,26 @@ const HomeScreen: React.FC = () => {
     setRecommendedList(updatedList);
   };
 
-  const renderCategory = ({item}: any) => {
+  const   renderCategory = ({item}: any) => {
     const isViewAll = item.title === 'View All';
+    if(isViewAll) {
+      return (
+        <View style={styles.categoryCard}>
+          <Image
+            source={item.image}
+            style={styles.greyImage}
+          />
+          <Text style={styles.viewAllTitle}>{item.title}</Text>
+        </View>
+      );
+    }
     return (
       <View
         style={[
           styles.categoryCard,
           // {backgroundColor: isViewAll ? 'grey' : 'transparent', borderRadius: 50,},
         ]}>
+          
         <Image
           source={item.image}
           style={[styles.categoryImage, {borderRadius: 50}]}
@@ -170,10 +184,16 @@ const HomeScreen: React.FC = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar barStyle="dark-content" backgroundColor="white" />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <AppHeaders />
         <SearchComponents />
-        <Image source={images.banner} style={styles.banner} />
+
+        <CustomSlider />
+        {/* <Image
+          source={images.banner}
+          style={styles.banner}
+        /> */}
+        <View style={{marginHorizontal: 5}}>
         <Text style={styles.sectionTitle}>{constant.top_booked_services}</Text>
         <FlatList
           data={categories}
@@ -183,16 +203,15 @@ const HomeScreen: React.FC = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{paddingHorizontal: 15}}
         />
+        </View>
         <View style={styles.recommendedHeader}>
-          <Text style={styles.sectionTitle}>
-            {constant.recommended_for_you}
-          </Text>
+          <Text style={styles.recommendedTitle}>{constant.recommended_for_you}</Text>
           <TouchableOpacity>
             <Text style={styles.viewAll}>{constant.view_all}</Text>
           </TouchableOpacity>
         </View>
 
-        <View>
+        <View style={{marginHorizontal: 5}}>
           <FlatList
             data={recommendedList}
             renderItem={({item}) => (
@@ -326,30 +345,51 @@ const styles = StyleSheet.create({
   },
   categoryCard: {
     alignItems: 'center',
-    marginRight: 15,
+    marginRight: 5,
   },
   categoryImage: {
-    width: 70,
-    height: 70,
+    width: 80,
+    height: 80,
     borderRadius: 50,
     marginBottom: 10,
   },
+  greyImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 50,
+    marginBottom: 10,
+    backgroundColor: colors.lightGray,
+  },
   categoryTitle: {
+    fontSize: 13,
+    fontWeight: 'regular',
+    color: colors.appColor,
+    textAlign: 'center',
+    marginTop: 5,
+  },
+  viewAllTitle: {
     fontSize: 14,
     fontWeight: 'regular',
-    color: 'red',
+    color: colors.black,
     textAlign: 'center',
     marginTop: 5,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginVertical: 20,
+    marginLeft: 16,
+    color: colors.appColor,
+    marginTop: 40,
+  },
+  recommendedTitle: {
+    fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 10,
-    marginLeft: 15,
-    color: 'red',
-    marginTop: 5,
+    marginLeft: 16,
+    color: colors.appColor,
+    marginTop: 20,
   },
-
   recommendedHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -358,9 +398,10 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   viewAll: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'grey',
     fontWeight: 'regular',
+    marginVertical: 10,
   },
   wrapper: {
     alignItems: 'flex-end',

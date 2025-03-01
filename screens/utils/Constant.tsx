@@ -14,7 +14,7 @@ export const constant = {
   new_born: "New Born",
   right_arrow: "Right Arrow",
   logo: "Logo",
-  top_booked_services: "Top Booked Services",
+  top_booked_services: "Top Booked Categories",
   view_all: "View All",
   recommended_for_you: "Recommended For You",
   view_all_services: "View All Services",

@@ -1,6 +1,7 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {images} from '../../utils/Images';
 import React from 'react';
+import { colors } from "../../utils/Colors";
 
 const RecommendedCard = React.memo(({item, onLike}: any) => {
   const renderStars = (rating: number) => {
@@ -20,9 +21,12 @@ const RecommendedCard = React.memo(({item, onLike}: any) => {
   return (
     <View style={styles.recommendedCard}>
       <View style={styles.topSection}>
-        <View style={styles.verifyContainer}>
-          <Image source={images.verify} style={styles.verifyImage} />
-        </View>
+        {/* <View style={styles.verifyContainer}> */}
+          <Image
+            source={images.verify}
+            style={styles.verifyImage}
+          />
+        {/* </View> */}
 
         <TouchableOpacity
           onPress={() => onLike(item.id)}
@@ -57,13 +61,13 @@ const RecommendedCard = React.memo(({item, onLike}: any) => {
 
 const styles = StyleSheet.create({
   starIcon: {
-    width: 16,
-    height: 16,
+    width: 12,
+    height: 12,
     resizeMode: 'contain',
     marginHorizontal: 2,
   },
   recommendedCard: {
-    width: 200,
+    width: 250,
     height: 300,
     marginRight: 15,
     borderRadius: 10,
@@ -84,18 +88,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   recommendedTitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
-    color: 'white',
+    color: colors.white,
     marginBottom: 5,
   },
   recommendedDescription: {
-    fontSize: 14,
-    color: 'white',
+    fontSize: 12,
+    color: colors.white,
     marginBottom: 10,
   },
   recommendedPrice: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'gray',
     marginTop: 5,
   },
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    padding: 10,
+    padding: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
@@ -116,12 +120,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   originalPrice: {
-    fontSize: 14,
-    color: 'gray',
+    fontSize: 12,
+    color: colors.white,
+    marginTop: 10,
     textDecorationLine: 'line-through',
   },
   offerPrice: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'yellow',
     fontWeight: 'bold',
   },
@@ -131,7 +136,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   ratingText: {
-    fontSize: 14,
+    fontSize: 10,
     color: 'white',
     marginLeft: 5,
   },
@@ -148,7 +153,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     position: 'absolute',
-    top: 10,
+    top: 5,
     left: 10,
     right: 10,
     zIndex: 1,
@@ -158,11 +163,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   verifyImage: {
-    width: 20,
-    height: 20,
+    width: 24,
+    height: 24,
     borderRadius: 15,
     marginRight: 10,
-    tintColor: 'red',
   },
 });
 export default RecommendedCard;

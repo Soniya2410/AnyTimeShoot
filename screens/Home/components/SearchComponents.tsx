@@ -12,7 +12,6 @@ const SearchComponents = () => {
           style={styles.searchInput}
         />
       </View>
-
       <View style={styles.wrapper}>
         <Text style={styles.yourLocation}>{constant.your_location}</Text>
         <View style={styles.locationContainer}>
@@ -27,7 +26,7 @@ const SearchComponents = () => {
 const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'flex-start',
-    marginLeft: 20,
+    marginRight: 10,
   },
   yourLocation: {
     fontSize: 12,
@@ -36,8 +35,8 @@ const styles = StyleSheet.create({
   },
   searchLocationContainer: {
     flexDirection: 'row',
-    marginHorizontal: 5,
-    marginLeft: 10,
+    // marginHorizontal: 5,
+    marginLeft: 16,
     marginBottom: 15,
     justifyContent: 'space-between',
   },
@@ -45,15 +44,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#f2f2f2',
-    borderRadius: 10,
-    paddingLeft: 10,
+    borderRadius: 8,
+    paddingLeft: 16,
     width: '70%',
   },
   searchInput: {
     paddingVertical: 10,
     paddingHorizontal: 15,
     fontSize: 16,
-    width: '100%',
+    // width: '100%',
   },
   searchIcon: {
     width: 20,

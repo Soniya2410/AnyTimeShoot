@@ -18,7 +18,7 @@ export const images = {
   banner: require('../../assets/images/banner.jpg'),
   filledStar: require('../../assets/images/filled_star.png'),
   emptyStar: require('../../assets/images/empty_star.png'),
-  verify: require('../../assets/images/verify.png'),
+  verify: require('../../assets/images/verified.png'),
   liked: require('../../assets/images/liked.png'),
   camProduct : require('../../assets/images/camProduct.png'),
   orangeProduct : require('../../assets/images/orangeProduct.jpeg'),
