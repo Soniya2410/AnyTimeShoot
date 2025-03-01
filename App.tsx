@@ -15,10 +15,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 //screens
-import HomeScreen from "./screens/HomeScreen";
-import ProfileScreen from "./screens/ProfileScreen";
-import CategoryScreen from "./screens/CategoryScreen";
-import MyBookingsScreen from "./screens/MyBookingsScreen";
+import HomeScreen from "./screens/Home/HomeScreen";
+import ProfileScreen from "./screens/Home/ProfileScreen";
+import CategoryScreen from "./screens/Home/CategoryScreen";
+import MyBookingsScreen from "./screens/Home/MyBookingsScreen";
+import { images } from "./screens/utils/Images";
 
 type RootStackParamList = {
 };
@@ -41,16 +42,16 @@ const BottomTabs: React.FC = () => {
             let iconSource;
             switch (route.name) {
               case 'Home':
-                iconSource = require('./assets/images/home.png');
+                iconSource = images.home
                 break;
               case 'Category':
-                iconSource = require('./assets/images/category.png');
+                iconSource = images.category
                 break;
               case 'My Bookings':
-                iconSource = require('./assets/images/myBookings.png');
+                iconSource = images.myBookings
                 break;
                 case 'Profile':
-                  iconSource = require('./assets/images/profile.png')
+                  iconSource = images.profile
                   break;
             }
             return (

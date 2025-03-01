@@ -1,0 +1,23 @@
+export const constant = {
+  title: "Any Time Shoot",
+  search_hint: "Search...",
+  location: "Gurugram",
+  your_location: "Your Location",
+  home: "Home",
+  category: "Category",
+  my_bookings: "My Bookings",
+  profile: "Profile",
+  wedding: "Wedding",
+  maternity: "Maternity",
+  pre_wedding: "Pre-Wedding",
+  product: "Product",
+  new_born: "New Born",
+  right_arrow: "Right Arrow",
+  logo: "Logo",
+  top_booked_services: "Top Booked Services",
+  view_all: "View All",
+  recommended_for_you: "Recommended For You",
+  view_all_services: "View All Services",
+  view_all_categories: "View All Categories",
+
+}
