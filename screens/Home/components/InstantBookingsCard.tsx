@@ -27,17 +27,18 @@ const InstantBookingCard = ({item}: any) => {
 
 const styles = StyleSheet.create({
   instantBookingCard: {
-    width: 180, 
-    height: 200, 
-    margin: 5,
+    width: '100%', 
+    height: 120, 
+    // margin: 5,
+    // marginHorizontal: 5,
     borderRadius: 10,
     backgroundColor: '#f9f9f9',
     overflow: 'hidden',
     position: 'relative', 
   },
   instantBookingImage: {
-    width: '100%',
-    height: '100%', 
+    // width: '100%',
+    // height: '100%', 
     resizeMode: 'cover',
   },
   overlay: {
@@ -47,18 +48,18 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     justifyContent: 'space-between', 
-    padding: 10,
+    padding: 5,
   },
   topSection: {
     alignItems: 'flex-start',
   },
   instantBookingName: {
-    fontSize: 18, 
+    fontSize: 10, 
     fontWeight: 'bold',
     color: 'white',
   },
   underline: {
-    height: 2,
+    height: 1,
     width: '100%',
     backgroundColor: 'yellow', 
     marginTop: 5, 
@@ -68,26 +69,29 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 10, 
+    bottom: 0
   },
   locationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-start'
   },
   locationIcon: {
-    width: 16,
-    height: 16,
-    marginRight: 5,
+    width: 10,
+    height: 10,
+    // marginRight: 5,
     tintColor: 'white', 
   },
   instantBookingAvailable: {
-    fontSize: 14, 
+    fontSize: 10, 
     color: 'white',
     fontWeight: 'bold',
   },
   instantBookingPrice: {
-    fontSize: 16, 
+    fontSize: 8, 
     color: 'white',
     fontWeight: 'bold',
+    marginLeft: 5,
   },
 });
 

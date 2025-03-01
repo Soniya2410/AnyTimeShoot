@@ -21,7 +21,8 @@ import SearchComponents from './components/SearchComponents';
 import RecommendedCard from './components/RecommendedCard';
 import HomeBanner from './components/CustomSlider';
 import CustomSlider from './components/CustomSlider';
-import InstantBookingCard from './components/InstantBookings';
+import InstantBookingCard from './components/InstantBookingsCard';
+import InstantBooking from './components/InstantBooking';
 
 const {width} = Dimensions.get('window');
 
@@ -225,31 +226,13 @@ const HomeScreen: React.FC = () => {
         </View>
 
         <View style={styles.recommendedHeader}>
-          <Text style={styles.sectionTitle}>{constant.instant_bookings}</Text>
+          <Text style={styles.recommendedTitle}>{constant.instant_bookings}</Text>
           <TouchableOpacity>
             <Text style={styles.viewAll}>{constant.view_all}</Text>
           </TouchableOpacity>
         </View>
-
-        <ScrollView style={styles.container}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={styles.row}>
-              {instantBooking.slice(0, 3).map(item => (
-                <InstantBookingCard key={item.id} item={item} />
-              ))}
-            </View>
-          </ScrollView>
-
-          <View style={styles.spacing} />
-
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={styles.row}>
-              {instantBooking.slice(3, 6).map(item => (
-                <InstantBookingCard key={item.id} item={item} />
-              ))}
-            </View>
-          </ScrollView>
-        </ScrollView>
+          <InstantBooking instantBooking={instantBooking} />
+      
       </ScrollView>
     </SafeAreaView>
   );
@@ -394,7 +377,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 15,
+    marginHorizontal: 10,
     marginVertical: 10,
   },
   viewAll: {
