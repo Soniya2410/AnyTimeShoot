@@ -13,9 +13,9 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { images } from '../utils/Images';
-import { constant } from '../utils/Constant';
-import { colors } from '../utils/Colors';
+import {images} from '../utils/Images';
+import {constant} from '../utils/Constant';
+import {colors} from '../utils/Colors';
 import AppHeaders from './components/AppHeaders';
 import SearchComponents from './components/SearchComponents';
 import RecommendedCard from './components/RecommendedCard';
@@ -61,7 +61,7 @@ const HomeScreen: React.FC = () => {
     {
       id: '1',
       service: 'Wedding Photography',
-      image: images.coupleMaternity, 
+      image: images.coupleMaternity,
       rating: 4.5,
       price: '2,00,000/-',
       available: 'Madurai',
@@ -69,7 +69,7 @@ const HomeScreen: React.FC = () => {
     {
       id: '2',
       service: 'Maternity Shoot',
-      image: images.familyMaternity, 
+      image: images.familyMaternity,
       rating: 4.7,
       price: '10,000/-',
       available: 'Delhi',
@@ -77,7 +77,7 @@ const HomeScreen: React.FC = () => {
     {
       id: '3',
       service: 'Pre-Wedding Shoot',
-      image: images.camProduct, 
+      image: images.camProduct,
       rating: 4.2,
       price: '1,00,000/-',
       available: 'Trichy',
@@ -85,7 +85,7 @@ const HomeScreen: React.FC = () => {
     {
       id: '4',
       service: 'Pre-Wedding Shoot',
-      image: images.stylishMan, 
+      image: images.stylishMan,
       rating: 4.2,
       price: '1,00,000/-',
       available: 'Coimbatore',
@@ -93,7 +93,7 @@ const HomeScreen: React.FC = () => {
     {
       id: '5',
       service: 'Pre-Wedding Shoot',
-      image: images.lawer, 
+      image: images.lawer,
       rating: 4.2,
       price: '1,00,000/-',
       available: 'Chennai',
@@ -101,7 +101,7 @@ const HomeScreen: React.FC = () => {
     {
       id: '6',
       service: 'Pre-Wedding Shoot',
-      image: images.orangeProduct, 
+      image: images.orangeProduct,
       rating: 4.2,
       price: '1,00,000/-',
       location: 'TamilNadu',
@@ -112,8 +112,8 @@ const HomeScreen: React.FC = () => {
 
   const categories = [
     {
-      id: '1', 
-      title: 'Wedding', 
+      id: '1',
+      title: 'Wedding',
       image: images.wedding,
     },
     {
@@ -150,27 +150,18 @@ const HomeScreen: React.FC = () => {
     setRecommendedList(updatedList);
   };
 
-  // const renderCategory = ({item}: any) => {
-  //   const isViewAll = item.title === 'View All';
-  //   return (
-  //     <View
-  //       style={[
-  //         styles.categoryCard,
-  //         // {backgroundColor: isViewAll ? 'grey' : 'transparent', borderRadius: 50,},
-  //       ]}>
-  //       <Image
-  //         source={item.image}
-  //         style={[styles.categoryImage, {borderRadius: 50}]}
-  //       />
-  //       <Text style={styles.categoryTitle}>{item.title}</Text>
-  //     </View>
-  //   );
-  // };
-
   const renderCategory = ({item}: any) => {
+    const isViewAll = item.title === 'View All';
     return (
-      <View style={styles.categoryCard}>
-        <Image source={item.image} style={[styles.categoryImage, {borderRadius: 50}]} />
+      <View
+        style={[
+          styles.categoryCard,
+          // {backgroundColor: isViewAll ? 'grey' : 'transparent', borderRadius: 50,},
+        ]}>
+        <Image
+          source={item.image}
+          style={[styles.categoryImage, {borderRadius: 50}]}
+        />
         <Text style={styles.categoryTitle}>{item.title}</Text>
       </View>
     );
@@ -182,10 +173,7 @@ const HomeScreen: React.FC = () => {
       <ScrollView>
         <AppHeaders />
         <SearchComponents />
-        <Image
-          source={images.banner}
-          style={styles.banner}
-        />
+        <Image source={images.banner} style={styles.banner} />
         <Text style={styles.sectionTitle}>{constant.top_booked_services}</Text>
         <FlatList
           data={categories}
@@ -196,7 +184,9 @@ const HomeScreen: React.FC = () => {
           contentContainerStyle={{paddingHorizontal: 15}}
         />
         <View style={styles.recommendedHeader}>
-          <Text style={styles.sectionTitle}>{constant.recommended_for_you}</Text>
+          <Text style={styles.sectionTitle}>
+            {constant.recommended_for_you}
+          </Text>
           <TouchableOpacity>
             <Text style={styles.viewAll}>{constant.view_all}</Text>
           </TouchableOpacity>
@@ -216,28 +206,48 @@ const HomeScreen: React.FC = () => {
         </View>
 
         <View style={styles.recommendedHeader}>
-        <Text style={styles.sectionTitle}>(constant.instant_bookings)</Text>
-        <TouchableOpacity>
-          <Text style={styles.viewAll}>{constant.view_all}</Text>
-        </TouchableOpacity>
-      </View>
+          <Text style={styles.sectionTitle}>{constant.instant_bookings}</Text>
+          <TouchableOpacity>
+            <Text style={styles.viewAll}>{constant.view_all}</Text>
+          </TouchableOpacity>
+        </View>
 
-      <View>
-        <FlatList
-          data={instantBooking}
-          renderItem={({item}) => <InstantBookingCard item={item} />}
-          keyExtractor={item => item.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{paddingHorizontal: 15}}
-        />
-      </View>
+        <ScrollView style={styles.container}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.row}>
+              {instantBooking.slice(0, 3).map(item => (
+                <InstantBookingCard key={item.id} item={item} />
+              ))}
+            </View>
+          </ScrollView>
+
+          <View style={styles.spacing} />
+
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.row}>
+              {instantBooking.slice(3, 6).map(item => (
+                <InstantBookingCard key={item.id} item={item} />
+              ))}
+            </View>
+          </ScrollView>
+        </ScrollView>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  spacing: {
+    height: 10,
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -307,7 +317,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: 'red',
   },
-  
+
   banner: {
     width: '100%',
     height: 180,
@@ -339,7 +349,7 @@ const styles = StyleSheet.create({
     color: 'red',
     marginTop: 5,
   },
-  
+
   recommendedHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -367,7 +377,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
   },
-  
+
   priceContainer: {
     alignItems: 'flex-end',
   },

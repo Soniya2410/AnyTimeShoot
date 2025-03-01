@@ -7,14 +7,19 @@ const InstantBookingCard = ({item}: any) => {
   return (
     <View style={styles.instantBookingCard}>
       <Image source={item.image} style={styles.instantBookingImage} />
-      <View style={styles.instantBookingInfo}>
-        <Text style={styles.instantBookingName}>{item.name}</Text>
-        <Text style={styles.instantBookingService}>{item.service}</Text>
-        <View style={styles.instantBookingDetails}>
-          <Text style={styles.instantBookingRating}>⭐ {item.rating}</Text>
+      <View style={styles.overlay}>
+        <View style={styles.topSection}>
+          <Text style={styles.instantBookingName}>{item.service}</Text>
+          <View style={styles.underline} />
+        </View>
+
+        <View style={styles.bottomSection}>
+          <View style={styles.locationContainer}>
+            <Image source={images.location} style={styles.locationIcon} />
+            <Text style={styles.instantBookingAvailable}>{item.available}</Text>
+          </View>
           <Text style={styles.instantBookingPrice}>{item.price}</Text>
         </View>
-        <Text style={styles.instantBookingAvailable}>{item.available}</Text>
       </View>
     </View>
   );
@@ -22,48 +27,66 @@ const InstantBookingCard = ({item}: any) => {
 
 const styles = StyleSheet.create({
   instantBookingCard: {
-    width: 200,
-    marginRight: 15,
+    width: 180, 
+    height: 200, 
+    margin: 5,
     borderRadius: 10,
     backgroundColor: '#f9f9f9',
     overflow: 'hidden',
+    position: 'relative', 
   },
   instantBookingImage: {
     width: '100%',
-    height: 120,
+    height: '100%', 
     resizeMode: 'cover',
   },
-  instantBookingInfo: {
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'space-between', 
     padding: 10,
   },
+  topSection: {
+    alignItems: 'flex-start',
+  },
   instantBookingName: {
-    fontSize: 16,
+    fontSize: 18, 
     fontWeight: 'bold',
-    color: colors.appColor,
+    color: 'white',
   },
-  instantBookingService: {
-    fontSize: 14,
-    color: 'black',
-    marginVertical: 5,
+  underline: {
+    height: 2,
+    width: '100%',
+    backgroundColor: 'yellow', 
+    marginTop: 5, 
   },
-  instantBookingDetails: {
+  bottomSection: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 5,
+    marginTop: 10, 
   },
-  instantBookingRating: {
-    fontSize: 14,
-    color: 'black',
+  locationContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  instantBookingPrice: {
-    fontSize: 14,
-    color: colors.appColor,
-    fontWeight: 'bold',
+  locationIcon: {
+    width: 16,
+    height: 16,
+    marginRight: 5,
+    tintColor: 'white', 
   },
   instantBookingAvailable: {
-    fontSize: 12,
-    color: colors.appColor,
+    fontSize: 14, 
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  instantBookingPrice: {
+    fontSize: 16, 
+    color: 'white',
     fontWeight: 'bold',
   },
 });
