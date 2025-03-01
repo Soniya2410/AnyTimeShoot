@@ -19,12 +19,12 @@ const CustomSlider = () => {
   const scrollViewRef = useRef<ScrollView>(null);
 
   const ImagesArray = [
-    { id: 1, uri: images.wedding },
-    { id: 2, uri: images.maternity },
-    { id: 3, uri: images.preWedding },
-    { id: 4, uri: images.maternity },
-    { id: 5, uri: images.product },
-    { id: 6, uri: images.preWedding },
+    { id: 1, uri: images.banner },
+    { id: 2, uri: images.banner2 },
+    { id: 3, uri: images.banner3 },
+    { id: 4, uri: images.banner4 },
+    { id: 5, uri: images.banner5 },
+    { id: 6, uri: images.banner6 },
   ];
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {

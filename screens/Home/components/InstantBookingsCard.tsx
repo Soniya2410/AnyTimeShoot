@@ -29,17 +29,14 @@ const styles = StyleSheet.create({
   instantBookingCard: {
     width: '100%', 
     height: 120, 
-    // margin: 5,
-    // marginHorizontal: 5,
     borderRadius: 10,
     backgroundColor: '#f9f9f9',
     overflow: 'hidden',
     position: 'relative', 
   },
   instantBookingImage: {
-    // width: '100%',
-    // height: '100%', 
     resizeMode: 'cover',
+    
   },
   overlay: {
     position: 'absolute',
@@ -47,7 +44,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    justifyContent: 'space-between', 
+    justifyContent: 'flex-end', 
     padding: 5,
   },
   topSection: {
@@ -79,7 +76,6 @@ const styles = StyleSheet.create({
   locationIcon: {
     width: 10,
     height: 10,
-    // marginRight: 5,
     tintColor: 'white', 
   },
   instantBookingAvailable: {

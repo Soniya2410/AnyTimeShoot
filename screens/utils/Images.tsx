@@ -25,5 +25,10 @@ export const images = {
   stylishMan: require('../../assets/images/stylishMan.jpg'),
   coupleMaternity: require('../../assets/images/coupleMaternity.jpeg'),
   lawer: require('../../assets/images/lawer.jpeg'),
-  familyMaternity: require('../../assets/images/familyMaternity.jpeg')
+  familyMaternity: require('../../assets/images/familyMaternity.jpeg'),
+  banner2: require('../../assets/images/banner2.png'),
+  banner3: require('../../assets/images/banner3.jpg'),
+  banner4: require('../../assets/images/banner4.jpeg'),
+  banner5: require('../../assets/images/banner5.png'),
+  banner6: require('../../assets/images/banner6.jpg'),
 }

@@ -66,7 +66,7 @@ const HomeScreen: React.FC = () => {
       service: 'Wedding Photography',
       image: images.coupleMaternity,
       rating: 4.5,
-      price: '2,00,000/-',
+      price: '$2,00,000/-',
       available: 'Madurai',
     },
     {
