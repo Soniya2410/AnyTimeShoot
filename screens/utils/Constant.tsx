@@ -21,5 +21,8 @@ export const constant = {
   view_all_categories: "View All Categories",
   instant_bookings: "Instant Booking Pacakges",
   wedding_packages_near_you: "Wedding Packages Near You",
+  upto_to: "Up to 70% off| Wedding, Prewedding Packages", 
+  view_more: "View More",
+  bestSeller_package: "Bestseller Packages",
 
 }

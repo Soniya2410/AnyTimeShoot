@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   instantBookingName: {
-    fontSize: 10, 
+    fontSize: 9, 
     fontWeight: 'bold',
     color: 'white',
   },
@@ -59,13 +59,13 @@ const styles = StyleSheet.create({
     height: 1,
     width: '100%',
     backgroundColor: 'yellow', 
-    marginTop: 5, 
+    marginTop: 2, 
   },
   bottomSection: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 10, 
+    marginTop: 5, 
     bottom: 0
   },
   locationContainer: {
@@ -74,17 +74,18 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   locationIcon: {
-    width: 10,
-    height: 10,
+    width: 8,
+    height: 8,
+    marginRight: 2,
     tintColor: 'white', 
   },
   instantBookingAvailable: {
-    fontSize: 10, 
+    fontSize: 8, 
     color: 'white',
     fontWeight: 'bold',
   },
   instantBookingPrice: {
-    fontSize: 8, 
+    fontSize: 7, 
     color: 'white',
     fontWeight: 'bold',
     marginLeft: 5,

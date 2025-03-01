@@ -23,6 +23,7 @@ import HomeBanner from './components/CustomSlider';
 import CustomSlider from './components/CustomSlider';
 import InstantBookingCard from './components/InstantBookingsCard';
 import InstantBooking from './components/InstantBooking';
+import PreweddingCard from './components/PreweddingCard';
 
 const {width} = Dimensions.get('window');
 
@@ -55,6 +56,132 @@ const HomeScreen: React.FC = () => {
       price: '1,00,000/-',
       offerPrice: '90,000/-',
       image: images.preWedding,
+      rating: 4,
+      liked: false,
+    },
+  ];
+
+  const prewedding = [
+    {
+      id: '1',
+      title: 'Wedding Xperts',
+      description: 'Capture.',
+      price: '2,00,000/-',
+      offerPrice: '1,80,000/-',
+      image: images.wedding,
+      rating: 4.5,
+      liked: false,
+    },
+    {
+      id: '2',
+      title: 'Maternity Shoot',
+      description: 'Beautiful',
+      price: '10,000/-',
+      offerPrice: '8,000/-',
+      image: images.maternity,
+      rating: 4.7,
+      liked: false,
+    },
+    {
+      id: '3',
+      title: 'Pre-Wedding Shoot',
+      description: 'Romantic',
+      price: '1,00,000/-',
+      offerPrice: '90,000/-',
+      image: images.preWedding,
+      rating: 4,
+      liked: false,
+    },
+    {
+      id: '4',
+      title: 'Pre-Wedding Shoot',
+      description: 'Romantic',
+      price: '1,00,000/-',
+      offerPrice: '90,000/-',
+      image: images.preWedding,
+      rating: 4,
+      liked: false,
+    },
+    {
+      id: '5',
+      title: 'Pre-Wedding Shoot',
+      description: 'Romantic',
+      price: '1,00,000/-',
+      offerPrice: '90,000/-',
+      image: images.preWedding,
+      rating: 4,
+      liked: false,
+    },
+    {
+      id: '6',
+      title: 'Pre-Wedding Shoot',
+      description: 'Romantic',
+      price: '1,00,000/-',
+      offerPrice: '90,000/-',
+      image: images.preWedding,
+      rating: 4,
+      liked: false,
+    },
+  ];
+
+  const bestSeller = [
+    {
+      id: '1',
+      title: 'Wedding Xperts',
+      description: 'Capture.',
+      price: '2,00,000/-',
+      offerPrice: '1,80,000/-',
+      image: images.wedding,
+      rating: 4.5,
+      liked: false,
+    },
+    {
+      id: '2',
+      title: 'Maternity Shoot',
+      description: 'Beautiful',
+      price: '10,000/-',
+      offerPrice: '8,000/-',
+      image: images.maternity,
+      rating: 4.7,
+      liked: false,
+    },
+    {
+      id: '3',
+      title: 'Pre-Wedding Shoot',
+      description: 'Romantic',
+      price: '1,00,000/-',
+      offerPrice: '90,000/-',
+      image: images.preWedding,
+      rating: 4,
+      liked: false,
+    },
+    {
+      id: '4',
+      title: 'Pre-Wedding Shoot',
+      description: 'Romantic',
+      price: '1,00,000/-',
+      offerPrice: '90,000/-',
+      image: images.wedding,
+      rating: 4,
+      liked: false,
+    },
+    {
+      id: '5',
+      title: 'Pre-Wedding Shoot',
+      description: 'Romantic',
+      price: '1,00,000/-',
+      offerPrice: '90,000/-',
+      image: images.wedding,
+      rating: 4,
+      liked: false,
+    },
+    {
+      id: '6',
+      title: 'Pre-Wedding Shoot',
+      description: 'Romantic',
+      price: '1,00,000/-',
+      offerPrice: '90,000/-',
+      image: images.wedding,
       rating: 4,
       liked: false,
     },
@@ -112,7 +239,8 @@ const HomeScreen: React.FC = () => {
   ];
 
   const [recommendedList, setRecommendedList] = useState(recommended);
-
+  const [preweddingList, setPreweddingList] = useState(prewedding);
+  const [bestSellerPackageList, setBestSellerPackageList] = useState(bestSeller);
   const categories = [
     {
       id: '1',
@@ -153,6 +281,13 @@ const HomeScreen: React.FC = () => {
     setRecommendedList(updatedList);
   };
 
+  const toggleWeddingLike = (id: string) => {
+    const updatedList = preweddingList.map(item =>
+      item.id === id ? {...item, liked: !item.liked} : item,
+    );
+    setPreweddingList(updatedList);
+  };
+
   const   renderCategory = ({item}: any) => {
     const isViewAll = item.title === 'View All';
     if(isViewAll) {
@@ -188,7 +323,6 @@ const HomeScreen: React.FC = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <AppHeaders />
         <SearchComponents />
-
         <CustomSlider />
         {/* <Image
           source={images.banner}
@@ -216,7 +350,7 @@ const HomeScreen: React.FC = () => {
           <FlatList
             data={recommendedList}
             renderItem={({item}) => (
-              <RecommendedCard item={item} onLike={toggleLike} cardSize={300}/>
+              <RecommendedCard item={item} onLike={toggleLike} cardSize={280}/>
             )}
             keyExtractor={item => item.id}
             horizontal
@@ -253,6 +387,41 @@ const HomeScreen: React.FC = () => {
             contentContainerStyle={{paddingHorizontal: 15}}
           />
         </View>
+        {/* Offer Packages  */}
+        <View style={styles.weddingPackage}>
+          <Text style={styles.recommendedTitle}>{constant.upto_to}</Text>
+        </View>
+        <FlatList
+          data={preweddingList}
+          renderItem={({item}) => (
+            <View style={styles.itemContainer}>
+            <PreweddingCard item={item} onLike={toggleWeddingLike} cardSize={120}/>
+            </View>
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={3} 
+          contentContainerStyle={styles.container}
+          showsVerticalScrollIndicator={false}
+        />
+         <View style={{marginHorizontal: 15}}>
+          <Text style={styles.viewMore}>{constant.view_more}</Text>
+        </View>
+
+        <View style={styles.weddingPackage}>
+          <Text style={styles.recommendedTitle}>{constant.bestSeller_package}</Text>
+        </View>
+        <FlatList
+          data={bestSellerPackageList}
+          renderItem={({item}) => (
+            <View style={styles.itemContainer}>
+            <PreweddingCard item={item} onLike={toggleWeddingLike} cardSize={120}/>
+            </View>
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={3} 
+          contentContainerStyle={styles.container}
+          showsVerticalScrollIndicator={false}
+        />
       </ScrollView>
     </SafeAreaView>
   );
@@ -262,6 +431,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+  },
+  itemContainer: {
+    flex: 1, 
+    margin: 5, 
   },
   row: {
     flexDirection: 'row',
@@ -412,6 +585,12 @@ const styles = StyleSheet.create({
     color: colors.grey,
     fontWeight: 'regular',
     textAlign: 'center',
+    marginTop: 5,
+  },
+  viewMore: {
+    fontSize: 12,
+    color: colors.appColor,
+    fontWeight: 'regular',
     marginTop: 5,
   },
   wrapper: {
