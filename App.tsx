@@ -5,6 +5,8 @@ import {
   Image,
   Platform,
   StatusBar,
+  View,
+  TouchableOpacity,
   
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -20,6 +22,7 @@ import ProfileScreen from "./screens/Home/ProfileScreen";
 import CategoryScreen from "./screens/Home/CategoryScreen";
 import MyBookingsScreen from "./screens/Home/MyBookingsScreen";
 import { images } from "./screens/utils/Images";
+import { colors } from "./screens/utils/Colors";
 
 type RootStackParamList = {
 };
@@ -73,7 +76,35 @@ const BottomTabs: React.FC = () => {
             height: Platform.OS === 'ios' ? 80 : 60,
             paddingBottom: Platform.OS === 'ios' ? 20 : 10, 
           },
-        })}>
+          tabBarButton: (props) => {
+            const { onPress, onLongPress, accessibilityState, children } = props;
+            return (
+              <TouchableOpacity
+                onPress={onPress}
+                activeOpacity={0.8}
+                style={{ flex: 1, position: 'relative' }}
+              >
+                {accessibilityState?.selected && (
+                  <View
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: 3,
+                      backgroundColor: 'red', // Highlight color
+                    }}
+                  />
+                )}
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                  {children}
+                </View>
+              </TouchableOpacity>
+            );
+          },
+        })}
+        >
+
         <Tab.Screen name="Home" component={HomeScreen}/>
         <Tab.Screen name="Category" component={CategoryScreen}/>
         <Tab.Screen name="My Bookings" component={MyBookingsScreen}/>
