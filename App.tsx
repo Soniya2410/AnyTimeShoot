@@ -63,15 +63,15 @@ const BottomTabs: React.FC = () => {
                 style={{
                   width: 25,
                   height: 25,
-                  tintColor: focused ? 'red' : 'gray',
+                  tintColor: focused ? colors.appColor : 'gray',
                 }}
                 resizeMode="contain"
               />
             );
           },
-          tabBarActiveTintColor: 'red',
+          tabBarActiveTintColor: colors.appColor,
           tabBarInactiveTintColor: 'gray',
-          tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
+          tabBarLabelStyle: {fontSize: 12, fontWeight: '500', marginTop: 2},
           tabBarStyle: {
             height: Platform.OS === 'ios' ? 80 : 60,
             paddingBottom: Platform.OS === 'ios' ? 20 : 10, 
@@ -92,7 +92,7 @@ const BottomTabs: React.FC = () => {
                       left: 0,
                       right: 0,
                       height: 3,
-                      backgroundColor: 'red', // Highlight color
+                      backgroundColor: colors.appColor, 
                     }}
                   />
                 )}

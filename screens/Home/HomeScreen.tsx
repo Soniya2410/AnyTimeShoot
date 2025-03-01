@@ -552,7 +552,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginVertical: 20,
     marginLeft: 16,
     color: colors.appColor,
@@ -560,7 +560,7 @@ const styles = StyleSheet.create({
   },
   recommendedTitle: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginVertical: 10,
     marginLeft: 16,
     color: colors.appColor,
