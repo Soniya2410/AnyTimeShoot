@@ -3,7 +3,7 @@ import {images} from '../../utils/Images';
 import React from 'react';
 import { colors } from "../../utils/Colors";
 
-const RecommendedCard = React.memo(({item, onLike}: any) => {
+const RecommendedCard = React.memo(({item, onLike, cardSize}: any) => {
   const renderStars = (rating: number) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -19,7 +19,7 @@ const RecommendedCard = React.memo(({item, onLike}: any) => {
   };
 
   return (
-    <View style={styles.recommendedCard}>
+    <View style={[styles.recommendedCard, {height: cardSize}]}>
       <View style={styles.topSection}>
         {/* <View style={styles.verifyContainer}> */}
           <Image

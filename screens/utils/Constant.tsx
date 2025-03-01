@@ -20,4 +20,6 @@ export const constant = {
   view_all_services: "View All Services",
   view_all_categories: "View All Categories",
   instant_bookings: "Instant Booking Pacakges",
+  wedding_packages_near_you: "Wedding Packages Near You",
+
 }

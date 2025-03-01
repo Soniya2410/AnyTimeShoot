@@ -21,7 +21,8 @@ const InstantBooking = ({instantBooking} : {instantBooking : any}) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10, 
+    paddingHorizontal: 10, 
+    paddingVertical: 5
   },
   itemContainer: {
     flex: 1, 

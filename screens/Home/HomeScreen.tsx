@@ -216,7 +216,7 @@ const HomeScreen: React.FC = () => {
           <FlatList
             data={recommendedList}
             renderItem={({item}) => (
-              <RecommendedCard item={item} onLike={toggleLike} />
+              <RecommendedCard item={item} onLike={toggleLike} cardSize={300}/>
             )}
             keyExtractor={item => item.id}
             horizontal
@@ -232,7 +232,27 @@ const HomeScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
           <InstantBooking instantBooking={instantBooking} />
-      
+
+          {/* Wedding Package  */}
+          <View style={styles.weddingPackage}>
+          <Text style={styles.recommendedTitle}>{constant.wedding_packages_near_you}</Text>
+          <TouchableOpacity>
+            <Text style={styles.viewAll}>{constant.view_all}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={{marginHorizontal: 5}}>
+          <FlatList
+            data={recommendedList}
+            renderItem={({item}) => (
+              <RecommendedCard item={item} onLike={toggleLike} cardSize={200}/>
+            )}
+            keyExtractor={item => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{paddingHorizontal: 15}}
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -358,7 +378,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     marginVertical: 20,
     marginLeft: 16,
@@ -366,25 +386,33 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   recommendedTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     marginVertical: 10,
     marginLeft: 16,
     color: colors.appColor,
-    marginTop: 20,
+    marginTop: 10,
   },
   recommendedHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginHorizontal: 10,
-    marginVertical: 10,
+    marginVertical: 5,
+  },
+  weddingPackage: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 10,
+    // marginVertical: 5,
   },
   viewAll: {
     fontSize: 14,
-    color: 'grey',
+    color: colors.grey,
     fontWeight: 'regular',
-    marginVertical: 10,
+    textAlign: 'center',
+    marginTop: 5,
   },
   wrapper: {
     alignItems: 'flex-end',
