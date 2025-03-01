@@ -86,11 +86,14 @@ const HomeScreen: React.FC = () => {
       const stars = [];
       for (let i = 1; i <= 5; i++) {
         stars.push(
-          <Icon
+          <Image
             key={i}
-            name={i <= rating ? 'star' : 'star-border'}
-            size={16}
-            color={i <= rating ? '#FFD700' : '#CCCCCC'}
+            source={
+              i <= rating
+                ? require('../assets/images/filled_star.png')
+                : require('../assets/images/empty_star.png')
+            }
+            style={styles.starIcon}
           />,
         );
       }
@@ -99,22 +102,46 @@ const HomeScreen: React.FC = () => {
 
     return (
       <View style={styles.recommendedCard}>
+        {/* Top Section: Verify Icon and Like Button */}
+        <View style={styles.topSection}>
+          <View style={styles.verifyContainer}>
+            <Image
+              source={require('../assets/images/verify.png')}
+              style={styles.verifyImage}
+            />
+          </View>
+
+          <TouchableOpacity
+            onPress={() => onLike(item.id)}
+            style={styles.likeButton}>
+            <Image
+              source={
+                item.liked
+                  ? require('../assets/images/liked.png')
+                  : require('../assets/images/heart.png')
+              }
+              style={styles.likeIcon}
+            />
+          </TouchableOpacity>
+        </View>
+
         <Image source={item.image} style={styles.recommendedImage} />
 
-        <View style={styles.recommendedInfo}>
-          <Text style={styles.recommendedTitle}>{item.title}</Text>
-          <Text style={styles.recommendedDescription}>{item.description}</Text>
-
-          <View style={styles.detailsContainer}>
+        <View style={styles.bottomSection}>
+          <View style={styles.leftSection}>
             <View style={styles.ratingContainer}>
               {renderStars(item.rating)}
               <Text style={styles.ratingText}>({item.rating})</Text>
             </View>
+            <Text style={styles.recommendedTitle}>{item.title}</Text>
+            <Text style={styles.recommendedDescription}>
+              {item.description}
+            </Text>
+          </View>
 
-            <View style={styles.priceContainer}>
-              <Text style={styles.originalPrice}>{item.price}</Text>
-              <Text style={styles.offerPrice}>{item.offerPrice}</Text>
-            </View>
+          <View style={styles.rightSection}>
+            <Text style={styles.originalPrice}>{item.price}</Text>
+            <Text style={styles.offerPrice}>{item.offerPrice}</Text>
           </View>
         </View>
       </View>
@@ -287,6 +314,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     width: '100%',
   },
+  starIcon: {
+    width: 16,
+    height: 16,
+    resizeMode: 'contain',
+    marginHorizontal: 2,
+  },
   searchIcon: {
     width: 20,
     height: 20,
@@ -304,6 +337,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginLeft: 10,
     color: 'red',
+  },
+  likeIcon: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
   },
   banner: {
     width: '100%',
@@ -373,11 +411,45 @@ const styles = StyleSheet.create({
     color: 'gray',
     marginTop: 5,
   },
-  likeIcon: {
-    fontSize: 20,
+  topSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     position: 'absolute',
-    top: 5,
-    right: 5,
+    top: 10,
+    left: 10,
+    right: 10,
+    zIndex: 1,
+  },
+  bottomSection: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+  },
+  leftSection: {
+    flex: 1,
+  },
+  rightSection: {
+    alignItems: 'flex-end',
+  },
+  verifyContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  verifyImage: {
+    width: 20,
+    height: 20,
+    borderRadius: 15,
+    marginRight: 10,
+    tintColor: 'red',
+  },
+  likeButton: {
+    padding: 5,
   },
   recommendedHeader: {
     flexDirection: 'row',
@@ -409,10 +481,12 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 5,
   },
   ratingText: {
     fontSize: 14,
     color: 'white',
+    marginLeft: 5,
   },
   priceContainer: {
     alignItems: 'flex-end',
