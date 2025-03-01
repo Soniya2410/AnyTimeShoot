@@ -230,11 +230,11 @@ const HomeScreen: React.FC = () => {
     },
     {
       id: '6',
-      service: 'Pre-Wedding Shoot',
+      service: '',
       image: images.orangeProduct,
       rating: 4.2,
-      price: '1,00,000/-',
-      location: 'TamilNadu',
+      price: '',
+      location: 'View All',
     },
   ];
 

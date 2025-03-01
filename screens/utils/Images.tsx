@@ -31,4 +31,5 @@ export const images = {
   banner4: require('../../assets/images/banner4.jpeg'),
   banner5: require('../../assets/images/banner5.png'),
   banner6: require('../../assets/images/banner6.jpg'),
+  rightBgArrow: require('../../assets/images/arrow-right.png'),
 }
