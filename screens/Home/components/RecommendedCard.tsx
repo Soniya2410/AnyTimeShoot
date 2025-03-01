@@ -1,20 +1,15 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { images } from "../../utils/Images";
-import React from "react";
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {images} from '../../utils/Images';
+import React from 'react';
 
 const RecommendedCard = React.memo(({item, onLike}: any) => {
-
   const renderStars = (rating: number) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <Image
           key={i}
-          source={
-            i <= rating
-              ? images.filledStar
-              : images.emptyStar
-          }
+          source={i <= rating ? images.filledStar : images.emptyStar}
           style={styles.starIcon}
         />,
       );
@@ -24,24 +19,16 @@ const RecommendedCard = React.memo(({item, onLike}: any) => {
 
   return (
     <View style={styles.recommendedCard}>
-      {/* Top Section: Verify Icon and Like Button */}
       <View style={styles.topSection}>
         <View style={styles.verifyContainer}>
-          <Image
-            source={images.verify}
-            style={styles.verifyImage}
-          />
+          <Image source={images.verify} style={styles.verifyImage} />
         </View>
 
         <TouchableOpacity
           onPress={() => onLike(item.id)}
           style={styles.likeButton}>
           <Image
-            source={
-              item.liked
-                ? images.liked
-                : images.heart
-            }
+            source={item.liked ? images.liked : images.heart}
             style={styles.likeIcon}
           />
         </TouchableOpacity>
@@ -56,9 +43,7 @@ const RecommendedCard = React.memo(({item, onLike}: any) => {
             <Text style={styles.ratingText}>({item.rating})</Text>
           </View>
           <Text style={styles.recommendedTitle}>{item.title}</Text>
-          <Text style={styles.recommendedDescription}>
-            {item.description}
-          </Text>
+          <Text style={styles.recommendedDescription}>{item.description}</Text>
         </View>
 
         <View style={styles.rightSection}>
@@ -70,8 +55,7 @@ const RecommendedCard = React.memo(({item, onLike}: any) => {
   );
 });
 
-const styles = StyleSheet.create({  
-
+const styles = StyleSheet.create({
   starIcon: {
     width: 16,
     height: 16,

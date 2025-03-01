@@ -102,7 +102,6 @@ const HomeScreen: React.FC = () => {
 
     return (
       <View style={styles.recommendedCard}>
-        {/* Top Section: Verify Icon and Like Button */}
         <View style={styles.topSection}>
           <View style={styles.verifyContainer}>
             <Image

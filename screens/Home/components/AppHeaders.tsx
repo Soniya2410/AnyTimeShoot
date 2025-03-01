@@ -1,36 +1,24 @@
-import { Image, Text, View, StyleSheet } from "react-native"
-import { constant } from "../../utils/Constant"
-import { images } from "../../utils/Images"
-import { colors } from "../../utils/Colors"
+import {Image, Text, View, StyleSheet} from 'react-native';
+import {constant} from '../../utils/Constant';
+import {images} from '../../utils/Images';
+import {colors} from '../../utils/Colors';
 
 const AppHeaders = () => {
-    return(
-       <View style={styles.header}>
-                <View style={styles.logoContainer}>
-                  <Image
-                    source={images.logo}
-                    style={styles.logo}
-                  />
-                  <Text style={styles.logoText}>{constant.title}</Text>
-                </View>
-      
-                <View style={styles.iconsContainer}>
-                  <Image
-                    source={images.notification}
-                    style={styles.icon}
-                  />
-                  <Image
-                    source={images.heart}
-                    style={styles.icon}
-                  />
-                  <Image
-                    source={images.message}
-                    style={styles.icon}
-                  />
-                </View>
-              </View>
-    )
-}
+  return (
+    <View style={styles.header}>
+      <View style={styles.logoContainer}>
+        <Image source={images.logo} style={styles.logo} />
+        <Text style={styles.logoText}>{constant.title}</Text>
+      </View>
+
+      <View style={styles.iconsContainer}>
+        <Image source={images.notification} style={styles.icon} />
+        <Image source={images.heart} style={styles.icon} />
+        <Image source={images.message} style={styles.icon} />
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   header: {

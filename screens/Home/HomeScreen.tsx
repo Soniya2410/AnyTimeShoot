@@ -19,6 +19,7 @@ import { colors } from '../utils/Colors';
 import AppHeaders from './components/AppHeaders';
 import SearchComponents from './components/SearchComponents';
 import RecommendedCard from './components/RecommendedCard';
+import InstantBookingCard from './components/InstantBookings';
 
 const {width} = Dimensions.get('window');
 
@@ -53,6 +54,57 @@ const HomeScreen: React.FC = () => {
       image: images.preWedding,
       rating: 4,
       liked: false,
+    },
+  ];
+
+  const instantBooking = [
+    {
+      id: '1',
+      service: 'Wedding Photography',
+      image: images.coupleMaternity, 
+      rating: 4.5,
+      price: '2,00,000/-',
+      available: 'Madurai',
+    },
+    {
+      id: '2',
+      service: 'Maternity Shoot',
+      image: images.familyMaternity, 
+      rating: 4.7,
+      price: '10,000/-',
+      available: 'Delhi',
+    },
+    {
+      id: '3',
+      service: 'Pre-Wedding Shoot',
+      image: images.camProduct, 
+      rating: 4.2,
+      price: '1,00,000/-',
+      available: 'Trichy',
+    },
+    {
+      id: '4',
+      service: 'Pre-Wedding Shoot',
+      image: images.stylishMan, 
+      rating: 4.2,
+      price: '1,00,000/-',
+      available: 'Coimbatore',
+    },
+    {
+      id: '5',
+      service: 'Pre-Wedding Shoot',
+      image: images.lawer, 
+      rating: 4.2,
+      price: '1,00,000/-',
+      available: 'Chennai',
+    },
+    {
+      id: '6',
+      service: 'Pre-Wedding Shoot',
+      image: images.orangeProduct, 
+      rating: 4.2,
+      price: '1,00,000/-',
+      location: 'TamilNadu',
     },
   ];
 
@@ -98,23 +150,31 @@ const HomeScreen: React.FC = () => {
     setRecommendedList(updatedList);
   };
 
+  // const renderCategory = ({item}: any) => {
+  //   const isViewAll = item.title === 'View All';
+  //   return (
+  //     <View
+  //       style={[
+  //         styles.categoryCard,
+  //         // {backgroundColor: isViewAll ? 'grey' : 'transparent', borderRadius: 50,},
+  //       ]}>
+  //       <Image
+  //         source={item.image}
+  //         style={[styles.categoryImage, {borderRadius: 50}]}
+  //       />
+  //       <Text style={styles.categoryTitle}>{item.title}</Text>
+  //     </View>
+  //   );
+  // };
+
   const renderCategory = ({item}: any) => {
-    const isViewAll = item.title === 'View All';
     return (
-      <View
-        style={[
-          styles.categoryCard,
-          // {backgroundColor: isViewAll ? 'grey' : 'transparent', borderRadius: 50,},
-        ]}>
-        <Image
-          source={item.image}
-          style={[styles.categoryImage, {borderRadius: 50}]}
-        />
+      <View style={styles.categoryCard}>
+        <Image source={item.image} style={[styles.categoryImage, {borderRadius: 50}]} />
         <Text style={styles.categoryTitle}>{item.title}</Text>
       </View>
     );
   };
-
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -154,6 +214,24 @@ const HomeScreen: React.FC = () => {
             contentContainerStyle={{paddingHorizontal: 15}}
           />
         </View>
+
+        <View style={styles.recommendedHeader}>
+        <Text style={styles.sectionTitle}>(constant.instant_bookings)</Text>
+        <TouchableOpacity>
+          <Text style={styles.viewAll}>{constant.view_all}</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View>
+        <FlatList
+          data={instantBooking}
+          renderItem={({item}) => <InstantBookingCard item={item} />}
+          keyExtractor={item => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{paddingHorizontal: 15}}
+        />
+      </View>
       </ScrollView>
     </SafeAreaView>
   );

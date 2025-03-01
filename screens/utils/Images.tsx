@@ -20,4 +20,10 @@ export const images = {
   emptyStar: require('../../assets/images/empty_star.png'),
   verify: require('../../assets/images/verify.png'),
   liked: require('../../assets/images/liked.png'),
+  camProduct : require('../../assets/images/camProduct.png'),
+  orangeProduct : require('../../assets/images/orangeProduct.jpeg'),
+  stylishMan: require('../../assets/images/stylishMan.jpg'),
+  coupleMaternity: require('../../assets/images/coupleMaternity.jpeg'),
+  lawer: require('../../assets/images/lawer.jpeg'),
+  familyMaternity: require('../../assets/images/familyMaternity.jpeg')
 }

@@ -19,5 +19,5 @@ export const constant = {
   recommended_for_you: "Recommended For You",
   view_all_services: "View All Services",
   view_all_categories: "View All Categories",
-
+  instant_bookings: "Instant Booking",
 }
