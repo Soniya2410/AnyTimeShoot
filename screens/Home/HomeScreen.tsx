@@ -562,7 +562,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     marginVertical: 10,
-    marginLeft: 16,
+    marginLeft: 10,
     color: colors.appColor,
     marginTop: 10,
   },
@@ -592,6 +592,7 @@ const styles = StyleSheet.create({
     color: colors.appColor,
     fontWeight: 'regular',
     marginTop: 5,
+    marginLeft: 5
   },
   wrapper: {
     alignItems: 'flex-end',

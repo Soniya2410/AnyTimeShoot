@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {images} from '../../utils/Images';
 import {colors} from '../../utils/Colors';
 import React from 'react';
+import { constant } from '../../utils/Constant';
 
 const InstantBookingCard = ({item}: any) => {
   const isSixthElement = item.id === '6';
@@ -13,7 +14,7 @@ const InstantBookingCard = ({item}: any) => {
       {isSixthElement && (
         <View style={styles.dullOverlay}>
           <Image source={images.rightBgArrow} style={styles.rightArrowImage} />
-          <Text style={styles.viewAllText}></Text>
+          <Text style={styles.viewAllText}>{constant.view_all}</Text>
         </View>
       )}
 
@@ -120,8 +121,8 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   viewAllText: {
-    color: 'black',
-    fontWeight: 'bold',
+    color: colors.white,
+    fontWeight: '500',
     marginTop: 10,
     fontSize: 12,
   },
