@@ -9,8 +9,10 @@ import {
   Dimensions,
   FlatList,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const {width} = Dimensions.get('window');
 
@@ -19,22 +21,31 @@ const HomeScreen: React.FC = () => {
     {
       id: '1',
       title: 'Wedding Xperts',
+      description: 'Capture.',
       price: '2,00,000/-',
+      offerPrice: '1,80,000/-',
       image: require('../assets/images/wedding.jpg'),
+      rating: 4.5,
       liked: false,
     },
     {
       id: '2',
-      title: 'Wedding Xperts',
+      title: 'Maternity Shoot',
+      description: 'Beautiful',
       price: '10,000/-',
+      offerPrice: '8,000/-',
       image: require('../assets/images/maternity.jpeg'),
+      rating: 4.7,
       liked: false,
     },
     {
       id: '3',
-      title: 'Shoot Xperts',
+      title: 'Pre-Wedding Shoot',
+      description: 'Romantic',
       price: '1,00,000/-',
+      offerPrice: '90,000/-',
       image: require('../assets/images/preWedding.jpg'),
+      rating: 4,
       liked: false,
     },
   ];
@@ -71,15 +82,40 @@ const HomeScreen: React.FC = () => {
   ];
 
   const RecommendedCard = ({item, onLike}: any) => {
+    const renderStars = (rating: number) => {
+      const stars = [];
+      for (let i = 1; i <= 5; i++) {
+        stars.push(
+          <Icon
+            key={i}
+            name={i <= rating ? 'star' : 'star-border'}
+            size={16}
+            color={i <= rating ? '#FFD700' : '#CCCCCC'}
+          />,
+        );
+      }
+      return stars;
+    };
+
     return (
       <View style={styles.recommendedCard}>
         <Image source={item.image} style={styles.recommendedImage} />
+
         <View style={styles.recommendedInfo}>
           <Text style={styles.recommendedTitle}>{item.title}</Text>
-          <Text style={styles.recommendedPrice}>{item.price}</Text>
-          <TouchableOpacity onPress={() => onLike(item.id)}>
-            <Text style={styles.likeIcon}>{item.liked ? '❤️' : '🤍'}</Text>
-          </TouchableOpacity>
+          <Text style={styles.recommendedDescription}>{item.description}</Text>
+
+          <View style={styles.detailsContainer}>
+            <View style={styles.ratingContainer}>
+              {renderStars(item.rating)}
+              <Text style={styles.ratingText}>({item.rating})</Text>
+            </View>
+
+            <View style={styles.priceContainer}>
+              <Text style={styles.originalPrice}>{item.price}</Text>
+              <Text style={styles.offerPrice}>{item.offerPrice}</Text>
+            </View>
+          </View>
         </View>
       </View>
     );
@@ -111,89 +147,90 @@ const HomeScreen: React.FC = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar barStyle="dark-content" backgroundColor="white" />
-
-      <View style={styles.header}>
-        <View style={styles.logoContainer}>
-          <Image
-            source={require('../assets/images/logo.png')}
-            style={styles.logo}
-          />
-          <Text style={styles.logoText}>Any Time Shoot</Text>
-        </View>
-
-        <View style={styles.iconsContainer}>
-          <Image
-            source={require('../assets/images/notification.png')}
-            style={styles.icon}
-          />
-          <Image
-            source={require('../assets/images/heart.png')}
-            style={styles.icon}
-          />
-          <Image
-            source={require('../assets/images/message.png')}
-            style={styles.icon}
-          />
-        </View>
-      </View>
-
-      <View style={styles.searchLocationContainer}>
-        <View style={styles.searchInputWrapper}>
-          <Image
-            source={require('../assets/images/search.png')}
-            style={styles.searchIcon}
-          />
-          <TextInput
-            placeholder="Search for salons, services..."
-            style={styles.searchInput}
-          />
-        </View>
-
-        <View style={styles.wrapper}>
-          <Text style={styles.yourLocation}>Your Location</Text>
-          <View style={styles.locationContainer}>
+      <ScrollView>
+        <View style={styles.header}>
+          <View style={styles.logoContainer}>
             <Image
-              source={require('../assets/images/location.png')}
-              style={styles.locationIcon}
+              source={require('../assets/images/logo.png')}
+              style={styles.logo}
             />
-            <Text style={styles.locationText}>Gurugram</Text>
+            <Text style={styles.logoText}>Any Time Shoot</Text>
+          </View>
+
+          <View style={styles.iconsContainer}>
+            <Image
+              source={require('../assets/images/notification.png')}
+              style={styles.icon}
+            />
+            <Image
+              source={require('../assets/images/heart.png')}
+              style={styles.icon}
+            />
+            <Image
+              source={require('../assets/images/message.png')}
+              style={styles.icon}
+            />
           </View>
         </View>
-      </View>
 
-      <Image
-        source={require('../assets/images/banner.jpg')}
-        style={styles.banner}
-      />
+        <View style={styles.searchLocationContainer}>
+          <View style={styles.searchInputWrapper}>
+            <Image
+              source={require('../assets/images/search.png')}
+              style={styles.searchIcon}
+            />
+            <TextInput
+              placeholder="Search for salons, services..."
+              style={styles.searchInput}
+            />
+          </View>
 
-      <Text style={styles.sectionTitle}>Top Booked Categories</Text>
-      <FlatList
-        data={categories}
-        renderItem={renderCategory}
-        keyExtractor={item => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{paddingHorizontal: 15}}
-      />
-      <View style={styles.recommendedHeader}>
-        <Text style={styles.sectionTitle}>Recommended for You</Text>
-        <TouchableOpacity>
-          <Text style={styles.viewAll}>View All</Text>
-        </TouchableOpacity>
-      </View>
+          <View style={styles.wrapper}>
+            <Text style={styles.yourLocation}>Your Location</Text>
+            <View style={styles.locationContainer}>
+              <Image
+                source={require('../assets/images/location.png')}
+                style={styles.locationIcon}
+              />
+              <Text style={styles.locationText}>Gurugram</Text>
+            </View>
+          </View>
+        </View>
 
-      <View style={{height: 250}}>
+        <Image
+          source={require('../assets/images/banner.jpg')}
+          style={styles.banner}
+        />
+
+        <Text style={styles.sectionTitle}>Top Booked Categories</Text>
         <FlatList
-          data={recommendedList}
-          renderItem={({item}) => (
-            <RecommendedCard item={item} onLike={toggleLike} />
-          )}
+          data={categories}
+          renderItem={renderCategory}
           keyExtractor={item => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{paddingHorizontal: 15}}
         />
-      </View>
+        <View style={styles.recommendedHeader}>
+          <Text style={styles.sectionTitle}>Recommended for You</Text>
+          <TouchableOpacity>
+            <Text style={styles.viewAll}>View All</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View>
+          <FlatList
+            data={recommendedList}
+            renderItem={({item}) => (
+              <RecommendedCard item={item} onLike={toggleLike} />
+            )}
+            keyExtractor={item => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{paddingHorizontal: 15}}
+          />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -300,24 +337,36 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   recommendedCard: {
-    width: 120,
-    height: 250,
+    width: 200,
+    height: 300,
     marginRight: 15,
     borderRadius: 10,
+    backgroundColor: 'clear',
     overflow: 'hidden',
-    backgroundColor: '#f5f5f5',
+    position: 'relative',
   },
   recommendedImage: {
     width: '100%',
-    height: 150,
+    height: '100%',
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
   recommendedInfo: {
     padding: 10,
+    flex: 1,
   },
   recommendedTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'red',
+    color: 'white',
+    marginBottom: 5,
+  },
+  recommendedDescription: {
+    fontSize: 14,
+    color: 'white',
+    marginBottom: 10,
   },
   recommendedPrice: {
     fontSize: 14,
@@ -350,6 +399,33 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'gray',
     marginBottom: 2,
+  },
+  detailsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  ratingText: {
+    fontSize: 14,
+    color: 'white',
+  },
+  priceContainer: {
+    alignItems: 'flex-end',
+  },
+  originalPrice: {
+    fontSize: 14,
+    color: 'gray',
+    textDecorationLine: 'line-through',
+  },
+  offerPrice: {
+    fontSize: 16,
+    color: 'yellow',
+    fontWeight: 'bold',
   },
 });
 
