@@ -3,20 +3,22 @@ import {
   Dimensions,
   StyleSheet,
   Image,
-  SafeAreaView,
   Platform,
+  StatusBar,
+  
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 //screens
-import HomeScreen from "./screen/HomeScreen";
-import ProfileScreen from "./screen/ProfileScreen";
+import HomeScreen from "./screens/HomeScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 import CategoryScreen from "./screens/CategoryScreen";
-import MyBookingsScreen from "./screen/MyBookingsScreen";
+import MyBookingsScreen from "./screens/MyBookingsScreen";
 
 type RootStackParamList = {
 };
@@ -39,16 +41,17 @@ const BottomTabs: React.FC = () => {
             let iconSource;
             switch (route.name) {
               case 'Home':
-                iconSource = require('./assets/images/Play.png');
+                iconSource = require('./assets/images/home.png');
                 break;
               case 'Category':
-                iconSource = require('./assets/images/Play.png');
+                iconSource = require('./assets/images/category.png');
                 break;
               case 'My Bookings':
-                iconSource = require('./assets/images/Profile.png');
+                iconSource = require('./assets/images/myBookings.png');
                 break;
                 case 'Profile':
-                  iconSource = require('./assets/images/Profile.png')
+                  iconSource = require('./assets/images/profile.png')
+                  break;
             }
             return (
               <Image
@@ -56,22 +59,26 @@ const BottomTabs: React.FC = () => {
                 style={{
                   width: 25,
                   height: 25,
-                  tintColor: focused ? '#8B5CF6' : 'gray',
+                  tintColor: focused ? 'red' : 'gray',
                 }}
                 resizeMode="contain"
               />
             );
           },
-          tabBarActiveTintColor: '#8B5CF6',
+          tabBarActiveTintColor: 'red',
           tabBarInactiveTintColor: 'gray',
           tabBarLabelStyle: {fontSize: 12, fontWeight: 'bold'},
+          tabBarStyle: {
+            height: Platform.OS === 'ios' ? 80 : 60,
+            paddingBottom: Platform.OS === 'ios' ? 20 : 10, 
+          },
         })}>
         <Tab.Screen name="Home" component={HomeScreen}/>
         <Tab.Screen name="Category" component={CategoryScreen}/>
         <Tab.Screen name="My Bookings" component={MyBookingsScreen}/>
         <Tab.Screen name='Profile' component={ProfileScreen}/>
       </Tab.Navigator>
-    </SafeAreaView>
+      </SafeAreaView>
   );
 };
 

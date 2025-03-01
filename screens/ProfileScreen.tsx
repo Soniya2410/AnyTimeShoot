@@ -2,16 +2,29 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 
 const ProfileScreen: React.FC = () => {
 return (
-<View>
-    <Text>'Profile Screen</Text>
+<View style={styles.baseView}>
+    <Text style={styles.text}>Profile Screen</Text>
 </View>
 );
 };
+
+const styles = StyleSheet.create({
+baseView: {
+  flex: 1,
+  justifyContent: 'center',
+  alignContent: 'center',
+  backgroundColor: 'white'
+},
+text: {
+  fontSize: 20,
+  color: 'black',
+  textAlign: 'center'
+}
+});
 
 export default ProfileScreen;
