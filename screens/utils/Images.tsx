@@ -32,4 +32,10 @@ export const images = {
   banner5: require('../../assets/images/banner5.png'),
   banner6: require('../../assets/images/banner6.jpg'),
   rightBgArrow: require('../../assets/images/arrow-right.png'),
+
+  //AnyTimeShoot Constant Images
+  onBoardBanner: require('../../assets/images/onBoardBanner.png'),
+  onBoardBanner2: require('../../assets/images/onBoardBanner2.png'),
+  onBoardBanner3: require('../../assets/images/onBoardBanner3.png'),
+  skipArrow: require('../../assets/images/Vector.png'),
 }

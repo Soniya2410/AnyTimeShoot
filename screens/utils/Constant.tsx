@@ -25,4 +25,11 @@ export const constant = {
   view_more: "View More",
   bestSeller_package: "Bestseller Packages",
 
+  //AnyTimeShoot Constant Images
+   onBoardTitle1: "Capture Life's Moments, Anytime, Anywhere",
+   onBoardTitle2: "Instant Memories, Delivered",
+   onBoardTitle3: "Your vision, our Expertise",
+   onBoardDesc1:  " Book professional photographers in minutes. No more missed moments",
+   onBoardDesc2:  "Your photos, delivered instantly. No more waiting",
+   onBoardDesc3: "Browse amazing packages that will suit your style and taste",
 }

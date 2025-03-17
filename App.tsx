@@ -24,7 +24,11 @@ import MyBookingsScreen from "./screens/Home/MyBookingsScreen";
 import { images } from "./screens/utils/Images";
 import { colors } from "./screens/utils/Colors";
 
+//AnyTimeShoot Screens
+import OnboardScreen from "./screens/Home/components/OnboardScreen";
+
 type RootStackParamList = {
+  onboard: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -108,7 +112,8 @@ const BottomTabs: React.FC = () => {
         <Tab.Screen name="Home" component={HomeScreen}/>
         <Tab.Screen name="Category" component={CategoryScreen}/>
         <Tab.Screen name="My Bookings" component={MyBookingsScreen}/>
-        <Tab.Screen name='Profile' component={ProfileScreen}/>
+        {/* <Tab.Screen name='Profile' component={ProfileScreen}/> */}
+        <Tab.Screen name="OnBoard" component={OnboardScreen}/>
       </Tab.Navigator>
       </SafeAreaView>
   );
@@ -119,6 +124,14 @@ const App: React.FC = () => {
   return (
     <NavigationContainer>
       <BottomTabs />
+      <Stack.Screen
+      name='onboard'
+      component={OnboardScreen}
+      options={{
+        title: ''
+      }
+      }
+      />
     </NavigationContainer>
   );
 };
