@@ -147,8 +147,8 @@ const styles = StyleSheet.create({
     fontWeight: 'regular',
     color: colors.grey,
     top: 50,
-    marginRight: 20,
-    marginLeft: 20,
+    marginRight: 30,
+    marginLeft: 30,
   },
   indicatorContainer: {
     flexDirection: 'row',
