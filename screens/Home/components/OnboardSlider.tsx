@@ -15,6 +15,7 @@ import {colors} from '../../utils/Colors';
 import {constant} from '../../utils/Constant';
 
 const {width: viewportWidth} = Dimensions.get('window');
+const dynamicImageWidth = viewportWidth * 0.8;
 
 const OnboardSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -127,8 +128,7 @@ const styles = StyleSheet.create({
     paddingTop: 100,
   },
   image: {
-    width: 326,
-    height: 326,
+    width: dynamicImageWidth,
     resizeMode: 'stretch',
     borderRadius: 5,
   },
