@@ -6,12 +6,10 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {images} from '../../utils/Images';
-import {constant} from '../../utils/Constant';
-import {colors} from '../../utils/Colors';
-import CustomSlider from './CustomSlider';
-import OnboardSlider from './OnboardSlider';
-
+import {images} from '../utils/Images';
+import {constant} from '../utils/Constant';
+import {colors} from '../utils/Colors';
+import OnboardSlider from '../Home/components/OnboardSlider';
 
 const OnboardScreen: React.FC = () => {
   return (

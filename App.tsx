@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -7,7 +7,6 @@ import {
   StatusBar,
   View,
   TouchableOpacity,
-  
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -17,18 +16,22 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 //screens
-import HomeScreen from "./screens/Home/HomeScreen";
-import ProfileScreen from "./screens/Home/ProfileScreen";
-import CategoryScreen from "./screens/Home/CategoryScreen";
-import MyBookingsScreen from "./screens/Home/MyBookingsScreen";
-import { images } from "./screens/utils/Images";
-import { colors } from "./screens/utils/Colors";
+import HomeScreen from './screens/Home/HomeScreen';
+import ProfileScreen from './screens/Home/ProfileScreen';
+import CategoryScreen from './screens/Home/CategoryScreen';
+import MyBookingsScreen from './screens/Home/MyBookingsScreen';
+import {images} from './screens/utils/Images';
+import {colors} from './screens/utils/Colors';
 
 //AnyTimeShoot Screens
-import OnboardScreen from "./screens/Home/components/OnboardScreen";
+import OnboardScreen from './screens/Home/OnboardScreen';
+import LoginScreen from './screens/Home/LoginScreen';
+import OnboardSlider from './screens/Home/components/OnboardSlider';
 
 type RootStackParamList = {
   onboard: undefined;
+  onboardSlider: undefined;
+  login: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -37,7 +40,6 @@ export type RootStackNavigationProp<T extends keyof RootStackParamList> =
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
 const {width, height} = Dimensions.get('screen');
-
 
 const BottomTabs: React.FC = () => {
   return (
@@ -49,17 +51,17 @@ const BottomTabs: React.FC = () => {
             let iconSource;
             switch (route.name) {
               case 'Home':
-                iconSource = images.home
+                iconSource = images.home;
                 break;
               case 'Category':
-                iconSource = images.category
+                iconSource = images.category;
                 break;
               case 'My Bookings':
-                iconSource = images.myBookings
+                iconSource = images.myBookings;
                 break;
-                case 'Profile':
-                  iconSource = images.profile
-                  break;
+              case 'Profile':
+                iconSource = images.profile;
+                break;
             }
             return (
               <Image
@@ -78,16 +80,15 @@ const BottomTabs: React.FC = () => {
           tabBarLabelStyle: {fontSize: 12, fontWeight: '500', marginTop: 2},
           tabBarStyle: {
             height: Platform.OS === 'ios' ? 80 : 60,
-            paddingBottom: Platform.OS === 'ios' ? 20 : 10, 
+            paddingBottom: Platform.OS === 'ios' ? 20 : 10,
           },
-          tabBarButton: (props) => {
-            const { onPress, onLongPress, accessibilityState, children } = props;
+          tabBarButton: props => {
+            const {onPress, onLongPress, accessibilityState, children} = props;
             return (
               <TouchableOpacity
                 onPress={onPress}
                 activeOpacity={0.8}
-                style={{ flex: 1, position: 'relative' }}
-              >
+                style={{flex: 1, position: 'relative'}}>
                 {accessibilityState?.selected && (
                   <View
                     style={{
@@ -96,41 +97,58 @@ const BottomTabs: React.FC = () => {
                       left: 0,
                       right: 0,
                       height: 3,
-                      backgroundColor: colors.appColor, 
+                      backgroundColor: colors.appColor,
                     }}
                   />
                 )}
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
                   {children}
                 </View>
               </TouchableOpacity>
             );
           },
-        })}
-        >
-
-        <Tab.Screen name="Home" component={HomeScreen}/>
-        <Tab.Screen name="Category" component={CategoryScreen}/>
-        <Tab.Screen name="My Bookings" component={MyBookingsScreen}/>
+        })}>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Category" component={CategoryScreen} />
+        <Tab.Screen name="My Bookings" component={MyBookingsScreen} />
         {/* <Tab.Screen name='Profile' component={ProfileScreen}/> */}
-        <Tab.Screen name="OnBoard" component={OnboardScreen}/>
+        <Tab.Screen name="OnBoard" component={OnboardScreen} />
       </Tab.Navigator>
-      </SafeAreaView>
+    </SafeAreaView>
   );
 };
-
 
 const App: React.FC = () => {
   return (
     <NavigationContainer>
       <BottomTabs />
       <Stack.Screen
-      name='onboard'
-      component={OnboardScreen}
-      options={{
-        title: ''
-      }
-      }
+        name='onboard'
+        component={OnboardScreen}
+        options={{
+          title: '',
+        }}
+      />
+
+      <Stack.Screen
+        name='onboardSlider'
+        component={OnboardSlider}
+        options={{
+          title: '',
+        }}
+      />
+
+      <Stack.Screen
+        name='login'
+        component={LoginScreen}
+        options={{
+          title: '',
+        }}
       />
     </NavigationContainer>
   );

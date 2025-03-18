@@ -13,6 +13,8 @@ import {
 import {images} from '../../utils/Images';
 import {colors} from '../../utils/Colors';
 import {constant} from '../../utils/Constant';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp } from '../../../App';
 
 const {width: viewportWidth} = Dimensions.get('window');
 const dynamicImageWidth = viewportWidth * 0.8;
@@ -20,6 +22,7 @@ const dynamicImageWidth = viewportWidth * 0.8;
 const OnboardSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
+  const navigation = useNavigation<RootStackNavigationProp<'onboardSlider'>>();
 
   const ImagesArray = [
     {
@@ -61,6 +64,13 @@ const OnboardSlider = () => {
     console.log('Skip pressed');
   };
 
+  const moveToLogin = () => {
+    if (activeIndex === 0) {
+      console.log('Button pressed');
+    navigation.navigate('login');
+    }
+  };
+
   return (
     <View style={styles.container}>
       {activeIndex < ImagesArray.length - 1 && (
@@ -95,6 +105,11 @@ const OnboardSlider = () => {
                 />
               ))}
             </View>
+            <View>
+          <TouchableOpacity style={styles.continueButton} onPress={moveToLogin}>
+            <Text style={styles.continueText}>Next</Text>
+          </TouchableOpacity>
+        </View>
           </View>
         ))}
       </ScrollView>
@@ -139,6 +154,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.black,
     top: 35,
+    fontFamily: 'Poppins-Bold',
   },
   slideDesc: {
     fontSize: 16,
@@ -149,13 +165,14 @@ const styles = StyleSheet.create({
     top: 50,
     marginRight: 30,
     marginLeft: 30,
+    fontFamily: 'Poppins-Regular'
   },
   indicatorContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
-    top: 55,
+    top: 75,
   },
   indicatorDot: {
     width: 8,
@@ -173,7 +190,22 @@ const styles = StyleSheet.create({
   arrowImage: {
     width: 6,
     height: 10,
-  }
+  },
+  continueButton: {
+    backgroundColor: colors.appColor,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: dynamicImageWidth,
+    height: 72,
+    borderRadius: 50,
+    marginTop: 120,
+  },
+  continueText: {
+    color: colors.white,
+    fontSize: 14,
+    fontFamily: 'Poppins-Bold',
+    fontWeight: 'bold'
+  },
 });
 
 export default OnboardSlider;
