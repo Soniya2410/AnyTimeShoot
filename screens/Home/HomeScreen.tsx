@@ -241,6 +241,7 @@ const HomeScreen: React.FC = () => {
   const [recommendedList, setRecommendedList] = useState(recommended);
   const [preweddingList, setPreweddingList] = useState(prewedding);
   const [bestSellerPackageList, setBestSellerPackageList] = useState(bestSeller);
+  const [offerPackageList, setOfferSellerPackageList] = useState(bestSeller);
   const categories = [
     {
       id: '1',
@@ -286,6 +287,20 @@ const HomeScreen: React.FC = () => {
       item.id === id ? {...item, liked: !item.liked} : item,
     );
     setPreweddingList(updatedList);
+  };
+
+  const toggleBestSellerLike = (id: string) => {
+    const updatedList = bestSeller.map(item =>
+      item.id === id ? {...item, liked: !item.liked} : item,
+    );
+    setBestSellerPackageList(updatedList);
+  };
+
+  const toggleOfferLike = (id: string) => {
+    const updatedList = offerPackageList.map(item =>
+      item.id === id ? {...item, liked: !item.liked} : item,
+    );
+    setOfferSellerPackageList(updatedList);
   };
 
   const   renderCategory = ({item}: any) => {
@@ -377,9 +392,9 @@ const HomeScreen: React.FC = () => {
 
         <View style={{marginHorizontal: 5}}>
           <FlatList
-            data={recommendedList}
+            data={preweddingList}
             renderItem={({item}) => (
-              <RecommendedCard item={item} onLike={toggleLike} cardSize={200}/>
+              <RecommendedCard item={item} onLike={toggleWeddingLike} cardSize={200}/>
             )}
             keyExtractor={item => item.id}
             horizontal
@@ -392,10 +407,10 @@ const HomeScreen: React.FC = () => {
           <Text style={styles.recommendedTitle}>{constant.upto_to}</Text>
         </View>
         <FlatList
-          data={preweddingList}
+          data={offerPackageList}
           renderItem={({item}) => (
             <View style={styles.itemContainer}>
-            <PreweddingCard item={item} onLike={toggleWeddingLike} cardSize={120}/>
+            <PreweddingCard item={item} onLike={toggleOfferLike} cardSize={120}/>
             </View>
           )}
           keyExtractor={(item) => item.id.toString()}
@@ -414,7 +429,7 @@ const HomeScreen: React.FC = () => {
           data={bestSellerPackageList}
           renderItem={({item}) => (
             <View style={styles.itemContainer}>
-            <PreweddingCard item={item} onLike={toggleWeddingLike} cardSize={120}/>
+            <PreweddingCard item={item} onLike={toggleBestSellerLike} cardSize={120}/>
             </View>
           )}
           keyExtractor={(item) => item.id.toString()}

@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 const MyBookingsScreen: React.FC = () => {
   return (
     <View style={styles.baseView}>
-      <Text style={styles.text}>Profile Screen</Text>
+      <Text style={styles.text}>My Bookings Screen</Text>
     </View>
   );
 };

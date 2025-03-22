@@ -67,7 +67,7 @@ const OnboardSlider = () => {
 
   const moveToLogin = () => {
     console.log('Button pressed');
-    navigation.navigate('login');
+    navigation.navigate('homeScreen');
   };
 
   return (
