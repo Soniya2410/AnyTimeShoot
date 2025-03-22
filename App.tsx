@@ -32,6 +32,7 @@ type RootStackParamList = {
   onboard: undefined;
   onboardSlider: undefined;
   login: undefined;
+  homeScreen : undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -128,7 +129,7 @@ const App: React.FC = () => {
     <NavigationContainer>
       <BottomTabs />
       <Stack.Screen
-        name='onboard'
+        name="onboard"
         component={OnboardScreen}
         options={{
           title: '',
@@ -136,7 +137,7 @@ const App: React.FC = () => {
       />
 
       <Stack.Screen
-        name='onboardSlider'
+        name="onboardSlider"
         component={OnboardSlider}
         options={{
           title: '',
@@ -144,8 +145,15 @@ const App: React.FC = () => {
       />
 
       <Stack.Screen
-        name='login'
+        name="login"
         component={LoginScreen}
+        options={{
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="homeScreen"
+        component={BottomTabs}
         options={{
           title: '',
         }}

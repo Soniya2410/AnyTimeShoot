@@ -61,14 +61,13 @@ const OnboardSlider = () => {
   };
 
   const moveToSkip = () => {
-    console.log('Skip pressed');
-  };
+     console.log('Skip pressed');
+     navigation.navigate('login');
+  }
 
   const moveToLogin = () => {
-    if (activeIndex === 0) {
-      console.log('Button pressed');
+    console.log('Button pressed');
     navigation.navigate('login');
-    }
   };
 
   return (
