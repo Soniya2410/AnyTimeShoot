@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -15,10 +15,15 @@ import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../App';
 import {TextInput} from 'react-native-gesture-handler';
 import { PVBMButton } from '../utils/PVBMButton';
+import { Picker } from '@react-native-picker/picker';
 
 const {width, height} = Dimensions.get('screen');
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'login'>>();
+
+  const [countryCode, setCountryCode] = useState('IN'); // Default to India
+  const [callingCode, setCallingCode] = useState('91');
+  const [visible, setVisible] = useState(false);
 
    const moveToOtpPage = () => {
 // navigation.navigate
@@ -39,8 +44,9 @@ const LoginScreen: React.FC = () => {
           <View style={styles.phoneNoView}>
             <Text style={styles.phoneNoText}>{constant.phoneNumber}</Text>
             <TextInput
-              keyboardType="phone-pad"
+              keyboardType='phone-pad'
               maxLength={10}
+              selectionColor={colors.appColor}
               style={styles.input}></TextInput>
           </View>
           <Text style={styles.secureText}>{constant.loginSecure}</Text>
@@ -169,8 +175,8 @@ const styles = StyleSheet.create({
   line: {
     flex: 1,
     height: 1,
-    width: 140,
     backgroundColor: colors.placeHolderColor,
+    marginHorizontal: 20,
   },
   orText: {
     marginHorizontal: 10,

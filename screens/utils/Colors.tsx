@@ -6,7 +6,7 @@ export const colors = {
 
   //AnyTimeShoot Constant Images
    indicatorInactive : 'rgba(239, 35, 60, 0.3)',
-   appColor: '#CC1939',
+   appColor: '#EC193B',
    white: '#ffffff',
    black: '#000000',
    placeHolderColor: '#474747',
