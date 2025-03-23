@@ -38,4 +38,5 @@ export const images = {
   onBoardBanner2: require('../../assets/images/onBoardBanner2.png'),
   onBoardBanner3: require('../../assets/images/onBoardBanner3.png'),
   skipArrow: require('../../assets/images/Vector.png'),
+  loginCam: require('../../assets/images/loginCam.png')
 }

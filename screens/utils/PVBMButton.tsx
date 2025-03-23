@@ -1,12 +1,11 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { colors } from "../../utils/colors";
+import { colors } from "./Colors";
 
-// Define the props interface
 interface PVBMButtonProps {
   onPress: () => void;
   title: string;
-  customStyle?: object; // Make customStyle optional
+  customStyle?: object; 
 }
 
 const PVBMButton = ({ onPress, title, customStyle = {} }: PVBMButtonProps) => {
@@ -25,6 +24,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginVertical: 10,
     borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   textStyle: {
     paddingVertical: 15,

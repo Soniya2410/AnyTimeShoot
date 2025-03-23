@@ -11,10 +11,11 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 import {images} from '../../utils/Images';
-import {colors} from '../../utils/Colors';
 import {constant} from '../../utils/Constant';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackNavigationProp } from '../../../App';
+import { PVBMButton } from '../../utils/PVBMButton';
+import { colors } from '../../utils/Colors';
 
 const {width: viewportWidth} = Dimensions.get('window');
 const dynamicImageWidth = viewportWidth * 0.8;
@@ -62,12 +63,12 @@ const OnboardSlider = () => {
 
   const moveToSkip = () => {
      console.log('Skip pressed');
-     navigation.navigate('login');
+    //  navigation.navigate('login');
   }
 
   const moveToLogin = () => {
     console.log('Button pressed');
-    navigation.navigate('homeScreen');
+    navigation.navigate('login');
   };
 
   return (
@@ -105,9 +106,12 @@ const OnboardSlider = () => {
               ))}
             </View>
             <View>
-          <TouchableOpacity style={styles.continueButton} onPress={moveToLogin}>
+          {/* <TouchableOpacity style={styles.continueButton} onPress={moveToLogin}>
             <Text style={styles.continueText}>Next</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
+          <PVBMButton onPress={moveToLogin} title={constant.next} customStyle={styles.continueButton}>
+            
+          </PVBMButton>
         </View>
           </View>
         ))}
@@ -192,8 +196,6 @@ const styles = StyleSheet.create({
   },
   continueButton: {
     backgroundColor: colors.appColor,
-    alignItems: 'center',
-    justifyContent: 'center',
     width: dynamicImageWidth,
     height: 72,
     borderRadius: 50,
