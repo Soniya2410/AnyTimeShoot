@@ -40,4 +40,8 @@ export const images = {
   skipArrow: require('../../assets/images/Vector.png'),
   loginCam: require('../../assets/images/loginCam.png'),
   checkIcon: require('../../assets/images/checkIcon.png'),
+  mobileVerifyTick: require('../../assets/images/mobileVerify.png'),
+  otpBlankBg: require('../../assets/images/otpBlankBg.png'),
+  otpFilledBg: require('../../assets/images/otpFilledBg.png'),
 }
+

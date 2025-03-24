@@ -23,6 +23,7 @@ import CountryPicker, {
 const {width, height} = Dimensions.get('screen');
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'login'>>();
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const [countryCode, setCountryCode] = useState<CountryCode>('FR');
   const [country, setCountry] = useState<Country>();
@@ -37,7 +38,7 @@ const LoginScreen: React.FC = () => {
   };
 
   const moveToOtpPage = () => {
-    // navigation.navigate
+    navigation.navigate('otpScreen');
   };
 
   return (
@@ -85,11 +86,22 @@ const LoginScreen: React.FC = () => {
           </View>
           <View style={styles.phoneNoView}>
             <Text style={styles.phoneNoText}>{constant.phoneNumber}</Text>
-            <TextInput
-              keyboardType="phone-pad"
-              maxLength={10}
-              selectionColor={colors.appColor}
-              style={styles.input}></TextInput>
+            <View style={styles.inputContainer}>
+              <TextInput
+                keyboardType="phone-pad"
+                maxLength={10}
+                selectionColor={colors.appColor}
+                style={styles.input}
+                value={phoneNumber}
+                onChangeText={setPhoneNumber}
+              />
+              {phoneNumber.length == 10 && (
+                <Image
+                  source={images.mobileVerifyTick}
+                  style={styles.mobileVerifyTick}
+                />
+              )}
+            </View>
           </View>
           <Text style={styles.secureText}>{constant.loginSecure}</Text>
           <PVBMButton
@@ -118,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
   },
   bgImg: {
     width: 189,
@@ -198,8 +210,9 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   input: {
+    flex: 1,
     padding: 12,
-    bottom: 10,
+    bottom: 14,
   },
   continueButton: {
     height: 54,
@@ -281,6 +294,18 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: 14,
     fontFamily: 'Poppins-regular',
+  },
+  mobileVerifyTick: {
+    height: 20,
+    width: 20,
+    right: 12,
+    position: 'absolute',
+    bottom: 27,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'relative',
   },
 });
 

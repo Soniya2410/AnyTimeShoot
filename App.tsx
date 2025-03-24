@@ -27,12 +27,14 @@ import { colors } from './screens/utils/Colors';
 import OnboardScreen from './screens/Home/OnboardScreen';
 import LoginScreen from './screens/Home/LoginScreen';
 import OnboardSlider from './screens/Home/components/OnboardSlider';
+import OTPSCreen from './screens/Home/OTPScreen';
 
 type RootStackParamList = {
   onboard: undefined;
   onboardSlider: undefined;
   login: undefined;
   homeScreen: undefined;
+  otpScreen: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -149,6 +151,11 @@ const App: React.FC = () => {
             name="homeScreen"
             component={BottomTabs}
             options={{ title: '', headerShown: false }}
+          />
+          <Stack.Screen
+          name='otpScreen'
+          component={OTPSCreen}
+          options={{title: "", headerShown: false}}
           />
         </Stack.Navigator>
       </NavigationContainer>

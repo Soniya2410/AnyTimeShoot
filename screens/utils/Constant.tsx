@@ -42,4 +42,16 @@ export const constant = {
    continue: "Continue",
    continueAs: "Continue as",
    guest: " Guest",
+   verifyYourPhnNo: "Verify your phone number",
+   enterTheCode: "Enter the code we’ve send to +911234567899",
+   resendOtp: "Resend OTP",
+   haventReceiveTheCode: "Haven't Received OTP Code",
+   verify: "Verify",
+   success: "Success!",
+   congrats: "Congratulations! You have been successfully authenticated",
+   userName: "Username",
+   enterYourEmail: "Enter Your Email",
+   continueWithGoogle: "Continue With Google",
+   skipForNow: "Skip for now",
+
 }
