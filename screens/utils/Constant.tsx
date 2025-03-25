@@ -24,6 +24,7 @@ export const constant = {
   upto_to: "Up to 70% off| Wedding, Prewedding Packages", 
   view_more: "View More",
   bestSeller_package: "Bestseller Packages",
+  getStarted: "Get Started",
 
   //AnyTimeShoot Constant Images
    onBoardTitle1: "Capture Life's Moments, Anytime, Anywhere",

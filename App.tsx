@@ -140,12 +140,12 @@ const App: React.FC = () => {
           <Stack.Screen
             name="onboardSlider"
             component={OnboardSlider}
-            options={{ title: '' }}
+            options={{ title: '', headerShown: false }}
           />
           <Stack.Screen
             name="login"
             component={LoginScreen}
-            options={{ title: '' }}
+            options={{ title: '', headerShown: false }}
           />
           <Stack.Screen
             name="homeScreen"

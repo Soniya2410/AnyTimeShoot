@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useCallback} from 'react';
 import {
   Dimensions,
   Image,
@@ -9,15 +9,18 @@ import {
   TouchableOpacity,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import {images} from '../../utils/Images';
 import {constant} from '../../utils/Constant';
-import { useNavigation } from '@react-navigation/native';
-import { RootStackNavigationProp } from '../../../App';
-import { PVBMButton } from '../../utils/PVBMButton';
-import { colors } from '../../utils/Colors';
+import {useNavigation} from '@react-navigation/native';
+import {RootStackNavigationProp} from '../../../App';
+import {ASButton} from './ASButton';
+import {colors} from '../../utils/Colors';
+import {Fonts} from '../../utils/Fonts';
 
-const {width: viewportWidth} = Dimensions.get('window');
+const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 const dynamicImageWidth = viewportWidth * 0.8;
 
 const OnboardSlider = () => {
@@ -52,84 +55,104 @@ const OnboardSlider = () => {
     setActiveIndex(currentIndex);
   };
 
-  const scrollToIndex = (index: number) => {
+  const scrollToIndex = useCallback((index: number) => {
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollTo({
         x: index * viewportWidth,
         animated: true,
       });
     }
-  };
+  }, []);
 
-  const moveToSkip = () => {
-     console.log('Skip pressed');
-    //  navigation.navigate('login');
-  }
+  const handleNextPress = useCallback(() => {
+    if (activeIndex < ImagesArray.length - 1) {
+      scrollToIndex(activeIndex + 1);
+    } else {
+      navigation.navigate('login');
+    }
+  }, [activeIndex, ImagesArray.length, navigation, scrollToIndex]);
 
-  const moveToLogin = () => {
-    console.log('Button pressed');
+  const moveToSkip = useCallback(() => {
     navigation.navigate('login');
-  };
+  }, [navigation]);
 
   return (
-    <View style={styles.container}>
-      {activeIndex < ImagesArray.length - 1 && (
-        <TouchableOpacity style={styles.skipButton} onPress={moveToSkip}>
-          <Text style={styles.skipText}>Skip</Text>
-          <Image source={images.skipArrow} style={styles.arrowImage}/>
-        </TouchableOpacity>
-      )}
-      <ScrollView
-        ref={scrollViewRef}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}>
-        {ImagesArray.map(item => (
-          <View key={item.id} style={styles.slide}>
-            <Image source={item.uri} style={styles.image} />
-            <Text style={styles.slideText}>{item.text}</Text>
-            <Text style={styles.slideDesc}>{item.description}</Text>
-            <View style={styles.indicatorContainer}>
-              {ImagesArray.map((_, index) => (
-                <View
-                  key={index}
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        {activeIndex < ImagesArray.length && (
+          <TouchableOpacity style={styles.skipButton} onPress={moveToSkip}>
+            <Text style={styles.skipText}>Skip</Text>
+            <Image source={images.skipArrow} style={styles.arrowImage} />
+          </TouchableOpacity>
+        )}
+        
+        {/* Scrollable Content Area */}
+        <View style={styles.scrollContainer}>
+          <ScrollView
+            ref={scrollViewRef}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            onScroll={handleScroll}
+            scrollEventThrottle={16}>
+            {ImagesArray.map((item) => (
+              <View key={item.id} style={styles.slide}>
+                <View style={styles.imageContainer}>
+                  <Image source={item.uri} style={styles.image} resizeMode="contain" />
+                </View>
+                
+                <View style={styles.textContainer}>
+                  <Text style={styles.slideText}>{item.text}</Text>
+                  <Text style={styles.slideDesc}>{item.description}</Text>
+                </View>
+                
+               
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+        {/* Fixed Button Area */}
+        <View style={styles.buttonContainer}>
+        <View style={styles.indicatorContainer}>
+              {ImagesArray.map((_, idx) => (
+                <TouchableOpacity
+                  key={idx}
                   style={[
                     styles.indicatorDot,
-                    index === activeIndex
-                      ? styles.activeDot
-                      : styles.inactiveDot,
+                    idx === activeIndex ? styles.activeDot : styles.inactiveDot,
                   ]}
-                  onTouchEnd={() => scrollToIndex(index)}
+                  onPress={() => scrollToIndex(idx)}
                 />
               ))}
-            </View>
-            <View>
-          {/* <TouchableOpacity style={styles.continueButton} onPress={moveToLogin}>
-            <Text style={styles.continueText}>Next</Text>
-          </TouchableOpacity> */}
-          <PVBMButton onPress={moveToLogin} title={constant.next} customStyle={styles.continueButton}>
-            
-          </PVBMButton>
+                </View>
+          <ASButton
+            onPress={handleNextPress}
+            title={activeIndex === ImagesArray.length - 1 ? constant.getStarted : constant.next}
+            customStyle={styles.continueButton}
+          />
         </View>
-          </View>
-        ))}
-      </ScrollView>
-    </View>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: colors.white,
+    paddingBottom: 20,
+  },
+  scrollContainer: {
+    flex: 1,
   },
   skipButton: {
     position: 'absolute',
-    top: 60,
-    right: 40,
+    top: 20,
+    right: 24,
     zIndex: 1,
     padding: 10,
     flexDirection: 'row',
@@ -139,53 +162,62 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.appColor,
     marginRight: 5,
+    fontFamily: Fonts.regular,
   },
   slide: {
     width: viewportWidth,
+    paddingHorizontal: 24,
     alignItems: 'center',
-    paddingTop: 100,
+    marginTop: 20,
+    
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    maxHeight: '60%',
   },
   image: {
     width: dynamicImageWidth,
-    resizeMode: 'stretch',
-    borderRadius: 5,
+    height: dynamicImageWidth * 0.9,
+  },
+  textContainer: {
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    marginTop: 20,
+    marginBottom: 30,
   },
   slideText: {
     fontSize: 24,
     textAlign: 'center',
-    marginTop: 20,
-    fontWeight: 'bold',
+    marginBottom: 16,
     color: colors.black,
-    top: 35,
-    fontFamily: 'Poppins-Bold',
+    fontFamily: Fonts.semiBold,
+    lineHeight: 32,
+    // fontWeight: 'bold'
   },
   slideDesc: {
     fontSize: 16,
     textAlign: 'center',
-    marginTop: 20,
-    fontWeight: 'regular',
     color: colors.grey,
-    top: 50,
-    marginRight: 30,
-    marginLeft: 30,
-    fontFamily: 'Poppins-Regular'
+    fontFamily: Fonts.regular,
+    lineHeight: 24,
   },
   indicatorContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
-    top: 75,
+    marginBottom: 50,
   },
   indicatorDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
     marginHorizontal: 4,
-    backgroundColor: colors.lightGray,
   },
   activeDot: {
     backgroundColor: colors.appColor,
+    width: 24,
   },
   inactiveDot: {
     backgroundColor: colors.indicatorInactive,
@@ -193,20 +225,18 @@ const styles = StyleSheet.create({
   arrowImage: {
     width: 6,
     height: 10,
+    tintColor: colors.appColor,
+  },
+  buttonContainer: {
+    paddingHorizontal: 24,
+    marginBottom: 20,
   },
   continueButton: {
     backgroundColor: colors.appColor,
-    width: dynamicImageWidth,
-    height: 72,
-    borderRadius: 50,
-    marginTop: 120,
-  },
-  continueText: {
-    color: colors.white,
-    fontSize: 14,
-    fontFamily: 'Poppins-Bold',
-    fontWeight: 'bold'
+    // width: '100%',
+    height: 56,
+    borderRadius: 28,
   },
 });
 
-export default OnboardSlider;
+export default React.memo(OnboardSlider);

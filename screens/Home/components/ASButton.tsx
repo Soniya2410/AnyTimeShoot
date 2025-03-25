@@ -1,14 +1,15 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { colors } from "./Colors";
+import { colors } from "../../utils/Colors";
+import { Fonts } from "../../utils/Fonts";
 
-interface PVBMButtonProps {
+interface ASButtonProps {
   onPress: () => void;
   title: string;
   customStyle?: object; 
 }
 
-const PVBMButton = ({ onPress, title, customStyle = {} }: PVBMButtonProps) => {
+const ASButton = ({ onPress, title, customStyle = {} }: ASButtonProps) => {
   return (
     <TouchableOpacity
       style={[styles.container, { backgroundColor: colors.appColor }, customStyle]}
@@ -21,7 +22,7 @@ const PVBMButton = ({ onPress, title, customStyle = {} }: PVBMButtonProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 16,
+    marginHorizontal: 10,
     marginVertical: 10,
     borderRadius: 8,
     alignItems: 'center',
@@ -31,9 +32,10 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     textAlign: 'center',
     color: colors.white,
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 20,
+    // fontWeight: 'bold',
+    fontFamily: Fonts.bold
   },
 });
 
-export { PVBMButton };
+export { ASButton };

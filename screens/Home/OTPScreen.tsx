@@ -1,29 +1,53 @@
-import React, {useState, ReactNode} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   Text,
   View,
-  TouchableOpacity,
   StyleSheet,
   Dimensions,
   Image,
-  ScrollView,
+  TextInput,
+  Keyboard,
 } from 'react-native';
 import {images} from '../utils/Images';
 import {colors} from '../utils/Colors';
 import {constant} from '../utils/Constant';
-import {useNavigation} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {OtpInput} from 'react-native-otp-entry';
-import { PVBMButton } from '../utils/PVBMButton';
+import { ASButton } from './components/ASButton';
+import { Fonts } from '../utils/Fonts';
 
 const {width, height} = Dimensions.get('screen');
 
 const OTPSCreen: React.FC = () => {
-  const [otp, setOtp] = useState<string>('');
- 
+  const [otp, setOtp] = useState<string[]>(['', '', '', '']);
+  const inputs = useRef<TextInput[]>([]);
+  
   const navigateToSucessPage = () => {
-
+    // Your navigation logic here
   };
+
+  const handleChange = (text: string, index: number) => {
+    const newOtp = [...otp];
+    newOtp[index] = text;
+    setOtp(newOtp);
+
+    // Auto focus to next input
+    if (text && index < 3) {
+      inputs.current[index + 1]?.focus();
+    }
+
+    // Submit automatically if last digit is entered
+    if (index === 3 && text) {
+      Keyboard.dismiss();
+      // You can add your submit logic here
+    }
+  };
+
+  const handleKeyPress = (e: any, index: number) => {
+    if (e.nativeEvent.key === 'Backspace' && !otp[index] && index > 0) {
+      inputs.current[index - 1]?.focus();
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -31,52 +55,37 @@ const OTPSCreen: React.FC = () => {
         <View style={styles.baseView}>
           <Text style={styles.verifyText}>{constant.verifyYourPhnNo}</Text>
           <Text style={styles.enterCodeText}>{constant.enterTheCode}</Text>
+          
           <View style={styles.otpContainer}>
-            <OtpInput
-              numberOfDigits={4}
-              focusColor={colors.appColor}
-              secureTextEntry={false}
-              blurOnFilled={true}
-              disabled={false}
-              type="numeric"
-              onTextChange={(text: string) => setOtp(text)}
-              placeholder='-'
-              theme={{
-                containerStyle: {
-                  flex: 1,
-                  width: '100%',
-                  backgroundColor: colors.white,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  padding: 16,
-                },
-                pinCodeContainerStyle: {
-                  width: 64,
-                  height: 48,
-                  borderWidth: 1,
-                  // borderColor: colors.otpBorderColor, 
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginHorizontal: 10,
-                  marginVertical: 10,
-                  // backgroundColor: colors.white,
-                  borderColor: otp.length > 0 ? colors.appColor : colors.otpBorderColor,
-                  backgroundColor: otp.length > 0 ? colors.appColor : colors.white,
-                },
-                pinCodeTextStyle: {
-                  fontSize: 20,
-                  color: colors.white,
-                  fontWeight: "bold",
-                  fontFamily: "Poppins-bold"
-                },
-              }}
-            />
+            {[0, 1, 2, 3].map((index) => (
+              <TextInput
+                key={index}
+                ref={(ref) => {if (ref) inputs.current[index] = ref}}
+                style={[
+                  styles.otpInput,
+                  {
+                    borderColor: otp[index] ? colors.appColor : colors.otpBorderColor,
+                    backgroundColor: otp[index] ? colors.appColor : colors.white,
+                  },
+                ]}
+                keyboardType="numeric"
+                maxLength={1}
+                placeholder='-'
+                value={otp[index]}
+                onChangeText={(text) => handleChange(text, index)}
+                onKeyPress={(e) => handleKeyPress(e, index)}
+                selectTextOnFocus
+              />
+            ))}
           </View>
+          
           <Text style={styles.haventText}>{constant.haventReceiveTheCode}</Text>
           <Text style={styles.resendText}>{constant.resendOtp}</Text>
-          <PVBMButton title='Verify' onPress={navigateToSucessPage} customStyle={styles.continueButton}>
-
-          </PVBMButton>
+          <ASButton 
+            title='Verify' 
+            onPress={navigateToSucessPage} 
+            customStyle={styles.continueButton}
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -104,53 +113,59 @@ const styles = StyleSheet.create({
   },
   verifyText: {
     fontSize: 16,
-    fontWeight: 'semibold',
+    fontWeight: '600',
     color: colors.appColor,
-    // fontFamily: 'Poppins-semibold'
     top: 20,
+    fontFamily: Fonts.semiBold,
     marginBottom: 20,
   },
   enterCodeText: {
-    top: 20,
+    marginTop: 10,
     fontSize: 15,
-    fontWeight: 'regular',
-    fontFamily: 'Poppins-regular',
+    // fontWeight: 'regular',
+    fontFamily: Fonts.regular,
     color: colors.black,
   },
   otpContainer: {
-    height: 100,
-    marginTop: 20,
-    marginLeft: 0,
-    marginRight: 0,
-    alignSelf: "center",
-    width: width,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 20,
+    paddingHorizontal: 10,
+    marginBottom: 30,
   },
-  containerStyle: {
-    flex: 1,
-    width: '100%',
-    backgroundColor: 'clear',
+  otpInput: {
+    width: 64,
+    height: 48,
+    borderWidth: 2,
+    borderRadius: 8,
+    borderColor: colors.otpBorderColor,
+    textAlign: 'center',
+    fontSize: 20,
+    color: colors.white,
+    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
   },
   haventText: {
     padding: 16,
     alignItems:'center',
     textAlign: 'center',
-    fontWeight: 'regular',
+    fontFamily: Fonts.regular,
     fontSize: 15,
     bottom: 10,
   },
   resendText: {
     alignItems:'center',
     textAlign: 'center',
-    fontWeight: 'medium',
+    fontFamily: Fonts.medium,
     fontSize: 14,
     color: colors.appColor,
-    // fontFamily
+    textDecorationLine:'underline'
   },
   continueButton: {
-   height: 54,
-   backgroundColor: colors.appColor,
-   borderRadius: 27,
-   top: 34,
+    height: 54,
+    backgroundColor: colors.appColor,
+    borderRadius: 27,
+    top: 34,
   }
 });
 

@@ -1,89 +1,83 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {
   Text,
   View,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
   Image,
   Dimensions,
+  SafeAreaView,
+  TextInput,
 } from 'react-native';
+import CountryPicker, {Country, CountryCode} from 'react-native-country-picker-modal';
+import {useNavigation} from '@react-navigation/native';
 import {images} from '../utils/Images';
 import {constant} from '../utils/Constant';
 import {colors} from '../utils/Colors';
-import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../App';
-import {TextInput} from 'react-native-gesture-handler';
-import {PVBMButton} from '../utils/PVBMButton';
-import CountryPicker, {
-  Country,
-  CountryCode,
-} from 'react-native-country-picker-modal';
+import {ASButton} from './components/ASButton';
+import {Fonts} from '../utils/Fonts';
 
 const {width, height} = Dimensions.get('screen');
+
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'login'>>();
   const [phoneNumber, setPhoneNumber] = useState('');
-
   const [countryCode, setCountryCode] = useState<CountryCode>('FR');
   const [country, setCountry] = useState<Country>();
-  const [withCountryNameButton, setWithCountryNameButton] =
-    useState<boolean>(false);
-  const [withFilter, setWithFilter] = useState<boolean>(true);
-  const [withAlphaFilter, setWithAlphaFilter] = useState<boolean>(false);
-  const [withCallingCode, setWithCallingCode] = useState<boolean>(false);
-  const onSelect = (country: Country) => {
+  const [showCountryPicker, setShowCountryPicker] = useState(false);
+
+  const onSelectCountry = useCallback((country: Country) => {
     setCountryCode(country.cca2);
     setCountry(country);
-  };
+    setShowCountryPicker(false);
+  }, []);
 
-  const moveToOtpPage = () => {
+  const moveToOtpPage = useCallback(() => {
     navigation.navigate('otpScreen');
-  };
+  }, [navigation]);
 
   return (
-    <View style={styles.container}>
-      <Image style={styles.bgImg} source={images.loginCam}></Image>
+    <SafeAreaView style={styles.container}>
+      <Image source={images.loginCam} style={styles.bgImg} />
+      
       <Text style={styles.welcomeText}>
         {constant.welcomeText}
         <Text style={styles.highlight}>{constant.shoot}</Text>
       </Text>
+
       <View style={styles.baseView}>
         <Text style={styles.loginText}>{constant.loginOrSignup}</Text>
+        
         <View style={styles.childBaseView}>
+          {/* Country Selection */}
           <View style={styles.dropDownView}>
             <Text style={styles.phoneNoLabel}>{constant.enterYourPhoneNo}</Text>
-            <View style={styles.countrySelectorRow}>
-              <TouchableOpacity
-                style={styles.countrySelector}
-                onPress={() => setWithCountryNameButton(true)}>
-                <Text style={styles.countryText}>
-                  {country
-                    ? `${country.name} (+${country.callingCode[0]})`
-                    : 'India (+91)'}
-                </Text>
-              </TouchableOpacity>
-              <Image style={styles.arrowImg} source={images.checkIcon} />
-            </View>
+            <TouchableOpacity 
+              style={styles.countrySelectorRow}
+              onPress={() => setShowCountryPicker(true)}>
+              <Text style={styles.countryText}>
+                {country ? `${country.name} (+${country.callingCode[0]})` : 'India (+91)'}
+              </Text>
+              <Image source={images.checkIcon} style={styles.arrowImg} />
+            </TouchableOpacity>
+            
             <CountryPicker
-              withModal={true}
+              withModal
               withFlag={false}
               withEmoji={false}
-              withCountryNameButton={false}
-              withAlphaFilter={false}
-              withFilter={true}
-              withCallingCode={true}
-              countryCode={countryCode ?? ''}
+              withFilter
+              withCallingCode
+              countryCode={countryCode}
               preferredCountries={['IN', 'SG', 'MY']}
-              onSelect={country => {
-                setCountryCode(country.cca2);
-                setCountry(country);
-              }}
-              visible={withCountryNameButton}
-              onClose={() => setWithCountryNameButton(false)}
+              onSelect={onSelectCountry}
+              visible={showCountryPicker}
+              onClose={() => setShowCountryPicker(false)}
               renderFlagButton={() => null}
             />
           </View>
+
+          {/* Phone Number Input */}
           <View style={styles.phoneNoView}>
             <Text style={styles.phoneNoText}>{constant.phoneNumber}</Text>
             <View style={styles.inputContainer}>
@@ -95,36 +89,43 @@ const LoginScreen: React.FC = () => {
                 value={phoneNumber}
                 onChangeText={setPhoneNumber}
               />
-              {phoneNumber.length == 10 && (
-                <Image
-                  source={images.mobileVerifyTick}
-                  style={styles.mobileVerifyTick}
+              {phoneNumber.length === 10 && (
+                <Image 
+                  source={images.mobileVerifyTick} 
+                  style={styles.mobileVerifyTick} 
                 />
               )}
             </View>
           </View>
+
           <Text style={styles.secureText}>{constant.loginSecure}</Text>
-          <PVBMButton
+          
+          <ASButton
             onPress={moveToOtpPage}
             title={constant.continue}
-            customStyle={styles.continueButton}></PVBMButton>
+            customStyle={styles.continueButton}
+          />
         </View>
+
+        {/* Divider */}
         <View style={styles.orContainer}>
           <View style={styles.line} />
           <Text style={styles.orText}>or</Text>
           <View style={styles.line} />
         </View>
-        <View style={{alignItems: 'center'}}>
+
+        <TouchableOpacity style={styles.guestContainer} onPress={()=> navigation.navigate('homeScreen')}>
           <Text style={styles.continueAsText}>
             {constant.continueAs}
             <Text style={styles.highlight}>{constant.guest}</Text>
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
+// Optimized styles using StyleSheet.create
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -139,44 +140,39 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     fontSize: 16,
-    fontFamily: 'Poppins-Medium',
+    fontFamily: Fonts.semiBold,
     color: colors.white,
     marginTop: 5,
-    // fontWeight: 'medium',
   },
   continueAsText: {
-    fontSize: 16,
-    fontFamily: 'Poppins-Medium',
+    fontSize: 12,
+    fontFamily: Fonts.medium,
     color: colors.black,
     marginTop: 5,
-    // fontWeight: 'medium',
   },
   highlight: {
     color: colors.appColor,
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
-    // fontWeight: 'bold',
+    fontSize: 12,
+    fontFamily: Fonts.semiBold,
   },
   baseView: {
     backgroundColor: colors.white,
     marginTop: 20,
-    width: width,
+    width,
     borderRadius: 30,
     padding: 20,
-    height: height,
+    height,
   },
   loginText: {
     color: colors.appColor,
     fontSize: 16,
-    fontWeight: 'semibold',
-    fontFamily: 'Poppins-SemiBold',
+    fontFamily: Fonts.semiBold,
     marginTop: 20,
     paddingRight: 16,
   },
   childBaseView: {
     backgroundColor: colors.white,
-    marginRight: 12,
-    marginLeft: 12,
+    marginHorizontal: 12,
     marginTop: 24,
     width: 342,
     height: 236,
@@ -197,16 +193,15 @@ const styles = StyleSheet.create({
   },
   secureText: {
     fontSize: 12,
-    fontWeight: 'regular',
     color: colors.black,
+    fontFamily: Fonts.regular,
     top: 24,
     marginBottom: 20,
   },
   phoneNoText: {
     color: colors.placeHolderColor,
     fontSize: 14,
-    fontWeight: 'regular',
-    fontFamily: 'Poppins-regular',
+    fontFamily: Fonts.regular,
     padding: 12,
   },
   input: {
@@ -219,8 +214,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.appColor,
     borderRadius: 50,
     marginTop: 24,
-    paddingRight: 16,
-    paddingLeft: 16,
+    paddingHorizontal: 16,
   },
   orContainer: {
     flexDirection: 'row',
@@ -237,36 +231,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     color: colors.placeHolderColor,
     fontSize: 14,
-    fontWeight: 'bold',
-    fontFamily: 'Poppins-bold',
-  },
-  phoneInputContainer: {
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: colors.lightGray,
-    borderRadius: 4,
-    height: 48,
-    marginBottom: 16,
-  },
-  countryCodeSelector: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    borderRightWidth: 1,
-    borderRightColor: colors.lightGray,
-  },
-  countryCodeText: {
-    color: colors.black,
-    fontSize: 14,
-    fontFamily: 'Poppins-regular',
-    marginRight: 8,
-  },
-  phoneInput: {
-    flex: 1,
-    paddingHorizontal: 12,
-    color: colors.black,
-    fontSize: 14,
-    fontFamily: 'Poppins-regular',
+    fontFamily: Fonts.bold,
   },
   arrowImg: {
     width: 24,
@@ -274,26 +239,20 @@ const styles = StyleSheet.create({
     tintColor: colors.placeHolderColor,
     marginLeft: 8,
   },
-  dropDownContainer: {
-    marginBottom: 16,
-  },
   phoneNoLabel: {
     color: colors.placeHolderColor,
-    fontSize: 14,
-    fontFamily: 'Poppins-regular',
+    fontSize: 12,
+    fontFamily: Fonts.regular,
     marginBottom: 8,
   },
   countrySelectorRow: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  countrySelector: {
-    flex: 1,
-  },
   countryText: {
     color: colors.black,
     fontSize: 14,
-    fontFamily: 'Poppins-regular',
+    fontFamily: Fonts.regular,
   },
   mobileVerifyTick: {
     height: 20,
@@ -307,6 +266,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
   },
+  guestContainer: {
+    alignItems: 'center',
+  },
 });
 
-export default LoginScreen;
+export default React.memo(LoginScreen);
