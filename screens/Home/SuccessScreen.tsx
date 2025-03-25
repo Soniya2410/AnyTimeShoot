@@ -15,6 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {RootStackNavigationProp} from '../../App';
 import { ASButton } from './components/ASButton';
+import { Fonts } from '../utils/Fonts';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -34,7 +35,7 @@ const SuccessScreen: React.FC = () => {
           {constant.congrats}
           <Text style={styles.youHaveText}>{constant.youhaveBeen}</Text>
         </Text>
-         <ASButton onPress={navigateToSignInPage} title='Continue' 
+         <ASButton onPress={navigateToSignInPage} title={constant.continue} 
         customStyle={styles.continueButton}
         > 
         </ASButton>
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
   },
   successText: {
     fontSize: 22,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     color: colors.successBorderColor,
     paddingHorizontal: 8
   },
@@ -66,8 +67,7 @@ const styles = StyleSheet.create({
     top: 15,
     color: colors.appColor,
     fontSize: 18,
-    // fontFamily: 'Poppins-SemiBold',
-    fontWeight: 'medium', 
+    fontFamily: Fonts.medium,
     textAlign: 'center',
     marginRight: 20,
     marginLeft: 20,
@@ -76,8 +76,7 @@ const styles = StyleSheet.create({
   youHaveText: {
     color: colors.placeHolderColor,
     fontSize: 18,
-    // fontFamily: 'Poppins-SemiBold',
-    fontWeight: 'medium',  
+    fontFamily: Fonts.medium,
   },
   continueButton:{
     top: 150,

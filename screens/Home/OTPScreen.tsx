@@ -51,7 +51,7 @@ const OTPSCreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <Image source={images.otpBlankBg} style={styles.bgImg} />
+        <Image source={images.otpFilledBg} style={styles.bgImg} />
         <View style={styles.baseView}>
           <Text style={styles.verifyText}>{constant.verifyYourPhnNo}</Text>
           <Text style={styles.enterCodeText}>{constant.enterTheCode}</Text>
@@ -82,7 +82,7 @@ const OTPSCreen: React.FC = () => {
           <Text style={styles.haventText}>{constant.haventReceiveTheCode}</Text>
           <Text style={styles.resendText}>{constant.resendOtp}</Text>
           <ASButton 
-            title='Verify' 
+            title={constant.verify}
             onPress={navigateToSucessPage} 
             customStyle={styles.continueButton}
           />
@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black,
   },
   bgImg: {
-    width: 161,
-    height: 190,
+    width: 300,
+    height: '30%',
   },
   baseView: {
     backgroundColor: colors.white,
@@ -115,14 +115,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: colors.appColor,
-    top: 20,
+    marginTop: 20,
     fontFamily: Fonts.semiBold,
     marginBottom: 20,
   },
   enterCodeText: {
     marginTop: 10,
     fontSize: 15,
-    // fontWeight: 'regular',
     fontFamily: Fonts.regular,
     color: colors.black,
   },

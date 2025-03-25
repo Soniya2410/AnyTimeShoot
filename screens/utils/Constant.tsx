@@ -55,5 +55,4 @@ export const constant = {
    enterYourEmail: "Enter Your Email",
    continueWithGoogle: "Continue With Google",
    skipForNow: "Skip for now",
-
 }

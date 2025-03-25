@@ -45,6 +45,6 @@ export const images = {
   otpSuccessBg: require('../../assets/images/otpSuccessBg.png'),
   otpFilledBg: require('../../assets/images/otpFilledBg.png'),
   signInBg: require('../../assets/images/signInBg.png'),
-
+  googleIcon: require('../../assets/images/google.png'),
 };
 

@@ -9,7 +9,10 @@ import {
   SafeAreaView,
   TextInput,
 } from 'react-native';
-import CountryPicker, {Country, CountryCode} from 'react-native-country-picker-modal';
+import CountryPicker, {
+  Country,
+  CountryCode,
+} from 'react-native-country-picker-modal';
 import {useNavigation} from '@react-navigation/native';
 import {images} from '../utils/Images';
 import {constant} from '../utils/Constant';
@@ -40,7 +43,7 @@ const LoginScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Image source={images.loginCam} style={styles.bgImg} />
-      
+
       <Text style={styles.welcomeText}>
         {constant.welcomeText}
         <Text style={styles.highlight}>{constant.shoot}</Text>
@@ -48,20 +51,22 @@ const LoginScreen: React.FC = () => {
 
       <View style={styles.baseView}>
         <Text style={styles.loginText}>{constant.loginOrSignup}</Text>
-        
+
         <View style={styles.childBaseView}>
           {/* Country Selection */}
           <View style={styles.dropDownView}>
             <Text style={styles.phoneNoLabel}>{constant.enterYourPhoneNo}</Text>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.countrySelectorRow}
               onPress={() => setShowCountryPicker(true)}>
               <Text style={styles.countryText}>
-                {country ? `${country.name} (+${country.callingCode[0]})` : 'India (+91)'}
+                {country
+                  ? `${country.name} (+${country.callingCode[0]})`
+                  : 'India (+91)'}
               </Text>
               <Image source={images.checkIcon} style={styles.arrowImg} />
             </TouchableOpacity>
-            
+
             <CountryPicker
               withModal
               withFlag={false}
@@ -90,16 +95,16 @@ const LoginScreen: React.FC = () => {
                 onChangeText={setPhoneNumber}
               />
               {phoneNumber.length === 10 && (
-                <Image 
-                  source={images.mobileVerifyTick} 
-                  style={styles.mobileVerifyTick} 
+                <Image
+                  source={images.mobileVerifyTick}
+                  style={styles.mobileVerifyTick}
                 />
               )}
             </View>
           </View>
 
           <Text style={styles.secureText}>{constant.loginSecure}</Text>
-          
+
           <ASButton
             onPress={moveToOtpPage}
             title={constant.continue}
@@ -114,7 +119,9 @@ const LoginScreen: React.FC = () => {
           <View style={styles.line} />
         </View>
 
-        <TouchableOpacity style={styles.guestContainer} onPress={()=> navigation.navigate('homeScreen')}>
+        <TouchableOpacity
+          style={styles.guestContainer}
+          onPress={() => navigation.navigate('homeScreen')}>
           <Text style={styles.continueAsText}>
             {constant.continueAs}
             <Text style={styles.highlight}>{constant.guest}</Text>
