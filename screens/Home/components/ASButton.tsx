@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 10,
     marginVertical: 10,
-    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colors.appColor,
   },
   textStyle: {
     paddingVertical: 15,

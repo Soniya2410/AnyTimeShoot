@@ -8,26 +8,28 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 // Screens
 import HomeScreen from './screens/Home/HomeScreen';
 import ProfileScreen from './screens/Home/ProfileScreen';
 import CategoryScreen from './screens/Home/CategoryScreen';
 import MyBookingsScreen from './screens/Home/MyBookingsScreen';
-import { images } from './screens/utils/Images';
-import { colors } from './screens/utils/Colors';
+import {images} from './screens/utils/Images';
+import {colors} from './screens/utils/Colors';
 
 // Onboarding Screens
 import OnboardScreen from './screens/Home/OnboardScreen';
 import LoginScreen from './screens/Home/LoginScreen';
 import OnboardSlider from './screens/Home/components/OnboardSlider';
 import OTPSCreen from './screens/Home/OTPScreen';
+import SuccessScreen from './screens/Home/SuccessScreen';
+import SignInScreen from './screens/Home/SignInScreen';
 
 type RootStackParamList = {
   onboard: undefined;
@@ -35,6 +37,8 @@ type RootStackParamList = {
   login: undefined;
   homeScreen: undefined;
   otpScreen: undefined;
+  successScreen: undefined;
+  signIn: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -42,16 +46,16 @@ export type RootStackNavigationProp<T extends keyof RootStackParamList> =
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
-const { width, height } = Dimensions.get('screen');
+const {width, height} = Dimensions.get('screen');
 
 const BottomTabs: React.FC = () => {
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <Tab.Navigator
-          screenOptions={({ route }) => ({
+          screenOptions={({route}) => ({
             headerShown: false,
-            tabBarIcon: ({ focused }) => {
+            tabBarIcon: ({focused}) => {
               let iconSource;
               switch (route.name) {
                 case 'Home':
@@ -81,18 +85,19 @@ const BottomTabs: React.FC = () => {
             },
             tabBarActiveTintColor: colors.appColor,
             tabBarInactiveTintColor: 'gray',
-            tabBarLabelStyle: { fontSize: 12, fontWeight: '500', marginTop: 2 },
+            tabBarLabelStyle: {fontSize: 12, fontWeight: '500', marginTop: 2},
             tabBarStyle: {
               height: Platform.OS === 'ios' ? 80 : 60,
               paddingBottom: Platform.OS === 'ios' ? 20 : 10,
             },
             tabBarButton: props => {
-              const { onPress, onLongPress, accessibilityState, children } = props;
+              const {onPress, onLongPress, accessibilityState, children} =
+                props;
               return (
                 <TouchableOpacity
                   onPress={onPress}
                   activeOpacity={0.8}
-                  style={{ flex: 1, position: 'relative' }}>
+                  style={{flex: 1, position: 'relative'}}>
                   {accessibilityState?.selected && (
                     <View
                       style={{
@@ -129,33 +134,49 @@ const BottomTabs: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{flex: 1}}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="onboard">
           <Stack.Screen
             name="onboard"
             component={OnboardScreen}
-            options={{ title: '', headerShown: false }}
+            options={{title: '', headerShown: false}}
           />
           <Stack.Screen
             name="onboardSlider"
             component={OnboardSlider}
-            options={{ title: '', headerShown: false }}
+            options={{title: '', headerShown: false}}
           />
           <Stack.Screen
             name="login"
             component={LoginScreen}
-            options={{ title: '', headerShown: false }}
+            options={{title: '', headerShown: false}}
           />
           <Stack.Screen
             name="homeScreen"
             component={BottomTabs}
-            options={{ title: '', headerShown: false }}
+            options={{title: '', headerShown: false}}
           />
           <Stack.Screen
-          name='otpScreen'
-          component={OTPSCreen}
-          options={{title: "", headerShown: false}}
+            name="otpScreen"
+            component={OTPSCreen}
+            options={{title: '', headerShown: false}}
+          />
+          <Stack.Screen
+            name="successScreen"
+            component={SuccessScreen}
+            options={{
+              title: '',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="signIn"
+            component={SignInScreen}
+            options={{
+              title: '',
+              headerShown: false,
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

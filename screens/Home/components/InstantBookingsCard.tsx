@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 12,
   },
-  
 });
 
 export default InstantBookingCard;

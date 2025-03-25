@@ -14,15 +14,18 @@ import {constant} from '../utils/Constant';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import { ASButton } from './components/ASButton';
 import { Fonts } from '../utils/Fonts';
+import { useNavigation } from '@react-navigation/native';
+import {RootStackNavigationProp} from '../../App';
 
 const {width, height} = Dimensions.get('screen');
 
 const OTPSCreen: React.FC = () => {
+  const navigation = useNavigation<RootStackNavigationProp<'otpScreen'>>();
   const [otp, setOtp] = useState<string[]>(['', '', '', '']);
   const inputs = useRef<TextInput[]>([]);
   
   const navigateToSucessPage = () => {
-    // Your navigation logic here
+    navigation.navigate('successScreen');
   };
 
   const handleChange = (text: string, index: number) => {
@@ -30,15 +33,12 @@ const OTPSCreen: React.FC = () => {
     newOtp[index] = text;
     setOtp(newOtp);
 
-    // Auto focus to next input
     if (text && index < 3) {
       inputs.current[index + 1]?.focus();
     }
 
-    // Submit automatically if last digit is entered
     if (index === 3 && text) {
       Keyboard.dismiss();
-      // You can add your submit logic here
     }
   };
 
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
   },
   haventText: {
-    padding: 16,
+    paddingHorizontal: 16,
     alignItems:'center',
     textAlign: 'center',
     fontFamily: Fonts.regular,
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
   },
   continueButton: {
     height: 54,
-    backgroundColor: colors.appColor,
     borderRadius: 27,
     top: 34,
   }

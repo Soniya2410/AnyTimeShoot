@@ -10,4 +10,5 @@ export const colors = {
   black: '#000000',
   placeHolderColor: '#474747',
   otpBorderColor: '#717171',
+  successBorderColor: '#474747',
 };

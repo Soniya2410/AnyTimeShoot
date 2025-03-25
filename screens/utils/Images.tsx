@@ -42,6 +42,9 @@ export const images = {
   checkIcon: require('../../assets/images/checkIcon.png'),
   mobileVerifyTick: require('../../assets/images/mobileVerify.png'),
   otpBlankBg: require('../../assets/images/otpBlankBg.png'),
+  otpSuccessBg: require('../../assets/images/otpSuccessBg.png'),
   otpFilledBg: require('../../assets/images/otpFilledBg.png'),
-}
+  signInBg: require('../../assets/images/signInBg.png'),
+
+};
 
