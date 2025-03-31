@@ -11,4 +11,7 @@ export const colors = {
   placeHolderColor: '#474747',
   otpBorderColor: '#717171',
   successBorderColor: '#474747',
+  appLightColor: 'rgba(236, 25, 59, 0.2)',
+  lineColor: '#D4D4D4',
+  borderColor: '#BCBCBC',
 };

@@ -46,5 +46,18 @@ export const images = {
   otpFilledBg: require('../../assets/images/otpFilledBg.png'),
   signInBg: require('../../assets/images/signInBg.png'),
   googleIcon: require('../../assets/images/google.png'),
+  profileTopImage: require('../../assets/images/profileTopImg.png'),
+  profileImage: require('../../assets/images/profileImage.png'),
+  rightAppNextArrow: require('../../assets/images/right_app_arrow.png'),
+  backIcon: require('../../assets/images/back.png'),
+  locationIcon: require('../../assets/images/locationIcon.png'),
+  phoneIcon: require('../../assets/images/phoneIcon.png'),
+  whislistIcon: require('../../assets/images/whislistIcon.png'),
+  termsIcon: require('../../assets/images/termsIcon.png'),
+  canPolicyIcon: require('../../assets/images/canPolicyIcon.png'),
+  rateUsIcon: require('../../assets/images/rateUsIcon.png'),
+  deleteAccountIcon: require('../../assets/images/deleteAccountIcon.png'),
+  contactUsIcon: require('../../assets/images/contactUsIcon.png'),
+  editProfileIcon: require('../../assets/images/editProfileIcon.png'),
 };
 

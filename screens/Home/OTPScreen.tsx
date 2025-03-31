@@ -71,6 +71,7 @@ const OTPSCreen: React.FC = () => {
                 keyboardType="numeric"
                 maxLength={1}
                 placeholder='-'
+                selectionColor={colors.appColor}
                 value={otp[index]}
                 onChangeText={(text) => handleChange(text, index)}
                 onKeyPress={(e) => handleKeyPress(e, index)}
@@ -81,11 +82,17 @@ const OTPSCreen: React.FC = () => {
           
           <Text style={styles.haventText}>{constant.haventReceiveTheCode}</Text>
           <Text style={styles.resendText}>{constant.resendOtp}</Text>
+
+          <View style={styles.validOtpView}>
+            <Text style={styles.invalidOtpText}>{constant.invalidOtpEntered}</Text>
+          </View>
+          <Text style={styles.clearAllText}>{constant.clearAll}</Text>
           <ASButton 
             title={constant.verify}
             onPress={navigateToSucessPage} 
             customStyle={styles.continueButton}
           />
+
         </View>
       </View>
     </SafeAreaView>
@@ -158,13 +165,35 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     fontSize: 14,
     color: colors.appColor,
-    textDecorationLine:'underline'
+    textDecorationLine:'underline',
   },
   continueButton: {
     height: 54,
     borderRadius: 27,
     top: 34,
-  }
+  },
+  validOtpView: {
+    marginTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
+    backgroundColor: colors.appLightColor,
+    borderRadius: 18,
+  },
+  invalidOtpText: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontFamily: Fonts.bold,
+    color: colors.appColor,
+  },
+  clearAllText: {
+    marginTop: 5,
+    textAlign: "right",
+    textDecorationLine: 'underline',
+    fontSize: 14,
+    fontFamily: Fonts.medium,
+    color: colors.appColor
+  },
 });
 
 export default OTPSCreen;

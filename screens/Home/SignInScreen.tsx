@@ -20,15 +20,15 @@ import {Fonts} from '../utils/Fonts';
 const {width, height} = Dimensions.get('screen');
 
 const SignInScreen: React.FC = () => {
+  const navigation = useNavigation<RootStackNavigationProp<'signIn'>>();
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
 
   const navigateToGoogle = () => {
- 
   };
 
   const navigateToHome = () => {
-
+    navigation.navigate('homeScreen')
   };
 
   return (
@@ -88,7 +88,7 @@ const SignInScreen: React.FC = () => {
             <Text style={styles.buttonText}>{constant.continueWithGoogle}</Text>
           </TouchableOpacity>
 
-          <ASButton title={constant.continueWithGoogle} onPress={navigateToHome} customStyle={styles.continueButton}> 
+          <ASButton title={constant.continue} onPress={navigateToHome} customStyle={styles.continueButton}> 
           </ASButton>
 
           <TouchableOpacity>

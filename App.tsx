@@ -55,6 +55,27 @@ const BottomTabs: React.FC = () => {
         <Tab.Navigator
           screenOptions={({route}) => ({
             headerShown: false,
+            headerTitleAlign: 'left',
+            headerStyle: {
+             shadowOpacity: 0,
+             paddingTop: Platform.OS === 'ios' ? StatusBar.currentHeight : 10             
+            },
+            headerLeft: () => (
+              <TouchableOpacity 
+                // onPress={() => navigation.goBack()}
+                style={{ marginLeft: 15 }}
+              >
+                <Image
+                  source={images.backIcon} 
+                  style={{ width: 13, height: 13 }}
+                />
+              </TouchableOpacity>
+            ),
+            headerTitleStyle: {
+              fontSize: 20,
+              fontWeight: 'bold',
+              marginLeft: 10, 
+            },
             tabBarIcon: ({focused}) => {
               let iconSource;
               switch (route.name) {
@@ -155,7 +176,9 @@ const App: React.FC = () => {
           <Stack.Screen
             name="homeScreen"
             component={BottomTabs}
-            options={{title: '', headerShown: false}}
+            options={{
+              headerShown: false, 
+            }}
           />
           <Stack.Screen
             name="otpScreen"
