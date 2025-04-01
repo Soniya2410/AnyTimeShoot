@@ -50,11 +50,11 @@ const {width, height} = Dimensions.get('screen');
 
 const BottomTabs: React.FC = () => {
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={{top:50}}>
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
         <Tab.Navigator
           screenOptions={({route}) => ({
-            headerShown: false,
+            headerShown: true,
             headerTitleAlign: 'left',
             headerStyle: {
              shadowOpacity: 0,
