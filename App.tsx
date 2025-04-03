@@ -30,6 +30,7 @@ import OnboardSlider from './screens/Home/components/OnboardSlider';
 import OTPSCreen from './screens/Home/OTPScreen';
 import SuccessScreen from './screens/Home/SuccessScreen';
 import SignInScreen from './screens/Home/SignInScreen';
+import CouponScreen from './screens/Home/CouponScreen';
 
 type RootStackParamList = {
   onboard: undefined;
@@ -39,6 +40,7 @@ type RootStackParamList = {
   otpScreen: undefined;
   successScreen: undefined;
   signIn: undefined;
+  coupon: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -145,7 +147,8 @@ const BottomTabs: React.FC = () => {
           })}>
           <Tab.Screen name="Home" component={HomeScreen} />
           <Tab.Screen name="Category" component={CategoryScreen} />
-          <Tab.Screen name="My Bookings" component={MyBookingsScreen} />
+          <Tab.Screen name="My Bookings" component={CouponScreen} />
+          {/* <Tab.Screen name='Coupon' component={CouponScreen}/> */}
           <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
       </SafeAreaView>

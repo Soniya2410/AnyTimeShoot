@@ -10,8 +10,9 @@ export const colors = {
   black: '#000000',
   placeHolderColor: '#474747',
   otpBorderColor: '#717171',
-  successBorderColor: '#474747',
+  textPrimary2: '#474747',
   appLightColor: 'rgba(236, 25, 59, 0.2)',
   lineColor: '#D4D4D4',
   borderColor: '#BCBCBC',
+  appliedColor: "#4CAF50",
 };

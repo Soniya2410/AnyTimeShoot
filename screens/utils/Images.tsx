@@ -59,5 +59,6 @@ export const images = {
   deleteAccountIcon: require('../../assets/images/deleteAccountIcon.png'),
   contactUsIcon: require('../../assets/images/contactUsIcon.png'),
   editProfileIcon: require('../../assets/images/editProfileIcon.png'),
+  appliedCouponIcon: require('../../assets/images/appliedCouponIcon.png')
 };
 
