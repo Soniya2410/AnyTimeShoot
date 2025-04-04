@@ -69,7 +69,7 @@ const LoginScreen: React.FC = () => {
 
             <CountryPicker
               withModal
-              withFlag={false}
+              withFlag={true}
               withEmoji={false}
               withFilter
               withCallingCode
@@ -81,11 +81,10 @@ const LoginScreen: React.FC = () => {
               renderFlagButton={() => null}
             />
           </View>
-
           {/* Phone Number Input */}
           <View style={styles.phoneNoView}>
+          <View style={[styles.inputContainer, { width: phoneNumber.length < 10 ? '95%' : '90%'}]}>
             <Text style={styles.phoneNoText}>{constant.phoneNumber}</Text>
-            <View style={styles.inputContainer}>
               <TextInput
                 keyboardType="phone-pad"
                 maxLength={10}
@@ -94,15 +93,14 @@ const LoginScreen: React.FC = () => {
                 value={phoneNumber}
                 onChangeText={setPhoneNumber}
               />
-              {phoneNumber.length === 10 && (
+            </View>
+            {phoneNumber.length === 10 && (
                 <Image
                   source={images.mobileVerifyTick}
                   style={styles.mobileVerifyTick}
                 />
               )}
-            </View>
           </View>
-
           <Text style={styles.secureText}>{constant.loginSecure}</Text>
 
           <ASButton
@@ -116,7 +114,7 @@ const LoginScreen: React.FC = () => {
         <View style={styles.orContainer}>
           <View style={styles.line} />
           <Text style={styles.orText}>or</Text>
-          <View style={styles.line} />
+          <View style={styles.line2} />
         </View>
 
         <TouchableOpacity
@@ -159,7 +157,7 @@ const styles = StyleSheet.create({
   },
   highlight: {
     color: colors.appColor,
-    fontSize: 12,
+    fontSize: 16,
     fontFamily: Fonts.semiBold,
   },
   baseView: {
@@ -179,42 +177,44 @@ const styles = StyleSheet.create({
   },
   childBaseView: {
     backgroundColor: colors.white,
-    marginHorizontal: 12,
+    // marginHorizontal: 12,
     marginTop: 24,
-    width: 342,
-    height: 236,
-    marginBottom: 24,
+    // width: 342,
+    // height: 236,
+    // marginBottom: 24,
   },
   dropDownView: {
     borderWidth: 1,
     borderColor: colors.lightGray,
     borderRadius: 4,
-    padding: 12,
-    marginBottom: 0,
+    padding: 5,
   },
   phoneNoView: {
-    height: 67,
-    borderRadius: 8,
+    // height: 67,
+    flexDirection: 'row',
+    justifyContent:'center',
+    alignItems: 'center',
+    borderRadius: 4,
     borderWidth: 2,
     borderColor: colors.black,
+    // padding: 5
   },
   secureText: {
     fontSize: 12,
     color: colors.black,
     fontFamily: Fonts.regular,
-    top: 24,
-    marginBottom: 20,
+    marginVertical: 20,
   },
   phoneNoText: {
     color: colors.placeHolderColor,
     fontSize: 14,
     fontFamily: Fonts.regular,
-    padding: 12,
   },
   input: {
-    flex: 1,
-    padding: 12,
-    bottom: 14,
+    fontSize: 15,
+    fontFamily: Fonts.regular,
+    color: colors.black,
+
   },
   continueButton: {
     height: 54,
@@ -232,10 +232,16 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 1,
     backgroundColor: colors.placeHolderColor,
-    marginHorizontal: 20,
+    marginLeft: 20,
+  },
+  line2: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.placeHolderColor,
+    marginRight: 20,
   },
   orText: {
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     color: colors.placeHolderColor,
     fontSize: 14,
     fontFamily: Fonts.bold,
@@ -250,7 +256,7 @@ const styles = StyleSheet.create({
     color: colors.placeHolderColor,
     fontSize: 12,
     fontFamily: Fonts.regular,
-    marginBottom: 8,
+    // marginBottom: 8,
   },
   countrySelectorRow: {
     flexDirection: 'row',
@@ -258,20 +264,19 @@ const styles = StyleSheet.create({
   },
   countryText: {
     color: colors.black,
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: Fonts.regular,
+    width: '90%',
+    marginTop: 5
   },
   mobileVerifyTick: {
     height: 20,
     width: 20,
-    right: 12,
-    position: 'absolute',
-    bottom: 27,
+    justifyContent:'flex-end',
+    alignItems:'center'
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    position: 'relative',
+    width: '90%',
   },
   guestContainer: {
     alignItems: 'center',

@@ -35,7 +35,7 @@ export const constant = {
    onBoardDesc3: "Browse amazing packages that will suit your style and taste",
    welcomeText: "Welcome To AnyTime",
    shoot: "Shoot",
-   next: "Next",
+   next: "NEXT",
    loginOrSignup: "Log In or Sign up",
    loginSecure: 'Securing your personal information is our priority.',
    phoneNumber: "Phone number",

@@ -27,9 +27,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.appColor,
+    height: 57
   },
   textStyle: {
-    paddingVertical: 15,
+    // paddingVertical: 12,
     textAlign: 'center',
     color: colors.white,
     fontSize: 20,

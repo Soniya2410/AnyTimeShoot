@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   },
   userNameText: {
     padding: 12,
-    color: colors.successBorderColor,
+    color: colors.textPrimary2,
     fontSize: 14,
     fontFamily: Fonts.regular,
   },

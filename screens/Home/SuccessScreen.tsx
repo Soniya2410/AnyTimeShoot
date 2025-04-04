@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   successText: {
     fontSize: 22,
     fontFamily: Fonts.bold,
-    color: colors.successBorderColor,
+    color: colors.textPrimary2,
     paddingHorizontal: 8
   },
   highlighText: {
@@ -69,8 +69,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: Fonts.medium,
     textAlign: 'center',
-    marginRight: 20,
-    marginLeft: 20,
     paddingHorizontal: 16,
   },
   youHaveText: {

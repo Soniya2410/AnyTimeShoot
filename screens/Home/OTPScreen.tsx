@@ -71,6 +71,7 @@ const OTPSCreen: React.FC = () => {
                 keyboardType="numeric"
                 maxLength={1}
                 placeholder='-'
+                placeholderTextColor={colors.placeHolderColor}
                 selectionColor={colors.appColor}
                 value={otp[index]}
                 onChangeText={(text) => handleChange(text, index)}
@@ -122,12 +123,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: colors.appColor,
-    marginTop: 20,
+    marginVertical: 10,
     fontFamily: Fonts.semiBold,
-    marginBottom: 20,
+    // marginBottom: 20,
   },
   enterCodeText: {
-    marginTop: 10,
+    marginTop: 5,
     fontSize: 15,
     fontFamily: Fonts.regular,
     color: colors.black,
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: Fonts.regular,
     fontSize: 15,
-    bottom: 10,
+    marginBottom: 10,
   },
   resendText: {
     alignItems:'center',
