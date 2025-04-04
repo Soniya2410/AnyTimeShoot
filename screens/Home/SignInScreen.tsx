@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black,
     flex: 1,
     alignItems: 'center',
-    top: 20,
   },
   bgImage: {
     width: width,

@@ -52,8 +52,7 @@ const {width, height} = Dimensions.get('screen');
 
 const BottomTabs: React.FC = () => {
   return (
-    <SafeAreaProvider style={{top:50}}>
-      <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+   
         <Tab.Navigator
           screenOptions={({route}) => ({
             headerShown: true,
@@ -64,7 +63,6 @@ const BottomTabs: React.FC = () => {
             },
             headerLeft: () => (
               <TouchableOpacity 
-                // onPress={() => navigation.goBack()}
                 style={{ marginLeft: 15 }}
               >
                 <Image
@@ -145,20 +143,28 @@ const BottomTabs: React.FC = () => {
               );
             },
           })}>
-          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
           <Tab.Screen name="Category" component={CategoryScreen} />
           <Tab.Screen name="My Bookings" component={CouponScreen} />
           {/* <Tab.Screen name='Coupon' component={CouponScreen}/> */}
-          <Tab.Screen name="Profile" component={ProfileScreen} />
+          <Tab.Screen name="Profile" component={ProfileScreen} options={{
+                  headerRight: () => (
+                    <TouchableOpacity 
+                      style={{ marginRight: 15 }}
+                      onPress={() => {}}
+                    >
+                      <Image source={images.backIcon} style={{ width: 20, height: 20 }} />
+                    </TouchableOpacity>
+                  ),
+                }}/>
         </Tab.Navigator>
-      </SafeAreaView>
-    </SafeAreaProvider>
   );
 };
 
 const App: React.FC = () => {
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <SafeAreaProvider>
+    <GestureHandlerRootView>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="onboard">
           <Stack.Screen
@@ -207,6 +213,7 @@ const App: React.FC = () => {
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
 };
 

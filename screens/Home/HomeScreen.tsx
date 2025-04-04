@@ -333,7 +333,7 @@ const HomeScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={{backgroundColor: 'white'}}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <AppHeaders />
         <SearchComponents />
