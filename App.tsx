@@ -31,6 +31,7 @@ import OTPSCreen from './screens/Home/OTPScreen';
 import SuccessScreen from './screens/Home/SuccessScreen';
 import SignInScreen from './screens/Home/SignInScreen';
 import CouponScreen from './screens/Home/CouponScreen';
+import MessageScreen from './screens/Home/MessageScreen';
 
 type RootStackParamList = {
   onboard: undefined;
@@ -82,10 +83,10 @@ const BottomTabs: React.FC = () => {
                 case 'Home':
                   iconSource = images.home;
                   break;
-                case 'Category':
-                  iconSource = images.category;
+                case 'Message':
+                  iconSource = images.messageIcon;
                   break;
-                case 'My Bookings':
+                case 'Bookings':
                   iconSource = images.myBookings;
                   break;
                 case 'Profile':
@@ -144,9 +145,8 @@ const BottomTabs: React.FC = () => {
             },
           })}>
           <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
-          <Tab.Screen name="Category" component={CategoryScreen} />
-          <Tab.Screen name="My Bookings" component={CouponScreen} />
-          {/* <Tab.Screen name='Coupon' component={CouponScreen}/> */}
+          <Tab.Screen name="Message" component={MessageScreen} />
+          <Tab.Screen name="Bookings" component={MyBookingsScreen} />
           <Tab.Screen name="Profile" component={ProfileScreen} options={{
                   headerRight: () => (
                     <TouchableOpacity 
