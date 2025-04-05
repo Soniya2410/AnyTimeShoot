@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   descText: {
     fontFamily: Fonts.regular,
-    fontSize: 14,
+    fontSize: 12,
     color: colors.textPrimary2,
   },
 });

@@ -28,66 +28,74 @@ const ProfileScreen = () => {
       title: constant.profilePhoneNumber,
       value: '+91 456 435 7689',
       icon: images.phoneIcon,
+      size: 20
     },
     {
       id: '2',
       title: constant.addres,
       value: '123 Anywhere st, Any City 123456',
       icon: images.locationIcon,
+      size: 18
     },
     {
       id: '3',
       title: constant.whislist,
       value: constant.products,
       icon: images.whislistIcon,
+      size: 18
     },
     {
       id: '4',
       title: constant.termsOfUse,
       value: constant.policy,
       icon: images.termsIcon,
+      size: 30
     },
     {
       id: '5',
       title: constant.cancellationPolicy,
       value: constant.policy,
       icon: images.canPolicyIcon,
+      size: 20
     },
     {
       id: '6',
       title: constant.rateUs,
       value: constant.ratings,
       icon: images.rateUsIcon,
+      size: 20
     },
     {
       id: '7',
       title: constant.deleteAccount,
       value: constant.deleteEverything,
       icon: images.deleteAccountIcon,
+      size: 20
     },
     {
       id: '8',
       title: constant.contactUs,
       value: constant.about,
       icon: images.contactUsIcon,
+      size: 20
     },
   ];
 
   const renderItem = ({
     item,
   }: {
-    item: {id: string; title: string; value: string; icon: any};
+    item: {id: string; title: string; value: string; icon: any; size: number};
   }) => (
     <TouchableOpacity style={styles.settingItem}>
-      <View style={styles.settingLeftContainer}>
+      {/* <View style={styles.settingLeftContainer}> */}
         <View style={styles.iconBackground}>
-          <Image source={item.icon} style={styles.settingIcon} />
+          <Image source={item.icon} style={styles.settingIcon} width={item.size} height={item.size}/>
         </View>
         <View style={styles.settingTextContainer}>
           <Text style={styles.settingTitle}>{item.title}</Text>
           <Text style={styles.settingValue}>{item.value}</Text>
         </View>
-      </View>
+      {/* </View> */}
       {item.title === constant.profilePhoneNumber ||
       item.title === constant.addres ? (
         <TouchableOpacity>
@@ -110,7 +118,7 @@ const ProfileScreen = () => {
         {/* Profile Header */}
         <View style={styles.profileHeader}>
           <Image source={images.profileImage} style={styles.profileImage} />
-          <View style={styles.profileInfoContainer}>
+          {/* <View style={styles.profileInfoContainer}> */}
             <View style={styles.profileInfo}>
               <Text style={styles.name}>Harshit Rana</Text>
               <Text style={styles.email}>harshit@gmail.com</Text>
@@ -122,13 +130,13 @@ const ProfileScreen = () => {
               />
             </TouchableOpacity>
           </View>
-        </View>
+        {/* </View> */}
 
         <View style={styles.lineContainer}></View>
 
         {/* Join Partner View */}
-        <View style={styles.partnerContainer}>
-          <View style={styles.profileInfoContainer}>
+        <TouchableOpacity style={styles.partnerContainer}>
+          {/* <View style={styles.profileInfoContainer}> */}
             <View style={styles.partnerInfo}>
               <Text style={styles.joinPartner}>{constant.joinPartner}</Text>
               <Text style={styles.descText}>
@@ -136,14 +144,14 @@ const ProfileScreen = () => {
                 <Text style={styles.highlight}>{constant.shoot}</Text>
               </Text>
             </View>
-            <TouchableOpacity style={styles.profileTopImageContainer}>
+            {/* <TouchableOpacity style={styles.profileTopImageContainer}> */}
               <Image
                 source={images.profileTopImage}
                 style={styles.profileTopImage}
               />
-            </TouchableOpacity>
-          </View>
-        </View>
+            {/* </TouchableOpacity> */}
+          {/* </View> */}
+        </TouchableOpacity>
 
         {/* Settings FlatList */}
         <View style={styles.settingsContainer}>
@@ -180,13 +188,13 @@ const styles = StyleSheet.create({
   profileHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   profileImage: {
     width: 57,
     height: 57,
     borderRadius: 40,
-    marginRight: 20,
+    marginRight: 5,
   },
   profileInfoContainer: {
     flex: 1,
@@ -195,12 +203,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   profileInfo: {
-    flex: 1,
+    // flex: 1,
+    width: '70%',
     marginLeft: 10,
   },
   partnerInfo: {
-    flex: 1,
-    marginLeft: 10,
+    // flex: 1,
+    width: '45%',
+    marginHorizontal: 10,
   },
   scrollContentContainer: {
     paddingBottom: 40,
@@ -211,16 +221,17 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 20,
-    fontFamily: Fonts.bold,
-    marginBottom: 5,
+    fontFamily: Fonts.regular,
+    // marginBottom: 5,
   },
   email: {
-    fontSize: 16,
+    fontSize: 12,
     color: '#666',
+    fontFamily: Fonts.light,
   },
   rightArrow: {
-    height: 16,
-    width: 16,
+    height: 19,
+    width: 19,
   },
   arrowContainer: {
     marginLeft: 10,
@@ -230,22 +241,25 @@ const styles = StyleSheet.create({
   },
   lineContainer: {
     width: '100%',
-    height: 2,
+    height: 1,
     backgroundColor: colors.lineColor,
   },
   partnerContainer: {
-    marginTop: 23,
-    width: '100%',
+    marginVertical: 20,
+    // width: '100%',
     height: '12%',
     backgroundColor: colors.white,
     borderColor: colors.borderColor,
     borderWidth: 1,
-    borderRadius: 16,
+    borderRadius: 14,
     shadowColor: colors.appColor,
     shadowOffset: { width: 0, height: 4},
     shadowOpacity: 0.3,
     shadowRadius: 6,
     elevation: 5,
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   shadowContainer: {
     shadowColor: colors.appLightColor,
@@ -257,21 +271,24 @@ const styles = StyleSheet.create({
     marginTop: 23,
   },
   profileTopImage: {
-    width: 166,
+    // width: '50%',
+    // marginHorizontal: 20,
     height: 95,
+    marginRight: 20,
   },
   joinPartner: {
     fontSize: 16,
-    marginBottom: 5,
-    marginRight: 11,
+    // marginBottom: 5,
+    // marginRight: 11,
     fontFamily: Fonts.medium,
   },
   descText: {
     fontSize: 10,
-    marginBottom: 5,
-    marginRight: 11,
+    marginRight: 10,
+    marginVertical: 5,
     fontFamily: Fonts.regular,
     color: colors.black,
+    lineHeight: 17,
   },
   highlight: {
     color: colors.appColor,
@@ -285,7 +302,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
   },
   settingsContainer: {
-    marginTop: 30,
+    marginVertical: 10,
   },
   settingItem: {
     flexDirection: 'row',
@@ -295,42 +312,37 @@ const styles = StyleSheet.create({
   },
   settingTextContainer: {
     flex: 1,
+    marginHorizontal: 10,
   },
-  settingLeftContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
+  // settingLeftContainer: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   flex: 1,
+  // },
   settingTitle: {
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: Fonts.medium,
     color: colors.black,
     marginBottom: 5,
   },
   settingValue: {
-    fontSize: 14,
+    fontSize: 10,
     fontFamily: Fonts.regular,
     color: '#666',
   },
   settingIcon: {
-    width: 20,
-    height: 20,
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginTop: -8,
-    marginLeft: -8,
-    resizeMode: 'contain',
+    // padding: 2,
     tintColor: colors.appColor,
   },
   iconBackground: {
     width: 40,
-    height: 40,
+    height: 35,
     borderRadius: 3,
     backgroundColor: colors.appLightColor,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 15,
+    padding: 2,
+    // marginRight: 15,
   },
   separator: {
     height: 1,
@@ -362,13 +374,13 @@ const styles = StyleSheet.create({
   },
   editButton: {
     borderRadius: 30,
-    marginTop: 50,
+    marginTop: 20,
     width: '70%',
     textAlign: 'center',
   },
   editButtonContainer: {
     alignItems: 'center',
-    marginTop: 30,
+    // marginTop: 10,
   },
 });
 
