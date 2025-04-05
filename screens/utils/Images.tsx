@@ -1,8 +1,8 @@
 export const images = {
   home: require('../../assets/images/home.png'),
-  category: require('../../assets/images/category.png'),
+  messageIcon: require('../../assets/images/messageIcon.png'),
   myBookings: require('../../assets/images/myBookings.png'),
-  profile: require('../../assets/images/Profile.png'),
+  profile: require('../../assets/images/profile.png'),
   wedding: require('../../assets/images/wedding.jpg'),
   maternity: require('../../assets/images/maternity.jpeg'),
   preWedding: require('../../assets/images/preWedding.jpg'),
@@ -59,6 +59,12 @@ export const images = {
   deleteAccountIcon: require('../../assets/images/deleteAccountIcon.png'),
   contactUsIcon: require('../../assets/images/contactUsIcon.png'),
   editProfileIcon: require('../../assets/images/editProfileIcon.png'),
-  appliedCouponIcon: require('../../assets/images/appliedCouponIcon.png')
+  appliedCouponIcon: require('../../assets/images/appliedCouponIcon.png'),
+  messageCenterImage: require('../../assets/images/messageCenterImage.png'),
+  sendIcon: require('../../assets/images/sendIcon.png'),
+  addIcon: require('../../assets/images/addIcon.png'),
+  upcomingBooking: require('../../assets/images/upcomingBooking.png'),
+  cancelBooking: require('../../assets/images/cancelBooking.png'),
+  completedBooking: require('../../assets/images/completedBooking16.png'),
 };
 

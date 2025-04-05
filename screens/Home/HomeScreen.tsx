@@ -19,11 +19,11 @@ import {colors} from '../utils/Colors';
 import AppHeaders from './components/AppHeaders';
 import SearchComponents from './components/SearchComponents';
 import RecommendedCard from './components/RecommendedCard';
-import HomeBanner from './components/CustomSlider';
 import CustomSlider from './components/CustomSlider';
 import InstantBookingCard from './components/InstantBookingsCard';
 import InstantBooking from './components/InstantBooking';
 import PreweddingCard from './components/PreweddingCard';
+import { Fonts } from '../utils/Fonts';
 
 const {width} = Dimensions.get('window');
 
@@ -333,7 +333,7 @@ const HomeScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={{backgroundColor: 'white'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <AppHeaders />
         <SearchComponents />
@@ -471,13 +471,13 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     resizeMode: 'contain',
-    tintColor: 'red',
+    tintColor: colors.appColor,
   },
   logoText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     marginLeft: 10,
-    color: 'red',
+    color: colors.appColor,
   },
   iconsContainer: {
     flexDirection: 'row',
@@ -486,7 +486,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 25,
     height: 25,
-    tintColor: 'red',
+    tintColor: colors.appColor,
   },
   searchLocationContainer: {
     flexDirection: 'row',
@@ -623,7 +623,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
   },
-
   priceContainer: {
     alignItems: 'flex-end',
   },
