@@ -11,9 +11,11 @@ import {images} from '../utils/Images';
 import {constant} from '../utils/Constant';
 import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const MessageScreen: React.FC = () => {
   return (
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.white }}>
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerContent}>
@@ -48,6 +50,7 @@ const MessageScreen: React.FC = () => {
         </TouchableOpacity>
       </View>
     </View>
+    </SafeAreaView>
   );
 };
 

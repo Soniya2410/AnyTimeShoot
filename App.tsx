@@ -66,10 +66,6 @@ const BottomTabs: React.FC = () => {
               <TouchableOpacity 
                 style={{ marginLeft: 15 }}
               >
-                <Image
-                  source={images.backIcon} 
-                  style={{ width: 13, height: 13 }}
-                />
               </TouchableOpacity>
             ),
             headerTitleStyle: {
@@ -145,7 +141,7 @@ const BottomTabs: React.FC = () => {
             },
           })}>
           <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
-          <Tab.Screen name="Message" component={MessageScreen} />
+          <Tab.Screen name="Message" component={MessageScreen} options={{headerShown: false}}/>
           <Tab.Screen name="Bookings" component={MyBookingsScreen} />
           <Tab.Screen name="Profile" component={ProfileScreen} options={{
                   headerRight: () => (
@@ -153,7 +149,7 @@ const BottomTabs: React.FC = () => {
                       style={{ marginRight: 15 }}
                       onPress={() => {}}
                     >
-                      <Image source={images.backIcon} style={{ width: 20, height: 20 }} />
+                      <Image source={images.shareIcon} style={{ width: 16, height: 16 }} />
                     </TouchableOpacity>
                   ),
                 }}/>
