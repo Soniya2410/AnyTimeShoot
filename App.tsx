@@ -13,7 +13,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+// import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 // Screens
 import HomeScreen from './screens/Home/HomeScreen';
@@ -149,7 +149,7 @@ const BottomTabs: React.FC = () => {
                       style={{ marginRight: 15 }}
                       onPress={() => {}}
                     >
-                      <Image source={images.shareIcon} style={{ width: 16, height: 16 }} />
+                      <Image source={images.shareIcon} style={{ width: 18, height: 19 }} />
                     </TouchableOpacity>
                   ),
                 }}/>
@@ -159,7 +159,7 @@ const BottomTabs: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <SafeAreaProvider>
+    // <SafeAreaProvider>
     <GestureHandlerRootView>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="onboard">
@@ -209,7 +209,7 @@ const App: React.FC = () => {
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
-    </SafeAreaProvider>
+    // </SafeAreaProvider>
   );
 };
 

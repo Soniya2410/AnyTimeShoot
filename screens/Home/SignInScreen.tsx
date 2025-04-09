@@ -6,13 +6,13 @@ import {
   StyleSheet,
   Dimensions,
   Image,
-  TextInput
+  TextInput,
+  SafeAreaView
 } from 'react-native';
 import {images} from '../utils/Images';
 import {colors} from '../utils/Colors';
 import {constant} from '../utils/Constant';
 import {useNavigation} from '@react-navigation/native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {RootStackNavigationProp} from '../../App';
 import {ASButton} from './components/ASButton';
 import {Fonts} from '../utils/Fonts';
@@ -74,11 +74,11 @@ const SignInScreen: React.FC = () => {
             </View>
           </View>
 
-          <View style={styles.orContainer}>
-            <View style={styles.line} />
-            <Text style={styles.orText}>or</Text>
-            <View style={styles.line} />
-          </View>
+             <View style={styles.orContainer}>
+              <View style={styles.line} />
+              <Text style={styles.orText}>or</Text>
+              <View style={styles.line2} />
+            </View>
 
           <TouchableOpacity style={styles.button} onPress={navigateToGoogle}>
             <Image
@@ -164,6 +164,12 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: colors.placeHolderColor,
     marginHorizontal: 20,
+  },
+  line2: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.placeHolderColor,
+    marginRight: 20,
   },
   orText: {
     marginHorizontal: 10,

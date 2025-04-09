@@ -7,12 +7,12 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import {images} from '../utils/Images';
 import {colors} from '../utils/Colors';
 import {constant} from '../utils/Constant';
 import {useNavigation} from '@react-navigation/native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {RootStackNavigationProp} from '../../App';
 import { ASButton } from './components/ASButton';
 import { Fonts } from '../utils/Fonts';
