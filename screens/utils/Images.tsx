@@ -67,5 +67,6 @@ export const images = {
   cancelBooking: require('../../assets/images/cancelBooking.png'),
   completedBooking: require('../../assets/images/completedBooking.png'),
   shareIcon: require('../../assets/images/shareIcon.png'),
+  yourLocationImage: require('../../assets/images/yourLocationImage.png'),
 };
 

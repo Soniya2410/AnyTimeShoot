@@ -2,8 +2,11 @@ import {Image, Text, View, StyleSheet} from 'react-native';
 import {constant} from '../../utils/Constant';
 import {images} from '../../utils/Images';
 import {colors} from '../../utils/Colors';
+import YourLocationPopupScreen from '../YourLocationPopupScreen';
+import { useState } from 'react';
 
 const AppHeaders = () => {
+  const [modalVisible, setModalVisible] = useState(true);
   return (
     <View style={styles.header}>
       <View style={styles.logoContainer}>
@@ -13,6 +16,7 @@ const AppHeaders = () => {
 
       <View style={styles.iconsContainer}>
         <Image source={images.notification} style={styles.icon} />
+       
         <Image source={images.heart} style={styles.icon} />
         <Image source={images.message} style={styles.icon} />
       </View>

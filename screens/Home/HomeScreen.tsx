@@ -24,10 +24,13 @@ import InstantBookingCard from './components/InstantBookingsCard';
 import InstantBooking from './components/InstantBooking';
 import PreweddingCard from './components/PreweddingCard';
 import { Fonts } from '../utils/Fonts';
+import YourLocationPopupScreen from './YourLocationPopupScreen';
 
 const {width} = Dimensions.get('window');
 
 const HomeScreen: React.FC = () => {
+  const [modalVisible, setModalVisible] = useState(true);
+
   const recommended = [
     {
       id: '1',
@@ -308,9 +311,10 @@ const HomeScreen: React.FC = () => {
     if(isViewAll) {
       return (
         <View style={styles.categoryCard}>
-          <Image
-            source={item.image}
-            style={styles.greyImage}
+          <Image source={item.image} style={styles.greyImage} />
+          <YourLocationPopupScreen
+            visible={modalVisible}
+            onClose={() => setModalVisible(false)}
           />
           <Text style={styles.viewAllTitle}>{item.title}</Text>
         </View>
@@ -322,7 +326,7 @@ const HomeScreen: React.FC = () => {
           styles.categoryCard,
           // {backgroundColor: isViewAll ? 'grey' : 'transparent', borderRadius: 50,},
         ]}>
-          
+
         <Image
           source={item.image}
           style={[styles.categoryImage, {borderRadius: 50}]}

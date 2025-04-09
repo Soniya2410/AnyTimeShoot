@@ -32,6 +32,7 @@ import SuccessScreen from './screens/Home/SuccessScreen';
 import SignInScreen from './screens/Home/SignInScreen';
 import CouponScreen from './screens/Home/CouponScreen';
 import MessageScreen from './screens/Home/MessageScreen';
+import YourLocationPopupScreen from './screens/Home/YourLocationPopupScreen';
 
 type RootStackParamList = {
   onboard: undefined;
@@ -42,6 +43,7 @@ type RootStackParamList = {
   successScreen: undefined;
   signIn: undefined;
   coupon: undefined;
+  yourLocationPopUp: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -206,6 +208,16 @@ const App: React.FC = () => {
               headerShown: false,
             }}
           />
+
+          <Stack.Screen 
+          name='yourLocationPopUp'
+          component={YourLocationPopupScreen}
+          options={{
+            title : '',
+            headerShown: false,
+          }}
+          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

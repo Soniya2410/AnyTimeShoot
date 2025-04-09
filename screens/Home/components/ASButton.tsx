@@ -23,11 +23,12 @@ const ASButton = ({ onPress, title, customStyle = {} }: ASButtonProps) => {
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 10,
-    marginVertical: 10,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.appColor,
-    height: 57
+    height: 54,
+    width: '100%', 
+    borderRadius: 27, 
   },
   textStyle: {
     // paddingVertical: 12,
