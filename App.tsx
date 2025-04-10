@@ -33,6 +33,7 @@ import SignInScreen from './screens/Home/SignInScreen';
 import CouponScreen from './screens/Home/CouponScreen';
 import MessageScreen from './screens/Home/MessageScreen';
 import YourLocationPopupScreen from './screens/Home/YourLocationPopupScreen';
+import BookingDetailScreen from './screens/Home/BookingDetailScreen';
 
 type RootStackParamList = {
   onboard: undefined;
@@ -44,6 +45,7 @@ type RootStackParamList = {
   signIn: undefined;
   coupon: undefined;
   yourLocationPopUp: undefined;
+  bookingDetail: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -55,113 +57,119 @@ const {width, height} = Dimensions.get('screen');
 
 const BottomTabs: React.FC = () => {
   return (
-   
-        <Tab.Navigator
-          screenOptions={({route}) => ({
-            headerShown: true,
-            headerTitleAlign: 'left',
-            headerStyle: {
-             shadowOpacity: 0,
-             paddingTop: Platform.OS === 'ios' ? StatusBar.currentHeight : 10             
-            },
-            headerLeft: () => (
-              <TouchableOpacity 
-                style={{ marginLeft: 15 }}
-              >
-              </TouchableOpacity>
-            ),
-            headerTitleStyle: {
-              fontSize: 20,
-              fontWeight: 'bold',
-              marginLeft: 10, 
-            },
-            tabBarIcon: ({focused}) => {
-              let iconSource;
-              switch (route.name) {
-                case 'Home':
-                  iconSource = images.home;
-                  break;
-                case 'Message':
-                  iconSource = images.messageIcon;
-                  break;
-                case 'Bookings':
-                  iconSource = images.myBookings;
-                  break;
-                case 'Profile':
-                  iconSource = images.profile;
-                  break;
-              }
-              return (
-                <Image
-                  source={iconSource}
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        headerShown: true,
+        headerTitleAlign: 'left',
+        headerStyle: {
+          shadowOpacity: 0,
+          paddingTop: Platform.OS === 'ios' ? StatusBar.currentHeight : 10,
+        },
+        headerLeft: () => (
+          <TouchableOpacity style={{marginLeft: 15}}></TouchableOpacity>
+        ),
+        headerTitleStyle: {
+          fontSize: 20,
+          fontWeight: 'bold',
+          marginLeft: 10,
+        },
+        tabBarIcon: ({focused}) => {
+          let iconSource;
+          switch (route.name) {
+            case 'Home':
+              iconSource = images.home;
+              break;
+            case 'Message':
+              iconSource = images.messageIcon;
+              break;
+            case 'Bookings':
+              iconSource = images.myBookings;
+              break;
+            case 'Profile':
+              iconSource = images.profile;
+              break;
+          }
+          return (
+            <Image
+              source={iconSource}
+              style={{
+                width: 25,
+                height: 25,
+                tintColor: focused ? colors.appColor : 'gray',
+              }}
+              resizeMode="contain"
+            />
+          );
+        },
+        tabBarActiveTintColor: colors.appColor,
+        tabBarInactiveTintColor: 'gray',
+        tabBarLabelStyle: {fontSize: 12, fontWeight: '500', marginTop: 2},
+        tabBarStyle: {
+          height: Platform.OS === 'ios' ? 80 : 60,
+          paddingBottom: Platform.OS === 'ios' ? 20 : 10,
+        },
+        tabBarButton: props => {
+          const {onPress, onLongPress, accessibilityState, children} = props;
+          return (
+            <TouchableOpacity
+              onPress={onPress}
+              activeOpacity={0.8}
+              style={{flex: 1, position: 'relative'}}>
+              {accessibilityState?.selected && (
+                <View
                   style={{
-                    width: 25,
-                    height: 25,
-                    tintColor: focused ? colors.appColor : 'gray',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 3,
+                    backgroundColor: colors.appColor,
                   }}
-                  resizeMode="contain"
                 />
-              );
-            },
-            tabBarActiveTintColor: colors.appColor,
-            tabBarInactiveTintColor: 'gray',
-            tabBarLabelStyle: {fontSize: 12, fontWeight: '500', marginTop: 2},
-            tabBarStyle: {
-              height: Platform.OS === 'ios' ? 80 : 60,
-              paddingBottom: Platform.OS === 'ios' ? 20 : 10,
-            },
-            tabBarButton: props => {
-              const {onPress, onLongPress, accessibilityState, children} =
-                props;
-              return (
-                <TouchableOpacity
-                  onPress={onPress}
-                  activeOpacity={0.8}
-                  style={{flex: 1, position: 'relative'}}>
-                  {accessibilityState?.selected && (
-                    <View
-                      style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        height: 3,
-                        backgroundColor: colors.appColor,
-                      }}
-                    />
-                  )}
-                  <View
-                    style={{
-                      flex: 1,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    {children}
-                  </View>
-                </TouchableOpacity>
-              );
-            },
-          })}>
-          <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
-          <Tab.Screen name="Message" component={MessageScreen} options={{headerShown: false}}/>
-          <Tab.Screen name="Bookings" component={MyBookingsScreen} />
-          <Tab.Screen name="Profile" component={ProfileScreen} options={{
-                  headerRight: () => (
-                    <TouchableOpacity 
-                      style={{ marginRight: 15 }}
-                      onPress={() => {}}
-                    >
-                      <Image source={images.shareIcon} style={{ width: 18, height: 19 }} />
-                    </TouchableOpacity>
-                  ),
-                }}/>
-        </Tab.Navigator>
+              )}
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                {children}
+              </View>
+            </TouchableOpacity>
+          );
+        },
+      })}>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="Message"
+        component={MessageScreen}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen name="Bookings" component={MyBookingsScreen} />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          headerRight: () => (
+            <TouchableOpacity style={{marginRight: 15}} onPress={() => {}}>
+              <Image
+                source={images.shareIcon}
+                style={{width: 18, height: 19}}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
 const App: React.FC = () => {
   return (
-    // <SafeAreaProvider>
     <GestureHandlerRootView>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="onboard">
@@ -184,7 +192,7 @@ const App: React.FC = () => {
             name="homeScreen"
             component={BottomTabs}
             options={{
-              headerShown: false, 
+              headerShown: false,
             }}
           />
           <Stack.Screen
@@ -209,19 +217,26 @@ const App: React.FC = () => {
             }}
           />
 
-          <Stack.Screen 
-          name='yourLocationPopUp'
-          component={YourLocationPopupScreen}
-          options={{
-            title : '',
-            headerShown: false,
-          }}
+          <Stack.Screen
+            name="yourLocationPopUp"
+            component={YourLocationPopupScreen}
+            options={{
+              title: '',
+              headerShown: false,
+            }}
           />
 
+          <Stack.Screen
+            name='bookingDetail'
+            component={BookingDetailScreen}
+            options={{
+              headerShown: true,
+              title: 'Bookings',
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
-    // </SafeAreaProvider>
   );
 };
 

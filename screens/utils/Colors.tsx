@@ -15,4 +15,6 @@ export const colors = {
   lineColor: '#D4D4D4',
   borderColor: '#BCBCBC',
   appliedColor: "#4CAF50",
+  starColor: "#FFC500",
+  
 };

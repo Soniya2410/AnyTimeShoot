@@ -5,12 +5,15 @@ import { Fonts } from '../utils/Fonts';
 import { images } from '../utils/Images';
 import CustomSlider from './components/CustomSlider';
 import { constant } from '../utils/Constant';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp } from '../../App';
 
 const icons = {
   upcoming: images.upcomingBooking,
   completed: images.completedBooking,
   cancelled: images.cancelBooking,
 };
+
 
 const bookings = [
   { 
@@ -37,6 +40,11 @@ const bookings = [
 ];
 
 const MyBookingsScreen: React.FC = () => {
+    const navigation = useNavigation<RootStackNavigationProp<'successScreen'>>();
+  
+    const navigateToDetailScreen = () => {
+      navigation.navigate('bookingDetail');
+    }
   return (
     <SafeAreaView style={styles.container}>
       <CustomSlider />
@@ -49,7 +57,7 @@ const MyBookingsScreen: React.FC = () => {
             <View style={styles.topLine}>
               <Image source={item.icon} style={styles.icon} />
               <View style={styles.spacer} />
-              <TouchableOpacity>
+              <TouchableOpacity onPress={navigateToDetailScreen}>
                 <Text style={styles.viewAllText}>{item.action}</Text>
               </TouchableOpacity>
             </View>
