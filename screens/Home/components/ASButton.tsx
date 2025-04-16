@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.appColor,
     height: 54,
-    width: '100%', 
+    // width: '80%', 
     borderRadius: 27, 
   },
   textStyle: {
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.white,
     fontSize: 20,
-    // fontWeight: 'bold',
     fontFamily: Fonts.bold
   },
 });

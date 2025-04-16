@@ -167,7 +167,7 @@ const ProfileScreen = () => {
         {/* Bottom Logout View */}
         <View style={styles.editButtonContainer}>
           <ASButton
-            title="Edit Profile"
+            title={constant.editProfile}
             customStyle={styles.editButton}
             onPress={moveToEditProfile}></ASButton>
         </View>

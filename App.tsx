@@ -33,7 +33,8 @@ import SignInScreen from './screens/Home/SignInScreen';
 import CouponScreen from './screens/Home/CouponScreen';
 import MessageScreen from './screens/Home/MessageScreen';
 import YourLocationPopupScreen from './screens/Home/YourLocationPopupScreen';
-import BookingDetailScreen from './screens/Home/BookingDetailScreen';
+import BookingListScreen from './screens/Home/BookingListScreen';
+import BookingDetailScreen from './screens/Home/BookingDetailScreen.tsx';
 
 type RootStackParamList = {
   onboard: undefined;
@@ -45,7 +46,8 @@ type RootStackParamList = {
   signIn: undefined;
   coupon: undefined;
   yourLocationPopUp: undefined;
-  bookingDetail: undefined;
+  bookingList: undefined;
+  bookingDetails: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -227,13 +229,23 @@ const App: React.FC = () => {
           />
 
           <Stack.Screen
-            name='bookingDetail'
-            component={BookingDetailScreen}
+            name='bookingList'
+            component={BookingListScreen}
             options={{
               headerShown: true,
               title: 'Bookings',
             }}
           />
+
+          <Stack.Screen
+          name='bookingDetails'
+          component={BookingDetailScreen}
+          options={{
+            headerShown: true,
+            title: 'Bookings'
+          }}
+          />
+          
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

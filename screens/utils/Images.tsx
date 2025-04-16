@@ -68,5 +68,9 @@ export const images = {
   completedBooking: require('../../assets/images/completedBooking.png'),
   shareIcon: require('../../assets/images/shareIcon.png'),
   yourLocationImage: require('../../assets/images/yourLocationImage.png'),
+  shootCompleted: require('../../assets/images/shootCompleted.png'),
+  editInProgress: require('../../assets/images/editInProgress.png'),
+  workDelivered: require('../../assets/images/workDelivered.png'),
+  startShoot: require('../../assets/images/startShoot.png'),
 };
 

@@ -42,12 +42,12 @@ const bookings = [
 const MyBookingsScreen: React.FC = () => {
     const navigation = useNavigation<RootStackNavigationProp<'successScreen'>>();
   
-    const navigateToDetailScreen = () => {
-      navigation.navigate('bookingDetail');
+    const navigateToDetailListScreen = () => {
+      navigation.navigate('bookingList');
     }
   return (
     <SafeAreaView style={styles.container}>
-      <CustomSlider />
+      <CustomSlider/>
       <FlatList
         data={bookings}
         keyExtractor={(item) => item.id}
@@ -57,7 +57,7 @@ const MyBookingsScreen: React.FC = () => {
             <View style={styles.topLine}>
               <Image source={item.icon} style={styles.icon} />
               <View style={styles.spacer} />
-              <TouchableOpacity onPress={navigateToDetailScreen}>
+              <TouchableOpacity onPress={navigateToDetailListScreen}>
                 <Text style={styles.viewAllText}>{item.action}</Text>
               </TouchableOpacity>
             </View>
