@@ -46,7 +46,7 @@ export const constant = {
    continueAs: "Continue as",
    guest: " Guest",
    verifyYourPhnNo: "Verify your phone number",
-   enterTheCode: "Enter the code we’ve send to +911234567899",
+   enterTheCode: "Enter the code we’ve send to",
    resendOtp: "Resend Code",
    haventReceiveTheCode: "Haven't Received OTP Code?",
    verify: "Verify",
@@ -112,4 +112,6 @@ export const constant = {
    count: "₹ 2,45,000",
    date: "17 Aug, 2025",
    editProfile: "Edit Profile",
+   locationError: 'The service is not available in this location at the moment. We’re working hard to bring it to you –',
+   comingSoon: ' Coming Soon',
 }

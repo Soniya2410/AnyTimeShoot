@@ -24,7 +24,8 @@ import InstantBookingCard from './components/InstantBookingsCard';
 import InstantBooking from './components/InstantBooking';
 import PreweddingCard from './components/PreweddingCard';
 import { Fonts } from '../utils/Fonts';
-import YourLocationPopupScreen from './YourLocationPopupScreen';
+import YourLocationPopupScreen from './modals/YourLocationPopupScreen';
+import { icons } from '../utils/Icons';
 
 const {width} = Dimensions.get('window');
 
@@ -234,7 +235,7 @@ const HomeScreen: React.FC = () => {
     {
       id: '6',
       service: '',
-      image: images.orangeProduct,
+      image: icons.nextArrowIcon,
       rating: 4.2,
       price: '',
       location: 'View All',
@@ -274,7 +275,7 @@ const HomeScreen: React.FC = () => {
     {
       id: '6',
       title: 'View All',
-      image: images.rightArrow,
+      image: icons.nextArrowIcon,
     },
   ];
 
@@ -311,7 +312,9 @@ const HomeScreen: React.FC = () => {
     if(isViewAll) {
       return (
         <View style={styles.categoryCard}>
-          <Image source={item.image} style={styles.greyImage} />
+          <View style={styles.greyImage}>
+          <Image source={item.image}  style={styles.arrowIcon}/>
+          </View>
           <YourLocationPopupScreen
             visible={modalVisible}
             onClose={() => setModalVisible(false)}
@@ -342,10 +345,6 @@ const HomeScreen: React.FC = () => {
         <AppHeaders />
         <SearchComponents />
         <CustomSlider />
-        {/* <Image
-          source={images.banner}
-          style={styles.banner}
-        /> */}
         <View style={{marginHorizontal: 5}}>
         <Text style={styles.sectionTitle}>{constant.top_booked_services}</Text>
         <FlatList
@@ -552,25 +551,28 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 50,
     marginBottom: 10,
-    backgroundColor: colors.lightGray,
+    backgroundColor: colors.appColor30,
+    justifyContent: 'center',
+    alignItems:'center'
   },
   categoryTitle: {
-    fontSize: 13,
+    fontSize: 12,
+    fontFamily: Fonts.regular,
+    // color: colors.appColor,
+    textAlign: 'center',
+    marginTop: 5,
+  },
+  viewAllTitle: {
+    fontSize: 12,
     fontWeight: 'regular',
     color: colors.appColor,
     textAlign: 'center',
     marginTop: 5,
   },
-  viewAllTitle: {
-    fontSize: 14,
-    fontWeight: 'regular',
-    color: colors.black,
-    textAlign: 'center',
-    marginTop: 5,
-  },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: '600',
+    // fontWeight: '600',
+    fontFamily: Fonts.medium,
     marginVertical: 20,
     marginLeft: 16,
     color: colors.appColor,
@@ -578,7 +580,8 @@ const styles = StyleSheet.create({
   },
   recommendedTitle: {
     fontSize: 16,
-    fontWeight: '600',
+    // fontWeight: '600',
+    fontFamily: Fonts.medium,
     marginVertical: 10,
     marginLeft: 10,
     color: colors.appColor,
@@ -630,6 +633,10 @@ const styles = StyleSheet.create({
   priceContainer: {
     alignItems: 'flex-end',
   },
+  arrowIcon: {
+    width: 18,
+    height: 29,
+  }
 });
 
 export default HomeScreen;

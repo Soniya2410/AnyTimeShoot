@@ -16,6 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../App';
 import {ASButton} from './components/ASButton';
 import {Fonts} from '../utils/Fonts';
+import { ASTextInput } from './components/ASTextInput';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -37,7 +38,13 @@ const SignInScreen: React.FC = () => {
         <Image source={images.signInBg} style={styles.bgImage}></Image>
         <View style={styles.baseView}>
           <Text style={styles.titleText}>{constant.loginOrSignup}</Text>
-          <View style={styles.userNameContainer}>
+          <ASTextInput 
+            keyboardType="default"
+            inputValue={userName}
+            setInputValue={setUserName}
+            placeholder={constant.userName}
+            />
+          {/* <View style={styles.userNameContainer}>
             <Text style={styles.userNameText}>{constant.userName}</Text>
             <View style={styles.inputContainer}>
               <TextInput
@@ -54,8 +61,8 @@ const SignInScreen: React.FC = () => {
                 />
               )}
             </View>
-          </View>
-          <View style={styles.userNameContainer}>
+          </View> */}
+          {/* <View style={styles.userNameContainer}>
             <Text style={styles.userNameText}>{constant.enterYourEmail}</Text>
             <View style={styles.inputContainer}>
               <TextInput
@@ -72,8 +79,14 @@ const SignInScreen: React.FC = () => {
                 />
               )}
             </View>
-          </View>
-
+          </View> */}
+          <View style={{marginVertical: 10}}></View>
+          <ASTextInput 
+            keyboardType="default"
+            inputValue={email}
+            setInputValue={setEmail}
+            placeholder={constant.enterYourEmail}
+            />
              <View style={styles.orContainer}>
               <View style={styles.line} />
               <Text style={styles.orText}>or</Text>
@@ -91,7 +104,7 @@ const SignInScreen: React.FC = () => {
           <ASButton title={constant.continue} onPress={navigateToHome} customStyle={styles.continueButton}> 
           </ASButton>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={navigateToHome}>
             <Text style={styles.skipForText}>{constant.skipForNow}</Text>
           </TouchableOpacity>
  
@@ -139,13 +152,13 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    padding: 12,
-    bottom: 14,
+    // padding: 12,
+    // bottom: 14,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    position: 'relative',
+    // position: 'relative',
   },
   mobileVerifyTick: {
     height: 20,
@@ -207,7 +220,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: Fonts.medium,
     textDecorationLine: 'underline',
-    textAlign: 'right'
+    textAlign: 'right',
+    marginTop: 10
   }
 });
 

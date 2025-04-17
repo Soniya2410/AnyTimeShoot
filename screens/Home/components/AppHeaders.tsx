@@ -2,8 +2,9 @@ import {Image, Text, View, StyleSheet} from 'react-native';
 import {constant} from '../../utils/Constant';
 import {images} from '../../utils/Images';
 import {colors} from '../../utils/Colors';
-import YourLocationPopupScreen from '../YourLocationPopupScreen';
 import { useState } from 'react';
+import { Fonts } from '../../utils/Fonts';
+
 
 const AppHeaders = () => {
   const [modalVisible, setModalVisible] = useState(true);
@@ -11,14 +12,8 @@ const AppHeaders = () => {
     <View style={styles.header}>
       <View style={styles.logoContainer}>
         <Image source={images.logo} style={styles.logo} />
-        <Text style={styles.logoText}>{constant.title}</Text>
-      </View>
-
-      <View style={styles.iconsContainer}>
-        <Image source={images.notification} style={styles.icon} />
-       
-        <Image source={images.heart} style={styles.icon} />
-        <Image source={images.message} style={styles.icon} />
+        <Text style={styles.anyTimeLabel}>{constant.anyTime}<Text style={styles.shootLabel}>{constant.shoot}</Text>
+        </Text>
       </View>
     </View>
   );
@@ -31,20 +26,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
   },
-  icon: {
-    width: 25,
-    height: 25,
-    tintColor: colors.appColor,
-  },
   logoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   logo: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     resizeMode: 'contain',
-    tintColor: colors.appColor,
   },
   logoText: {
     fontSize: 16,
@@ -52,10 +41,16 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: colors.appColor,
   },
-  iconsContainer: {
-    flexDirection: 'row',
-    gap: 15,
+  anyTimeLabel: {
+    fontFamily: Fonts.regular,
+    fontSize: 16,
+    marginHorizontal: 5
   },
+  shootLabel: {
+    fontFamily: Fonts.regular,
+    fontSize: 16,
+    color: colors.appColor
+  }
 });
 
 export default AppHeaders;

@@ -16,5 +16,6 @@ export const colors = {
   borderColor: '#BCBCBC',
   appliedColor: "#4CAF50",
   starColor: "#FFC500",
-  
+  appColor30: '#EC193B30',
+  inputBackground: '#F5F5F5',
 };

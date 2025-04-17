@@ -20,7 +20,7 @@ const CustomSlider = () => {
 
   const ImagesArray = [
     { id: 1, uri: images.banner },
-    { id: 2, uri: images.banner2 },
+    { id: 2, uri: images.bookingBanner },
     { id: 3, uri: images.banner3 },
     { id: 4, uri: images.banner4 },
     { id: 5, uri: images.banner5 },

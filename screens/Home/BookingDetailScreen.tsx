@@ -19,6 +19,7 @@ import {useNavigation} from '@react-navigation/native';
 import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
 import BookingDetailSlider from './components/BookingDetailSlider';
+import { icons } from '../utils/Icons';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -34,7 +35,7 @@ const TimelineStep = ({
   isLast: boolean;
 }) => {
   return (
-    <View style={{flexDirection: 'row', marginBottom: 20}}>
+    <View style={{flexDirection: 'row'}}>
       <View style={{alignItems: 'center', width: 40}}>
         <View style={styles.circle}>
           <Image source={icon} style={styles.icon} />
@@ -63,46 +64,45 @@ const BookingDetailScreen: React.FC = () => {
         ListHeaderComponent={
           <>
             <BookingDetailSlider />
-
             <View style={styles.content}>
               <View style={styles.infoRow}>
                 <View style={styles.infoCard}>
+                  <Image source={icons.datePicker} style={styles.iconTop}/>
                   <Text style={styles.infoLabel}>
                     {constant.bookingDetails}
                   </Text>
                   <Text style={styles.infoValue}>{constant.date}</Text>
                 </View>
                 <View style={styles.infoCard}>
+                <Image source={icons.priceIcone} style={styles.icon}/>
                   <Text style={styles.infoLabel}>
                     {constant.totalBookingPrice}
                   </Text>
                   <Text style={styles.infoValue}>{constant.count}</Text>
                 </View>
               </View>
-
               <Text style={styles.sectionTitle}>{constant.yourBooking}</Text>
-
               <View style={styles.timeline}>
                 <TimelineStep
-                  icon={images.startShoot}
+                  icon={icons.startShoot}
                   title={constant.startShoot}
                   subtitle={constant.otpVerification}
                   isLast={false}
                 />
                 <TimelineStep
-                  icon={images.shootCompleted}
+                  icon={icons.shootCompletedIcon}
                   title={constant.shootCompleted}
                   subtitle={constant.photographerWillUploadPhotos}
                   isLast={false}
                 />
                 <TimelineStep
-                  icon={images.editInProgress}
+                  icon={icons.editingIcon}
                   title={constant.endingInProgress}
                   subtitle={constant.willStartEditingSoon}
                   isLast={false}
                 />
                 <TimelineStep
-                  icon={images.workDelivered}
+                  icon={icons.workDeliveredIcon}
                   title={constant.workDelivered}
                   subtitle={constant.photosAreReady}
                   isLast={true}
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 2,
-    borderColor: colors.borderColor,
+    borderColor: colors.appColor,
     borderWidth: 1,
   },
   icon: {
@@ -196,9 +196,14 @@ const styles = StyleSheet.create({
     height: 18,
     resizeMode: 'contain',
   },
+  iconTop: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+  },
   verticalLine: {
     width: 2,
-    height: 40,
+    height: 50,
     backgroundColor: colors.appColor,
     marginTop: -2,
     zIndex: 1,

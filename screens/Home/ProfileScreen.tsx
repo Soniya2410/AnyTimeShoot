@@ -14,9 +14,9 @@ import {colors} from '../utils/Colors';
 import {constant} from '../utils/Constant';
 import {Fonts} from '../utils/Fonts';
 import {ASButton} from './components/ASButton';
-const {height} = Dimensions.get('window');
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../App';
+import { icons } from '../utils/Icons';
 
 const ProfileScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp<'login'>>();
@@ -27,69 +27,77 @@ const ProfileScreen = () => {
       id: '1',
       title: constant.profilePhoneNumber,
       value: '+91 456 435 7689',
-      icon: images.phoneIcon,
-      size: 20
+      icon: icons.phoneIcon,
+      width: 20,
+      height: 20,
     },
     {
       id: '2',
       title: constant.addres,
       value: '123 Anywhere st, Any City 123456',
-      icon: images.locationIcon,
-      size: 18
+      icon: icons.locationAppColorIcon,
+      width: 15,
+      height: 23,
     },
     {
       id: '3',
       title: constant.whislist,
       value: constant.products,
-      icon: images.whislistIcon,
-      size: 18
+      icon: icons.heartAppColorIcon,
+      width: 20,
+      height: 19,
     },
     {
       id: '4',
       title: constant.termsOfUse,
       value: constant.policy,
-      icon: images.termsIcon,
-      size: 30
+      icon: icons.humanIcon,
+      width: 23,
+      height: 25,
     },
     {
       id: '5',
       title: constant.cancellationPolicy,
       value: constant.policy,
-      icon: images.canPolicyIcon,
-      size: 20
+      icon: icons.cancellationIcon,
+      width: 20,
+      height: 20,
     },
     {
       id: '6',
       title: constant.rateUs,
       value: constant.ratings,
-      icon: images.rateUsIcon,
-      size: 20
+      icon: icons.starIcon,
+      width: 20,
+      height: 20,
     },
     {
       id: '7',
       title: constant.deleteAccount,
       value: constant.deleteEverything,
-      icon: images.deleteAccountIcon,
-      size: 20
+      icon: icons.deleteAccountIcon,
+      width: 18,
+      height: 20,
     },
     {
       id: '8',
       title: constant.contactUs,
       value: constant.about,
-      icon: images.contactUsIcon,
-      size: 20
+      icon: icons.contact,
+      width: 20,
+      height: 20,
     },
   ];
 
   const renderItem = ({
     item,
   }: {
-    item: {id: string; title: string; value: string; icon: any; size: number};
+    item: {id: string; title: string; value: string; icon: any; width: number, height: number};
   }) => (
     <TouchableOpacity style={styles.settingItem}>
       {/* <View style={styles.settingLeftContainer}> */}
         <View style={styles.iconBackground}>
-          <Image source={item.icon} style={styles.settingIcon} width={item.size} height={item.size}/>
+          <Image source={item.icon} style={styles.settingIcon} width={item.width} height={item.height}/>
         </View>
         <View style={styles.settingTextContainer}>
           <Text style={styles.settingTitle}>{item.title}</Text>
@@ -100,7 +108,7 @@ const ProfileScreen = () => {
       item.title === constant.addres ? (
         <TouchableOpacity>
           <Image
-            source={images.editProfileIcon}
+            source={icons.editIcon}
             style={[styles.rightArrow, {tintColor: colors.appColor}]}
           />
         </TouchableOpacity>
@@ -115,10 +123,8 @@ const ProfileScreen = () => {
       contentContainerStyle={styles.scrollContentContainer}
       showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
-        {/* Profile Header */}
         <View style={styles.profileHeader}>
           <Image source={images.profileImage} style={styles.profileImage} />
-          {/* <View style={styles.profileInfoContainer}> */}
             <View style={styles.profileInfo}>
               <Text style={styles.name}>Harshit Rana</Text>
               <Text style={styles.email}>harshit@gmail.com</Text>

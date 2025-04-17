@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,13 +7,103 @@ import {
   Image,
   TextInput,
   SafeAreaView,
+  FlatList,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { images } from '../utils/Images';
 import { constant } from '../utils/Constant';
 import { colors } from '../utils/Colors';
 import { Fonts } from '../utils/Fonts';
+import { icons } from '../utils/Icons';
+
+interface Message {
+  id: string;
+  text: string;
+  isUser: boolean;
+  timestamp: Date;
+}
 
 const MessageScreen: React.FC = () => {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputText, setInputText] = useState('');
+  const flatListRef = useRef<FlatList>(null);
+
+  // Load sample messages (in a real app, you'd fetch these from an API)
+  useEffect(() => {
+    const initialMessages: Message[] = [
+      {
+        id: '1',
+        text: 'Hello! How can I help you today?',
+        isUser: false,
+        timestamp: new Date(Date.now() - 60000),
+      },
+      {
+        id: '2',
+        text: 'Welcome to our support chat!',
+        isUser: false,
+        timestamp: new Date(Date.now() - 300000),
+      },
+    ];
+    setMessages(initialMessages);
+  }, []);
+
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    if (messages.length > 0) {
+      setTimeout(() => {
+        flatListRef.current?.scrollToEnd({ animated: true });
+      }, 100);
+    }
+  }, [messages]);
+
+  const handleSend = () => {
+    if (inputText.trim() === '') return;
+
+    const newMessage: Message = {
+      id: Date.now().toString(),
+      text: inputText,
+      isUser: true,
+      timestamp: new Date(),
+    };
+
+    setMessages([...messages, newMessage]);
+    setInputText('');
+
+    // Simulate a reply after 1 second
+    setTimeout(() => {
+      const replyMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: 'Thanks for your message! Our team will get back to you soon.',
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, replyMessage]);
+    }, 1000);
+  };
+
+  const renderMessage = ({ item }: { item: Message }) => {
+    return (
+      <View style={[
+        styles.messageBubble,
+        item.isUser ? styles.userBubble : styles.otherBubble
+      ]}>
+        <Text style={[
+          styles.messageText,
+          item.isUser ? styles.userText : styles.otherText
+        ]}>
+          {item.text}
+        </Text>
+        <Text style={[
+          styles.timestamp,
+          item.isUser ? styles.userTimestamp : styles.otherTimestamp
+        ]}>
+          {item.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+        </Text>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -29,52 +119,73 @@ const MessageScreen: React.FC = () => {
           </View>
         </View>
 
-        {/* Empty Chat Illustration */}
-        <View style={styles.emptyChat}>
-          <Image 
-            source={images.messageCenterImage} 
-            style={styles.illustration}
-            resizeMode="contain"
+        {/* Chat Messages */}
+        {messages.length > 0 ? (
+          <FlatList
+            ref={flatListRef}
+            data={messages}
+            renderItem={renderMessage}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={styles.messagesContainer}
+            showsVerticalScrollIndicator={false}
           />
-        </View>
+        ) : (
+          <View style={styles.emptyChat}>
+            <Image 
+              source={images.messageCenterImage} 
+              style={styles.illustration}
+              resizeMode="contain"
+            />
+            <Text style={styles.emptyChatText}>No messages yet</Text>
+          </View>
+        )}
 
         {/* Message Input */}
-        <View style={styles.inputWrapper}>
-          <AttachmentButton />
-          
-          <TextInput
-            style={styles.input}
-            placeholder={constant.typeMessageHere}
-            placeholderTextColor={colors.textPrimary2}
-          />
-          
-          <SendButton />
-        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
+        >
+          <View style={styles.inputWrapper}>
+            <TouchableOpacity style={styles.iconButton}>
+              <Image 
+                source={icons.addImageIcon} 
+                style={styles.icon}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+            
+            <TextInput
+              style={styles.input}
+              placeholder={constant.typeMessageHere}
+              placeholderTextColor={colors.textPrimary2}
+              value={inputText}
+              onChangeText={setInputText}
+              onSubmitEditing={handleSend}
+              returnKeyType="send"
+            />
+            
+            <TouchableOpacity 
+              style={styles.iconButton}
+              onPress={handleSend}
+              disabled={inputText.trim() === ''}
+            >
+              <Image 
+                source={icons.sendIcon} 
+                style={[
+                  styles.icon,
+                  inputText.trim() === '' && styles.disabledIcon
+                ]}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
       </View>
     </SafeAreaView>
   );
 };
 
-// Reusable Button Components
-const AttachmentButton = () => (
-  <IconButton source={images.addIcon} />
-);
-
-const SendButton = () => (
-  <IconButton source={images.sendIcon} />
-);
-
-const IconButton: React.FC<{ source: any }> = ({ source }) => (
-  <TouchableOpacity style={styles.iconButton}>
-    <Image 
-      source={source} 
-      style={styles.icon}
-      resizeMode="contain"
-    />
-  </TouchableOpacity>
-);
-
-// Styles
+// Enhanced Styles
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -116,9 +227,57 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  emptyChatText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: colors.textPrimary2,
+    fontFamily: Fonts.regular,
+  },
   illustration: {
     width: 200,
     height: 200,
+  },
+  messagesContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    flexGrow: 1,
+  },
+  messageBubble: {
+    maxWidth: '80%',
+    padding: 12,
+    borderRadius: 16,
+    marginVertical: 4,
+  },
+  userBubble: {
+    alignSelf: 'flex-end',
+    backgroundColor: colors.appColor,
+    borderBottomRightRadius: 4,
+  },
+  otherBubble: {
+    alignSelf: 'flex-start',
+    backgroundColor: colors.inputBackground,
+    borderBottomLeftRadius: 4,
+  },
+  messageText: {
+    fontSize: 14,
+    fontFamily: Fonts.regular,
+  },
+  userText: {
+    color: colors.white,
+  },
+  otherText: {
+    // color: colors.textPrimary,
+  },
+  timestamp: {
+    fontSize: 10,
+    marginTop: 4,
+    textAlign: 'right',
+  },
+  userTimestamp: {
+    color: colors.white,
+  },
+  otherTimestamp: {
+    color: colors.textPrimary2,
   },
   inputWrapper: {
     flexDirection: 'row',
@@ -142,13 +301,13 @@ const styles = StyleSheet.create({
   },
   iconButton: {
     padding: 8,
-    borderRadius: 20,
-    backgroundColor: colors.appColor, // Changed from 'red' to use your color system
   },
   icon: {
-    width: 16,
-    height: 16,
-    tintColor: colors.white,
+    width: 24,
+    height: 24,
+  },
+  disabledIcon: {
+    opacity: 0.3,
   },
 });
 

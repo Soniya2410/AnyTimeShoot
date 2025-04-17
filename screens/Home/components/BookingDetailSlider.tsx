@@ -8,11 +8,14 @@ import {
   Text,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  TouchableOpacity,
 } from 'react-native';
 import { images } from '../../utils/Images';
 import { colors } from '../../utils/Colors';
 import { Fonts } from '../../utils/Fonts';
 import { constant } from '../../utils/Constant';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp } from '../../../App';
 
 const { width: viewportWidth } = Dimensions.get('window');
 
@@ -28,6 +31,13 @@ const BookingDetailSlider = () => {
     { id: 5, uri: images.banner5 },
     { id: 6, uri: images.banner6 },
   ];
+
+    const navigation = useNavigation<RootStackNavigationProp<'couponScreen'>>();
+    
+    const moveToDetailPage = () => {
+      navigation.navigate('couponScreen');
+    }
+  
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
@@ -60,10 +70,10 @@ const BookingDetailSlider = () => {
                 <Text style={styles.title}>{constant.studioExperts}</Text>
                 <Text style={styles.subtitle}>{constant.maternity}</Text>
               </View>
-              <View style={styles.overlayRight}>
+              <TouchableOpacity style={styles.overlayRight} onPress={() => {moveToDetailPage()}}>
                 <Text style={styles.rating}>★★★★☆</Text>
                 <Text style={styles.ratingText}>4/5</Text>
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
         ))}

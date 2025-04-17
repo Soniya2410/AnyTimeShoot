@@ -19,6 +19,7 @@ import {useNavigation} from '@react-navigation/native';
 import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
 import CustomSlider from './components/CustomSlider';
+import { icons } from '../utils/Icons';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -80,7 +81,7 @@ const BookingListScreen: React.FC = () => {
                   {renderStars(item.rating)}
                   <Text style={styles.ratingText}> {item.rating}/5</Text>
                 </View>
-                <Image style={styles.rightArrow} source={images.skipArrow} />
+                <Image style={styles.rightArrow} source={icons.nextArrowIcon} />
               </View>
             </View>
           </View>
@@ -95,6 +96,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
+    padding: 10
   },
   listContainer: {
     padding: 16,
@@ -104,14 +106,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: colors.white,
     borderRadius: 10,
-    padding: 10,
+    // padding: 10,
     marginBottom: 12,
     borderColor: colors.borderColor,
     borderWidth: 1,
-    height: 120,
+    // height: 120,
   },
   cardImage: {
-    width: 100,
+    width: '30%',
     height: '100%',
     borderRadius: 5,
   },
@@ -121,7 +123,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     justifyContent: 'space-between',
     paddingVertical: 8,
-    paddingTop: 0,
     width: '60%',
   },
   cardTitle: {
@@ -154,9 +155,8 @@ const styles = StyleSheet.create({
     color: colors.textPrimary2,
   },
   rightArrow: {
-    width: 6,
-    height: 10,
-    tintColor: colors.appColor,
+    width: 8,
+    height: 15,
     marginRight: 10,
   },
   starsContainer: {

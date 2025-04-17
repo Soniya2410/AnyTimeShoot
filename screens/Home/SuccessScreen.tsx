@@ -36,7 +36,7 @@ const SuccessScreen: React.FC = () => {
           <Text style={styles.youHaveText}>{constant.youhaveBeen}</Text>
         </Text>
          <ASButton onPress={navigateToSignInPage} title={constant.continue} 
-        customStyle={styles.continueButton}
+          customStyle={styles.continueButton}
         > 
         </ASButton>
       </View>

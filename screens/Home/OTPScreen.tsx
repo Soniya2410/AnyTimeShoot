@@ -8,6 +8,7 @@ import {
   TextInput,
   SafeAreaView,
   Keyboard,
+  TouchableOpacity,
 } from 'react-native';
 import {images} from '../utils/Images';
 import {colors} from '../utils/Colors';
@@ -15,28 +16,43 @@ import {constant} from '../utils/Constant';
 import { ASButton } from './components/ASButton';
 import { Fonts } from '../utils/Fonts';
 import { useNavigation } from '@react-navigation/native';
-import {RootStackNavigationProp} from '../../App';
+import {RootStackNavigationProp, RootStackParamList} from '../../App';
+import { RouteProp } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const {width, height} = Dimensions.get('screen');
 
-const OTPSCreen: React.FC = () => {
+type OTPScreenRouteProp = RouteProp<RootStackParamList, 'otpScreen'>;
+
+type Props = {
+  route: OTPScreenRouteProp;
+};
+
+const OTPSCreen: React.FC<Props> = ({ route }) => {
   const navigation = useNavigation<RootStackNavigationProp<'otpScreen'>>();
   const [otp, setOtp] = useState<string[]>(['', '', '', '']);
   const inputs = useRef<TextInput[]>([]);
+  const [showInvalidOtp, setShowInvalidOtp] = useState(false);
+  const {phoneNumber, countryCode} = route.params;
+  console.log('Phone Number:', phoneNumber);
   
   const navigateToSucessPage = () => {
-    navigation.navigate('successScreen');
+    if(otp.join('').length < 4) {
+      setShowInvalidOtp(true);
+      return;
+    } else {
+      setShowInvalidOtp(false);
+      navigation.navigate('successScreen');
+    }
   };
 
   const handleChange = (text: string, index: number) => {
     const newOtp = [...otp];
     newOtp[index] = text;
     setOtp(newOtp);
-
     if (text && index < 3) {
       inputs.current[index + 1]?.focus();
     }
-
     if (index === 3 && text) {
       Keyboard.dismiss();
     }
@@ -48,14 +64,23 @@ const OTPSCreen: React.FC = () => {
     }
   };
 
+  const clearAllPin = () => {
+    const newOtp = ['', '', '', ''];
+    setOtp(newOtp);
+    inputs.current[0]?.focus();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
+      {/* <View style={styles.container}> */}
         <Image source={images.otpFilledBg} style={styles.bgImg} />
+        <ScrollView
+    contentContainerStyle={styles.scrollContainer}
+    keyboardShouldPersistTaps="handled"
+  >
         <View style={styles.baseView}>
           <Text style={styles.verifyText}>{constant.verifyYourPhnNo}</Text>
-          <Text style={styles.enterCodeText}>{constant.enterTheCode}</Text>
-          
+          <Text style={styles.enterCodeText}>{`${constant.enterTheCode} +${countryCode+phoneNumber}`}</Text>
           <View style={styles.otpContainer}>
             {[0, 1, 2, 3].map((index) => (
               <TextInput
@@ -83,19 +108,26 @@ const OTPSCreen: React.FC = () => {
           
           <Text style={styles.haventText}>{constant.haventReceiveTheCode}</Text>
           <Text style={styles.resendText}>{constant.resendOtp}</Text>
-
-          <View style={styles.validOtpView}>
-            <Text style={styles.invalidOtpText}>{constant.invalidOtpEntered}</Text>
-          </View>
-          <Text style={styles.clearAllText}>{constant.clearAll}</Text>
-          <ASButton 
-            title={constant.verify}
-            onPress={navigateToSucessPage} 
-            customStyle={styles.continueButton}
-          />
-
+          {showInvalidOtp && (
+            <View>
+            <View style={styles.validOtpView}>
+              <Text style={styles.invalidOtpText}>{constant.invalidOtpEntered}</Text>
+            </View>
+             <TouchableOpacity onPress={clearAllPin}>
+             <Text style={styles.clearAllText}>{constant.clearAll}</Text>
+             </TouchableOpacity>
+             </View>
+             )}
+             <View style={styles.bottomButtonContainer}>
+              <ASButton 
+                title={constant.verify}
+                onPress={navigateToSucessPage} 
+                customStyle={styles.continueButton}
+              />
+              </View>
         </View>
-      </View>
+        </ScrollView>
+      {/* </View> */}
     </SafeAreaView>
   );
 };
@@ -107,17 +139,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.black,
   },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+  },  
   bgImg: {
     width: 300,
     height: '30%',
   },
   baseView: {
+    flex: 1,
     backgroundColor: colors.white,
     marginTop: 30,
     width: width,
     borderRadius: 20,
     padding: 20,
     height: height,
+    // justifyContent: 'space-between', 
   },
   verifyText: {
     fontSize: 16,
@@ -171,7 +209,7 @@ const styles = StyleSheet.create({
   continueButton: {
     height: 54,
     borderRadius: 27,
-    top: 34,
+
   },
   validOtpView: {
     marginTop: 20,
@@ -194,6 +232,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: Fonts.medium,
     color: colors.appColor
+  },
+  bottomButtonContainer: {
+    padding: 16,
+    backgroundColor: colors.white,
+    // borderTopWidth: 1,
+    // borderTopColor: '#eee',
   },
 });
 

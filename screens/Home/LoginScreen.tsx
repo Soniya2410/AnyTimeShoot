@@ -8,6 +8,7 @@ import {
   Dimensions,
   SafeAreaView,
   TextInput,
+  Alert
 } from 'react-native';
 import CountryPicker, {
   Country,
@@ -20,6 +21,7 @@ import {colors} from '../utils/Colors';
 import {RootStackNavigationProp} from '../../App';
 import {ASButton} from './components/ASButton';
 import {Fonts} from '../utils/Fonts';
+import { ASTextInput } from './components/ASTextInput';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -31,14 +33,25 @@ const LoginScreen: React.FC = () => {
   const [showCountryPicker, setShowCountryPicker] = useState(false);
 
   const onSelectCountry = useCallback((country: Country) => {
+    console.log('Loginscreen country code', country.callingCode[0]);
     setCountryCode(country.cca2);
     setCountry(country);
     setShowCountryPicker(false);
   }, []);
 
-  const moveToOtpPage = useCallback(() => {
-    navigation.navigate('otpScreen');
-  }, [navigation]);
+  const moveToOtpPage = () => {
+    if(phoneNumber.length < 10) {
+      Alert.alert('Please enter a valid phone number');
+      return;
+    } else {
+      navigation.navigate('otpScreen',{phoneNumber: phoneNumber, countryCode : country?.callingCode[0]?? ''});
+    }
+  };
+
+  const handleSetPhoneNumber = (val: string) => {
+    console.log('Updating state in parent:', val);
+    setPhoneNumber(val);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -82,7 +95,14 @@ const LoginScreen: React.FC = () => {
             />
           </View>
           {/* Phone Number Input */}
-          <View style={styles.phoneNoView}>
+          <ASTextInput 
+            keyboardType="phone-pad"
+            inputValue={phoneNumber}
+            setInputValue={handleSetPhoneNumber}
+            placeholder={constant.phoneNumber}
+            />
+
+          {/* <View style={styles.phoneNoView}>
           <View style={[styles.inputContainer, { width: phoneNumber.length < 10 ? '95%' : '90%'}]}>
             <Text style={styles.phoneNoText}>{constant.phoneNumber}</Text>
               <TextInput
@@ -100,7 +120,7 @@ const LoginScreen: React.FC = () => {
                   style={styles.mobileVerifyTick}
                 />
               )}
-          </View>
+          </View> */}
           <Text style={styles.secureText}>{constant.loginSecure}</Text>
 
           <ASButton
@@ -189,16 +209,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 5,
   },
-  phoneNoView: {
-    // height: 67,
-    flexDirection: 'row',
-    justifyContent:'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    borderWidth: 2,
-    borderColor: colors.black,
-    // padding: 5
-  },
+  
   secureText: {
     fontSize: 12,
     color: colors.black,
@@ -209,11 +220,14 @@ const styles = StyleSheet.create({
     color: colors.placeHolderColor,
     fontSize: 14,
     fontFamily: Fonts.regular,
+    marginTop: 15,
+    // backgroundColor: 'red'
   },
   input: {
     fontSize: 15,
     fontFamily: Fonts.regular,
     color: colors.black,
+    marginBottom: 5
 
   },
   continueButton: {
