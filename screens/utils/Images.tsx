@@ -69,5 +69,14 @@ export const images = {
   startShoot: require('../../assets/images/startShoot.png'),
   locationError: require('../../assets/images/locationError.png'),
   bookingBanner: require('../../assets/images/bookingBanner.png'),
+  noBooking: require('../../assets/images/noBooking.png'),
+  successCreation: require('../../assets/images/successCreation.png'),
+  confetti: require('../../assets/images/confetti.png'),
+  compStartShoot: require('../../assets/images/compStartShoot.png'),
+  compWorkDelivered: require('../../assets/images/compWorkDelivered.png'),
+  compInprogress: require('../../assets/images/compInprogress.png'),
+  compShootCompleted: require('../../assets/images/compShootCompleted.png'),
+  completedPopup: require('../../assets/images/completedPopup.png'),
+
 };
 

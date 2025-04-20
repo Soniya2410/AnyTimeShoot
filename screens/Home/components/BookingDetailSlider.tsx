@@ -97,7 +97,7 @@ const BookingDetailSlider = () => {
 const styles = StyleSheet.create({
   sliderWrapper: {
     height: 413,
-    width: 360,
+    width: "90%",
     alignSelf: 'center',
     borderRadius: 16,
     overflow: 'hidden',
@@ -107,12 +107,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   slide: {
-    width: 360,
+    width: viewportWidth * 0.9,
     height: 413,
     position: 'relative',
   },
   image: {
-    width: 360,
+    width: "100%",
     height: 350,
     alignSelf: 'center',
     resizeMode: 'cover',

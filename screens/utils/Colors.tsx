@@ -18,4 +18,7 @@ export const colors = {
   starColor: "#FFC500",
   appColor30: '#EC193B30',
   inputBackground: '#F5F5F5',
+  completedColor: '#44A621',
+  inprogressColor: '#FF7622',
+  
 };

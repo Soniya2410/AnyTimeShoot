@@ -20,6 +20,7 @@ import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
 import BookingDetailSlider from './components/BookingDetailSlider';
 import { icons } from '../utils/Icons';
+import RateAndReviewComponent from './components/RateAndReviewComponents';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -28,36 +29,68 @@ const TimelineStep = ({
   title,
   subtitle,
   isLast,
+  status,
 }: {
   icon: any;
   title: string;
   subtitle: string;
   isLast: boolean;
+  status: 'completed' | 'inProgress' | 'start' | 'workDeliverd';
 }) => {
+  const getBorderColor = () => {
+    switch (status) {
+      case 'completed':
+        return colors.completedColor; 
+      case 'inProgress':
+        return colors.inprogressColor; 
+      case 'start':
+        return colors.appColor
+        case 'workDeliverd':
+          return colors.appColor
+      default:
+        return colors.appColor;
+    }
+  };
+
+  const getTitleColor = () => {
+    switch (status) {
+      case 'completed':
+        return colors.completedColor; 
+      case 'inProgress':
+        return colors.inprogressColor; 
+      case 'start':
+        return colors.appColor;
+      case 'workDeliverd':
+        return colors.appColor;
+      default:
+        return colors.appColor;
+    }
+  };
+
   return (
     <View style={{flexDirection: 'row'}}>
       <View style={{alignItems: 'center', width: 40}}>
-        <View style={styles.circle}>
+        <View style={[styles.circle, {borderColor: getBorderColor()}]}>
           <Image source={icon} style={styles.icon} />
         </View>
         {!isLast && <View style={styles.verticalLine} />}
       </View>
 
       <View style={{flex: 1, paddingLeft: 8}}>
-        <Text style={styles.stepTitle}>{title}</Text>
+        <Text style={[styles.stepTitle, {color: getTitleColor()}]}>{title}</Text>
         <Text style={styles.stepSubtitle}>{subtitle}</Text>
       </View>
     </View>
   );
 };
 
-const BookingDetailScreen: React.FC = () => {
+const CompletedBookingDetailScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'bookingDetails'>>();
 
   const moveToSuccessPopUp = () => {};
 
   const moveToInvoice = () => {
-  navigation.navigate('completedDetail');
+  navigation.navigate('completedPopup');
   };
 
   const moveToCancelScree = () => {
@@ -92,50 +125,45 @@ const BookingDetailScreen: React.FC = () => {
               <Text style={styles.sectionTitle}>{constant.yourBooking}</Text>
               <View style={styles.timeline}>
                 <TimelineStep
-                  icon={icons.startShoot}
+                  icon={images.compStartShoot}
                   title={constant.startShoot}
                   subtitle={constant.otpVerification}
                   isLast={false}
+                  status='start'
                 />
                 <TimelineStep
-                  icon={icons.shootCompletedIcon}
+                  icon={images.compShootCompleted}
                   title={constant.shootCompleted}
                   subtitle={constant.photographerWillUploadPhotos}
                   isLast={false}
+                  status='completed'
                 />
                 <TimelineStep
-                  icon={icons.editingIcon}
+                  icon={images.compInprogress}
                   title={constant.endingInProgress}
                   subtitle={constant.willStartEditingSoon}
                   isLast={false}
+                  status='inProgress'
                 />
                 <TimelineStep
-                  icon={icons.workDeliveredIcon}
+                  icon={images.compWorkDelivered}
                   title={constant.workDelivered}
                   subtitle={constant.photosAreReady}
                   isLast={true}
+                  status='workDeliverd'
                 />
               </View>
 
-              <TouchableOpacity style={styles.invoiceButton} onPress={moveToInvoice}>
-                <Text style={styles.invoiceButtonText}>
-                  {constant.getInvoice}
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity  onPress= {moveToCancelScree} style={styles.cancelButton}>
-                <Text style={styles.cancelButtonText}>
-                  {constant.requestCancellation}
-                </Text>
-              </TouchableOpacity>
+             <RateAndReviewComponent/>
+              
             </View>
           </>
         }
         ListFooterComponent={
           <ASButton
-            title={constant.startShoot}
+            title={constant.generateInvoice}
             customStyle={styles.startShootButton}
-            onPress={moveToSuccessPopUp}
+            onPress={moveToInvoice}
           />
         }
       />
@@ -256,6 +284,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     borderRadius: 25,
     marginBottom: 20,
+
   },
   startShootButtonText: {
     color: 'white',
@@ -265,4 +294,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BookingDetailScreen;
+export default CompletedBookingDetailScreen;

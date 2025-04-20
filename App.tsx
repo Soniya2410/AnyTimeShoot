@@ -33,15 +33,20 @@ import SignInScreen from './screens/Home/SignInScreen';
 import MessageScreen from './screens/Home/MessageScreen';
 import BookingListScreen from './screens/Home/BookingListScreen';
 import BookingDetailScreen from './screens/Home/BookingDetailScreen.tsx';
-import { icons } from './screens/utils/Icons.tsx';
+import {icons} from './screens/utils/Icons.tsx';
 import CouponScreen from './screens/Home/CouponScreen.tsx';
+import CancelledBookingScreen from './screens/Home/CancelledBookingScreen.tsx';
+import NoBookingScreen from './screens/Home/NoBookingScreen.tsx';
+import SuccessPopupCreationSccreen from './screens/Home/SuccessPopupCreationScreen.tsx';
+import CompletedBookingDetailScreen from './screens/Home/CompletedBookingDetailScreen.tsx';
+import CompletedPopupScreen from './screens/Home/CompletedPopupScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
   onboardSlider: undefined;
   login: undefined;
   homeScreen: undefined;
-  otpScreen: {phoneNumber: string, countryCode: string};
+  otpScreen: {phoneNumber: string; countryCode: string};
   successScreen: undefined;
   signIn: undefined;
   coupon: undefined;
@@ -49,6 +54,11 @@ export type RootStackParamList = {
   bookingList: undefined;
   bookingDetails: undefined;
   couponScreen: undefined;
+  cancelledScreen: undefined;
+  noBookingScreen: undefined;
+  successCreation: undefined;
+  completedDetail: undefined;
+  completedPopup: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -145,7 +155,7 @@ const BottomTabs: React.FC = () => {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{headerShown: false,}}
+        options={{headerShown: false}}
       />
       <Tab.Screen
         name="Message"
@@ -158,11 +168,10 @@ const BottomTabs: React.FC = () => {
         component={ProfileScreen}
         options={{
           headerRight: () => (
-            <TouchableOpacity style={{marginRight: 15, width: 24, height: 24}} onPress={() => {}}>
-              <Image
-                source={icons.shareIcon}
-                style={{width: 18, height: 20}}
-              />
+            <TouchableOpacity
+              style={{marginRight: 15, width: 24, height: 24}}
+              onPress={() => {}}>
+              <Image source={icons.shareIcon} style={{width: 18, height: 20}} />
             </TouchableOpacity>
           ),
         }}
@@ -175,11 +184,12 @@ const App: React.FC = () => {
   return (
     <GestureHandlerRootView>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="onboard"
-         screenOptions={{
-          headerBackTitle: '', // This works differently in native-stack
-          headerTintColor: '#000000', // Arrow color
-        }}>
+        <Stack.Navigator
+          initialRouteName="onboard"
+          screenOptions={{
+            headerBackTitle: '', // This works differently in native-stack
+            headerTintColor: '#000000', // Arrow color
+          }}>
           <Stack.Screen
             name="onboard"
             component={OnboardScreen}
@@ -234,35 +244,77 @@ const App: React.FC = () => {
           /> */}
 
           <Stack.Screen
-            name='bookingList'
+            name="bookingList"
             component={BookingListScreen}
             options={{
               headerTitle: 'Bookings',
               headerTitleAlign: 'left',
-              headerBackTitle: ''
-              
+              headerBackTitle: '',
             }}
           />
 
           <Stack.Screen
-          name='bookingDetails'
-          component={BookingDetailScreen}
-          options={{
-            headerTitle: 'Bookings',
-            headerTitleAlign: 'left',
-            headerBackTitle: ''
-          }}
+            name="bookingDetails"
+            component={BookingDetailScreen}
+            options={{
+              headerTitle: 'Bookings',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+            }}
           />
-            <Stack.Screen
-            name='couponScreen'
+          <Stack.Screen
+            name="couponScreen"
             component={CouponScreen}
             options={{
-            headerTitle: 'Coupons',
-            headerTitleAlign: 'left',
-            headerBackTitle: ''
-          }}
+              headerTitle: 'Coupons',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+            }}
           />
-          
+
+          <Stack.Screen
+            name="cancelledScreen"
+            component={CancelledBookingScreen}
+            options={{
+              headerTitle: 'Bookings',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+            }}
+          />
+
+          <Stack.Screen
+            name="noBookingScreen"
+            component={NoBookingScreen}
+            options={{
+              headerTitle: 'Bookings',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+            }}
+          />
+
+          <Stack.Screen
+            name="successCreation"
+            component={SuccessPopupCreationSccreen}
+            options={{
+              headerTitle: '',
+            }}
+          />
+
+          <Stack.Screen
+            name="completedDetail"
+            component={CompletedBookingDetailScreen}
+            options={{
+              headerTitle: '',
+            }}
+          />
+
+          <Stack.Screen
+            name='completedPopup'
+            component={CompletedPopupScreen}
+            options={{
+              headerTitle: '',
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
