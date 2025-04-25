@@ -19,7 +19,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/Home/HomeScreen';
 import ProfileScreen from './screens/Home/ProfileScreen';
 import CategoryScreen from './screens/Home/CategoryScreen';
-import MyBookingsScreen from './screens/Home/MyBookingsScreen';
+import MyBookingsScreen from './screens/Home/MyBookingsScreen.tsx';
 import {images} from './screens/utils/Images';
 import {colors} from './screens/utils/Colors';
 
@@ -32,7 +32,6 @@ import SuccessScreen from './screens/Home/SuccessScreen';
 import SignInScreen from './screens/Home/SignInScreen';
 import MessageScreen from './screens/Home/MessageScreen';
 import BookingListScreen from './screens/Home/BookingListScreen';
-import BookingDetailScreen from './screens/Home/BookingDetailScreen.tsx';
 import {icons} from './screens/utils/Icons.tsx';
 import CouponScreen from './screens/Home/CouponScreen.tsx';
 import CancelledBookingScreen from './screens/Home/CancelledBookingScreen.tsx';
@@ -40,6 +39,12 @@ import NoBookingScreen from './screens/Home/NoBookingScreen.tsx';
 import SuccessPopupCreationSccreen from './screens/Home/SuccessPopupCreationScreen.tsx';
 import CompletedBookingDetailScreen from './screens/Home/CompletedBookingDetailScreen.tsx';
 import CompletedPopupScreen from './screens/Home/CompletedPopupScreen.tsx';
+import UpcomingBookingDetailScreen from './screens/Home/UpcomingBookingDetailScreen.tsx';
+import UpcomingPopupScreen from './screens/Home/UpcomingPopupScreen.tsx';
+import UpcomingShootStartedScreen from './screens/Home/UpcomingShootStartedScreen.tsx';
+import UpcomingShootCompletedScreen from './screens/Home/UpcomingShootCompletedScreen.tsx';
+import UpcomingEditingInprogressScreen from './screens/Home/UpcomingEditingInprogressScreen.tsx';
+import ProfileDetailScreen from './screens/Home/ProfileDetailScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -52,13 +57,18 @@ export type RootStackParamList = {
   coupon: undefined;
   yourLocationPopUp: undefined;
   bookingList: undefined;
-  bookingDetails: undefined;
+  upcomingbookingDetails: undefined;
+  upcomingPopup: undefined;
+  upcomingStartShoot: undefined;
+  upcomingShootCompleted: undefined;
+  upcomingEditingInprogress: undefined;
   couponScreen: undefined;
   cancelledScreen: undefined;
   noBookingScreen: undefined;
   successCreation: undefined;
   completedDetail: undefined;
   completedPopup: undefined;
+  profileDetail: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -254,14 +264,47 @@ const App: React.FC = () => {
           />
 
           <Stack.Screen
-            name="bookingDetails"
-            component={BookingDetailScreen}
+            name="upcomingbookingDetails"
+            component={UpcomingBookingDetailScreen}
             options={{
               headerTitle: 'Bookings',
               headerTitleAlign: 'left',
               headerBackTitle: '',
             }}
           />
+
+          <Stack.Screen
+            name="upcomingPopup"
+            component={UpcomingPopupScreen}
+            options={{
+              headerTitle: 'Bookings',
+            }}
+          />
+
+          <Stack.Screen
+            name="upcomingStartShoot"
+            component={UpcomingShootStartedScreen}
+            options={{
+              headerTitle: 'Bookings',
+            }}
+          />
+
+          <Stack.Screen
+            name="upcomingShootCompleted"
+            component={UpcomingShootCompletedScreen}
+            options={{
+              headerTitle: 'Bookings',
+            }}
+          />
+
+          <Stack.Screen
+            name="upcomingEditingInprogress"
+            component={UpcomingEditingInprogressScreen}
+            options={{
+              headerTitle: 'Bookings',
+            }}
+          />
+
           <Stack.Screen
             name="couponScreen"
             component={CouponScreen}
@@ -309,10 +352,18 @@ const App: React.FC = () => {
           />
 
           <Stack.Screen
-            name='completedPopup'
+            name="completedPopup"
             component={CompletedPopupScreen}
             options={{
               headerTitle: '',
+            }}
+          />
+
+          <Stack.Screen
+            name="profileDetail"
+            component={ProfileDetailScreen}
+            options={{
+              headerTitle: 'Profile',
             }}
           />
         </Stack.Navigator>

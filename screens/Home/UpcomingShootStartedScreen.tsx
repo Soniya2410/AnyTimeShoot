@@ -40,9 +40,9 @@ const TimelineStep = ({
   const getBorderColor = () => {
     switch (status) {
       case 'completed':
-        return colors.completedColor; 
+        return colors.appColor; 
       case 'inProgress':
-        return colors.inprogressColor; 
+        return colors.appColor; 
       case 'start':
         return colors.appColor
         case 'workDeliverd':
@@ -55,15 +55,15 @@ const TimelineStep = ({
   const getTitleColor = () => {
     switch (status) {
       case 'completed':
-        return colors.completedColor; 
+        return colors.black; 
       case 'inProgress':
-        return colors.inprogressColor; 
+        return colors.black; 
       case 'start':
         return colors.appColor;
       case 'workDeliverd':
-        return colors.appColor;
+        return colors.black;
       default:
-        return colors.appColor;
+        return colors.black;
     }
   };
 
@@ -84,17 +84,18 @@ const TimelineStep = ({
   );
 };
 
-const CompletedBookingDetailScreen: React.FC = () => {
-  const navigation = useNavigation<RootStackNavigationProp<'upcomingbookingDetails'>>();
+const UpcomingShootStartedScreen: React.FC = () => {
+  const navigation = useNavigation<RootStackNavigationProp<'upcomingStartShoot'>>();
 
-  const moveToSuccessPopUp = () => {};
+  const moveToSuccessPopUp = () => {
+  };
 
   const moveToInvoice = () => {
-  navigation.navigate('completedPopup');
+    navigation.navigate('upcomingShootCompleted');
   };
 
   const moveToCancelScree = () => {
-   navigation.navigate('cancelledScreen');
+//    navigation.navigate('cancelledScreen');
   };
 
   return (
@@ -132,30 +133,27 @@ const CompletedBookingDetailScreen: React.FC = () => {
                   status='start'
                 />
                 <TimelineStep
-                  icon={images.compShootCompleted}
+                  icon={icons.shootCompletedIcon}
                   title={constant.shootCompleted}
                   subtitle={constant.photographerWillUploadPhotos}
                   isLast={false}
                   status='completed'
                 />
                 <TimelineStep
-                  icon={images.compInprogress}
+                  icon={icons.editingIcon}
                   title={constant.endingInProgress}
                   subtitle={constant.willStartEditingSoon}
                   isLast={false}
                   status='inProgress'
                 />
                 <TimelineStep
-                  icon={images.compWorkDelivered}
+                  icon={icons.workDeliveredIcon}
                   title={constant.workDelivered}
                   subtitle={constant.photosAreReady}
                   isLast={true}
                   status='workDeliverd'
                 />
-              </View>
-
-             <RateAndReviewComponent/>
-              
+              </View>              
             </View>
           </>
         }
@@ -164,6 +162,7 @@ const CompletedBookingDetailScreen: React.FC = () => {
             title={constant.generateInvoice}
             customStyle={styles.startShootButton}
             onPress={moveToInvoice}
+            textStyle={styles.startShootButtonText}
           />
         }
       />
@@ -176,7 +175,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
-
   content: {
     paddingHorizontal: 16,
     marginTop: 5,
@@ -279,19 +277,21 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.regular,
   },
   startShootButton: {
-    backgroundColor: colors.appColor,
+    marginTop: 20,
+    backgroundColor: colors.white,
     paddingVertical: 14,
     marginHorizontal: 16,
-    borderRadius: 25,
+    borderRadius: 10,
     marginBottom: 20,
-
+    borderColor: colors.appColor,
+    borderWidth: 2,
   },
   startShootButtonText: {
-    color: 'white',
+    color: colors.appColor,
     textAlign: 'center',
     fontSize: 16,
     fontFamily: Fonts.semiBold,
   },
 });
 
-export default CompletedBookingDetailScreen;
+export default UpcomingShootStartedScreen;

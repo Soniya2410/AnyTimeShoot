@@ -7,15 +7,16 @@ interface ASButtonProps {
   onPress: () => void;
   title: string;
   customStyle?: object; 
+  textStyle?: object;
 }
 
-const ASButton = ({ onPress, title, customStyle = {} }: ASButtonProps) => {
+const ASButton = ({ onPress, title, customStyle = {}, textStyle = {} }: ASButtonProps) => {
   return (
     <TouchableOpacity
       style={[styles.container, { backgroundColor: colors.appColor }, customStyle]}
       onPress={onPress}
     >
-      <Text style={styles.textStyle}>{title}</Text>
+    <Text style={[styles.textStyle, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.white,
     fontSize: 20,
-    fontFamily: Fonts.bold
+    fontFamily: Fonts.medium
   },
 });
 

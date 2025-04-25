@@ -77,6 +77,10 @@ export const images = {
   compInprogress: require('../../assets/images/compInprogress.png'),
   compShootCompleted: require('../../assets/images/compShootCompleted.png'),
   completedPopup: require('../../assets/images/completedPopup.png'),
+  upcomingCompleted: require('../../assets/images/upcomingCompleted.png'),
+  bgCompleted: require('../../assets/images/bgCompleted.png'),
+  bgInprogress: require('../../assets/images/bgInprogress.png'),
+
 
 };
 

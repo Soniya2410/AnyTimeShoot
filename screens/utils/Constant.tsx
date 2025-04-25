@@ -124,4 +124,7 @@ export const constant = {
    anyTimeShoot: " AnyTimeShoot",
    generateInvoice: "Generate Invoice",
    rateAndReview: "Rate & Review the booking",
+   shootStarted:  "Shoot started", 
+   successfully: "successfully",
+   studioLocation: "Studio Location",
 }

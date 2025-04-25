@@ -14,7 +14,6 @@ const icons = {
   cancelled: images.cancelBooking,
 };
 
-
 const bookings = [
   { 
     id: '1', 

@@ -5,7 +5,6 @@ import {colors} from '../../utils/Colors';
 import { useState } from 'react';
 import { Fonts } from '../../utils/Fonts';
 
-
 const AppHeaders = () => {
   const [modalVisible, setModalVisible] = useState(true);
   return (

@@ -1,15 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
-  Modal,
   View,
   Text,
   StyleSheet,
   Image,
-  Pressable,
-  TouchableOpacity,
   Dimensions,
   SafeAreaView,
   FlatList,
+  ImageBackground,
 } from 'react-native';
 import {images} from '../utils/Images';
 import {constant} from '../utils/Constant';
@@ -19,10 +17,9 @@ import {useNavigation} from '@react-navigation/native';
 import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
 import BookingDetailSlider from './components/BookingDetailSlider';
-import { icons } from '../utils/Icons';
-import RateAndReviewComponent from './components/RateAndReviewComponents';
+import {icons} from '../utils/Icons';
 
-const {width, height} = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 
 const TimelineStep = ({
   icon,
@@ -40,13 +37,13 @@ const TimelineStep = ({
   const getBorderColor = () => {
     switch (status) {
       case 'completed':
-        return colors.completedColor; 
+        return colors.completedColor;
       case 'inProgress':
-        return colors.inprogressColor; 
+        return colors.appColor;
       case 'start':
-        return colors.appColor
-        case 'workDeliverd':
-          return colors.appColor
+        return colors.appColor;
+      case 'workDeliverd':
+        return colors.appColor;
       default:
         return colors.appColor;
     }
@@ -55,13 +52,13 @@ const TimelineStep = ({
   const getTitleColor = () => {
     switch (status) {
       case 'completed':
-        return colors.completedColor; 
+        return colors.completedColor;
       case 'inProgress':
-        return colors.inprogressColor; 
+        return colors.black;
       case 'start':
         return colors.appColor;
       case 'workDeliverd':
-        return colors.appColor;
+        return colors.black;
       default:
         return colors.appColor;
     }
@@ -77,24 +74,21 @@ const TimelineStep = ({
       </View>
 
       <View style={{flex: 1, paddingLeft: 8}}>
-        <Text style={[styles.stepTitle, {color: getTitleColor()}]}>{title}</Text>
+        <Text style={[styles.stepTitle, {color: getTitleColor()}]}>
+          {title}
+        </Text>
         <Text style={styles.stepSubtitle}>{subtitle}</Text>
       </View>
     </View>
   );
 };
 
-const CompletedBookingDetailScreen: React.FC = () => {
-  const navigation = useNavigation<RootStackNavigationProp<'upcomingbookingDetails'>>();
-
-  const moveToSuccessPopUp = () => {};
+const UpcomingShootCompletedScreen: React.FC = () => {
+  const navigation =
+    useNavigation<RootStackNavigationProp<'upcomingShootCompleted'>>();
 
   const moveToInvoice = () => {
-  navigation.navigate('completedPopup');
-  };
-
-  const moveToCancelScree = () => {
-   navigation.navigate('cancelledScreen');
+    navigation.navigate('upcomingEditingInprogress');
   };
 
   return (
@@ -102,60 +96,68 @@ const CompletedBookingDetailScreen: React.FC = () => {
       <FlatList
         data={[]}
         renderItem={null}
+        contentContainerStyle={styles.flatListContainer}
         ListHeaderComponent={
           <>
             <BookingDetailSlider />
             <View style={styles.content}>
               <View style={styles.infoRow}>
                 <View style={styles.infoCard}>
-                  <Image source={icons.datePicker} style={styles.iconTop}/>
+                  <Image source={icons.datePicker} style={styles.iconTop} />
                   <Text style={styles.infoLabel}>
                     {constant.bookingDetails}
                   </Text>
                   <Text style={styles.infoValue}>{constant.date}</Text>
                 </View>
                 <View style={styles.infoCard}>
-                <Image source={icons.priceIcone} style={styles.icon}/>
+                  <Image source={icons.priceIcone} style={styles.icon} />
                   <Text style={styles.infoLabel}>
                     {constant.totalBookingPrice}
                   </Text>
                   <Text style={styles.infoValue}>{constant.count}</Text>
                 </View>
               </View>
-              <Text style={styles.sectionTitle}>{constant.yourBooking}</Text>
-              <View style={styles.timeline}>
-                <TimelineStep
-                  icon={images.compStartShoot}
-                  title={constant.startShoot}
-                  subtitle={constant.otpVerification}
-                  isLast={false}
-                  status='start'
-                />
-                <TimelineStep
-                  icon={images.compShootCompleted}
-                  title={constant.shootCompleted}
-                  subtitle={constant.photographerWillUploadPhotos}
-                  isLast={false}
-                  status='completed'
-                />
-                <TimelineStep
-                  icon={images.compInprogress}
-                  title={constant.endingInProgress}
-                  subtitle={constant.willStartEditingSoon}
-                  isLast={false}
-                  status='inProgress'
-                />
-                <TimelineStep
-                  icon={images.compWorkDelivered}
-                  title={constant.workDelivered}
-                  subtitle={constant.photosAreReady}
-                  isLast={true}
-                  status='workDeliverd'
-                />
-              </View>
 
-             <RateAndReviewComponent/>
-              
+              <ImageBackground
+                source={images.bgCompleted}
+                resizeMode="contain"
+                style={styles.imageBackground}>
+                <View style={styles.timelineContent}>
+                  <Text style={styles.sectionTitle}>
+                    {constant.yourBooking}
+                  </Text>
+                  <View style={styles.timeline}>
+                    <TimelineStep
+                      icon={images.compStartShoot}
+                      title={constant.startShoot}
+                      subtitle={constant.otpVerification}
+                      isLast={false}
+                      status="start"
+                    />
+                    <TimelineStep
+                      icon={images.compShootCompleted}
+                      title={constant.shootCompleted}
+                      subtitle={constant.photographerWillUploadPhotos}
+                      isLast={false}
+                      status="completed"
+                    />
+                    <TimelineStep
+                      icon={images.editInProgress}
+                      title={constant.endingInProgress}
+                      subtitle={constant.willStartEditingSoon}
+                      isLast={false}
+                      status="inProgress"
+                    />
+                    <TimelineStep
+                      icon={images.workDelivered}
+                      title={constant.workDelivered}
+                      subtitle={constant.photosAreReady}
+                      isLast={true}
+                      status="workDeliverd"
+                    />
+                  </View>
+                </View>
+              </ImageBackground>
             </View>
           </>
         }
@@ -164,6 +166,7 @@ const CompletedBookingDetailScreen: React.FC = () => {
             title={constant.generateInvoice}
             customStyle={styles.startShootButton}
             onPress={moveToInvoice}
+            textStyle={styles.startShootButtonText}
           />
         }
       />
@@ -176,9 +179,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
-
+  flatListContainer: {
+    flexGrow: 1,
+  },
   content: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 0,
     marginTop: 5,
   },
   infoRow: {
@@ -186,6 +191,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 20,
     marginTop: 0,
+    paddingHorizontal: 16,
   },
   infoCard: {
     width: '48%',
@@ -206,6 +212,15 @@ const styles = StyleSheet.create({
     color: colors.appColor,
     marginTop: 4,
   },
+  imageBackground: {
+    width: '100%',
+    marginBottom: 20,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  timelineContent: {
+    padding: 16,
+  },
   sectionTitle: {
     fontSize: 16,
     fontFamily: Fonts.semiBold,
@@ -214,7 +229,6 @@ const styles = StyleSheet.create({
   },
   timeline: {
     paddingLeft: 8,
-    marginBottom: 20,
   },
   circle: {
     width: 30,
@@ -254,44 +268,22 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.regular,
     color: colors.placeHolderColor,
   },
-
-  invoiceButton: {
-    borderWidth: 1,
-    borderColor: colors.appColor,
-    borderRadius: 10,
-    padding: 12,
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  invoiceButtonText: {
-    color: colors.appColor,
-    fontSize: 14,
-    fontFamily: Fonts.semiBold,
-  },
-  cancelButton: {
-    alignItems: 'center',
-    marginBottom: 40,
-  },
-  cancelButtonText: {
-    color: colors.appColor,
-    fontSize: 14,
-    textDecorationLine: 'underline',
-    fontFamily: Fonts.regular,
-  },
   startShootButton: {
-    backgroundColor: colors.appColor,
+    marginTop: 20,
+    backgroundColor: colors.white,
     paddingVertical: 14,
     marginHorizontal: 16,
-    borderRadius: 25,
+    borderRadius: 10,
     marginBottom: 20,
-
+    borderColor: colors.appColor,
+    borderWidth: 2,
   },
   startShootButtonText: {
-    color: 'white',
+    color: colors.appColor,
     textAlign: 'center',
     fontSize: 16,
     fontFamily: Fonts.semiBold,
   },
 });
 
-export default CompletedBookingDetailScreen;
+export default UpcomingShootCompletedScreen;

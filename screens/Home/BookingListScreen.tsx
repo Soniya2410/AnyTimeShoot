@@ -51,7 +51,7 @@ const BookingListScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'bookingList'>>();
   
   const moveToDetailPage = () => {
-    navigation.navigate('bookingDetails');
+    navigation.navigate('upcomingbookingDetails');
   }
 
   const renderStars = (count: number) => {

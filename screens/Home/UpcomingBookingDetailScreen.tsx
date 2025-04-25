@@ -20,6 +20,8 @@ import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
 import BookingDetailSlider from './components/BookingDetailSlider';
 import { icons } from '../utils/Icons';
+// import MapComponent from './components/MapComponent';
+import OTPSection from './components/OTPSection';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -51,10 +53,12 @@ const TimelineStep = ({
   );
 };
 
-const BookingDetailScreen: React.FC = () => {
-  const navigation = useNavigation<RootStackNavigationProp<'bookingDetails'>>();
+const UpcomingBookingDetailScreen: React.FC = () => {
+  const navigation = useNavigation<RootStackNavigationProp<'upcomingbookingDetails'>>();
 
-  const moveToSuccessPopUp = () => {};
+  const moveToSuccessPopUp = () => {
+    navigation.navigate('upcomingStartShoot')
+  };
 
   const moveToInvoice = () => {
   navigation.navigate('completedDetail');
@@ -127,6 +131,10 @@ const BookingDetailScreen: React.FC = () => {
                 <Text style={styles.cancelButtonText}>
                   {constant.requestCancellation}
                 </Text>
+
+                {/* <MapComponent/> */}
+                <OTPSection/>
+
               </TouchableOpacity>
             </View>
           </>
@@ -265,4 +273,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BookingDetailScreen;
+export default UpcomingBookingDetailScreen;
