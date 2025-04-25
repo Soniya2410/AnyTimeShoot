@@ -81,6 +81,15 @@ export const images = {
   bgCompleted: require('../../assets/images/bgCompleted.png'),
   bgInprogress: require('../../assets/images/bgInprogress.png'),
 
-
+  home1: require('../../assets/images/home/home_1.png'),
+  home2: require('../../assets/images/home/home_2.png'),
+  home3: require('../../assets/images/home/home_3.png'),
+  home4: require('../../assets/images/home/home_4.png'),
+  baby1: require('../../assets/images/home/baby_1.png'),
+  marragie1: require('../../assets/images/home/marraige_1.png'),
+  marragie2: require('../../assets/images/home/marraige_2.png'),
+  details1: require('../../assets/images/details_1.png'),
+  details2: require('../../assets/images/details_2.png'),
+  details3: require('../../assets/images/details_3.png'),
 };
 

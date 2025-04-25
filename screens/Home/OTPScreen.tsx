@@ -13,7 +13,7 @@ import {
 import {images} from '../utils/Images';
 import {colors} from '../utils/Colors';
 import {constant} from '../utils/Constant';
-import { ASButton } from './components/ASButton';
+import { ASButton } from '../components/ASButton';
 import { Fonts } from '../utils/Fonts';
 import { useNavigation } from '@react-navigation/native';
 import {RootStackNavigationProp, RootStackParamList} from '../../App';

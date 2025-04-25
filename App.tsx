@@ -26,25 +26,26 @@ import {colors} from './screens/utils/Colors';
 // Onboarding Screens
 import OnboardScreen from './screens/Home/OnboardScreen';
 import LoginScreen from './screens/Home/LoginScreen';
-import OnboardSlider from './screens/Home/components/OnboardSlider';
+import OnboardSlider from './screens/components/OnboardSlider';
 import OTPSCreen from './screens/Home/OTPScreen';
 import SuccessScreen from './screens/Home/SuccessScreen';
 import SignInScreen from './screens/Home/SignInScreen';
 import MessageScreen from './screens/Home/MessageScreen';
-import BookingListScreen from './screens/Home/BookingListScreen';
+import BookingListScreen from './screens/booking/BookingListScreen';
+import BookingDetailScreen from './screens/Home/BookingDetailScreen.tsx';
 import {icons} from './screens/utils/Icons.tsx';
 import CouponScreen from './screens/Home/CouponScreen.tsx';
-import CancelledBookingScreen from './screens/Home/CancelledBookingScreen.tsx';
-import NoBookingScreen from './screens/Home/NoBookingScreen.tsx';
+import CancelledBookingScreen from './screens/booking/CancelledBookingScreen.tsx';
+import NoBookingScreen from './screens/booking/NoBookingScreen.tsx';
 import SuccessPopupCreationSccreen from './screens/Home/SuccessPopupCreationScreen.tsx';
-import CompletedBookingDetailScreen from './screens/Home/CompletedBookingDetailScreen.tsx';
-import CompletedPopupScreen from './screens/Home/CompletedPopupScreen.tsx';
-import UpcomingBookingDetailScreen from './screens/Home/UpcomingBookingDetailScreen.tsx';
-import UpcomingPopupScreen from './screens/Home/UpcomingPopupScreen.tsx';
-import UpcomingShootStartedScreen from './screens/Home/UpcomingShootStartedScreen.tsx';
-import UpcomingShootCompletedScreen from './screens/Home/UpcomingShootCompletedScreen.tsx';
-import UpcomingEditingInprogressScreen from './screens/Home/UpcomingEditingInprogressScreen.tsx';
+import CompletedBookingDetailScreen from './screens/booking/CompletedBookingDetailScreen.tsx';
+import UpcomingBookingDetailScreen from './screens/booking/UpcomingBookingDetailScreen.tsx';
+import UpcomingShootStartedScreen from './screens/booking/UpcomingShootStartedScreen.tsx';
+import UpcomingShootCompletedScreen from './screens/booking/UpcomingShootCompletedScreen.tsx';
+import UpcomingEditingInprogressScreen from './screens/booking/UpcomingEditingInprogressScreen.tsx';
 import ProfileDetailScreen from './screens/Home/ProfileDetailScreen.tsx';
+import PackageList from './screens/Home/PackageList.tsx';
+import PackageDetails from './screens/booking/PackageDetails.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -68,6 +69,8 @@ export type RootStackParamList = {
   successCreation: undefined;
   completedDetail: undefined;
   completedPopup: undefined;
+  packageList: {title: string, data: any[]};
+  packageDetail: {title: string};
   profileDetail: undefined;
 };
 
@@ -191,11 +194,12 @@ const BottomTabs: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  
   return (
     <GestureHandlerRootView>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="onboard"
+          initialRouteName="homeScreen"
           screenOptions={{
             headerBackTitle: '', // This works differently in native-stack
             headerTintColor: '#000000', // Arrow color
@@ -263,6 +267,23 @@ const App: React.FC = () => {
             }}
           />
 
+        <Stack.Screen
+            name="packageList"
+            component={PackageList}
+            options={{
+              headerBackTitle: '',
+            }}
+          />
+
+        <Stack.Screen
+            name="packageDetail"
+            component={PackageDetails}
+            options={{
+              headerBackTitle: '',
+              headerTitle: 'Package Details',
+            }}
+          />
+
           <Stack.Screen
             name="upcomingbookingDetails"
             component={UpcomingBookingDetailScreen}
@@ -273,13 +294,13 @@ const App: React.FC = () => {
             }}
           />
 
-          <Stack.Screen
+          {/* <Stack.Screen
             name="upcomingPopup"
             component={UpcomingPopupScreen}
             options={{
               headerTitle: 'Bookings',
             }}
-          />
+          /> */}
 
           <Stack.Screen
             name="upcomingStartShoot"
@@ -351,13 +372,13 @@ const App: React.FC = () => {
             }}
           />
 
-          <Stack.Screen
-            name="completedPopup"
+          {/* <Stack.Screen
+            name='completedPopup'
             component={CompletedPopupScreen}
             options={{
               headerTitle: '',
             }}
-          />
+          /> */}
 
           <Stack.Screen
             name="profileDetail"

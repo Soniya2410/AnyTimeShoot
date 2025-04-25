@@ -12,56 +12,61 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import {images} from '../utils/Images';
 import {constant} from '../utils/Constant';
 import {colors} from '../utils/Colors';
-import AppHeaders from './components/AppHeaders';
-import SearchComponents from './components/SearchComponents';
-import RecommendedCard from './components/RecommendedCard';
-import CustomSlider from './components/CustomSlider';
-import InstantBookingCard from './components/InstantBookingsCard';
-import InstantBooking from './components/InstantBooking';
-import PreweddingCard from './components/PreweddingCard';
+import AppHeaders from '../components/AppHeaders';
+import SearchComponents from '../components/SearchComponents';
+import RecommendedCard from '../components/RecommendedCard';
+import CustomSlider from '../components/CustomSlider';
+import InstantBookingCard from '../components/InstantBookingsCard';
+import InstantBooking from '../components/InstantBooking';
+import PreweddingCard from '../components/PreweddingCard';
 import { Fonts } from '../utils/Fonts';
-import YourLocationPopupScreen from './modals/YourLocationPopupScreen';
+import YourLocationPopupScreen from './components/YourLocationPopupScreen';
 import { icons } from '../utils/Icons';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp } from '../../App';
 
 const {width} = Dimensions.get('window');
 
 const HomeScreen: React.FC = () => {
+  const navigation = useNavigation<RootStackNavigationProp<'homeScreen'>>();
   const [modalVisible, setModalVisible] = useState(true);
 
   const recommended = [
     {
       id: '1',
       title: 'Wedding Xperts',
-      description: 'Capture.',
+      description: 'Wedding Shoot:  5 Days',
       price: '2,00,000/-',
       offerPrice: '1,80,000/-',
       image: images.wedding,
       rating: 4.5,
       liked: false,
+      offerText: 'Limited Offer'
     },
     {
       id: '2',
       title: 'Maternity Shoot',
-      description: 'Beautiful',
+      description: 'Wedding Shoot:  5 Days',
       price: '10,000/-',
       offerPrice: '8,000/-',
-      image: images.maternity,
+      image: images.baby1,
       rating: 4.7,
       liked: false,
+      offerText: 'Limited Offer'
     },
     {
       id: '3',
       title: 'Pre-Wedding Shoot',
-      description: 'Romantic',
+      description: 'Wedding Shoot:  5 Days',
       price: '1,00,000/-',
       offerPrice: '90,000/-',
-      image: images.preWedding,
+      image: images.marragie1,
       rating: 4,
       liked: false,
+      offerText: 'Limited Offer'
     },
   ];
 
@@ -72,9 +77,10 @@ const HomeScreen: React.FC = () => {
       description: 'Capture.',
       price: '2,00,000/-',
       offerPrice: '1,80,000/-',
-      image: images.wedding,
+      image: images.marragie2,
       rating: 4.5,
       liked: false,
+      prewedding: true
     },
     {
       id: '2',
@@ -82,9 +88,10 @@ const HomeScreen: React.FC = () => {
       description: 'Beautiful',
       price: '10,000/-',
       offerPrice: '8,000/-',
-      image: images.maternity,
+      image: images.marragie2,
       rating: 4.7,
       liked: false,
+      prewedding: true
     },
     {
       id: '3',
@@ -92,9 +99,10 @@ const HomeScreen: React.FC = () => {
       description: 'Romantic',
       price: '1,00,000/-',
       offerPrice: '90,000/-',
-      image: images.preWedding,
+      image: images.marragie2,
       rating: 4,
       liked: false,
+      prewedding: true
     },
     {
       id: '4',
@@ -115,6 +123,7 @@ const HomeScreen: React.FC = () => {
       image: images.preWedding,
       rating: 4,
       liked: false,
+      prewedding: true
     },
     {
       id: '6',
@@ -125,6 +134,7 @@ const HomeScreen: React.FC = () => {
       image: images.preWedding,
       rating: 4,
       liked: false,
+      prewedding: true
     },
   ];
 
@@ -250,27 +260,22 @@ const HomeScreen: React.FC = () => {
     {
       id: '1',
       title: 'Wedding',
-      image: images.wedding,
+      image: images.home1,
     },
     {
       id: '2',
       title: 'Pre-wedding',
-      image: images.preWedding,
+      image: images.home2,
     },
     {
       id: '3',
       title: 'Maternity',
-      image: images.maternity,
+      image: images.home3,
     },
     {
       id: '4',
       title: 'Product',
-      image: images.product,
-    },
-    {
-      id: '5',
-      title: 'New Born',
-      image: images.newBorn,
+      image: images.home4,
     },
     {
       id: '6',
@@ -357,8 +362,10 @@ const HomeScreen: React.FC = () => {
         />
         </View>
         <View style={styles.recommendedHeader}>
-          <Text style={styles.recommendedTitle}>{constant.recommended_for_you}</Text>
-          <TouchableOpacity>
+          <Text style={styles.recommendedTitle}>{constant.specialOffer}</Text>
+          <TouchableOpacity onPress={() => {
+            navigation.navigate('packageList', {title: 'Special Offer', data: recommendedList});
+          }}>
             <Text style={styles.viewAll}>{constant.view_all}</Text>
           </TouchableOpacity>
         </View>
@@ -375,19 +382,12 @@ const HomeScreen: React.FC = () => {
             contentContainerStyle={{paddingHorizontal: 15}}
           />
         </View>
-
-        <View style={styles.recommendedHeader}>
-          <Text style={styles.recommendedTitle}>{constant.instant_bookings}</Text>
-          <TouchableOpacity>
-            <Text style={styles.viewAll}>{constant.view_all}</Text>
-          </TouchableOpacity>
-        </View>
-          <InstantBooking instantBooking={instantBooking} />
-
-          {/* Wedding Package  */}
-          <View style={styles.weddingPackage}>
-          <Text style={styles.recommendedTitle}>{constant.wedding_packages_near_you}</Text>
-          <TouchableOpacity>
+   {/* Wedding Package  */}
+   <View style={styles.weddingPackage}>
+          <Text style={styles.recommendedTitle}>{constant.bestSeller}</Text>
+          <TouchableOpacity onPress={() => {
+            navigation
+          }}>
             <Text style={styles.viewAll}>{constant.view_all}</Text>
           </TouchableOpacity>
         </View>
@@ -404,6 +404,15 @@ const HomeScreen: React.FC = () => {
             contentContainerStyle={{paddingHorizontal: 15}}
           />
         </View>
+        <View style={styles.recommendedHeader}>
+          <Text style={styles.recommendedTitle}>{constant.instant_bookings}</Text>
+          <TouchableOpacity>
+            <Text style={styles.viewAll}>{constant.view_all}</Text>
+          </TouchableOpacity>
+        </View>
+          <InstantBooking instantBooking={instantBooking} />
+
+       
         {/* Offer Packages  */}
         <View style={styles.weddingPackage}>
           <Text style={styles.recommendedTitle}>{constant.upto_to}</Text>
@@ -557,7 +566,7 @@ const styles = StyleSheet.create({
   },
   categoryTitle: {
     fontSize: 12,
-    fontFamily: Fonts.regular,
+    fontFamily: Fonts.medium,
     // color: colors.appColor,
     textAlign: 'center',
     marginTop: 5,
@@ -603,10 +612,11 @@ const styles = StyleSheet.create({
   },
   viewAll: {
     fontSize: 14,
-    color: colors.grey,
+    color: colors.appColor,
     fontWeight: 'regular',
     textAlign: 'center',
     marginTop: 5,
+    textDecorationLine: 'underline',
   },
   viewMore: {
     fontSize: 12,

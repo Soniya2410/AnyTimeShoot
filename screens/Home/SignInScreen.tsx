@@ -14,9 +14,9 @@ import {colors} from '../utils/Colors';
 import {constant} from '../utils/Constant';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../App';
-import {ASButton} from './components/ASButton';
+import {ASButton} from '../components/ASButton';
 import {Fonts} from '../utils/Fonts';
-import { ASTextInput } from './components/ASTextInput';
+import { ASTextInput } from '../components/ASTextInput';
 
 const {width, height} = Dimensions.get('screen');
 

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {images} from '../utils/Images';
 import {constant} from '../utils/Constant';
-import {ASButton} from './components/ASButton';
+import {ASButton} from '../components/ASButton';
 import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
 

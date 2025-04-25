@@ -31,4 +31,9 @@ export const icons = {
   editingIcon: require('../../assets/icons/editing.png'),
   workDeliveredIcon: require('../../assets/icons/work_delivered.png'),
   shootCompletedIcon: require('../../assets/icons/shoot_complete.png'),
+  verifyIcon: require('../../assets/icons/verify.png'),
+  timerIcon: require('../../assets/icons/timer.png'),
+  rawDataIcon: require('../../assets/icons/raw_data.png'),
+  editRawDataIcon: require('../../assets/icons/edit_raw_data.png'),
+  backArrowIcon: require('../../assets/icons/back_arrow.png'),
 }

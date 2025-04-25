@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, TouchableOpacity
 import { colors } from '../utils/Colors';
 import { Fonts } from '../utils/Fonts';
 import { images } from '../utils/Images';
-import CustomSlider from './components/CustomSlider';
+import CustomSlider from '../components/CustomSlider';
 import { constant } from '../utils/Constant';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackNavigationProp } from '../../App';

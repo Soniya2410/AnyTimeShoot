@@ -25,6 +25,8 @@ export const constant = {
   view_more: "View More",
   bestSeller_package: "Bestseller Packages",
   getStarted: "Get Started",
+  specialOffer: "Special Offer",
+  bestSeller: "Best Seller packages",
 
   //AnyTimeShoot Constant Images
    onBoardTitle1: "Capture Life's Moments, Anytime, Anywhere",
