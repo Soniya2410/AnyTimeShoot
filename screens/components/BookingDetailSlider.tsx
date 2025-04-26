@@ -19,13 +19,13 @@ import { RootStackNavigationProp } from '../../App';
 
 const { width: viewportWidth } = Dimensions.get('window');
 
-const BookingDetailSlider = () => {
+const BookingDetailSlider = ({page = 'home'} : {page? : string}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
 
   const ImagesArray = [
-    { id: 1, uri: images.banner },
-    { id: 2, uri: images.banner2 },
+    { id: 1, uri: page =='detail' ? images.detailed : images.banner },
+    { id: 2, uri: page =='detail' ?  images.detailed : images.banner2 },
     { id: 3, uri: images.banner3 },
     { id: 4, uri: images.banner4 },
     { id: 5, uri: images.banner5 },
@@ -64,7 +64,6 @@ const BookingDetailSlider = () => {
         {ImagesArray.map((item) => (
           <View key={item.id} style={styles.slide}>
             <Image source={item.uri} style={styles.image} />
-            
             <View style={styles.overlayContainer}>
               <View style={styles.overlayLeft}>
                 <Text style={styles.title}>{constant.studioExperts}</Text>
@@ -97,7 +96,7 @@ const BookingDetailSlider = () => {
 const styles = StyleSheet.create({
   sliderWrapper: {
     height: 413,
-    width: 360,
+    width: 400,
     alignSelf: 'center',
     borderRadius: 16,
     overflow: 'hidden',
@@ -107,12 +106,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   slide: {
-    width: 360,
+    width: 400,
     height: 413,
     position: 'relative',
   },
   image: {
-    width: 360,
+    width: 400,
     height: 350,
     alignSelf: 'center',
     resizeMode: 'cover',

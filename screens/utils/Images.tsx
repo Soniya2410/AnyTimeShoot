@@ -93,6 +93,6 @@ export const images = {
   details1: require('../../assets/images/details_1.png'),
   details2: require('../../assets/images/details_2.png'),
   details3: require('../../assets/images/details_3.png'),
-
+  detailed: require('../../assets/images/detailed.png'),
 };
 

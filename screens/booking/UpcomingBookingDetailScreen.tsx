@@ -10,6 +10,7 @@ import {
   Dimensions,
   SafeAreaView,
   FlatList,
+  ScrollView,
 } from 'react-native';
 import {constant} from '../utils/Constant';
 import {ASButton} from '../components/ASButton';
@@ -69,12 +70,8 @@ const UpcomingBookingDetailScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={[]}
-        renderItem={null}
-        ListHeaderComponent={
-          <>
-            <BookingDetailSlider />
+      <ScrollView >
+       <BookingDetailSlider page='detail'/>
             <View style={styles.content}>
               <View style={styles.infoRow}>
                 <View style={styles.infoCard}>
@@ -136,16 +133,13 @@ const UpcomingBookingDetailScreen: React.FC = () => {
 
               </TouchableOpacity>
             </View>
-          </>
-        }
-        ListFooterComponent={
+         
           <ASButton
             title={constant.startShoot}
             customStyle={styles.startShootButton}
             onPress={moveToSuccessPopUp}
           />
-        }
-      />
+          </ScrollView>
     </SafeAreaView>
   );
 };

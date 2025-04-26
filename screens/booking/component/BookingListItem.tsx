@@ -24,7 +24,7 @@ const BookingListItem: React.FC<BookingListItemProps> = ({ item, onPress }) => {
         <Image source={item.image} style={styles.cardImage} />
         <View style={styles.cardContent}>
           <Text style={styles.cardTitle}>{item.title}</Text>
-          <Text style={styles.cardSubtitle}>{item.subTitle}</Text>
+          <Text style={styles.cardSubtitle}>{item.description}</Text>
           <View style={styles.ratingContainer}>
             <View style={styles.starsContainer}>
               {renderStars(item.rating)}

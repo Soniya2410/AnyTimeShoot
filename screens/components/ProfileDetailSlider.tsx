@@ -19,15 +19,15 @@ import {RootStackNavigationProp} from '../../App';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
-const ProfileDetailSlider = ({isSingleImage = true}) => {
+const ProfileDetailSlider = ({isSingleImage = true, page = 'home'}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
 
   const ImagesArray = isSingleImage 
     ? [{id: 1, uri: images.banner}] 
     : [
-        {id: 1, uri: images.banner},
-        {id: 2, uri: images.banner2},
+        {id: 1, uri: page == 'detail' ? images.detailed : images.banner},
+        {id: 2, uri: page == 'detail' ? images.detailed : images.banner2},
         {id: 3, uri: images.banner3},
         {id: 4, uri: images.banner4},
         {id: 5, uri: images.banner5},

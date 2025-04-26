@@ -1,42 +1,62 @@
 import React from "react"
-import { Image, ScrollView, Text, TouchableOpacity, View, StyleSheet } from "react-native"
+import { Image, ScrollView, Text, TouchableOpacity, View, StyleSheet, FlatList } from "react-native"
 import { icons } from "../utils/Icons";
 import { images } from "../utils/Images";
 import { Fonts } from "../utils/Fonts";
+import BookingDetailSlider from "../components/BookingDetailSlider";
+import { colors } from "../utils/Colors";
 
 export default function PackageDetails(){
+
+  const IncludesInPackage = [
+    { id: 1, image: images.details1, text: 'Raw Images\n1000' },
+    { id: 2, image: images.details2, text: 'Edited Images\n250' },
+    { id: 3, image: images.details3, text: 'Raw Videos\n2' },
+  ];
+
+  const renderIncludesInPackage = ({item} : {item: any}) => {
+    return (
+      <View key={item.id} style={styles.card}>
+        <Image source={item.image} style={styles.cardImage} />
+        <Text style={styles.cardText}>{item.text}</Text>
+      </View>
+    )
+  }
   return (
     <ScrollView style={styles.container}>
       <View>
+      <BookingDetailSlider page={'detail'}/>
       {/* Shoot Info */}
       <View style={styles.shootInfo}>
+
         <View style={styles.infoBox}>
+        <Text style={styles.infoText}>{'Shoot Duration'}</Text>
+        <View style={styles.infoOuterBox}>
           <Image source={icons.timerIcon}  style={styles.icon}/>
           <Text style={styles.infoText}>25 hours</Text>
+          </View>
         </View>
         <View style={styles.infoBox}>
-          <Image source={icons.locationAppColorIcon} style={styles.icon}/>
+        <Text style={styles.infoText}>{'Shoot Venue'}</Text>
+        <View style={styles.infoOuterBox}>
+          <Image source={icons.ovalLocationIcon} style={styles.icon}/>
           <Text style={styles.infoText}>Your Location</Text>
+          </View>
         </View>
       </View>
       </View>
 
       {/* Includes in Package */}
       <Text style={styles.sectionTitle}>Includes in package</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.imageRow}>
-        <View style={styles.card}>
-          <Image source={images.details1} style={styles.cardImage} />
-          <Text style={styles.cardText}>Raw Images{'\n'}1000</Text>
-        </View>
-        <View style={styles.card}>
-          <Image source={images.details2} style={styles.cardImage} />
-          <Text style={styles.cardText}>Edited Images{'\n'}250</Text>
-        </View>
-        <View style={styles.card}>
-          <Image source={images.details3} style={styles.cardImage} />
-          <Text style={styles.cardText}>Raw Videos{'\n'}2</Text>
-        </View>
-      </ScrollView>
+      <FlatList 
+        renderItem={renderIncludesInPackage}
+        data={IncludesInPackage}
+        keyExtractor={(item) => item.id.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.imageRow}
+        style={{marginTop: 10}}
+        />
 
       {/* Tabs (only showing Package Details for now) */}
       <View style={styles.tabs}>
@@ -89,25 +109,25 @@ const styles = StyleSheet.create({
   },
   shootInfo: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     marginVertical: 20,
   },
   infoBox: {
     alignItems: 'center',
-    borderRadius: 10,
-    borderWidth:1,
-    borderColor: '#ccc',
+    marginHorizontal: 20
+
   },
   infoText: {
     marginTop: 5,
     fontSize: 12,
-    fontFamily : Fonts.regular
+    fontFamily : Fonts.regular,
+    marginHorizontal: 5
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#e53935',
-    marginLeft: 20,
+    marginHorizontal: 15,
     marginTop: 20,
   },
   imageRow: {
@@ -118,6 +138,7 @@ const styles = StyleSheet.create({
     width: 120,
     marginRight: 15,
     alignItems: 'center',
+    position: 'relative',
   },
   cardImage: {
     width: 120,
@@ -127,32 +148,57 @@ const styles = StyleSheet.create({
   cardText: {
     marginTop: 5,
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: 12,
+    position: 'absolute',
+    color: colors.white,
+    bottom:0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    width: '100%',
+    padding: 5,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    fontFamily: Fonts.regular,
   },
   tabs: {
     flexDirection: 'row',
     marginVertical: 20,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: 10,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    // padding: 5,
+    marginHorizontal: 20,
+    backgroundColor: '#fff',
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
+    // elevation: 5,
   },
   activeTab: {
     backgroundColor: '#e53935',
     paddingVertical: 8,
     paddingHorizontal: 20,
-    borderRadius: 20,
+    borderRadius: 5,
+    padding: 15,
   },
   inactiveTab: {
-    backgroundColor: '#eee',
     paddingVertical: 8,
     paddingHorizontal: 20,
     borderRadius: 20,
+    padding: 15,
   },
   tabText: {
     color: '#fff',
-    fontWeight: 'bold',
+    fontFamily: Fonts.semiBold,
   },
   tabTextInactive: {
     color: '#333',
-    fontWeight: 'bold',
+    fontFamily: Fonts.semiBold,
   },
   packageDescription: {
     marginHorizontal: 20,
@@ -186,7 +232,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   icon: {
-    width: 24,
-    height: 24,
-  }
+    width: 18,
+    height: 20,
+  },
+  infoOuterBox: {
+    flexDirection: 'row',
+    alignItems: 'center', 
+    borderRadius: 25, 
+    borderWidth: 1, 
+    padding: 5, 
+    paddingHorizontal: 10,
+    marginVertical:5,
+    borderColor: '#ccc'
+    }
 });

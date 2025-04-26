@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   FlatList,
   ImageBackground,
+  ScrollView,
 } from 'react-native';
 import {images} from '../utils/Images';
 import {constant} from '../utils/Constant';
@@ -93,13 +94,14 @@ const UpcomingShootCompletedScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
+      <ScrollView>
+      {/* <FlatList
         data={[]}
         renderItem={null}
         contentContainerStyle={styles.flatListContainer}
         ListHeaderComponent={
-          <>
-            <BookingDetailSlider />
+          <> */}
+            <BookingDetailSlider page={'detail'}/>
             <View style={styles.content}>
               <View style={styles.infoRow}>
                 <View style={styles.infoCard}>
@@ -117,11 +119,23 @@ const UpcomingShootCompletedScreen: React.FC = () => {
                   <Text style={styles.infoValue}>{constant.count}</Text>
                 </View>
               </View>
-
-              <ImageBackground
+              <View style={{position:'relative'}}>
+                <Image
+                  source={images.bgCompleted}
+                  resizeMode="contain"
+                  style={{
+                    width: '100%',
+                    height: 200,
+                    justifyContent:'center',
+                    marginTop: 50,
+                    alignSelf: 'center',
+                    position:'absolute'
+                  }}
+                />
+              {/* <ImageBackground
                 source={images.bgCompleted}
                 resizeMode="contain"
-                style={styles.imageBackground}>
+                style={styles.imageBackground}> */}
                 <View style={styles.timelineContent}>
                   <Text style={styles.sectionTitle}>
                     {constant.yourBooking}
@@ -157,19 +171,21 @@ const UpcomingShootCompletedScreen: React.FC = () => {
                     />
                   </View>
                 </View>
-              </ImageBackground>
+              {/* </ImageBackground> */}
             </View>
-          </>
+            </View>
+          {/* </>
         }
-        ListFooterComponent={
+        ListFooterComponent={ */}
           <ASButton
             title={constant.generateInvoice}
             customStyle={styles.startShootButton}
             onPress={moveToInvoice}
             textStyle={styles.startShootButtonText}
           />
-        }
-      />
+        {/* }
+      /> */}
+      </ScrollView>
     </SafeAreaView>
   );
 };
