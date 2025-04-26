@@ -37,4 +37,5 @@ export const icons = {
   editRawDataIcon: require('../../assets/icons/edit_raw_data.png'),
   backArrowIcon: require('../../assets/icons/back_arrow.png'),
   ovalLocationIcon: require('../../assets/icons/oval_location.png'),
+  chatIcon: require('../../assets/icons/chat.png'),
 }

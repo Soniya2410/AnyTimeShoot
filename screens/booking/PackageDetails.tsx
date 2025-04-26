@@ -5,6 +5,7 @@ import { images } from "../utils/Images";
 import { Fonts } from "../utils/Fonts";
 import BookingDetailSlider from "../components/BookingDetailSlider";
 import { colors } from "../utils/Colors";
+import ProfileDetailSlider from "../components/ProfileDetailSlider";
 
 export default function PackageDetails(){
 
@@ -25,8 +26,9 @@ export default function PackageDetails(){
   return (
     <ScrollView style={styles.container}>
       <View>
-      <BookingDetailSlider page={'detail'}/>
+      {/* <BookingDetailSlider page={'detail'}/> */}
       {/* Shoot Info */}
+      <ProfileDetailSlider />
       <View style={styles.shootInfo}>
 
         <View style={styles.infoBox}>

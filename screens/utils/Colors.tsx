@@ -20,5 +20,5 @@ export const colors = {
   inputBackground: '#F5F5F5',
   completedColor: '#44A621',
   inprogressColor: '#FF7622',
-  
+  subTitleColor: '#747474',
 };

@@ -13,6 +13,7 @@ import {icons} from '../utils/Icons';
 import {constant} from '../utils/Constant';
 import {images} from '../utils/Images';
 import ProfileDetailSlider from '../components/ProfileDetailSlider';
+import { ASButton } from '../components/ASButton';
 
 const ProfileDetailScreen = () => {
   const [expandedItems, setExpandedItems] = useState<number[]>([]);
@@ -50,13 +51,17 @@ const ProfileDetailScreen = () => {
     );
   };
 
+  const moveToDetailPage = () => {
+    // navigation.navigate('couponScreen');
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <ProfileDetailSlider />
 
         <View style={styles.section}>
-          s<Text style={styles.sectionTitle}>{constant.aboutMe}</Text>{' '}
+          <Text style={styles.sectionTitle}>{constant.aboutMe}</Text>{' '}
           <Text style={styles.sectionText}>
             {constant.profileDetailSubText}
           </Text>
@@ -120,7 +125,6 @@ const ProfileDetailScreen = () => {
                       ]}
                     />
                   </View>
-
                   {expandedItems.includes(faq.id) && (
                     <View style={styles.answerBox}>
                       <Text style={styles.answerText}>{faq.answer}</Text>
@@ -130,6 +134,10 @@ const ProfileDetailScreen = () => {
               ))}
             </View>
           </View>
+            <ASButton
+              title={constant.continue}
+              onPress={moveToDetailPage}
+              />
         </View>
       </ScrollView>
     </View>
@@ -204,8 +212,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   infoLabel: {
-    fontSize: 8,
-    color: colors.textPrimary2,
+    fontSize: 10,
+    color: colors.subTitleColor,
     fontFamily: Fonts.regular,
   },
   infoValue: {
@@ -256,7 +264,7 @@ const styles = StyleSheet.create({
   listItemText: {
     flex: 1,
     fontSize: 14,
-    color: colors.black,
+    color: colors.textPrimary2,
     fontFamily: Fonts.regular,
   },
   faqItem: {

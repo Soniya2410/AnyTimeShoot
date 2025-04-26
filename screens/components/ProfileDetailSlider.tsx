@@ -16,10 +16,12 @@ import {Fonts} from '../utils/Fonts';
 import {constant} from '../utils/Constant';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../App';
+import { icons } from '../utils/Icons';
+import { ASButton } from './ASButton';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
-const ProfileDetailSlider = ({isSingleImage = true, page = 'home'}) => {
+const ProfileDetailSlider = ({isSingleImage = false, page = 'home'}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -69,7 +71,7 @@ const ProfileDetailSlider = ({isSingleImage = true, page = 'home'}) => {
             <Image source={item.uri} style={styles.image} />
 
             <TouchableOpacity style={styles.chatButton}>
-              <Image source={images.chatImg} style={styles.chatImage} />
+              <Image source={icons.chatIcon} style={styles.chatImage} />
             </TouchableOpacity>
 
             
@@ -132,9 +134,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 70,
     right: 10,
-    width: 32,
-    height: 32,
-    borderRadius: 20,
+    width: 40,
+    height: 40,
+    borderRadius: 25,
     backgroundColor: colors.white,
     justifyContent: 'center',
     alignItems: 'center',
@@ -145,8 +147,8 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   chatImage: {
-    width: 15,
-    height: 13,
+    width: 24,
+    height: 24,
     resizeMode: 'contain',
   },
   greenDot: {
@@ -179,7 +181,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 25,
-  },  activeDot: {
+  },  
+  activeDot: {
     backgroundColor: colors.appColor,
   },
   inactiveDot: {
@@ -235,7 +238,8 @@ const styles = StyleSheet.create({
   ratingText: {
     fontSize: 14,
     color: colors.black,
-  },  overlayContainer: {
+  },  
+  overlayContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 5,
@@ -248,7 +252,7 @@ const styles = StyleSheet.create({
   },
   sliderWrapper: {
     height: 413,
-    width: 360,
+    width: 400,
     alignSelf: 'center',
     borderRadius: 16,
     overflow: 'hidden',
@@ -258,12 +262,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   slide: {
-    width: 360,
+    width: 400,
     height: 413,
     position: 'relative',
   },
   image: {
-    width: 360,
+    width: 400,
     height: 350,
     alignSelf: 'center',
     resizeMode: 'cover',
