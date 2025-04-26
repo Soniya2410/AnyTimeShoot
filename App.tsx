@@ -7,6 +7,7 @@ import {
   StatusBar,
   View,
   TouchableOpacity,
+  Text,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -32,7 +33,6 @@ import SuccessScreen from './screens/Home/SuccessScreen';
 import SignInScreen from './screens/Home/SignInScreen';
 import MessageScreen from './screens/Home/MessageScreen';
 import BookingListScreen from './screens/booking/BookingListScreen';
-import BookingDetailScreen from './screens/Home/BookingDetailScreen.tsx';
 import {icons} from './screens/utils/Icons.tsx';
 import CouponScreen from './screens/Home/CouponScreen.tsx';
 import CancelledBookingScreen from './screens/booking/CancelledBookingScreen.tsx';
@@ -46,6 +46,7 @@ import UpcomingEditingInprogressScreen from './screens/booking/UpcomingEditingIn
 import ProfileDetailScreen from './screens/Home/ProfileDetailScreen.tsx';
 import PackageList from './screens/Home/PackageList.tsx';
 import PackageDetails from './screens/booking/PackageDetails.tsx';
+import {constant} from './screens/utils/Constant.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -69,7 +70,7 @@ export type RootStackParamList = {
   successCreation: undefined;
   completedDetail: undefined;
   completedPopup: undefined;
-  packageList: {title: string, data: any[]};
+  packageList: {title: string; data: any[]};
   packageDetail: {title: string};
   profileDetail: undefined;
 };
@@ -194,7 +195,6 @@ const BottomTabs: React.FC = () => {
 };
 
 const App: React.FC = () => {
-  
   return (
     <GestureHandlerRootView>
       <NavigationContainer>
@@ -248,15 +248,6 @@ const App: React.FC = () => {
             }}
           />
 
-          {/* <Stack.Screen
-            name="yourLocationPopUp"
-            component={YourLocationPopupScreen}
-            options={{
-              title: '',
-              headerShown: false,
-            }}
-          /> */}
-
           <Stack.Screen
             name="bookingList"
             component={BookingListScreen}
@@ -267,7 +258,7 @@ const App: React.FC = () => {
             }}
           />
 
-        <Stack.Screen
+          <Stack.Screen
             name="packageList"
             component={PackageList}
             options={{
@@ -275,7 +266,7 @@ const App: React.FC = () => {
             }}
           />
 
-        <Stack.Screen
+          <Stack.Screen
             name="packageDetail"
             component={PackageDetails}
             options={{
@@ -291,22 +282,62 @@ const App: React.FC = () => {
               headerTitle: 'Bookings',
               headerTitleAlign: 'left',
               headerBackTitle: '',
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.black,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.black}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
             }}
           />
-
-          {/* <Stack.Screen
-            name="upcomingPopup"
-            component={UpcomingPopupScreen}
-            options={{
-              headerTitle: 'Bookings',
-            }}
-          /> */}
 
           <Stack.Screen
             name="upcomingStartShoot"
             component={UpcomingShootStartedScreen}
             options={{
               headerTitle: 'Bookings',
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.black,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.black}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
             }}
           />
 
@@ -315,6 +346,30 @@ const App: React.FC = () => {
             component={UpcomingShootCompletedScreen}
             options={{
               headerTitle: 'Bookings',
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.black,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.black}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
             }}
           />
 
@@ -323,6 +378,30 @@ const App: React.FC = () => {
             component={UpcomingEditingInprogressScreen}
             options={{
               headerTitle: 'Bookings',
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.black,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.black}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
             }}
           />
 
@@ -384,7 +463,23 @@ const App: React.FC = () => {
             name="profileDetail"
             component={ProfileDetailScreen}
             options={{
+              headerShown: true,
+              headerTitleAlign: 'left',
               headerTitle: 'Profile',
+              // headerTitleStyle: {
+              //   fontSize: 20,
+              //   fontWeight: 'bold',
+              // },
+              // headerLeft: () => (
+              //   <TouchableOpacity style={{marginLeft: 20}}></TouchableOpacity>
+              // ),
+              headerRight: () => (
+                <TouchableOpacity
+                  style={{marginRight: 15, width: 24, height: 24}}
+                  onPress={() => {}}>
+                  <Image source={icons.shareIcon} style={{width: 18, height: 20}} />
+                </TouchableOpacity>
+              ),
             }}
           />
         </Stack.Navigator>

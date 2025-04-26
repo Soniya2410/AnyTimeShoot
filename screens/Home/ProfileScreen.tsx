@@ -21,6 +21,10 @@ import { icons } from '../utils/Icons';
 const ProfileScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp<'login'>>();
 
+  const moveToDetailPage = () => {
+   navigation.navigate('profileDetail');
+  };
+
   const moveToEditProfile = () => {};
   const settingsData = [
     {
@@ -129,7 +133,7 @@ const ProfileScreen = () => {
               <Text style={styles.name}>Harshit Rana</Text>
               <Text style={styles.email}>harshit@gmail.com</Text>
             </View>
-            <TouchableOpacity style={styles.arrowContainer}>
+            <TouchableOpacity style={styles.arrowContainer} onPress={moveToDetailPage}>
               <Image
                 source={images.rightAppNextArrow}
                 style={styles.rightArrow}

@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 import {images} from '../utils/Images';
 import {constant} from '../utils/Constant';
-import {ASButton} from '../components/ASButton';
+import {ASButton} from './components/ASButton';
 import {RootStackNavigationProp} from '../../App';
 import {useNavigation} from '@react-navigation/native';
 import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
-import BookingDetailSlider from '../components/ProfileDetailSlider';
+import BookingDetailSlider from './components/BookingDetailSlider';
 import {icons} from '../utils/Icons';
 
 const {width} = Dimensions.get('screen');
@@ -39,7 +39,7 @@ const TimelineStep = ({
       case 'completed':
         return colors.completedColor;
       case 'inProgress':
-        return colors.appColor;
+        return colors.inprogressColor;
       case 'start':
         return colors.appColor;
       case 'workDeliverd':
@@ -54,7 +54,7 @@ const TimelineStep = ({
       case 'completed':
         return colors.completedColor;
       case 'inProgress':
-        return colors.black;
+        return colors.inprogressColor;
       case 'start':
         return colors.appColor;
       case 'workDeliverd':
@@ -83,12 +83,12 @@ const TimelineStep = ({
   );
 };
 
-const UpcomingShootCompletedScreen: React.FC = () => {
+const UpcomingEditingInprogressScreen: React.FC = () => {
   const navigation =
-    useNavigation<RootStackNavigationProp<'upcomingShootCompleted'>>();
+    useNavigation<RootStackNavigationProp<'upcomingEditingInprogress'>>();
 
   const moveToInvoice = () => {
-    navigation.navigate('upcomingEditingInprogress');
+    navigation.navigate('profileDetail');
   };
 
   return (
@@ -119,7 +119,7 @@ const UpcomingShootCompletedScreen: React.FC = () => {
               </View>
 
               <ImageBackground
-                source={images.bgCompleted}
+                source={images.bgInprogress}
                 resizeMode="contain"
                 style={styles.imageBackground}>
                 <View style={styles.timelineContent}>
@@ -142,7 +142,7 @@ const UpcomingShootCompletedScreen: React.FC = () => {
                       status="completed"
                     />
                     <TimelineStep
-                      icon={images.editInProgress}
+                      icon={images.compInprogress}
                       title={constant.endingInProgress}
                       subtitle={constant.willStartEditingSoon}
                       isLast={false}
@@ -286,4 +286,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UpcomingShootCompletedScreen;
+export default UpcomingEditingInprogressScreen;

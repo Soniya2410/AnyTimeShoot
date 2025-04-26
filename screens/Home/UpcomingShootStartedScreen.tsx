@@ -11,16 +11,16 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
+import {images} from '../utils/Images';
 import {constant} from '../utils/Constant';
-import {ASButton} from '../components/ASButton';
+import {ASButton} from './components/ASButton';
 import {RootStackNavigationProp} from '../../App';
 import {useNavigation} from '@react-navigation/native';
 import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
-import BookingDetailSlider from '../components/ProfileDetailSlider';
+import BookingDetailSlider from './components/BookingDetailSlider';
 import { icons } from '../utils/Icons';
-// import MapComponent from './components/MapComponent';
-import OTPSection from '../components/OTPSection';
+import RateAndReviewComponent from './components/RateAndReviewComponents';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -29,42 +29,73 @@ const TimelineStep = ({
   title,
   subtitle,
   isLast,
+  status,
 }: {
   icon: any;
   title: string;
   subtitle: string;
   isLast: boolean;
+  status: 'completed' | 'inProgress' | 'start' | 'workDeliverd';
 }) => {
+  const getBorderColor = () => {
+    switch (status) {
+      case 'completed':
+        return colors.appColor; 
+      case 'inProgress':
+        return colors.appColor; 
+      case 'start':
+        return colors.appColor
+        case 'workDeliverd':
+          return colors.appColor
+      default:
+        return colors.appColor;
+    }
+  };
+
+  const getTitleColor = () => {
+    switch (status) {
+      case 'completed':
+        return colors.black; 
+      case 'inProgress':
+        return colors.black; 
+      case 'start':
+        return colors.appColor;
+      case 'workDeliverd':
+        return colors.black;
+      default:
+        return colors.black;
+    }
+  };
+
   return (
     <View style={{flexDirection: 'row'}}>
       <View style={{alignItems: 'center', width: 40}}>
-        <View style={styles.circle}>
+        <View style={[styles.circle, {borderColor: getBorderColor()}]}>
           <Image source={icon} style={styles.icon} />
         </View>
         {!isLast && <View style={styles.verticalLine} />}
       </View>
 
       <View style={{flex: 1, paddingLeft: 8}}>
-        <Text style={styles.stepTitle}>{title}</Text>
+        <Text style={[styles.stepTitle, {color: getTitleColor()}]}>{title}</Text>
         <Text style={styles.stepSubtitle}>{subtitle}</Text>
       </View>
     </View>
   );
 };
 
-const UpcomingBookingDetailScreen: React.FC = () => {
-  const navigation = useNavigation<RootStackNavigationProp<'upcomingbookingDetails'>>();
+const UpcomingShootStartedScreen: React.FC = () => {
+  const navigation = useNavigation<RootStackNavigationProp<'upcomingStartShoot'>>();
 
   const moveToSuccessPopUp = () => {
-    navigation.navigate('upcomingStartShoot')
   };
 
   const moveToInvoice = () => {
-  navigation.navigate('completedDetail');
+    navigation.navigate('upcomingShootCompleted');
   };
 
   const moveToCancelScree = () => {
-   navigation.navigate('cancelledScreen');
+//    navigation.navigate('cancelledScreen');
   };
 
   return (
@@ -95,54 +126,43 @@ const UpcomingBookingDetailScreen: React.FC = () => {
               <Text style={styles.sectionTitle}>{constant.yourBooking}</Text>
               <View style={styles.timeline}>
                 <TimelineStep
-                  icon={icons.startShoot}
+                  icon={images.compStartShoot}
                   title={constant.startShoot}
                   subtitle={constant.otpVerification}
                   isLast={false}
+                  status='start'
                 />
                 <TimelineStep
                   icon={icons.shootCompletedIcon}
                   title={constant.shootCompleted}
                   subtitle={constant.photographerWillUploadPhotos}
                   isLast={false}
+                  status='completed'
                 />
                 <TimelineStep
                   icon={icons.editingIcon}
                   title={constant.endingInProgress}
                   subtitle={constant.willStartEditingSoon}
                   isLast={false}
+                  status='inProgress'
                 />
                 <TimelineStep
                   icon={icons.workDeliveredIcon}
                   title={constant.workDelivered}
                   subtitle={constant.photosAreReady}
                   isLast={true}
+                  status='workDeliverd'
                 />
-              </View>
-
-              <TouchableOpacity style={styles.invoiceButton} onPress={moveToInvoice}>
-                <Text style={styles.invoiceButtonText}>
-                  {constant.getInvoice}
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity  onPress= {moveToCancelScree} style={styles.cancelButton}>
-                <Text style={styles.cancelButtonText}>
-                  {constant.requestCancellation}
-                </Text>
-
-                {/* <MapComponent/> */}
-                <OTPSection/>
-
-              </TouchableOpacity>
+              </View>              
             </View>
           </>
         }
         ListFooterComponent={
           <ASButton
-            title={constant.startShoot}
+            title={constant.generateInvoice}
             customStyle={styles.startShootButton}
-            onPress={moveToSuccessPopUp}
+            onPress={moveToInvoice}
+            textStyle={styles.startShootButtonText}
           />
         }
       />
@@ -155,7 +175,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
-
   content: {
     paddingHorizontal: 16,
     marginTop: 5,
@@ -258,18 +277,21 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.regular,
   },
   startShootButton: {
-    backgroundColor: colors.appColor,
+    marginTop: 20,
+    backgroundColor: colors.white,
     paddingVertical: 14,
     marginHorizontal: 16,
-    borderRadius: 25,
+    borderRadius: 10,
     marginBottom: 20,
+    borderColor: colors.appColor,
+    borderWidth: 2,
   },
   startShootButtonText: {
-    color: 'white',
+    color: colors.appColor,
     textAlign: 'center',
     fontSize: 16,
     fontFamily: Fonts.semiBold,
   },
 });
 
-export default UpcomingBookingDetailScreen;
+export default UpcomingShootStartedScreen;

@@ -129,4 +129,13 @@ export const constant = {
    shootStarted:  "Shoot started", 
    successfully: "successfully",
    studioLocation: "Studio Location",
+   help: "Help",
+   location_caps: "Location",
+   otherPackages: "Other Packages",
+   someRandomAddress: "Some random address pincode",
+   viewAllPackages: "View all other packages of photographer",
+   packageRule: "Package Rule",
+   aboutMe: "About Me",
+   profileDetailSubText: "An experienced photographer with a passion for capturing life's most  memorable moments.Skilled in various photography styles, from portraits to events, ensuring each shot tells a unique story.",
+   FAQ: "Frequently Asked Questions",
 }

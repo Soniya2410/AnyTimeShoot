@@ -16,7 +16,7 @@ import {RootStackNavigationProp} from '../../App';
 import {useNavigation} from '@react-navigation/native';
 import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
-import BookingDetailSlider from '../components/BookingDetailSlider';
+import BookingDetailSlider from '../components/ProfileDetailSlider';
 import {icons} from '../utils/Icons';
 
 const {width} = Dimensions.get('screen');
