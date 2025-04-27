@@ -22,7 +22,7 @@ const ProfileScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp<'login'>>();
 
   const moveToDetailPage = () => {
-   navigation.navigate('profileDetail');
+   navigation.navigate('reviewScreen');
   };
 
   const moveToEditProfile = () => {};

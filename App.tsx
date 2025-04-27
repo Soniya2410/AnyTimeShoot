@@ -47,6 +47,7 @@ import ProfileDetailScreen from './screens/Home/ProfileDetailScreen.tsx';
 import PackageList from './screens/Home/PackageList.tsx';
 import PackageDetails from './screens/booking/PackageDetails.tsx';
 import {constant} from './screens/utils/Constant.tsx';
+import ReviewsScreen from './screens/Home/ReviewsScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -73,6 +74,7 @@ export type RootStackParamList = {
   packageList: {title: string; data: any[]};
   packageDetail: {title: string};
   profileDetail: undefined;
+  reviewScreen: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -481,6 +483,15 @@ const App: React.FC = () => {
                 </TouchableOpacity>
               ),
             }}
+          />
+
+          <Stack.Screen
+          name='reviewScreen'
+          component={ReviewsScreen}
+          options={{
+            headerShown: true,
+            headerTitle: "Review",
+          }}
           />
         </Stack.Navigator>
       </NavigationContainer>

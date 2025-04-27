@@ -3,7 +3,7 @@ export const colors = {
   red_80: '#ff0000',
   grey: '#5E5E5E',
 
-  //AnyTimeShoot Constant Images
+  //AnyTimeShoot Constant Colors
   indicatorInactive: 'rgba(239, 35, 60, 0.3)',
   appColor: '#EC193B',
   white: '#ffffff',
@@ -21,4 +21,5 @@ export const colors = {
   completedColor: '#44A621',
   inprogressColor: '#FF7622',
   subTitleColor: '#747474',
+  reviewBackgroundColor: '#3F9BAC4',
 };

@@ -138,4 +138,9 @@ export const constant = {
    aboutMe: "About Me",
    profileDetailSubText: "An experienced photographer with a passion for capturing life's most  memorable moments.Skilled in various photography styles, from portraits to events, ensuring each shot tells a unique story.",
    FAQ: "Frequently Asked Questions",
+   averageRating: "Average Rating",
+   bookNow: "Book Now",
+   reviewPrice: "₹ 2,45,000",
+   reviewRating: "4.5 and 1000+ reviews",
+   readMore: "Read More",
 }

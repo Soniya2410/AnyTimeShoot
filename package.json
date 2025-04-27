@@ -21,7 +21,6 @@
     "react-native": "0.78.0",
     "react-native-country-picker-modal": "^2.0.0",
     "react-native-gesture-handler": "^2.24.0",
-    "react-native-maps": "^1.22.6",
     "react-native-otp-entry": "^1.8.4",
     "react-native-reanimated": "^3.17.1",
     "react-native-reanimated-carousel": "^4.0.2",
