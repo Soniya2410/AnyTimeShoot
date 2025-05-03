@@ -59,7 +59,7 @@ export type RootStackParamList = {
   signIn: undefined;
   coupon: undefined;
   yourLocationPopUp: undefined;
-  bookingList: undefined;
+  bookingList: {item: unknown};
   upcomingbookingDetails: undefined;
   upcomingPopup: undefined;
   upcomingStartShoot: undefined;
@@ -70,7 +70,7 @@ export type RootStackParamList = {
   noBookingScreen: undefined;
   successCreation: undefined;
   completedDetail: undefined;
-  completedPopup: undefined;
+  // completedPopup: undefined;
   packageList: {title: string; data: any[]};
   packageDetail: {title: string};
   profileDetail: undefined;
@@ -201,7 +201,7 @@ const App: React.FC = () => {
     <GestureHandlerRootView>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="homeScreen"
+          initialRouteName="onboard"
           screenOptions={{
             headerBackTitle: '', // This works differently in native-stack
             headerTintColor: '#000000', // Arrow color

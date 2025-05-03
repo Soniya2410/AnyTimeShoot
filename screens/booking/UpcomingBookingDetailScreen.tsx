@@ -22,36 +22,9 @@ import BookingDetailSlider from '../components/ProfileDetailSlider';
 import { icons } from '../utils/Icons';
 // import MapComponent from './components/MapComponent';
 import OTPSection from '../components/OTPSection';
+import { TimelineStep } from './component/TimelineStep';
 
 const {width, height} = Dimensions.get('screen');
-
-const TimelineStep = ({
-  icon,
-  title,
-  subtitle,
-  isLast,
-}: {
-  icon: any;
-  title: string;
-  subtitle: string;
-  isLast: boolean;
-}) => {
-  return (
-    <View style={{flexDirection: 'row'}}>
-      <View style={{alignItems: 'center', width: 40}}>
-        <View style={styles.circle}>
-          <Image source={icon} style={styles.icon} />
-        </View>
-        {!isLast && <View style={styles.verticalLine} />}
-      </View>
-
-      <View style={{flex: 1, paddingLeft: 8}}>
-        <Text style={styles.stepTitle}>{title}</Text>
-        <Text style={styles.stepSubtitle}>{subtitle}</Text>
-      </View>
-    </View>
-  );
-};
 
 const UpcomingBookingDetailScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'upcomingbookingDetails'>>();

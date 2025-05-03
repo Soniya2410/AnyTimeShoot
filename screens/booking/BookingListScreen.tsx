@@ -14,13 +14,29 @@ import {
 import {images} from '../utils/Images';
 import {constant} from '../utils/Constant';
 import {ASButton} from '../components/ASButton';
-import {RootStackNavigationProp} from '../../App';
-import {useNavigation} from '@react-navigation/native';
+import {RootStackNavigationProp, RootStackParamList} from '../../App';
+import {RouteProp, useNavigation} from '@react-navigation/native';
 import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
 import CustomSlider from '../components/CustomSlider';
 import { icons } from '../utils/Icons';
 import { BookingListItem } from './component/BookingListItem';
+
+
+type BookingStackParamList = {
+  BookingScreen: {
+    item: {
+      types: string;
+    };
+  };
+};
+
+type BookingRouteProp = RouteProp<BookingStackParamList, 'BookingScreen'>;
+
+
+type Props = {
+  route: BookingRouteProp;
+};
 
 const {width, height} = Dimensions.get('screen');
 
@@ -48,16 +64,26 @@ const bookingDetails = [
   },
 ];
 
-const BookingListScreen: React.FC = () => {
+const BookingListScreen: React.FC<Props> = ({route}) => {
   const navigation = useNavigation<RootStackNavigationProp<'bookingList'>>();
-  
+  const {item} = route.params;
+  console.log(item,"list");
+
+
   const moveToDetailPage = () => {
-    navigation.navigate('upcomingbookingDetails');
+    if(item?.types == 'Upcoming') {
+      navigation.navigate('upcomingbookingDetails');
+    } else if(item.types == 'Cancel') {
+      navigation.navigate('cancelledScreen');
+    }
+    else if(item.types == 'Complete') {
+      navigation.navigate('completedDetail');
+    }
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <CustomSlider />
+       <CustomSlider/>
       <FlatList
         data={bookingDetails}
         keyExtractor={item => item.id}

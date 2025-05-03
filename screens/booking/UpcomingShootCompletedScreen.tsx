@@ -19,70 +19,9 @@ import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
 import BookingDetailSlider from '../components/ProfileDetailSlider';
 import {icons} from '../utils/Icons';
+import { TimelineStep } from './component/TimelineStep';
 
 const {width} = Dimensions.get('screen');
-
-const TimelineStep = ({
-  icon,
-  title,
-  subtitle,
-  isLast,
-  status,
-}: {
-  icon: any;
-  title: string;
-  subtitle: string;
-  isLast: boolean;
-  status: 'completed' | 'inProgress' | 'start' | 'workDeliverd';
-}) => {
-  const getBorderColor = () => {
-    switch (status) {
-      case 'completed':
-        return colors.completedColor;
-      case 'inProgress':
-        return colors.appColor;
-      case 'start':
-        return colors.appColor;
-      case 'workDeliverd':
-        return colors.appColor;
-      default:
-        return colors.appColor;
-    }
-  };
-
-  const getTitleColor = () => {
-    switch (status) {
-      case 'completed':
-        return colors.completedColor;
-      case 'inProgress':
-        return colors.black;
-      case 'start':
-        return colors.appColor;
-      case 'workDeliverd':
-        return colors.black;
-      default:
-        return colors.appColor;
-    }
-  };
-
-  return (
-    <View style={{flexDirection: 'row'}}>
-      <View style={{alignItems: 'center', width: 40}}>
-        <View style={[styles.circle, {borderColor: getBorderColor()}]}>
-          <Image source={icon} style={styles.icon} />
-        </View>
-        {!isLast && <View style={styles.verticalLine} />}
-      </View>
-
-      <View style={{flex: 1, paddingLeft: 8}}>
-        <Text style={[styles.stepTitle, {color: getTitleColor()}]}>
-          {title}
-        </Text>
-        <Text style={styles.stepSubtitle}>{subtitle}</Text>
-      </View>
-    </View>
-  );
-};
 
 const UpcomingShootCompletedScreen: React.FC = () => {
   const navigation =

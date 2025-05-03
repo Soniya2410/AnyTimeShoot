@@ -10,6 +10,7 @@ import {
   Dimensions,
   SafeAreaView,
   FlatList,
+  ScrollView,
 } from 'react-native';
 import {images} from '../utils/Images';
 import {constant} from '../utils/Constant';
@@ -21,6 +22,7 @@ import {Fonts} from '../utils/Fonts';
 import BookingDetailSlider from '../components/ProfileDetailSlider';
 import { icons } from '../utils/Icons';
 import RateAndReviewComponent from '../components/RateAndReviewComponents';
+import { CompletedPopupScreen } from './component/CompletedPopupScreen';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -86,11 +88,15 @@ const TimelineStep = ({
 
 const CompletedBookingDetailScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'upcomingbookingDetails'>>();
+  const [showCompletedPopup, setIsShowCompletedPopup] = useState(false);
 
-  const moveToSuccessPopUp = () => {};
+  const onCloseFunction = () => {
+    setIsShowCompletedPopup(false)
+  };
 
   const moveToInvoice = () => {
-  navigation.navigate('completedPopup');
+    setIsShowCompletedPopup(true)
+  // navigation.navigate('completedPopup');
   };
 
   const moveToCancelScree = () => {
@@ -99,10 +105,11 @@ const CompletedBookingDetailScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
+      <ScrollView >
+      {/* <FlatList
         data={[]}
         renderItem={null}
-        ListHeaderComponent={
+        ListHeaderComponent={ */}
           <>
             <BookingDetailSlider />
             <View style={styles.content}>
@@ -158,15 +165,17 @@ const CompletedBookingDetailScreen: React.FC = () => {
               
             </View>
           </>
-        }
-        ListFooterComponent={
+        {/* }
+        ListFooterComponent={ */}
           <ASButton
             title={constant.generateInvoice}
             customStyle={styles.startShootButton}
             onPress={moveToInvoice}
           />
-        }
-      />
+        {/* }
+      /> */}
+      </ScrollView>
+      <CompletedPopupScreen visible={showCompletedPopup} onClose={onCloseFunction} onContinue={onCloseFunction}/>
     </SafeAreaView>
   );
 };

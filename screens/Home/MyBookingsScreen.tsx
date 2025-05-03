@@ -7,6 +7,7 @@ import CustomSlider from '../components/CustomSlider';
 import { constant } from '../utils/Constant';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackNavigationProp } from '../../App';
+import MyBookingListItem from './components/MyBookingItems';
 
 const icons = {
   upcoming: images.upcomingBooking,
@@ -20,29 +21,33 @@ const bookings = [
     title: constant.upcomingBookings, 
     description: constant.upcomingDes,
     action: constant.viewAll,
-    icon: icons.upcoming
+    icon: icons.upcoming,
+    types: 'Upcoming'
   },
   { 
     id: '2', 
     title: constant.completedBookings, 
     description: constant.completedDes,
     action: constant.viewAll,
-    icon: icons.completed
+    icon: icons.completed,
+    types: 'Complete'
   },
   { 
     id: '3', 
     title: constant.cancelledBookings, 
     description: constant.cancelledDes,
     action: constant.viewAll,
-    icon: icons.cancelled
+    icon: icons.cancelled,
+    types:'Cancel'
   },
 ];
 
 const MyBookingsScreen: React.FC = () => {
     const navigation = useNavigation<RootStackNavigationProp<'successScreen'>>();
   
-    const navigateToDetailListScreen = () => {
-      navigation.navigate('bookingList');
+    const navigateToDetailListScreen = (item : unknown) => {
+      console.log('click', item)
+      navigation.navigate('bookingList', { item : item});
     }
   return (
     <SafeAreaView style={styles.container}>
@@ -52,20 +57,10 @@ const MyBookingsScreen: React.FC = () => {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContainer}
         renderItem={({ item }) => (
-          <View style={styles.bookingCard}>
-            <View style={styles.topLine}>
-              <Image source={item.icon} style={styles.icon} />
-              <View style={styles.spacer} />
-              <TouchableOpacity onPress={navigateToDetailListScreen}>
-                <Text style={styles.viewAllText}>{item.action}</Text>
-              </TouchableOpacity>
-            </View>
-            
-            <View style={styles.textContainer}>
-              <Text style={styles.titleText}>{item.title}</Text>
-              <Text style={styles.descText}>{item.description}</Text>
-            </View>
-          </View>
+         <MyBookingListItem 
+            onPress={() => navigateToDetailListScreen(item)} 
+            item={item}
+         />
         )}
       />
     </SafeAreaView>

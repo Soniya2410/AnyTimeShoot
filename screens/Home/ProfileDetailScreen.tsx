@@ -61,7 +61,7 @@ const ProfileDetailScreen = () => {
         <ProfileDetailSlider />
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{constant.aboutMe}</Text>{' '}
+          <Text style={styles.sectionTitle}>{constant.aboutMe}</Text>
           <Text style={styles.sectionText}>
             {constant.profileDetailSubText}
           </Text>

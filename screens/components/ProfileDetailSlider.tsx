@@ -83,13 +83,14 @@ const ProfileDetailSlider = ({isSingleImage = false, page = 'home'}) => {
             <View style={styles.overlayContainer}>
               <View style={styles.profileWrapper}>
                 {!isSingleImage && (
-                  <View style={styles.profileContainer}>
+                  <TouchableOpacity style={styles.profileContainer}
+                  onPress={()=> navigation.navigate('profileDetail')}>
                     <Image
                       source={images.profileImage}
                       style={styles.profileImage}
                     />
                     <View style={styles.greenDot} />
-                  </View>
+                  </TouchableOpacity>
                 )}
                 <View style={[
                   styles.textContainer,
