@@ -2,14 +2,12 @@ import React, { useRef, useState } from 'react';
 import {
   Dimensions,
   Image,
-  ScrollView,
   StyleSheet,
   View,
   Text,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
   TouchableOpacity,
 } from 'react-native';
+import Carousel from '@snap-carousel/react-native-snap-carousel';
 import { images } from '../../utils/Images';
 import { colors } from '../../utils/Colors';
 import { Fonts } from '../../utils/Fonts';
@@ -17,11 +15,16 @@ import { constant } from '../../utils/Constant';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackNavigationProp } from '../../../App';
 
-const { width: viewportWidth } = Dimensions.get('window');
+const { width: screenWidth } = Dimensions.get('window');
+const SLIDER_WIDTH = screenWidth;
+const ITEM_WIDTH = screenWidth * 0.9;
+const IMAGE_HEIGHT = ITEM_WIDTH * 0.75;
+const SLIDER_HEIGHT = IMAGE_HEIGHT + 80;
 
 const BookingDetailSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const scrollViewRef = useRef<ScrollView>(null);
+  const carouselRef = useRef(null);
+  const navigation = useNavigation<RootStackNavigationProp<'couponScreen'>>();
 
   const ImagesArray = [
     { id: 1, uri: images.banner },
@@ -32,62 +35,65 @@ const BookingDetailSlider = () => {
     { id: 6, uri: images.banner6 },
   ];
 
-    const navigation = useNavigation<RootStackNavigationProp<'couponScreen'>>();
-    
-    const moveToDetailPage = () => {
-      navigation.navigate('couponScreen');
-    }
-  
-
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const contentOffsetX = event.nativeEvent.contentOffset.x;
-    const currentIndex = Math.round(contentOffsetX / viewportWidth);
-    setActiveIndex(currentIndex);
+  const moveToDetailPage = () => {
+    navigation.navigate('couponScreen');
   };
 
-  const scrollToIndex = (index: number) => {
-    if (scrollViewRef.current) {
-      scrollViewRef.current.scrollTo({ x: index * viewportWidth, animated: true });
-    }
+  const renderItem = ({ item }: { item: any }) => {
+    return (
+      <View style={[styles.slide, { width: ITEM_WIDTH }]}>
+        <Image source={item.uri} style={[styles.image, { height: IMAGE_HEIGHT }]} />
+        
+        <View style={styles.infoContainer}>
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>{constant.studioExperts}</Text>
+            <Text style={styles.subtitle}>{constant.maternity}</Text>
+          </View>
+          <TouchableOpacity 
+            style={styles.ratingContainer}
+            onPress={moveToDetailPage}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.rating}>★★★★☆</Text>
+            <Text style={styles.ratingText}>4/5</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
   };
 
   return (
-    <View style={styles.sliderWrapper}>
-      <ScrollView
-        ref={scrollViewRef}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onScroll={handleScroll}
-        scrollEventThrottle={16} 
-      >
-        {ImagesArray.map((item) => (
-          <View key={item.id} style={styles.slide}>
-            <Image source={item.uri} style={styles.image} />
-            
-            <View style={styles.overlayContainer}>
-              <View style={styles.overlayLeft}>
-                <Text style={styles.title}>{constant.studioExperts}</Text>
-                <Text style={styles.subtitle}>{constant.maternity}</Text>
-              </View>
-              <TouchableOpacity style={styles.overlayRight} onPress={() => {moveToDetailPage()}}>
-                <Text style={styles.rating}>★★★★☆</Text>
-                <Text style={styles.ratingText}>4/5</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        ))}
-      </ScrollView>
+    <View style={styles.mainContainer}>
+      <Carousel
+        ref={carouselRef}
+        data={ImagesArray}
+        renderItem={renderItem}
+        sliderWidth={SLIDER_WIDTH}
+        itemWidth={ITEM_WIDTH}
+        onSnapToItem={(index) => setActiveIndex(index)}
+        inactiveSlideScale={1}
+        inactiveSlideOpacity={1}
+        firstItem={0}
+        loop={false}
+        autoplay={false}
+        layout={'default'}
+        contentContainerCustomStyle={styles.carouselContent}
+      />
+      
       <View style={styles.indicatorContainer}>
         {ImagesArray.map((_, index) => (
-          <View
+          <TouchableOpacity
             key={index}
-            style={[
-              styles.indicatorDot,
-              index === activeIndex ? styles.activeDot : styles.inactiveDot,
-            ]}
-            onTouchEnd={() => scrollToIndex(index)} 
-          />
+            onPress={() => carouselRef.current?.snapToItem(index)}
+            activeOpacity={0.7}
+          >
+            <View
+              style={[
+                styles.indicatorDot,
+                index === activeIndex ? styles.activeDot : styles.inactiveDot,
+              ]}
+            />
+          </TouchableOpacity>
         ))}
       </View>
     </View>
@@ -95,64 +101,72 @@ const BookingDetailSlider = () => {
 };
 
 const styles = StyleSheet.create({
-  sliderWrapper: {
-    height: 413,
-    width: "90%",
-    alignSelf: 'center',
+  mainContainer: {
+    width: '100%',
+    alignItems: 'center',
+    paddingVertical: 16,
+  },
+  carouselContent: {
+    paddingVertical: 10,
+  },
+  slide: {
     borderRadius: 16,
     overflow: 'hidden',
     backgroundColor: colors.white,
-    marginVertical: 10,
     borderColor: colors.borderColor,
     borderWidth: 1,
-  },
-  slide: {
-    width: viewportWidth * 0.9,
-    height: 413,
-    position: 'relative',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   image: {
-    width: "100%",
-    height: 350,
-    alignSelf: 'center',
+    width: '100%',
     resizeMode: 'cover',
-    borderRadius: 5,
   },
-  overlayContainer: {
+  infoContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
-    marginTop: 10,
+    paddingVertical: 12,
+    backgroundColor: colors.white,
   },
-  overlayLeft: {},
-  overlayRight: { alignItems: 'flex-end' },
-  
+  textContainer: {
+    flex: 1,
+  },
+  ratingContainer: {
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
   title: {
     fontSize: 16,
     color: colors.black,
     fontFamily: Fonts.semiBold,
+    marginBottom: 4,
   },
   subtitle: {
     fontSize: 12,
     color: colors.placeHolderColor,
-    fontFamily: Fonts.regular
+    fontFamily: Fonts.regular,
   },
   rating: {
     fontSize: 16,
     color: colors.starColor,
-    fontFamily : Fonts.semiBold,
+    fontFamily: Fonts.semiBold,
+    letterSpacing: 2,
   },
   ratingText: {
     fontSize: 14,
     color: colors.black,
+    fontFamily: Fonts.regular,
+    marginTop: 2,
   },
   indicatorContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    bottom: 10,
-    width: '100%',
+    marginTop: 10,
   },
   indicatorDot: {
     width: 8,
@@ -162,6 +176,7 @@ const styles = StyleSheet.create({
   },
   activeDot: {
     backgroundColor: colors.appColor,
+    width: 12,
   },
   inactiveDot: {
     backgroundColor: colors.lightGray,
