@@ -22,4 +22,6 @@ export const colors = {
   inprogressColor: '#FF7622',
   subTitleColor: '#747474',
   reviewBackgroundColor: '#3F9BAC4',
+  dayColor: '#1D1B20',
+  calendarBackground: '#FFDCDC',
 };

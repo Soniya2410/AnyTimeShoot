@@ -61,6 +61,8 @@ export const constant = {
    skipForNow: "Skip for now",
    invalidOtpEntered: "Invalid OTP entered",
    clearAll: "Clear All",
+   clear: "Clear",
+   ok: "Ok",
    joinPartner: "Join as a Partner",
    settings: "Settings",
    itsEasyToGet: "It’s easy to get set up and start earning with AnyTime",
@@ -118,6 +120,7 @@ export const constant = {
    comingSoon: ' Coming Soon',
    bookingNow: "Booking Now",
    cancelled: "Cancelled",
+   cancel: "Cancel",
    cancelReason: 'You cancelled it on "DATE"',
    emptyText: "You haven't made any bookings yet. Start exploring our options and reserve your",
    spotNow: "spot Now",
@@ -143,4 +146,5 @@ export const constant = {
    reviewPrice: "₹ 2,45,000",
    reviewRating: "4.5 and 1000+ reviews",
    readMore: "Read More",
+   sheduledShoot: "Schedule Shoot",
 }

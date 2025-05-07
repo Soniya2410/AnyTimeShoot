@@ -48,6 +48,7 @@ import PackageList from './screens/Home/PackageList.tsx';
 import PackageDetails from './screens/booking/PackageDetails.tsx';
 import {constant} from './screens/utils/Constant.tsx';
 import ReviewsScreen from './screens/Home/ReviewsScreen.tsx';
+import BookingDetailScreen from './screens/Home/BookingDetailScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -75,6 +76,7 @@ export type RootStackParamList = {
   packageDetail: {title: string};
   profileDetail: undefined;
   reviewScreen: undefined;
+  bookingDetail: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -479,19 +481,60 @@ const App: React.FC = () => {
                 <TouchableOpacity
                   style={{marginRight: 15, width: 24, height: 24}}
                   onPress={() => {}}>
-                  <Image source={icons.shareIcon} style={{width: 18, height: 20}} />
+                  <Image
+                    source={icons.shareIcon}
+                    style={{width: 18, height: 20}}
+                  />
                 </TouchableOpacity>
               ),
             }}
           />
 
           <Stack.Screen
-          name='reviewScreen'
-          component={ReviewsScreen}
-          options={{
-            headerShown: true,
-            headerTitle: "Review",
-          }}
+            name="reviewScreen"
+            component={ReviewsScreen}
+            options={{
+              headerShown: true,
+              headerTitle: 'Review',
+            }}
+          />
+
+          <Stack.Screen
+            name="bookingDetail"
+            component={BookingDetailScreen}
+            options={{
+              headerShown: true,
+              headerTitleAlign: 'left',
+              headerTitle: 'Booking Detail',
+              // headerTitleStyle: {
+              //   fontSize: 20,
+              //   fontWeight: 'bold',
+              // },
+              // headerLeft: () => (
+              //   <TouchableOpacity style={{marginLeft: 20}}></TouchableOpacity>
+              // ),
+              headerRight: () => (
+                <View style={{flexDirection: 'row', marginRight: 0}}>
+                    <TouchableOpacity
+                    style={{marginRight: 15, width: 24, height: 24}}
+                    onPress={() => {}}>
+                    <Image
+                      source={icons.bookmarkIcon}
+                      style={{width: 18, height: 20}}
+                    />
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={{marginRight: 0, width: 24, height: 24}}
+                    onPress={() => {}}>
+                    <Image
+                      source={icons.shareIcon}
+                      style={{width: 18, height: 20}}
+                    />
+                  </TouchableOpacity>
+                </View>
+              ),
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
