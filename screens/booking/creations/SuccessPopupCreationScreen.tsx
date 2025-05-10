@@ -7,17 +7,21 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import {images} from '../utils/Images';
-import {constant} from '../utils/Constant';
-import {ASButton} from '../components/ASButton';
-import {colors} from '../utils/Colors';
-import {Fonts} from '../utils/Fonts';
+import {images} from '../../utils/Images';
+import {constant} from '../../utils/Constant';
+import {ASButton} from '../../components/ASButton';
+import {colors} from '../../utils/Colors';
+import {Fonts} from '../../utils/Fonts';
+import { RootStackNavigationProp } from '../../../App';
+import { useNavigation } from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
 
 const SuccessPopupCreationScreen: React.FC = () => {
+  const navigation = useNavigation<RootStackNavigationProp<'successCreation'>>();
+  
   const moveToContinue = () => {
-   
+   navigation.navigate('packageCreation')
   };
 
   return (

@@ -386,7 +386,6 @@ const HomeScreen: React.FC = () => {
    <View style={styles.weddingPackage}>
           <Text style={styles.recommendedTitle}>{constant.bestSeller}</Text>
           <TouchableOpacity onPress={() => {
-            navigation
           }}>
             <Text style={styles.viewAll}>{constant.view_all}</Text>
           </TouchableOpacity>

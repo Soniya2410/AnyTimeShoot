@@ -82,6 +82,11 @@ export const images = {
   bgInprogress: require('../../assets/images/bgInprogress.png'),
   helpIcon: require('../../assets/images/helpIcon.png'),
   chatImg: require('../../assets/images/chatImg.png'),
+  helpLightIcon: require('../../assets/images/helpLightIcon.png'),
+  pauseIcon: require('../../assets/images/pause.png'),
+  liveIcon: require('../../assets/images/live.png'),
+  pendingIcon: require('../../assets/images/pending.png'),
+
 
   home1: require('../../assets/images/home/home_1.png'),
   home2: require('../../assets/images/home/home_2.png'),

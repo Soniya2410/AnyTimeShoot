@@ -181,7 +181,7 @@ const ProfileScreen = () => {
             customStyle={styles.editButton}
             onPress={moveToEditProfile}></ASButton>
         </View>
-        <TouchableOpacity style={styles.logoutButton}>
+        <TouchableOpacity style={styles.logoutButton} onPress={() => navigation.navigate('successCreation')}>
           <Text style={styles.logoutText}>Log out ?</Text>
         </TouchableOpacity>
       </View>

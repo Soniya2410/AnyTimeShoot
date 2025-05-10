@@ -37,7 +37,7 @@ import {icons} from './screens/utils/Icons.tsx';
 import CouponScreen from './screens/Home/CouponScreen.tsx';
 import CancelledBookingScreen from './screens/booking/CancelledBookingScreen.tsx';
 import NoBookingScreen from './screens/booking/NoBookingScreen.tsx';
-import SuccessPopupCreationSccreen from './screens/Home/SuccessPopupCreationScreen.tsx';
+import SuccessPopupCreationSccreen from './screens/booking/creations/SuccessPopupCreationScreen.tsx';
 import CompletedBookingDetailScreen from './screens/booking/CompletedBookingDetailScreen.tsx';
 import UpcomingBookingDetailScreen from './screens/booking/UpcomingBookingDetailScreen.tsx';
 import UpcomingShootStartedScreen from './screens/booking/UpcomingShootStartedScreen.tsx';
@@ -49,6 +49,7 @@ import PackageDetails from './screens/booking/PackageDetails.tsx';
 import {constant} from './screens/utils/Constant.tsx';
 import ReviewsScreen from './screens/Home/ReviewsScreen.tsx';
 import BookingDetailScreen from './screens/Home/BookingDetailScreen.tsx';
+import PackageCreationScreen from './screens/booking/creations/PackageCreationScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -77,6 +78,7 @@ export type RootStackParamList = {
   profileDetail: undefined;
   reviewScreen: undefined;
   bookingDetail: undefined;
+  packageCreation: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -515,7 +517,7 @@ const App: React.FC = () => {
               // ),
               headerRight: () => (
                 <View style={{flexDirection: 'row', marginRight: 0}}>
-                    <TouchableOpacity
+                  <TouchableOpacity
                     style={{marginRight: 15, width: 24, height: 24}}
                     onPress={() => {}}>
                     <Image
@@ -533,6 +535,47 @@ const App: React.FC = () => {
                     />
                   </TouchableOpacity>
                 </View>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="packageCreation"
+            component={PackageCreationScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerBackground: () => (
+                <View style={{ backgroundColor: colors.appColor, flex: 1 }} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              }, 
+              headerTintColor:  colors.white,
+              
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                      tintColor: colors.white,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
               ),
             }}
           />

@@ -147,4 +147,11 @@ export const constant = {
    reviewRating: "4.5 and 1000+ reviews",
    readMore: "Read More",
    sheduledShoot: "Schedule Shoot",
+   packageVerification: "Package Verification",
+   packageSubVerification : "Thanks for creating the package, your package is under reviewed by AnyTime",
+   pending: "Pending",
+   pause: "Pause",
+   live: "Live",
+   addPackage: "Add Package",
+
 }
