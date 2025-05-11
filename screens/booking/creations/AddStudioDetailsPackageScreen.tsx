@@ -81,13 +81,15 @@ const studioDetails = [
 ];
 
 const AddStudioDetailsPackageScreen: React.FC = () => {
-  //   const navigation = useNavigation<RootStackNavigationProp<''>>();
+   const navigation = useNavigation<RootStackNavigationProp<'addStudioDetailsPackage'>>();
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedStudio, setSelectedStudio] = useState<'Yes' | 'No' | null>(
     null,
   );
-  const moveToAddStudioDetails = () => {};
+  const moveToAddStudioDetails = () => {
+    navigation.navigate('addDeliveryDetailsPackage');
+  };
 
   const renderItem = ({item}: any) => {
     const isSelected = selectedId === item.id;

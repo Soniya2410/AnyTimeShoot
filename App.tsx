@@ -55,6 +55,9 @@ import WishlistScreen from './screens/Home/WishlistScreen.tsx';
 import ChooseCategoryPackage from './screens/booking/creations/ChooseCategoryPackage.tsx';
 import AddDetailsPackageScreen from './screens/booking/creations/AddDetailsPackageScreen.tsx';
 import AddStudioDetailsPackageScreen from './screens/booking/creations/AddStudioDetailsPackageScreen.tsx';
+import AddDeliveryDetailScreen from './screens/booking/creations/AddDeliveryDetailScreen.tsx';
+import PricingDetailPackageScreen from './screens/booking/creations/PricingDetailPackageScreen.tsx';
+import AddRulesPackageScreen from './screens/booking/creations/AddRulesPackageScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -89,6 +92,9 @@ export type RootStackParamList = {
   chooseCategoryCreation: undefined;
   addDetailsPackage: undefined;
   addStudioDetailsPackage: undefined;
+  addDeliveryDetailsPackage: undefined;
+  pricingDetailPackage: undefined;
+  addRulesPackage: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -728,6 +734,130 @@ const App: React.FC = () => {
               ),
             }}
           />
+
+            <Stack.Screen
+            name='addDeliveryDetailsPackage'
+            component={AddDeliveryDetailScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+           <Stack.Screen
+            name='pricingDetailPackage'
+            component={PricingDetailPackageScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+           <Stack.Screen
+            name='addRulesPackage'
+            component={AddRulesPackageScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

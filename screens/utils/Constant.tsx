@@ -195,5 +195,36 @@ export const constant = {
   uploaded: "Uploaded",
 
 
-   includeInPackage: "Includes in package"
+  includeInPackage: "Includes in package",
+  deliveryDetails: "Delivery Details",
+  descDelivery: "Describe the detailed schedule for your deliverables .",
+  rawData: "Raw Data",
+  deliveryMode: "Delivery Mode",
+  deliveyTime: "Delivery Time",
+  selectMode: "select mode",
+  numberOfDays: "Number of days after shoot",
+  editedData: "Edited Data *",
+  offline: "Offline",
+  cloudSharing: "Cloud Sharing",
+
+  additionInformation: "Additional Information",
+  chooseCancellationPolicy: "Choose Cancellation Policy",
+  pickAcancellationPolicy: "Pick a cancellation policy",
+  locationWhereYouAccepting: "Location where you accept booking",
+  policy1: "Policy 1",
+  gurugam: "Gurugam",
+  pricingDetails: "Pricing Details",
+  provideTheOverall: "Provide the overall cost of the package",
+  enterPrice: "Enter Price *",
+  enterPricingValue: "Enter Pricing Value",
+  pleaseNote: "Please Note:",
+  pricingDetail1: "1. Our Focus is provide end to end services to our clients, we encourage to Add All inclusive prices for your Package.",
+  pricingDetail2: "2. Please Note on Each booking we will charge 3% Commission on the price you will mention here.",
+  pricingDetail3: "3. Please Note while creating any Package include all the expenses.",
+  addRules: "Add Rules / Terms & Conditions ",
+  addAnyExtra: "Add any extra terms which customer should keep in mind for the shoot .",
+  rulesText: "Shoot will be done in the mentioned hours only and extra hours will charge extra.",
+
+
+
 }

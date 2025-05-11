@@ -50,8 +50,8 @@ const AddDetailsPackageScreen: React.FC = () => {
         </View>
 
         <View style={styles.padingView}>
-      <Text style={styles.labelTitle}>{constant.shootIsStudio}</Text>
-      <View style={styles.yesNoContainer}>
+       <Text style={styles.labelTitle}>{constant.shootIsStudio}</Text>
+       <View style={styles.yesNoContainer}>
         <TouchableOpacity
           style={[
             styles.optionButton,
