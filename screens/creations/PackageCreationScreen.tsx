@@ -27,10 +27,10 @@ const packages = [
 ];
 
 const PackageCreationScreen: React.FC = () => {
-const navigation = useNavigation<RootStackNavigationProp<'packageCreation'>>;
+  const navigation = useNavigation<RootStackNavigationProp<'packageCreation'>>();
 
 const moveToNextScreen = () => {
-
+ navigation.navigate('chooseCategoryCreation');
 };
     const statusImages: { [key: string]: any } = {
         pending: images.pendingIcon, 

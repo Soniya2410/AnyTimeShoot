@@ -52,6 +52,9 @@ import BookingDetailScreen from './screens/Home/BookingDetailScreen.tsx';
 import PackageCreationScreen from './screens/creations/PackageCreationScreen.tsx';
 import NotificationScreen from './screens/Home/NotificationScreen.tsx';
 import WishlistScreen from './screens/Home/WishlistScreen.tsx';
+import ChooseCategoryPackage from './screens/booking/creations/ChooseCategoryPackage.tsx';
+import AddDetailsPackageScreen from './screens/booking/creations/AddDetailsPackageScreen.tsx';
+import AddStudioDetailsPackageScreen from './screens/booking/creations/AddStudioDetailsPackageScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -83,6 +86,9 @@ export type RootStackParamList = {
   packageCreation: undefined;
   notificationList: undefined;
   wishlist: undefined;
+  chooseCategoryCreation: undefined;
+  addDetailsPackage: undefined;
+  addStudioDetailsPackage: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -549,13 +555,54 @@ const App: React.FC = () => {
             options={{
               headerTitle: 'Package Creation',
               headerBackground: () => (
-                <View style={{ backgroundColor: colors.appColor, flex: 1 }} />
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
               headerTitleStyle: {
                 color: colors.white,
-              }, 
-              headerTintColor:  colors.white,
-              
+              },
+              headerTintColor: colors.white,
+
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                      tintColor: colors.white,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="chooseCategoryCreation"
+            component={ChooseCategoryPackage}
+            options={{
+              headerTitle: 'Package Creation',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+
               headerRight: () => (
                 <TouchableOpacity
                   onPress={() => {}}
@@ -597,6 +644,88 @@ const App: React.FC = () => {
             options={{
               headerBackTitle: '',
               headerTitle: 'WishList',
+            }}
+          />
+
+          <Stack.Screen
+            name="addDetailsPackage"
+            component={AddDetailsPackageScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="addStudioDetailsPackage"
+            component={AddStudioDetailsPackageScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
             }}
           />
         </Stack.Navigator>

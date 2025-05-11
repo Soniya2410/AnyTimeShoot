@@ -21,7 +21,7 @@ const SuccessPopupCreationScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'successCreation'>>();
   
   const moveToContinue = () => {
-   navigation.navigate('packageCreation')
+   navigation.navigate('packageCreation');
   };
 
   return (

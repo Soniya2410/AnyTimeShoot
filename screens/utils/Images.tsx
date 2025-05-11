@@ -86,6 +86,17 @@ export const images = {
   pauseIcon: require('../../assets/images/pause.png'),
   liveIcon: require('../../assets/images/live.png'),
   pendingIcon: require('../../assets/images/pending.png'),
+  currentLocationIcon: require('../../assets/images/gis_location-poi.png'),
+  file: require('../../assets/images/file.png'),
+  changingRoom: require('../../assets/images/changingRoom.png'),
+  washroom: require('../../assets/images/washroom.png'),
+  airConditioning: require('../../assets/images/airConditioning.png'),
+  freeParking: require('../../assets/images/freeParking.png'),
+  makeupArtist: require('../../assets/images/makeupArtist.png'),
+  backDrops: require('../../assets/images/backDrops.png'),
+  soundproofArea: require('../../assets/images/soundproofArea.png'),
+  props: require('../../assets/images/props.png'),
+  wardrobe: require('../../assets/images/wardrobe.png'),
 
 
   home1: require('../../assets/images/home/home_1.png'),
