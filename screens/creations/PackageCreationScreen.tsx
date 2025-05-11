@@ -8,13 +8,13 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { images } from '../../utils/Images';
-import { constant } from '../../utils/Constant';
-import { colors } from '../../utils/Colors';
-import { Fonts } from '../../utils/Fonts';
-import { ASButton } from '../../components/ASButton';
+import { images } from '../utils/Images';
+import { constant } from '../utils/Constant';
+import { colors } from '../utils/Colors';
+import { Fonts } from '../utils/Fonts';
+import { ASButton } from '../components/ASButton';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackNavigationProp } from '../../../App';
+import { RootStackNavigationProp } from '../../App';
 
 const { width } = Dimensions.get('screen');
 

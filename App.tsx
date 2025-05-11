@@ -18,7 +18,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 // Screens
 import HomeScreen from './screens/Home/HomeScreen';
-import ProfileScreen from './screens/Home/ProfileScreen';
+import ProfileScreen from './screens/profile/ProfileScreen.tsx';
 import CategoryScreen from './screens/Home/CategoryScreen';
 import MyBookingsScreen from './screens/Home/MyBookingsScreen.tsx';
 import {images} from './screens/utils/Images';
@@ -37,19 +37,21 @@ import {icons} from './screens/utils/Icons.tsx';
 import CouponScreen from './screens/Home/CouponScreen.tsx';
 import CancelledBookingScreen from './screens/booking/CancelledBookingScreen.tsx';
 import NoBookingScreen from './screens/booking/NoBookingScreen.tsx';
-import SuccessPopupCreationSccreen from './screens/booking/creations/SuccessPopupCreationScreen.tsx';
+import SuccessPopupCreationSccreen from './screens/creations/SuccessPopupCreationScreen.tsx';
 import CompletedBookingDetailScreen from './screens/booking/CompletedBookingDetailScreen.tsx';
 import UpcomingBookingDetailScreen from './screens/booking/UpcomingBookingDetailScreen.tsx';
 import UpcomingShootStartedScreen from './screens/booking/UpcomingShootStartedScreen.tsx';
 import UpcomingShootCompletedScreen from './screens/booking/UpcomingShootCompletedScreen.tsx';
 import UpcomingEditingInprogressScreen from './screens/booking/UpcomingEditingInprogressScreen.tsx';
-import ProfileDetailScreen from './screens/Home/ProfileDetailScreen.tsx';
+import ProfileDetailScreen from './screens/profile/ProfileDetailScreen.tsx';
 import PackageList from './screens/Home/PackageList.tsx';
 import PackageDetails from './screens/booking/PackageDetails.tsx';
 import {constant} from './screens/utils/Constant.tsx';
 import ReviewsScreen from './screens/Home/ReviewsScreen.tsx';
 import BookingDetailScreen from './screens/Home/BookingDetailScreen.tsx';
-import PackageCreationScreen from './screens/booking/creations/PackageCreationScreen.tsx';
+import PackageCreationScreen from './screens/creations/PackageCreationScreen.tsx';
+import NotificationScreen from './screens/Home/NotificationScreen.tsx';
+import WishlistScreen from './screens/Home/WishlistScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -79,6 +81,8 @@ export type RootStackParamList = {
   reviewScreen: undefined;
   bookingDetail: undefined;
   packageCreation: undefined;
+  notificationList: undefined;
+  wishlist: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -205,7 +209,7 @@ const App: React.FC = () => {
     <GestureHandlerRootView>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="onboard"
+          initialRouteName="homeScreen"
           screenOptions={{
             headerBackTitle: '', // This works differently in native-stack
             headerTintColor: '#000000', // Arrow color
@@ -577,6 +581,22 @@ const App: React.FC = () => {
                   <Text style={{color: colors.white}}>{constant.help}</Text>
                 </TouchableOpacity>
               ),
+            }}
+          />
+           <Stack.Screen
+            name="notificationList"
+            component={NotificationScreen}
+            options={{
+              headerBackTitle: '',
+              headerTitle: 'Notification',
+            }}
+          />
+          <Stack.Screen
+            name="wishlist"
+            component={WishlistScreen}
+            options={{
+              headerBackTitle: '',
+              headerTitle: 'WishList',
             }}
           />
         </Stack.Navigator>

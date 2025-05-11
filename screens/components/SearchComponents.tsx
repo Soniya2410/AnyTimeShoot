@@ -5,7 +5,15 @@ import { icons } from '../utils/Icons';
 import { colors } from '../utils/Colors';
 import { Fonts } from '../utils/Fonts';
 
-const SearchComponents = () => {
+const SearchComponents = (props : any) => {
+  const notificationPage = () => {
+    props.navigation.navigate('notificationList')
+  }
+
+  const wishListPage = () => {
+    props.navigation.navigate('wishlist')
+    // props.navigation.navigate('reviewScreen')
+  }
   return (
     <View>
     <View style={styles.searchLocationContainer}>
@@ -17,15 +25,15 @@ const SearchComponents = () => {
         />
       </View>
       <View style={styles.iconsContainer}>
-        <TouchableOpacity style={styles.iconContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => notificationPage()}>
           <Image source={icons.bellIcon} style={styles.icon}/>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={()=> wishListPage()}>
           <Image source={icons.heartIcon}  style={styles.heartIcon}/>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer}>
+        {/* <TouchableOpacity style={styles.iconContainer}>
           <Image source={icons.cartIcon} style={styles.icon}/>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
      <View style={styles.wrapper}>
@@ -66,7 +74,7 @@ const styles = StyleSheet.create({
     borderColor: '#f2f2f2',
     borderWidth: 1,
     paddingLeft: 10,
-    width: '75%',
+    width: '80%',
   },
   searchInput: {
     paddingVertical: 10,

@@ -348,7 +348,7 @@ const HomeScreen: React.FC = () => {
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <AppHeaders />
-        <SearchComponents />
+        <SearchComponents  navigation={navigation}/>
         <CustomSlider />
         <View style={{marginHorizontal: 5}}>
         <Text style={styles.sectionTitle}>{constant.top_booked_services}</Text>

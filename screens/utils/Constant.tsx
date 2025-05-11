@@ -153,5 +153,5 @@ export const constant = {
    pause: "Pause",
    live: "Live",
    addPackage: "Add Package",
-
+   includeInPackage: "Includes in package"
 }

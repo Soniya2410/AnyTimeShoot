@@ -2,13 +2,15 @@ import { TouchableOpacity, View, Image, Text, StyleSheet } from "react-native"
 import { icons } from "../../utils/Icons"
 import { colors } from "../../utils/Colors";
 import { Fonts } from "../../utils/Fonts";
+import { images } from "../../utils/Images";
 
 type BookingListItemProps = {
   item: any; 
   onPress: (item: any) => void; 
+  isWishList?: boolean;
 };
 
-const BookingListItem: React.FC<BookingListItemProps> = ({ item, onPress }) => {
+const BookingListItem: React.FC<BookingListItemProps> = ({ item, onPress, isWishList = false }) => {
 
   const renderStars = (count: number) => {
     return [...Array(5)].map((_, i) => (
@@ -30,9 +32,16 @@ const BookingListItem: React.FC<BookingListItemProps> = ({ item, onPress }) => {
               {renderStars(item.rating)}
               <Text style={styles.ratingText}> {item.rating}/5</Text>
             </View>
-            <Image style={styles.rightArrow} source={icons.nextArrowIcon} />
           </View>
         </View>
+        <View style={{ width: '10%', marginVertical: 10}}>
+             {isWishList && (<Image
+                source={images.liked}
+                style={styles.likeIcon}
+              />
+            )} 
+            <Image style={styles.rightArrow} source={icons.nextArrowIcon} />
+            </View>
       </View>
       </TouchableOpacity>
   )
@@ -60,7 +69,7 @@ const styles = StyleSheet.create({
       marginTop: 5,
       justifyContent: 'space-between',
       paddingVertical: 8,
-      width: '60%',
+      width: '58%',
     },
     cardTitle: {
       fontFamily: Fonts.semiBold,
@@ -95,10 +104,18 @@ const styles = StyleSheet.create({
       width: 8,
       height: 15,
       marginRight: 10,
+      position: 'absolute',
+      bottom: 5,
+      right: 10
     },
     starsContainer: {
       flexDirection: 'row',
       alignItems: 'center',
+    },
+    likeIcon: {
+      width: 24,
+      height: 24,
+      resizeMode: 'contain',
     },
 });
 

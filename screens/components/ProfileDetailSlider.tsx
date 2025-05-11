@@ -21,10 +21,10 @@ import {RootStackNavigationProp} from '../../App';
 import {icons} from '../utils/Icons';
 
 const {width: screenWidth} = Dimensions.get('window');
-const SLIDER_WIDTH = screenWidth * 0.9;
+const SLIDER_WIDTH = screenWidth * 0.95;
 const ITEM_WIDTH = SLIDER_WIDTH;
-const IMAGE_HEIGHT = ITEM_WIDTH * 0.85;
-const SLIDER_HEIGHT = IMAGE_HEIGHT + 120;
+const IMAGE_HEIGHT = ITEM_WIDTH * 0.75;
+const SLIDER_HEIGHT = IMAGE_HEIGHT + 70;
 
 const ProfileDetailSlider = ({isSingleImage = false, page = 'detail'}) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -74,7 +74,7 @@ const ProfileDetailSlider = ({isSingleImage = false, page = 'detail'}) => {
   };
 
   return (
-    <View style={[styles.sliderWrapper, {width: SLIDER_WIDTH}]}>
+    <View style={[styles.sliderWrapper, {width: SLIDER_WIDTH, height: SLIDER_HEIGHT}]}>
       <ScrollView
         ref={scrollViewRef}
         horizontal
@@ -186,7 +186,7 @@ const ProfileDetailSlider = ({isSingleImage = false, page = 'detail'}) => {
 const styles = StyleSheet.create({
   sliderWrapper: {
     alignSelf: 'center',
-    borderRadius: 16,
+    borderRadius: 14,
     overflow: 'hidden',
     backgroundColor: colors.white,
     marginVertical: 10,
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   },
   chatButton: {
     position: 'absolute',
-    bottom: 70,
+    bottom: 100,
     right: 10,
     width: 40,
     height: 40,
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.starColor,
     borderBottomRightRadius: 8,
     paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 2,
@@ -262,6 +262,7 @@ const styles = StyleSheet.create({
   ratingBadgeText: {
     color: colors.black,
     fontFamily: Fonts.semiBold,
+    paddingVertical: 5,
     fontSize: 12,
   },
   overlayContainer: {

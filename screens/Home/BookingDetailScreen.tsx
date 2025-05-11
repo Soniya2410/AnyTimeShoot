@@ -8,7 +8,7 @@ import {
   Modal,
   ScrollView
 } from 'react-native';
-import { Calendar } from 'react-native-calendars';
+import { Calendar, Agenda } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native';
 import ProfileDetailSlider from '../components/ProfileDetailSlider';
 import { RootStackNavigationProp } from '../../App';
@@ -16,12 +16,14 @@ import { constant } from '../utils/Constant';
 import { colors } from '../utils/Colors';
 import { Fonts } from '../utils/Fonts';
 
+
 const BookingDetailScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'bookingDetail'>>();
   const [selectedDate, setSelectedDate] = useState<string>('2025-08-17');
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [activeDropdown, setActiveDropdown] = useState<'month' | 'year' | null>(null);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [selected, setSelected] = useState('2025-08-17');
 
   const handleDayPress = (day: any) => {
     setSelectedDate(day.dateString);
@@ -73,6 +75,7 @@ const BookingDetailScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView >
       <ProfileDetailSlider />
 
       <View style={styles.calContainer}>
@@ -86,16 +89,16 @@ const BookingDetailScreen: React.FC = () => {
           <Text style={styles.selectorText}>Date</Text>
         </TouchableOpacity>
 
-        <Modal
+        {/* <Modal
           visible={modalVisible}
           transparent
           animationType="slide"
           onRequestClose={() => setModalVisible(false)}
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.bottomSheet}>
+        > */}
+          {/* <View style={styles.modalContainer}> */}
+            {/* <View style={styles.bottomSheet}> */}
               {/* Header with month/year selectors */}
-              <View style={styles.headerRow}>
+              {/* <View style={styles.headerRow}>
                 <View style={styles.monthControl}>
                   <TouchableOpacity onPress={() => navigateMonth('prev')}>
                     <Text style={styles.arrow}>{'<'}</Text>
@@ -117,7 +120,6 @@ const BookingDetailScreen: React.FC = () => {
                   <TouchableOpacity onPress={() => navigateYear('prev')}>
                     <Text style={styles.arrow}>{'<'}</Text>
                   </TouchableOpacity>
-                  
                   <TouchableOpacity 
                     style={styles.selectorButton}
                     onPress={() => setActiveDropdown(activeDropdown === 'year' ? null : 'year')}
@@ -129,11 +131,45 @@ const BookingDetailScreen: React.FC = () => {
                     <Text style={styles.arrow}>{'>'}</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
+              </View> */}
 
               {/* Calendar with absolute positioned dropdowns */}
               <View style={styles.calendarWrapper}>
-                <Calendar
+              <Calendar
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#D32F2F',
+                  borderRadius: 5,
+                  marginVertical: 10,
+                  // height: 350
+                }}
+              
+                  current={selected}
+                  onDayPress={(day) => setSelected(day.dateString)}
+                  markedDates={{
+                    [selected]: { selected: true, selectedColor: '#D32F2F' },
+                  }}
+                  theme={{
+                    backgroundColor: '#F8D0D0',
+                    calendarBackground: '#F8D0D0',
+                    textSectionTitleColor: '#333',
+                    selectedDayBackgroundColor: '#D32F2F',
+                    selectedDayTextColor: '#fff',
+                    todayTextColor: '#D32F2F',
+                    dayTextColor: '#000',
+                    textDisabledColor: '#d9e1e8',
+                    arrowColor: '#D32F2F',
+                    monthTextColor: '#D32F2F',
+                    indicatorColor: '#D32F2F',
+                    textDayFontFamily: Fonts.bold,
+                    textMonthFontFamily: Fonts.extraBold,
+                    textDayHeaderFontFamily: Fonts.extraBold,
+                    textDayFontSize: 12,
+                    textMonthFontSize: 20,
+                    textDayHeaderFontSize: 12,
+                  }}
+                />
+                {/* <Calendar
                   key={currentDate.toISOString()}
                   current={currentDate.toISOString().split('T')[0]}
                   onDayPress={handleDayPress}
@@ -155,10 +191,10 @@ const BookingDetailScreen: React.FC = () => {
                     textDisabledColor: colors.textPrimary2,
                   }}
                   style={styles.calendarStyle}
-                />
+                /> */}
 
                 {/* Month Dropdown (overlapping) */}
-                {activeDropdown === 'month' && (
+                {/* {activeDropdown === 'month' && (
                   <View style={styles.overlayDropdown}>
                     <ScrollView 
                       style={styles.dropdownContainer}
@@ -178,10 +214,10 @@ const BookingDetailScreen: React.FC = () => {
                       ))}
                     </ScrollView>
                   </View>
-                )}
+                )} */}
 
                 {/* Year Dropdown (overlapping) */}
-                {activeDropdown === 'year' && (
+                {/* {activeDropdown === 'year' && (
                   <View style={styles.overlayDropdown}>
                     <ScrollView 
                       style={styles.dropdownContainer}
@@ -201,11 +237,11 @@ const BookingDetailScreen: React.FC = () => {
                       ))}
                     </ScrollView>
                   </View>
-                )}
+                )} */}
               </View>
 
               {/* Footer */}
-              <View style={styles.footer}>
+              {/* <View style={styles.footer}>
                 <TouchableOpacity onPress={() => setSelectedDate('')}>
                   <Text style={styles.clear}>{constant.clear}</Text>
                 </TouchableOpacity>
@@ -217,11 +253,12 @@ const BookingDetailScreen: React.FC = () => {
                     <Text style={styles.ok}>{constant.ok}</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
+              </View> */}
             </View>
-          </View>
-        </Modal>
-      </View>
+          {/* </View> */}
+        {/* </Modal> */}
+      {/* </View> */}
+      </ScrollView>
     </SafeAreaView>
   );
 };

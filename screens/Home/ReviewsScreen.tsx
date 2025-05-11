@@ -12,15 +12,7 @@ import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
 import {constant} from '../utils/Constant';
 import {ASButton} from '../components/ASButton';
-
-type ReviewItem = {
-  id: string;
-  name: string;
-  date: string;
-  rating: number;
-  review: string;
-  avatar: number;
-};
+import { ReviewItems } from './components/ReviewItems';
 
 const reviews = [
   {
@@ -63,33 +55,6 @@ const reviews = [
 
 export default function ReviewsScreen() {
   const moveToBookNow = () => {};
-  const renderReviewItem = ({item}: {item: ReviewItem}) => (
-    <View style={styles.reviewCard}>
-      <View style={styles.reviewHeader}>
-      <Image source={item.avatar} style={styles.avatar} />
-        <View style={{flex: 1, marginLeft: 10}}>
-          <Text style={styles.name}>{item.name}</Text>
-          <View style={styles.starContainer}>
-            {[...Array(5)].map((_, i) => (
-              <Image
-                key={i}
-                source={
-                  i < item.rating
-                    ? require('../../assets/images/filled_star.png')
-                    : require('../../assets/images/empty_star.png')
-                }
-                style={styles.star}
-              />
-            ))}
-          </View>
-        </View>
-        <Text style={styles.date}>{item.date}</Text>
-      </View>
-      <Text style={styles.reviewText}>
-        {item.review} <Text style={styles.readMore}>{constant.readMore}</Text>
-      </Text>
-    </View>
-  );
 
   return (
     <View style={styles.container}>
@@ -106,7 +71,9 @@ export default function ReviewsScreen() {
       <FlatList
         data={reviews}
         keyExtractor={item => item.id}
-        renderItem={renderReviewItem}
+        renderItem={({item, index}) => 
+          <ReviewItems item={item} />
+        }
         contentContainerStyle={{paddingBottom: 100}}
         showsVerticalScrollIndicator={false}
       />
@@ -162,52 +129,14 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     marginLeft: 8,
   },
-  reviewCard: {
-    backgroundColor: colors.appLightColor,
-    borderRadius: 12,
-    padding: 12,
-    marginBottom: 12,
-  },
-  reviewHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
-  name: {
-    fontSize: 14,
-    fontFamily: Fonts.semiBold,
-    color: colors.black,
-  },
-  starContainer: {
-    flexDirection: 'row',
-    marginTop: 4,
-  },
-  star: {
-    width: 14,
-    height: 14,
-    marginRight: 2,
-  },
+  
+  
+ 
   starLarge: {
     width: 20,
     height: 20,
   },
-  date: {
-    fontSize: 12,
-    color: colors.subTitleColor,
-  },
-  reviewText: {
-    fontSize: 14,
-    color: colors.black,
-    marginTop: 4,
-  },
-  readMore: {
-    color: colors.appColor,
-  },
+  
   line: {
     height: 1,
     backgroundColor: colors.lineColor,
