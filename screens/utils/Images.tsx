@@ -97,6 +97,9 @@ export const images = {
   soundproofArea: require('../../assets/images/soundproofArea.png'),
   props: require('../../assets/images/props.png'),
   wardrobe: require('../../assets/images/wardrobe.png'),
+  editIcon: require('../../assets/images/editIcon.png'),
+  deleteIcon: require('../../assets/images/deleteIcon.png'),
+
 
 
   home1: require('../../assets/images/home/home_1.png'),

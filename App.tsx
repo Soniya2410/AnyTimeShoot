@@ -58,6 +58,7 @@ import AddStudioDetailsPackageScreen from './screens/booking/creations/AddStudio
 import AddDeliveryDetailScreen from './screens/booking/creations/AddDeliveryDetailScreen.tsx';
 import PricingDetailPackageScreen from './screens/booking/creations/PricingDetailPackageScreen.tsx';
 import AddRulesPackageScreen from './screens/booking/creations/AddRulesPackageScreen.tsx';
+import AdditionalInformationPackageScreen from './screens/booking/creations/AdditionInfomationPackageScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -95,6 +96,7 @@ export type RootStackParamList = {
   addDeliveryDetailsPackage: undefined;
   pricingDetailPackage: undefined;
   addRulesPackage: undefined;
+  additionalInformationPackage: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -820,6 +822,47 @@ const App: React.FC = () => {
            <Stack.Screen
             name='addRulesPackage'
             component={AddRulesPackageScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name='additionalInformationPackage'
+            component={AdditionalInformationPackageScreen}
             options={{
               headerTitle: 'Package Creation',
               headerTitleAlign: 'left',

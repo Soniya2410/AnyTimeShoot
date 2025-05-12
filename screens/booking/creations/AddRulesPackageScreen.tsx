@@ -4,24 +4,117 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  TextInput,
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
+  Image,
+  FlatList,
+  TextInput,
 } from 'react-native';
 import {constant} from '../../utils/Constant';
 import {Fonts} from '../../utils/Fonts';
-import {ASButton} from '../../components/ASButton';
 import {colors} from '../../utils/Colors';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../../App';
-import RNPickerSelect from 'react-native-picker-select';
+import {images} from '../../utils/Images';
+import {ASButton} from '../../components/ASButton';
+import {icons} from '../../utils/Icons';
+
+const rulesList = [
+  {id: '1', rule: constant.rulesText, isEditing: false, tempText: ''},
+  {id: '2', rule: constant.rulesText, isEditing: false, tempText: ''},
+  {id: '3', rule: constant.rulesText, isEditing: false, tempText: ''},
+  {id: '4', rule: constant.rulesText, isEditing: false, tempText: ''},
+  {id: '5', rule: constant.rulesText, isEditing: false, tempText: ''},
+];
 
 const AddRulesPackageScreen: React.FC = () => {
   const navigation =
     useNavigation<RootStackNavigationProp<'addRulesPackage'>>();
+  const [rules, setRules] = useState(rulesList);
 
-  const moveToNextScreen = () => {};
+  const moveToNextScreen = () => {
+    navigation.navigate('additionalInformationPackage');
+  };
+
+  const onEdit = (id: string) => {
+    setRules(prev =>
+      prev.map(item =>
+        item.id === id ? {...item, isEditing: true, tempText: item.rule} : item,
+      ),
+    );
+  };
+
+  const onCancel = (id: string) => {
+    setRules(prev =>
+      prev.map(item =>
+        item.id === id ? {...item, isEditing: false, tempText: ''} : item,
+      ),
+    );
+  };
+
+  const onSave = (id: string) => {
+    setRules(prev =>
+      prev.map(item =>
+        item.id === id
+          ? {...item, rule: item.tempText, isEditing: false, tempText: ''}
+          : item,
+      ),
+    );
+  };
+
+  const onChangeTempText = (id: string, text: string) => {
+    setRules(prev =>
+      prev.map(item => (item.id === id ? {...item, tempText: text} : item)),
+    );
+  };
+
+  const renderItem = ({item, index}: any) => (
+    <View style={styles.ruleItem}>
+      <View style={styles.numberView}>
+        <Text style={styles.numbersText}>{index + 1}</Text>
+      </View>
+
+      {item.isEditing ? (
+        <TextInput
+          style={styles.input}
+          value={item.tempText}
+          onChangeText={text => onChangeTempText(item.id, text)}
+          multiline
+        />
+      ) : (
+        <Text style={styles.rulesText}>{item.rule}</Text>
+      )}
+
+      <View style={styles.iconContainer}>
+        {item.isEditing ? (
+          <>
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() => onSave(item.id)}>
+              <Image source={icons.nextArrowIcon} style={styles.image} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() => onCancel(item.id)}>
+              <Image source={images.deleteIcon} style={styles.image} />
+            </TouchableOpacity>
+          </>
+        ) : (
+          <>
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() => onEdit(item.id)}>
+              <Image style={styles.image} source={images.editIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.iconButton}>
+              <Image style={styles.image} source={images.deleteIcon} />
+            </TouchableOpacity>
+          </>
+        )}
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -33,7 +126,21 @@ const AddRulesPackageScreen: React.FC = () => {
             <Text style={styles.title}>{constant.addRules}</Text>
             <Text style={styles.subTitle}>{constant.addAnyExtra}</Text>
           </View>
-          <View style={styles.paddingView}></View>
+
+          <FlatList
+            data={rules} // ✅ this is the key fix
+            keyExtractor={item => item.id}
+            renderItem={renderItem}
+            contentContainerStyle={styles.listStyle}
+          />
+
+          <View style={styles.bottomContainer}>
+            <ASButton
+              title={constant.continue}
+              customStyle={styles.btnContinue}
+              onPress={moveToNextScreen}
+            />
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </View>
@@ -45,23 +152,82 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  scrollContent: {
+    paddingBottom: 200,
+  },
+  paddingView: {
+    marginHorizontal: 16,
+    marginTop: 20,
+  },
   title: {
     fontFamily: Fonts.medium,
     fontSize: 16,
     color: colors.appColor,
-    top: 10,
   },
   subTitle: {
     fontFamily: Fonts.regular,
     fontSize: 14,
     color: colors.textPrimary2,
-    top: 10,
+    marginTop: 6,
   },
-  paddingView: {
-    marginHorizontal: 16,
+  listStyle: {
+    marginTop: 64,
+    paddingHorizontal: 16,
   },
-  scrollContent: {
-    paddingBottom: '70%',
+  ruleItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  numberView: {
+    width: 25,
+    height: 25,
+    backgroundColor: colors.appLightColor,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 8,
+  },
+  numbersText: {
+    fontSize: 12,
+    fontFamily: Fonts.medium,
+    color: colors.appColor,
+  },
+  rulesText: {
+    flex: 1,
+    fontSize: 14,
+    fontFamily: Fonts.regular,
+    color: colors.textPrimary2,
+    marginRight: 10,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  iconButton: {
+    padding: 4,
+  },
+  image: {
+    width: 16,
+    height: 16,
+  },
+  input: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: colors.lineColor,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    fontSize: 14,
+    fontFamily: Fonts.regular,
+    color: colors.textPrimary2,
+    marginRight: 10,
+    minHeight: 52,
+  },
+  clearText: {
+    color: colors.appColor,
+    fontSize: 12,
+    fontFamily: Fonts.medium,
   },
   bottomContainer: {
     position: 'absolute',
@@ -71,7 +237,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
   },
-  continueButton: {
+  btnContinue: {
     backgroundColor: colors.appColor,
     margin: 16,
     paddingVertical: 14,

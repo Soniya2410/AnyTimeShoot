@@ -224,7 +224,7 @@ export const constant = {
   addRules: "Add Rules / Terms & Conditions ",
   addAnyExtra: "Add any extra terms which customer should keep in mind for the shoot .",
   rulesText: "Shoot will be done in the mentioned hours only and extra hours will charge extra.",
-
+  save: "Save",
 
 
 }
