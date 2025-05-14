@@ -59,6 +59,9 @@ import AddDeliveryDetailScreen from './screens/booking/creations/AddDeliveryDeta
 import PricingDetailPackageScreen from './screens/booking/creations/PricingDetailPackageScreen.tsx';
 import AddRulesPackageScreen from './screens/booking/creations/AddRulesPackageScreen.tsx';
 import AdditionalInformationPackageScreen from './screens/booking/creations/AdditionInfomationPackageScreen.tsx';
+import ExtraPerksPackageScreen from './screens/booking/creations/ExtraPerksPackageScreen.tsx';
+import AddSamplePackageScreen from './screens/booking/creations/AddSamplePackageScreen.tsx';
+import DeliverableDetailScreen from './screens/booking/creations/DeliverablePackageScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -97,6 +100,9 @@ export type RootStackParamList = {
   pricingDetailPackage: undefined;
   addRulesPackage: undefined;
   additionalInformationPackage: undefined;
+  extraPerksPackage: undefined;
+  addSamplePackage: undefined;
+  deliverablePackage: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -863,6 +869,129 @@ const App: React.FC = () => {
           <Stack.Screen
             name='additionalInformationPackage'
             component={AdditionalInformationPackageScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name='extraPerksPackage'
+            component={ExtraPerksPackageScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name='addSamplePackage'
+            component={AddSamplePackageScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                      tintColor: colors.white,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name='deliverablePackage'
+            component={DeliverableDetailScreen}
             options={{
               headerTitle: 'Package Creation',
               headerTitleAlign: 'left',

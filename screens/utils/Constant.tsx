@@ -225,6 +225,23 @@ export const constant = {
   addAnyExtra: "Add any extra terms which customer should keep in mind for the shoot .",
   rulesText: "Shoot will be done in the mentioned hours only and extra hours will charge extra.",
   save: "Save",
+  extraPerks: "Extra Perks",
+  deliverSomethingExtra: "Deliver something extra to win over your customer.",
+  yourPackageWillBe: "Your package will give:",
+  addExtraPerks: "Add extra  perks which you are giving in package:",
+  fastPostProduction: "Fast Post Production",
+  wardrobes: "Wardobes",
+  doorStepShoot: "Door Step Shoot",
+  postingTips: "Posing Tips",
+  scripting: "Scripting",
+  onlineSharing: "Online Sharing",
+  freeEInvites: "Free E-Invites",
+  other: "Other",
+  addSampleForPackage: "Add Sample for package",
+  provideSample: "Provide sample image/videos for the shoot and deliverables .",
+  thumbnailImage:"Thumbnail Image *",
+  sampleVideo: "Sample Video",
+  sampleImages: "Sample Images",
 
 
 }

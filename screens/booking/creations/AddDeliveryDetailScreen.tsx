@@ -51,7 +51,7 @@ const AddDeliveryDetailScreen: React.FC = () => {
                 placeholderTextColor={colors.lineColor}></TextInput> */}
               <RNPickerSelect
                 onValueChange={value => setEditedDataDeliveryMode(value)}
-                value={editedDataDeliveryMode} // ✅ Add this
+                value={editedDataDeliveryMode} 
                 placeholder={{label: constant.selectMode, value: null}}
                 items={[
                   {label: constant.offline, value: constant.offline},

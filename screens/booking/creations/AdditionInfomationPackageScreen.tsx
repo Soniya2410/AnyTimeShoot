@@ -19,12 +19,21 @@ import {RootStackNavigationProp} from '../../../App';
 import {images} from '../../utils/Images';
 import {ASButton} from '../../components/ASButton';
 import {icons} from '../../utils/Icons';
+import RNPickerSelect from 'react-native-picker-select';
 
 const AdditionalInformationPackageScreen: React.FC = () => {
   const navigation =
     useNavigation<RootStackNavigationProp<'additionalInformationPackage'>>();
+const [rawDataDeliveryMode, setRawDataDeliveryMode] = useState<string | null>(
+    null,
+  );
+   const [editedDataDeliveryMode, setEditedDataDeliveryMode] = useState<
+      string | null
+    >(null);
 
-  const moveToNextScreen = () => {};
+  const moveToNextScreen = () => {
+    navigation.navigate('extraPerksPackage');
+  };
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView
@@ -34,6 +43,43 @@ const AdditionalInformationPackageScreen: React.FC = () => {
           <View style={styles.paddingView}>
             <Text style={styles.title}>{constant.addRules}</Text>
             <Text style={styles.subTitle}>{constant.addAnyExtra}</Text>
+          </View>
+          <View style={styles.paddingView}>
+            <View style={{marginTop: 5}}>
+              <Text style={styles.deliveryMode}>{constant.chooseCancellationPolicy}</Text>
+              {/* <TextInput
+                style={styles.input}
+                placeholder={constant.selectMode}
+                placeholderTextColor={colors.lineColor}></TextInput> */}
+              <RNPickerSelect
+                onValueChange={value => setEditedDataDeliveryMode(value)}
+                value={editedDataDeliveryMode} 
+                placeholder={{label: constant.selectMode, value: null}}
+                items={[
+                  {label: constant.offline, value: constant.offline},
+                  {label: constant.cloudSharing, value: constant.cloudSharing},
+                ]}
+                useNativeAndroidPickerStyle={false}
+                style={{
+                  inputIOS: styles.input,
+                  inputAndroid: styles.input,
+                  placeholder: {
+                    color: colors.lineColor,
+                  },
+                }}
+              />
+            </View>
+
+            <View style={{marginTop: 23}}>
+              <Text style={styles.deliveryMode}>{constant.locationWhereYouAccepting}</Text>
+              <TextInput
+                style={styles.input}
+                placeholder={constant.numberOfDays}
+                placeholderTextColor={colors.lineColor}></TextInput>
+            </View>
+          </View>
+          <View style={styles.bottomContainer}>
+          <ASButton title={constant.continue} onPress={moveToNextScreen} customStyle={styles.btnContinue} />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -47,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   scrollContent: {
-    paddingBottom: 200,
+    paddingBottom: '100%',
   },
   paddingView: {
     marginHorizontal: 16,
@@ -91,6 +137,23 @@ const styles = StyleSheet.create({
     color: colors.textPrimary2,
     marginRight: 10,
     minHeight: 52,
+    marginTop: 3,
+  },
+   deliveryMode: {
+    fontSize: 15,
+    color: colors.textPrimary2,
+    fontFamily: Fonts.medium,
+  },
+   rawData: {
+    fontFamily: Fonts.medium,
+    fontSize: 16,
+    color: colors.appColor,
+    marginTop: 32,
+  },
+   placeholder: {
+    fontSize: 12,
+    color: colors.lineColor,
+    fontFamily: Fonts.medium,
   },
 });
 
