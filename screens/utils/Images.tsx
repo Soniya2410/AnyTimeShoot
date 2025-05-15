@@ -99,7 +99,7 @@ export const images = {
   wardrobe: require('../../assets/images/wardrobe.png'),
   editIcon: require('../../assets/images/editIcon.png'),
   deleteIcon: require('../../assets/images/deleteIcon.png'),
-
+  selectedIcon: require('../../assets/images/selectedIcon.png'),
 
 
   home1: require('../../assets/images/home/home_1.png'),

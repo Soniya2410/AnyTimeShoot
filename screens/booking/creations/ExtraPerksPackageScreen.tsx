@@ -34,7 +34,7 @@ const ExtraPerksPackageScreen: React.FC = () => {
   const [customPerk, setCustomPerk] = useState('');
 
   const moveToNextScreen = () => {
-  navigation.navigate('addSamplePackage')
+  navigation.navigate('addSamplePackage');
   };
 
   const togglePerk = (perk: string) => {

@@ -8,49 +8,277 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
+  Image,
 } from 'react-native';
-import {constant} from '../../utils/Constant';
-import {Fonts} from '../../utils/Fonts';
 import {ASButton} from '../../components/ASButton';
+import {constant} from '../../utils/Constant';
 import {colors} from '../../utils/Colors';
+import {Fonts} from '../../utils/Fonts';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../../App';
-import RNPickerSelect from 'react-native-picker-select';
+import { images } from '../../utils/Images';
+
+type Deliverable = {
+  id: number;
+  name: string;
+  quantity?: string;
+  isSelected: boolean;
+  isCustom?: boolean;
+};
 
 const DeliverableDetailScreen: React.FC = () => {
-    return (
-<KeyboardAvoidingView
+  const navigation =
+    useNavigation<RootStackNavigationProp<'deliverablePackage'>>();
+  const [deliverables, setDeliverables] = useState<Deliverable[]>([
+    {id: 1, name: 'Raw Images', isSelected: false},
+    {id: 2, name: 'Edited Images', isSelected: false},
+    {id: 3, name: 'Raw Video', isSelected: false},
+    {id: 4, name: 'Edited Videos', isSelected: false},
+    {id: 5, name: 'Reels', isSelected: false},
+    {id: 6, name: 'Video Teaser', isSelected: false},
+    {id: 7, name: 'Highlight Video', isSelected: false},
+    {id: 8, name: 'Album', isSelected: false},
+    {id: 9, name: 'Photo Frame', isSelected: false},
+  ]);
+  const [customDeliverable, setCustomDeliverable] = useState<Deliverable>({
+    id: 10,
+    name: '',
+    quantity: '',
+    isSelected: false,
+    isCustom: true,
+  });
+
+  const toggleSelection = (id: number) => {
+    setDeliverables(prev =>
+      prev.map(item =>
+        item.id === id ? {...item, isSelected: !item.isSelected} : item,
+      ),
+    );
+  };
+
+  const handleQuantityChange = (id: number, value: string) => {
+    setDeliverables(prev =>
+      prev.map(item => (item.id === id ? {...item, quantity: value} : item)),
+    );
+  };
+
+  const moveToNextScreen = () => {};
+
+  return (
+    <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.title}>{constant.addSampleForPackage}</Text>
-        <Text style={styles.subTitle}>{constant.provideSample}</Text>
-        </ScrollView>
-        </KeyboardAvoidingView>
-    );
+        <Text style={styles.title}>{constant.deliverable}</Text>
+        <Text style={styles.subTitle}>{constant.mentionDetails}</Text>
+        // Deliverable Details
+     {/* Deliverable Details */}
+
+        {deliverables.map(item => (
+          <View key={item.id} style={styles.itemContainer}>
+            <TouchableOpacity onPress={() => toggleSelection(item.id)} style={styles.row}>
+              <Text style={styles.itemText}>{item.id}. {item.name}</Text>
+              {item.isSelected ? (
+                <Image source={images.selectedIcon} style={styles.selectedIcon} />
+              ) : (
+                <View style={styles.checkbox} />
+              )}
+            </TouchableOpacity>
+            {item.isSelected && (
+              <>
+                <View style={styles.inputRow}>
+                  <TextInput
+                    placeholder=""
+                    keyboardType="number-pad"
+                    style={styles.input}
+                    value={item.quantity}
+                    onChangeText={value => handleQuantityChange(item.id, value)}
+                  />
+                  <Text style={styles.unitText}>{constant.images}</Text>
+                </View>
+                <Text style={styles.helperText}>
+                  {constant.give}
+                  <Text style={styles.highlightText}>
+                    {constant.minimum}
+                    <Text style={styles.helperText}>{constant.numberOfImage}</Text>
+                  </Text>
+                </Text>
+              </>
+            )}
+          </View>
+        ))}
+        // Custom Deliverable
+        <View style={styles.itemContainer}>
+          <TouchableOpacity
+            onPress={() =>
+              setCustomDeliverable(prev => ({
+                ...prev,
+                isSelected: !prev.isSelected,
+              }))
+            }
+            style={styles.row}>
+            <Text style={styles.itemText}>{constant.other10}</Text>
+            <View
+              style={[
+                styles.addButton,
+                customDeliverable.isSelected && styles.addButtonSelected,
+              ]}>
+              <Text
+                style={[
+                  styles.plus,
+                  customDeliverable.isSelected && styles.plusSelected,
+                ]}>
+                +
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          {customDeliverable.isSelected && (
+            <View>
+              <Text style={styles.otherText}>{constant.deliverable}</Text>
+              <TextInput
+                placeholder={constant.nameDeliverable}
+                style={styles.inputOther}
+                value={customDeliverable.name}
+                onChangeText={text =>
+                  setCustomDeliverable(prev => ({...prev, name: text}))
+                }
+              />
+              <Text style={styles.otherText}>{constant.quantity}</Text>
+              <TextInput
+                placeholder={constant.numberOfTheDeliverable}
+                keyboardType="number-pad"
+                style={styles.inputOther}
+                value={customDeliverable.quantity}
+                onChangeText={text =>
+                  setCustomDeliverable(prev => ({...prev, quantity: text}))
+                }
+              />
+              <Text style={styles.helperText}>
+                {constant.give}
+                <Text style={styles.highlightText}>
+                  {constant.minimum}
+                  <Text style={styles.helperText}>
+                    {constant.numberOfImage}
+                  </Text>
+                </Text>
+              </Text>
+            </View>
+          )}
+        </View>
+      </ScrollView>
+
+      <View style={styles.bottomContainer}>
+        <ASButton
+          title={constant.continue}
+          customStyle={styles.btnContinue}
+          onPress={moveToNextScreen}
+        />
+      </View>
+    </KeyboardAvoidingView>
+  );
 };
 
 const styles = StyleSheet.create({
-container: {
+  container: {
     flex: 1,
     backgroundColor: colors.white,
+  },
+  scrollContent: {
+    padding: 16,
+    paddingBottom: 100,
   },
   title: {
     fontFamily: Fonts.medium,
     fontSize: 16,
     color: colors.appColor,
-    marginRight: 16,
-    marginLeft: 16,
   },
   subTitle: {
     fontFamily: Fonts.regular,
     fontSize: 14,
     color: colors.textPrimary2,
-    marginRight: 16,
-    marginLeft: 16,
-    top: 10,
+    marginTop: 8,
   },
-   bottomContainer: {
+  itemContainer: {
+    marginTop: 16,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  itemText: {
+    fontFamily: Fonts.medium,
+    fontSize: 14,
+    color: colors.black,
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: colors.appColor,
+  },
+  checkedBox: {
+    backgroundColor: colors.appColor,
+  },
+  inputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+    width: '50%',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: colors.appColor,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    flex: 1,
+    height: 41,
+    color: colors.appColor,
+  },
+  inputOther: {
+    borderWidth: 1,
+    borderColor: colors.lineColor,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    flex: 1,
+    height: 41,
+    color: colors.appColor,
+  },
+  unitText: {
+    marginLeft: 8,
+    fontSize: 12,
+    fontFamily: Fonts.medium,
+    color: colors.appColor,
+  },
+  helperText: {
+    fontSize: 12,
+    color: colors.textPrimary2,
+    marginTop: 4,
+    fontFamily: Fonts.regular,
+  },
+  highlightText: {
+    fontSize: 12,
+    color: colors.textPrimary2,
+    fontFamily: Fonts.bold,
+  },
+  addButton: {
+    width: 24,
+    height: 24,
+    borderWidth: 1,
+    borderColor: colors.appColor,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  plus: {
+    fontSize: 16,
+    color: colors.appColor,
+  },
+  bottomContainer: {
     position: 'absolute',
     bottom: 0,
     width: '100%',
@@ -60,14 +288,29 @@ container: {
   },
   btnContinue: {
     backgroundColor: colors.appColor,
-    margin: 16,
     paddingVertical: 14,
     borderRadius: 50,
     alignItems: 'center',
-    marginTop: 15,
   },
-  scrollContent: {
-    paddingBottom: '100%',
+  otherText: {
+    color: colors.appColor,
+    fontFamily: Fonts.medium,
+    fontSize: 15,
+    marginTop: 11,
+  },
+  selectedIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+    backgroundColor: colors.appColor,
+    borderRadius: 6,
+  },
+  addButtonSelected: {
+    backgroundColor: colors.appColor,
+  },
+  plusSelected: {
+    color: colors.white,
   },
 });
+
 export default DeliverableDetailScreen;
