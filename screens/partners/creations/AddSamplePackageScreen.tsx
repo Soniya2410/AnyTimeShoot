@@ -9,6 +9,7 @@ import {
   Platform,
   TouchableOpacity,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import {constant} from '../../utils/Constant';
 import {Fonts} from '../../utils/Fonts';
@@ -27,33 +28,29 @@ const AddSamplePackageScreen: React.FC = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.viewStyle}>
         <Text style={styles.title}>{constant.addSampleForPackage}</Text>
         <Text style={styles.subTitle}>{constant.provideSample}</Text>
-
         <View style={styles.thumbView}>
           <View>
-            <Text style={styles.title}>{constant.thumbnailImage}</Text>
-            <View style={styles.thumbBg}>
+            <Text style={styles.categoryTitle}>{constant.thumbnailImage}</Text>
+            <TouchableOpacity style={styles.thumbBg}>
               <Image source={images.file} style={styles.image} />
               <Text style={styles.text1}>{constant.chooseAfile}</Text>
               <Text style={styles.text2}>{constant.jpegOrPngFormats}</Text>
-            </View>
+            </TouchableOpacity>
           </View>
-
           <View>
-            <Text style={styles.title}>{constant.sampleVideo}</Text>
-            <View style={styles.thumbBg}>
+            <Text style={styles.categoryTitle}>{constant.sampleVideo}</Text>
+            <TouchableOpacity style={styles.thumbBg}>
               <Image source={images.file} style={styles.image} />
               <Text style={styles.text1}>{constant.chooseAfile}</Text>
               <Text style={styles.text2}>{constant.jpegOrPngFormats}</Text>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
-
+        <Text style={styles.categoryTitle2}>{constant.sampleImages}</Text>
         <View style={styles.sampleImagesView}>
           <Image source={images.file} style={styles.image} />
           <Text style={styles.sampleImageText1}>{constant.chooseAfile}</Text>
@@ -61,16 +58,13 @@ const AddSamplePackageScreen: React.FC = () => {
             {constant.jpegOrPngFormats}
           </Text>
         </View>
-
-        <View style={styles.bottomContainer}>
-          <ASButton
-            title={constant.continue}
-            customStyle={styles.btnContinue}
-            onPress={moveToNextScreen}
-          />
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        <ASButton
+          title={'Upload'}
+          customStyle={styles.btnContinue}
+          onPress={moveToNextScreen}
+        />
+      </SafeAreaView>
   );
 };
 
@@ -79,20 +73,34 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  viewStyle : {
+    marginHorizontal: 16,
+    height: '90%'
+  },
   title: {
     fontFamily: Fonts.medium,
     fontSize: 16,
     color: colors.appColor,
-    marginRight: 16,
-    marginLeft: 16,
+    marginVertical: 5
+
+  },
+  categoryTitle: {
+    fontFamily: Fonts.medium,
+    fontSize: 16,
+    color: colors.textPrimary2,
+  },
+  categoryTitle2: {
+    fontFamily: Fonts.medium,
+    fontSize: 16,
+    color: colors.textPrimary2,
+    marginVertical: 5,
+    marginTop: 20
   },
   subTitle: {
-    fontFamily: Fonts.regular,
+    fontFamily: Fonts.light,
     fontSize: 14,
     color: colors.textPrimary2,
-    marginRight: 16,
-    marginLeft: 16,
-    top: 10,
+   
   },
   bottomContainer: {
     position: 'absolute',
@@ -104,19 +112,17 @@ const styles = StyleSheet.create({
   },
   btnContinue: {
     backgroundColor: colors.appColor,
-    margin: 16,
+    // margin: 16,
     paddingVertical: 14,
     borderRadius: 50,
     alignItems: 'center',
     marginTop: 15,
   },
-  scrollContent: {
-    paddingBottom: '100%',
-  },
+  
   thumbView: {
     flexDirection: 'row',
+    justifyContent:'space-between',
     marginTop: 24,
-    marginRight: 8,
   },
   image: {
     width: 34,
@@ -129,9 +135,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 20,
-    height: 119,
-    width: 154,
+    // marginLeft: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    minHeight: 120,
+    // width: 154,
     marginTop: 10,
   },
   text1: {
@@ -140,7 +148,7 @@ const styles = StyleSheet.create({
     color: colors.appColor,
   },
   text2: {
-    fontSize: 6,
+    fontSize: 8,
     fontFamily: Fonts.medium,
     color: colors.textPrimary2,
   },
@@ -159,12 +167,10 @@ const styles = StyleSheet.create({
     borderColor: colors.lineColor,
     borderWidth: 1,
     borderRadius: 8,
-    marginTop: 24,
-    marginRight: 16,
-    marginLeft: 16,
-    height: '40%',
     justifyContent: 'center',
     alignItems: 'center',
+    minHeight: 150,
+    marginVertical: 10
   },
 });
 

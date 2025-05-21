@@ -17,51 +17,60 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 // Screens
-import HomeScreen from './screens/Home/HomeScreen';
+import HomeScreen from './screens/home/HomeScreen.tsx';
 import ProfileScreen from './screens/profile/ProfileScreen.tsx';
-import CategoryScreen from './screens/Home/CategoryScreen';
-import MyBookingsScreen from './screens/Home/MyBookingsScreen.tsx';
+import CategoryScreen from './screens/home/CategoryScreen.tsx';
+import MyBookingsScreen from './screens/home/MyBookingsScreen.tsx';
 import {images} from './screens/utils/Images';
 import {colors} from './screens/utils/Colors';
 
 // Onboarding Screens
-import OnboardScreen from './screens/Home/OnboardScreen';
-import LoginScreen from './screens/Home/LoginScreen';
+import OnboardScreen from './screens/auth/OnboardScreen.tsx';
+import LoginScreen from './screens/auth/LoginScreen.tsx';
 import OnboardSlider from './screens/components/OnboardSlider';
-import OTPSCreen from './screens/Home/OTPScreen';
-import SuccessScreen from './screens/Home/SuccessScreen';
-import SignInScreen from './screens/Home/SignInScreen';
-import MessageScreen from './screens/Home/MessageScreen';
+import OTPSCreen from './screens/auth/OTPScreen.tsx';
+import SuccessScreen from './screens/home/SuccessScreen.tsx';
+import SignInScreen from './screens/auth/SignInScreen.tsx';
+import MessageScreen from './screens/home/MessageScreen.tsx';
 import BookingListScreen from './screens/booking/BookingListScreen';
 import {icons} from './screens/utils/Icons.tsx';
-import CouponScreen from './screens/Home/CouponScreen.tsx';
+import CouponScreen from './screens/home/CouponScreen.tsx';
 import CancelledBookingScreen from './screens/booking/CancelledBookingScreen.tsx';
 import NoBookingScreen from './screens/booking/NoBookingScreen.tsx';
-import SuccessPopupCreationSccreen from './screens/creations/SuccessPopupCreationScreen.tsx';
+import SuccessPopupCreationSccreen from './screens/partners/creations/SuccessPopupCreationScreen.tsx';
 import CompletedBookingDetailScreen from './screens/booking/CompletedBookingDetailScreen.tsx';
 import UpcomingBookingDetailScreen from './screens/booking/UpcomingBookingDetailScreen.tsx';
 import UpcomingShootStartedScreen from './screens/booking/UpcomingShootStartedScreen.tsx';
 import UpcomingShootCompletedScreen from './screens/booking/UpcomingShootCompletedScreen.tsx';
 import UpcomingEditingInprogressScreen from './screens/booking/UpcomingEditingInprogressScreen.tsx';
 import ProfileDetailScreen from './screens/profile/ProfileDetailScreen.tsx';
-import PackageList from './screens/Home/PackageList.tsx';
+import PackageList from './screens/home/PackageList.tsx';
 import PackageDetails from './screens/booking/PackageDetails.tsx';
 import {constant} from './screens/utils/Constant.tsx';
-import ReviewsScreen from './screens/Home/ReviewsScreen.tsx';
-import BookingDetailScreen from './screens/Home/BookingDetailScreen.tsx';
-import PackageCreationScreen from './screens/creations/PackageCreationScreen.tsx';
-import NotificationScreen from './screens/Home/NotificationScreen.tsx';
-import WishlistScreen from './screens/Home/WishlistScreen.tsx';
-import ChooseCategoryPackage from './screens/booking/creations/ChooseCategoryPackage.tsx';
-import AddDetailsPackageScreen from './screens/booking/creations/AddDetailsPackageScreen.tsx';
-import AddStudioDetailsPackageScreen from './screens/booking/creations/AddStudioDetailsPackageScreen.tsx';
-import AddDeliveryDetailScreen from './screens/booking/creations/AddDeliveryDetailScreen.tsx';
-import PricingDetailPackageScreen from './screens/booking/creations/PricingDetailPackageScreen.tsx';
-import AddRulesPackageScreen from './screens/booking/creations/AddRulesPackageScreen.tsx';
-import AdditionalInformationPackageScreen from './screens/booking/creations/AdditionInfomationPackageScreen.tsx';
-import ExtraPerksPackageScreen from './screens/booking/creations/ExtraPerksPackageScreen.tsx';
-import AddSamplePackageScreen from './screens/booking/creations/AddSamplePackageScreen.tsx';
-import DeliverableDetailScreen from './screens/booking/creations/DeliverablePackageScreen.tsx';
+import ReviewsScreen from './screens/home/ReviewsScreen.tsx';
+import BookingDetailScreen from './screens/home/BookingDetailScreen.tsx';
+import PackageCreationScreen from './screens/partners/creations/PackageCreationScreen.tsx';
+import NotificationScreen from './screens/home/NotificationScreen.tsx';
+import WishlistScreen from './screens/home/WishlistScreen.tsx';
+import ChooseCategoryPackage from './screens/partners/creations/ChooseCategoryPackage.tsx';
+import AddDetailsPackageScreen from './screens/partners/creations/AddDetailsPackageScreen.tsx';
+import AddStudioDetailsPackageScreen from './screens/partners/creations/AddStudioDetailsPackageScreen.tsx';
+import AddDeliveryDetailScreen from './screens/partners/creations/AddDeliveryDetailScreen.tsx';
+import PricingDetailPackageScreen from './screens/partners/creations/PricingDetailPackageScreen.tsx';
+import AddRulesPackageScreen from './screens/partners/creations/AddRulesPackageScreen.tsx';
+import AdditionalInformationPackageScreen from './screens/partners/creations/AdditionInfomationPackageScreen.tsx';
+import ExtraPerksPackageScreen from './screens/partners/creations/ExtraPerksPackageScreen.tsx';
+import AddSamplePackageScreen from './screens/partners/creations/AddSamplePackageScreen.tsx';
+import DeliverableDetailScreen from './screens/partners/creations/DeliverablePackageScreen.tsx';
+import TermsOfUseScreen from './screens/profile/TermsOfUseScreen.tsx';
+import CancellationPolicyScreen from './screens/profile/CancellationPolicyScreen.tsx';
+import ContactUsScreen from './screens/profile/ContactUsScreen.tsx';
+import PartnerOnboardingScreen from './screens/partners/onboarding/PartnerOnBoardingScreen.tsx';
+import PartnerRegistrationScreen from './screens/partners/onboarding/PartnerRegistrationScreen.tsx';
+import PackageCreationSuccessScreen from './screens/partners/onboarding/PackageCreationSuccess.tsx';
+import PartnerOTPScreen from './screens/partners/onboarding/PartnerOTPScreen.tsx';
+import PartnerOTPVerificationScreen from './screens/partners/onboarding/PartnerOTPVerificationScreen.tsx';
+
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -103,6 +112,14 @@ export type RootStackParamList = {
   extraPerksPackage: undefined;
   addSamplePackage: undefined;
   deliverablePackage: undefined;
+  contactUs: undefined;
+  cancellationPolicy: undefined;
+  termsOfUse: undefined;
+  partnersOnboarding: undefined;
+  partnerRegister: undefined;
+  packageCreationSuccess: undefined;
+  partnerOTPScreen: undefined;
+  partnerOTPVerify: {selectionOption: string};
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -468,9 +485,7 @@ const App: React.FC = () => {
           <Stack.Screen
             name="successCreation"
             component={SuccessPopupCreationSccreen}
-            options={{
-              headerTitle: '',
-            }}
+            options={{title: '', headerShown: false}}
           />
 
           <Stack.Screen
@@ -567,7 +582,9 @@ const App: React.FC = () => {
             name="packageCreation"
             component={PackageCreationScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -608,7 +625,9 @@ const App: React.FC = () => {
             name="chooseCategoryCreation"
             component={ChooseCategoryPackage}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -665,9 +684,9 @@ const App: React.FC = () => {
             name="addDetailsPackage"
             component={AddDetailsPackageScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: '',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -706,9 +725,9 @@ const App: React.FC = () => {
             name="addStudioDetailsPackage"
             component={AddStudioDetailsPackageScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: '',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -747,9 +766,9 @@ const App: React.FC = () => {
             name='addDeliveryDetailsPackage'
             component={AddDeliveryDetailScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: '',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -788,9 +807,9 @@ const App: React.FC = () => {
             name='pricingDetailPackage'
             component={PricingDetailPackageScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: '',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -829,9 +848,9 @@ const App: React.FC = () => {
             name='addRulesPackage'
             component={AddRulesPackageScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: '',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -870,9 +889,9 @@ const App: React.FC = () => {
             name='additionalInformationPackage'
             component={AdditionalInformationPackageScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: '',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -911,9 +930,9 @@ const App: React.FC = () => {
             name='extraPerksPackage'
             component={ExtraPerksPackageScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: '',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -952,7 +971,9 @@ const App: React.FC = () => {
             name='addSamplePackage'
             component={AddSamplePackageScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -993,9 +1014,79 @@ const App: React.FC = () => {
             name='deliverablePackage'
             component={DeliverableDetailScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
+              headerBackTitle: 'Package Creation',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="contactUs"
+            component={ContactUsScreen}
+            options={{
               headerBackTitle: '',
+              headerTitle: 'Contact Us',
+            }}
+          />
+          <Stack.Screen
+            name="termsOfUse"
+            component={TermsOfUseScreen}
+            options={{
+              headerBackTitle: '',
+              headerTitle: 'Terms Of Use',
+            }}
+          />
+          <Stack.Screen
+            name="cancellationPolicy"
+            component={CancellationPolicyScreen}
+            options={{
+              headerBackTitle: '',
+              headerTitle: 'Cancellation Policy',
+            }}
+          />
+           <Stack.Screen
+            name="partnersOnboarding"
+            component={PartnerOnboardingScreen}
+            options={{title: '', headerShown: false}}
+          />
+
+          <Stack.Screen
+            name="partnerRegister"
+            component={PartnerRegistrationScreen}
+            options={{
+              headerTitle: '',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'AnyTimeShoot',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -1030,6 +1121,127 @@ const App: React.FC = () => {
             }}
           />
 
+          <Stack.Screen
+            name="packageCreationSuccess"
+            component={PackageCreationSuccessScreen}
+            options={{
+              headerTitle: '',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'AnyTimeShoot',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="partnerOTPScreen"
+            component={PartnerOTPScreen}
+            options={{
+              headerTitle: '',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'AnyTimeShoot',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="partnerOTPVerify"
+            component={PartnerOTPVerificationScreen}
+            options={{
+              headerTitle: '',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'AnyTimeShoot',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

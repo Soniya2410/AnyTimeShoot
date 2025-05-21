@@ -2,7 +2,6 @@ import React from 'react';
 import { View, TextInput, Image, StyleSheet, Text } from 'react-native';
 import { colors } from '../utils/Colors';
 import { Fonts } from '../utils/Fonts';
-import { constant } from '../utils/Constant';
 import { images } from '../utils/Images';
 
 interface ASTextInputProps {

@@ -10,6 +10,7 @@ import {
   Image,
   FlatList,
   TextInput,
+  SafeAreaView,
 } from 'react-native';
 import {constant} from '../../utils/Constant';
 import {Fonts} from '../../utils/Fonts';
@@ -34,7 +35,7 @@ const AddRulesPackageScreen: React.FC = () => {
   const [rules, setRules] = useState(rulesList);
 
   const moveToNextScreen = () => {
-    navigation.navigate('additionalInformationPackage');
+    navigation.navigate('pricingDetailPackage');
   };
 
   const onEdit = (id: string) => {
@@ -117,33 +118,27 @@ const AddRulesPackageScreen: React.FC = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.paddingView}>
       <KeyboardAvoidingView
         style={{flex: 1}}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        <ScrollView contentContainerStyle={styles.scrollContent}>
-          <View style={styles.paddingView}>
-            <Text style={styles.title}>{constant.addRules}</Text>
-            <Text style={styles.subTitle}>{constant.addAnyExtra}</Text>
-          </View>
-
+          <Text style={styles.title}>{constant.addRules}</Text>
+          <Text style={styles.subTitle}>{constant.addAnyExtra}</Text>
           <FlatList
-            data={rules} // ✅ this is the key fix
+            data={rules} 
             keyExtractor={item => item.id}
             renderItem={renderItem}
             contentContainerStyle={styles.listStyle}
           />
-
-          <View style={styles.bottomContainer}>
-            <ASButton
-              title={constant.continue}
-              customStyle={styles.btnContinue}
-              onPress={moveToNextScreen}
-            />
-          </View>
-        </ScrollView>
       </KeyboardAvoidingView>
-    </View>
+      </View>
+      <ASButton
+        title={constant.continue}
+        customStyle={styles.btnContinue}
+        onPress={moveToNextScreen}
+      />
+    </SafeAreaView>
   );
 };
 
@@ -152,27 +147,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
-  scrollContent: {
-    paddingBottom: 200,
-  },
   paddingView: {
-    marginHorizontal: 16,
-    marginTop: 20,
+    height:'90%',
+    marginHorizontal: 16
   },
   title: {
     fontFamily: Fonts.medium,
     fontSize: 16,
     color: colors.appColor,
+    marginTop: 10
   },
   subTitle: {
     fontFamily: Fonts.regular,
-    fontSize: 14,
+    fontSize: 15,
     color: colors.textPrimary2,
-    marginTop: 6,
+    marginTop: 16,
   },
   listStyle: {
     marginTop: 64,
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
   },
   ruleItem: {
     flexDirection: 'row',

@@ -19,9 +19,7 @@ import {images} from '../../utils/Images';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../../App';
 import {FlatList} from 'react-native-gesture-handler';
-
-const screenWidth = Dimensions.get('window').width;
-const cardSize = (screenWidth - 50) / 3; // 3 columns, 16px padding on both sides + 16px spacing
+import { StudioFacilitiesItems } from '../../booking/component/StudioFacilitiesItems';
 
 const studioDetails = [
   {
@@ -83,46 +81,21 @@ const studioDetails = [
 const AddStudioDetailsPackageScreen: React.FC = () => {
    const navigation = useNavigation<RootStackNavigationProp<'addStudioDetailsPackage'>>();
 
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+
   const [selectedStudio, setSelectedStudio] = useState<'Yes' | 'No' | null>(
     null,
   );
   const moveToAddStudioDetails = () => {
-    navigation.navigate('addDeliveryDetailsPackage');
+    navigation.navigate('addSamplePackage');
   };
 
-  const renderItem = ({item}: any) => {
-    const isSelected = selectedId === item.id;
-    return (
-      <TouchableOpacity
-        onPress={() => setSelectedId(item.id)}
-        style={[styles.card, isSelected && styles.selectedCard]}>
-        <Image
-          source={item.image}
-          style={[
-            styles.gridImage,
-            {tintColor: isSelected ? colors.white : undefined},
-          ]}
-        />
-        <Text style={[styles.titleText]}>
-          {item.title}
-        </Text>
-        <Text
-          style={[
-            styles.descText,
-            {color: isSelected ? colors.white : colors.lineColor},
-          ]}>
-          {item.desc}
-        </Text>
-      </TouchableOpacity>
-    );
-  };
+ 
   
   return (
     <View style={styles.container}>
     <KeyboardAvoidingView
-    style={{flex: 1}}
-    behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      style={{flex: 1}}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.title}>{constant.addStudioDetails}</Text>
         <Text style={styles.subTitle}>{constant.giveSomeDetail}</Text>
@@ -143,7 +116,7 @@ const AddStudioDetailsPackageScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
 
-        // studio Images
+        {/* studio Images */}
         <View style={styles.paddingView}>
           <Text style={styles.studioAddress}>{constant.studioImages}</Text>
           <TouchableOpacity style={styles.fileContainer}>
@@ -153,12 +126,12 @@ const AddStudioDetailsPackageScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
 
-        // Grid list
+         {/* Grid list */}
         <View>
           <Text style={styles.studio}>{constant.facilitiesAvailable}</Text>
           <FlatList
             data={studioDetails}
-            renderItem={renderItem}
+            renderItem={({item, index}) => <StudioFacilitiesItems item={item} />}
             keyExtractor={item => item.id}
             numColumns={3}
             columnWrapperStyle={styles.row}
@@ -170,7 +143,7 @@ const AddStudioDetailsPackageScreen: React.FC = () => {
           <ASButton
             customStyle={styles.continueButton}
             title={constant.continue}
-            onPress={moveToAddStudioDetails}></ASButton>
+            onPress={moveToAddStudioDetails} />
         </View>
       </KeyboardAvoidingView>
     </View>
@@ -271,7 +244,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     color: colors.textPrimary2,
     marginLeft: 16,
-    marginTop: 20,
+    marginTop: 25,
   },
   bottomContainer: {
     position: 'absolute',
@@ -295,28 +268,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
     textAlign: 'left',
   },
-  selectedCard: {
-    borderColor: colors.appColor,
-    backgroundColor: colors.appColor,
-  },
-  card: {
-    width: cardSize,
-    minHeight: cardSize,
-    borderRadius: 12,
-    backgroundColor: colors.white,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: colors.lineColor,
-    padding: 10,
-    alignItems: 'flex-start', 
-    justifyContent: 'flex-start',
-  },
-  gridImage: {
-    width: 24,
-    height: 24,
-    marginRight: 8,
-    marginBottom: 10,
-  },
+ 
   cardContent: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -328,19 +280,8 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 8,
   },
-  titleText: {
-    fontSize: 13,
-    color: colors.black,
-    fontFamily: Fonts.medium,
-    textAlign: 'left',
-    marginBottom: 5,
-  },
-  descText: {
-    fontSize: 12,
-    fontFamily: Fonts.medium,
-    color: colors.lineColor,
-    textAlign: 'left',
-  },
+
+  
 });
 
 export default AddStudioDetailsPackageScreen;

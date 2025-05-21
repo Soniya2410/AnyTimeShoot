@@ -1,164 +1,386 @@
-import React, { useState } from "react"
-import { Image, ScrollView, Text, TouchableOpacity, View, StyleSheet, FlatList } from "react-native"
-import { icons } from "../utils/Icons";
-import { images } from "../utils/Images";
-import { Fonts } from "../utils/Fonts";
-import { colors } from "../utils/Colors";
-import ProfileDetailSlider from "../components/ProfileDetailSlider";
-import { constant } from "../utils/Constant";
-import { ReviewItems } from "../Home/components/ReviewItems";
-import { useNavigation } from "@react-navigation/native";
-import { RootStackNavigationProp } from "../../App";
+import React, {useState} from 'react';
+import {
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  FlatList,
+} from 'react-native';
+import {icons} from '../utils/Icons';
+import {images} from '../utils/Images';
+import {Fonts} from '../utils/Fonts';
+import {colors} from '../utils/Colors';
+import ProfileDetailSlider from '../components/ProfileDetailSlider';
+import {constant} from '../utils/Constant';
+import {ReviewItems} from '../home/components/ReviewItems';
+import {useNavigation} from '@react-navigation/native';
+import {RootStackNavigationProp} from '../../App';
+import RecommendedCard from '../components/RecommendedCard';
+import { StudioFacilitiesItems } from './component/StudioFacilitiesItems';
 
 const PackageDetails: React.FC = () => {
-const [activeTabIndex, setActiveTabIndex] = useState(0);
- const navigation = useNavigation<RootStackNavigationProp<'bookingList'>>();
-const reviews = [
-  {
-    id: '1',
-    name: 'Mark Kenji',
-    date: '12 Jun 2024',
-    rating: 5,
-    review:
-      'The app offers a seamless and intuitive user experience with its clean design. Features are well-organized and cater to all needs effectively...',
-    avatar: images.profileImage,
-  },
-  {
-    id: '2',
-    name: 'Mark Kenji',
-    date: '12 Jun 2024',
-    rating: 4,
-    review:
-      'The app offers a seamless and intuitive user experience with its clean design. Features are well-organized and cater to all needs effectively...',
-    avatar: images.profileImage,
-  },
-]
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const navigation = useNavigation<RootStackNavigationProp<'bookingList'>>();
+
+  const studioDetails = [
+    {
+      id: '1',
+      title: constant.changingRoom,
+      image: images.changingRoom,
+      desc: constant.facilitiesInclude,
+    },
+    {
+      id: '2',
+      title: constant.washRoom,
+      image: images.washroom,
+      desc: constant.facilitiesInclude,
+    },
+    {
+      id: '3',
+      title: constant.airConditioning,
+      image: images.airConditioning,
+      desc: constant.facilitiesInclude,
+    },
+    {
+      id: '4',
+      title: constant.freeParking,
+      image: images.freeParking,
+      desc: constant.facilitiesInclude,
+    },
+    {
+      id: '5',
+      title: constant.makeupArtisit,
+      image: images.makeupArtist,
+      desc: constant.facilitiesInclude,
+    },
+    {
+      id: '6',
+      title: constant.backdrops,
+      image: images.backDrops,
+      desc: constant.facilitiesInclude,
+    },
+    {
+      id: '7',
+      title: constant.soundproofArea,
+      image: images.soundproofArea,
+      desc: constant.facilitiesInclude,
+    },
+    {
+      id: '8',
+      title: constant.props,
+      image: images.props,
+      desc: constant.facilitiesInclude,
+    },
+    {
+      id: '9',
+      title: constant.wardrobe,
+      image: images.wardrobe,
+      desc: constant.facilitiesInclude,
+    },
+  ];
+  
+  const reviews = [
+    {
+      id: '1',
+      name: 'Mark Kenji',
+      date: '12 Jun 2024',
+      rating: 5,
+      review:
+        'The app offers a seamless and intuitive user experience with its clean design. Features are well-organized and cater to all needs effectively...',
+      avatar: images.profileImage,
+    },
+    {
+      id: '2',
+      name: 'Mark Kenji',
+      date: '12 Jun 2024',
+      rating: 4,
+      review:
+        'The app offers a seamless and intuitive user experience with its clean design. Features are well-organized and cater to all needs effectively...',
+      avatar: images.profileImage,
+    },
+  ];
   const IncludesInPackage = [
-    { id: 1, image: images.details1, text: 'Raw Images\n1000' },
-    { id: 2, image: images.details2, text: 'Edited Images\n250' },
-    { id: 3, image: images.details3, text: 'Raw Videos\n2' },
+    {id: 1, image: images.details1, text: 'Raw Images\n1000'},
+    {id: 2, image: images.details2, text: 'Edited Images\n250'},
+    {id: 3, image: images.details3, text: 'Raw Videos\n2'},
   ];
 
-  const moveToReviewAll = () => {
-    navigation.navigate('reviewScreen')
-  }
+  const recommended = [
+    {
+      id: '1',
+      title: 'Wedding Xperts',
+      description: 'Wedding Shoot:  5 Days',
+      price: '2,00,000/-',
+      offerPrice: '1,80,000/-',
+      image: images.wedding,
+      rating: 4.5,
+      liked: false,
+      offerText: 'Limited Offer',
+    },
+    {
+      id: '2',
+      title: 'Maternity Shoot',
+      description: 'Wedding Shoot:  5 Days',
+      price: '10,000/-',
+      offerPrice: '8,000/-',
+      image: images.baby1,
+      rating: 4.7,
+      liked: false,
+      offerText: 'Limited Offer',
+    },
+    {
+      id: '3',
+      title: 'Pre-Wedding Shoot',
+      description: 'Wedding Shoot:  5 Days',
+      price: '1,00,000/-',
+      offerPrice: '90,000/-',
+      image: images.marragie1,
+      rating: 4,
+      liked: false,
+      offerText: 'Limited Offer',
+    },
+  ];
 
-  const renderIncludesInPackage = ({item} : {item: any}) => {
+  const [recommendedList, setRecommendedList] = useState(recommended);
+  const toggleLike = (id: string) => {
+    const updatedList = recommendedList.map(item =>
+      item.id === id ? {...item, liked: !item.liked} : item,
+    );
+    setRecommendedList(updatedList);
+  };
+
+  const moveToReviewAll = () => {
+    navigation.navigate('reviewScreen');
+  };
+
+  const renderIncludesInPackage = ({item}: {item: any}) => {
     return (
       <View key={item.id} style={styles.card}>
         <Image source={item.image} style={styles.cardImage} />
         <Text style={styles.cardText}>{item.text}</Text>
       </View>
-    )
-  }
+    );
+  };
   return (
     <ScrollView style={styles.container}>
       <View>
-      {/* <BookingDetailSlider page={'detail'}/> */}
-      {/* Shoot Info */}
-      <ProfileDetailSlider />
-      <View style={styles.shootInfo}>
-
-        <View style={styles.infoBox}>
-        <Text style={styles.infoText}>{'Shoot Duration'}</Text>
-        <View style={styles.infoOuterBox}>
-          <Image source={icons.timerIcon}  style={styles.icon}/>
-          <Text style={styles.infoText}>25 hours</Text>
+        {/* <BookingDetailSlider page={'detail'}/> */}
+        {/* Shoot Info */}
+        <ProfileDetailSlider />
+        <View style={styles.shootInfo}>
+          <View style={styles.infoBox}>
+            <Text style={styles.infoText}>{'Shoot Duration'}</Text>
+            <View style={styles.infoOuterBox}>
+              <Image source={icons.timerIcon} style={styles.icon} />
+              <Text style={styles.infoText}>25 hours</Text>
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <Text style={styles.infoText}>{'Shoot Venue'}</Text>
+            <View style={styles.infoOuterBox}>
+              <Image source={icons.ovalLocationIcon} style={styles.icon} />
+              <Text style={styles.infoText}>Your Location</Text>
+            </View>
           </View>
         </View>
-        <View style={styles.infoBox}>
-        <Text style={styles.infoText}>{'Shoot Venue'}</Text>
-        <View style={styles.infoOuterBox}>
-          <Image source={icons.ovalLocationIcon} style={styles.icon}/>
-          <Text style={styles.infoText}>Your Location</Text>
-          </View>
-        </View>
-      </View>
       </View>
 
       {/* Includes in Package */}
       <Text style={styles.sectionTitle}>{constant.includeInPackage}</Text>
-      <FlatList 
+      <FlatList
         renderItem={renderIncludesInPackage}
         data={IncludesInPackage}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={item => item.id.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.imageRow}
         style={{marginTop: 10}}
-        />
+      />
 
       {/* Tabs (only showing Package Details for now) */}
       <View style={styles.tabs}>
-        <TouchableOpacity style={activeTabIndex == 0? styles.activeTab : styles.inactiveTab} onPress={() => setActiveTabIndex(0)}>
-          <Text style={activeTabIndex == 0? styles.tabText : styles.tabTextInactive}>Package Details</Text>
+        <TouchableOpacity
+          style={activeTabIndex == 0 ? styles.activeTab : styles.inactiveTab}
+          onPress={() => setActiveTabIndex(0)}>
+          <Text
+            style={
+              activeTabIndex == 0 ? styles.tabText : styles.tabTextInactive
+            }>
+            Package Details
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={activeTabIndex == 1?  styles.activeTab : styles.inactiveTab} onPress={() => setActiveTabIndex(1)}>
-          <Text style={activeTabIndex == 1? styles.tabText : styles.tabTextInactive}>Gears</Text>
+        <TouchableOpacity
+          style={activeTabIndex == 1 ? styles.activeTab : styles.inactiveTab}
+          onPress={() => setActiveTabIndex(1)}>
+          <Text
+            style={
+              activeTabIndex == 1 ? styles.tabText : styles.tabTextInactive
+            }>
+            Gears
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={activeTabIndex == 2?  styles.activeTab : styles.inactiveTab} onPress={() => setActiveTabIndex(2)}>
-          <Text style={activeTabIndex == 2? styles.tabText : styles.tabTextInactive}>Review</Text>
+        <TouchableOpacity
+          style={activeTabIndex == 2 ? styles.activeTab : styles.inactiveTab}
+          onPress={() => setActiveTabIndex(2)}>
+          <Text
+            style={
+              activeTabIndex == 2 ? styles.tabText : styles.tabTextInactive
+            }>
+            Review
+          </Text>
         </TouchableOpacity>
       </View>
 
       {/* Package Description */}
       {activeTabIndex == 0 && (
-      <Text style={styles.packageDescription}>
-        Our Wedding Photography Package captures your special day with elegance and artistry. From candid moments to posed portraits, our professional photographers ensure every significant moment is beautifully documented.
-      </Text>
+        <Text style={styles.packageDescription}>
+          Our Wedding Photography Package captures your special day with
+          elegance and artistry. From candid moments to posed portraits, our
+          professional photographers ensure every significant moment is
+          beautifully documented.
+        </Text>
       )}
 
-    {activeTabIndex == 1 && (
-      <Text style={styles.packageDescription}>
-        Our Wedding Photography Package captures your special day with elegance and artistry. From candid moments to posed portraits, our professional photographers ensure every significant moment is beautifully documented.
-      </Text>
+      {activeTabIndex == 1 && (
+        <Text style={styles.packageDescription}>
+          Our Wedding Photography Package captures your special day with
+          elegance and artistry. From candid moments to posed portraits, our
+          professional photographers ensure every significant moment is
+          beautifully documented.
+        </Text>
       )}
 
-    {activeTabIndex == 2 && (
-      <View style={{ marginHorizontal: 10}}>
-        <TouchableOpacity onPress={()=> {moveToReviewAll()}}>
-        <Text style={styles.viewAll}>{constant.view_all}</Text>
-        </TouchableOpacity>
-      <FlatList
-        data={reviews}
-        keyExtractor={item => item.id}
-        renderItem={({item, index}) => 
-          <ReviewItems item={item} />
-        }
-        contentContainerStyle={{paddingBottom: 10}}
-        showsVerticalScrollIndicator={false}
-      />
-      </View>
+      {activeTabIndex == 2 && (
+        <View style={{marginHorizontal: 10}}>
+          <TouchableOpacity
+            onPress={() => {
+              moveToReviewAll();
+            }}>
+            <Text style={styles.viewAll}>{constant.view_all}</Text>
+          </TouchableOpacity>
+          <FlatList
+            data={reviews}
+            keyExtractor={item => item.id}
+            renderItem={({item, index}) => <ReviewItems item={item} />}
+            contentContainerStyle={{paddingBottom: 10}}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
       )}
-
 
       {/* Image Slider */}
-      {activeTabIndex == 0 || activeTabIndex == 1 && (
-      <Image
-        source={images.stylishMan}
-        style={styles.sliderImage}
-        resizeMode="cover"
-      />
-      )}
+      {activeTabIndex == 0 ||
+        (activeTabIndex == 1 && (
+          <Image
+            source={images.stylishMan}
+            style={styles.sliderImage}
+            resizeMode="cover"
+          />
+        ))}
 
       {/* Delivery Details */}
-      <Text style={styles.sectionTitle}>Delivery Details</Text>
-      <Text style={styles.subtitle}>When you will get deliverables</Text>
+      <Text style={styles.sectionTitle}>{constant.deliveryDetails}</Text>
+      <Text style={styles.subtitle}>{constant.whenYouWillGetDeliverables}</Text>
 
       {/* Delivery Table */}
-      <View style={styles.deliveryTable}>
+      <View style={styles.table}>
+        {/* Table Header */}
+        <View style={styles.tableRowHeader}>
+          <View style={[styles.tableHeaderCell]}></View>
+          <Text style={[styles.tableHeaderCell]}>Item</Text>
+          <Text style={styles.tableHeaderCell}>{constant.deliveryMode}</Text>
+          <Text style={styles.tableHeaderCell}>{constant.timelineAftershoot}</Text>
+        </View>
+
+        {/* Row 1 */}
+        <View style={styles.tableRow}>
+          {/* <View
+            style={[
+              styles.tableCell,
+              {flex: 2, flexDirection: 'row', alignItems: 'center'},
+            ]}> */}
+            <Image source={icons.rawDataIcon} style={styles.iconTable} />
+            <View style={styles.line}></View>
+            <Text style={styles.cellText}>{constant.rawData}</Text>
+            <View style={styles.line}></View>
+          {/* </View> */}
+          <Text style={styles.tableCell}>{constant.offline}</Text>
+          <View style={styles.line}></View>
+          <Text style={styles.tableCell}>20 days</Text>
+        </View>
+
+        {/* Row 2 */}
+        <View style={styles.tableRow}>
+          {/* <View
+            style={[
+              styles.tableCell,
+              {flex: 2, flexDirection: 'row', alignItems: 'center'},
+            ]}> */}
+            <Image source={icons.editRawDataIcon} style={styles.iconTable} />
+            <View style={styles.line}></View>
+            <Text style={styles.cellText}>{constant.editedData}</Text>
+          {/* </View> */}
+          <View style={styles.line}></View>
+          <Text style={styles.tableCell}>{constant.cloudSharing}</Text>
+          <View style={styles.line}></View>
+          <Text style={styles.tableCell}>20 days</Text>
+        </View>
+      </View>
+
+      <View style={styles.recommendedHeader}>
+        <Text style={styles.recommendedTitle}>{constant.specialOffer}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('packageList', {
+              title: 'Special Offer',
+              data: recommendedList,
+            });
+          }}>
+          <Text style={styles.viewAll}>{constant.view_all}</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={{marginHorizontal: 5}}>
+        <FlatList
+          data={recommendedList}
+          renderItem={({item}) => (
+            <RecommendedCard item={item} onLike={toggleLike} cardSize={280} />
+          )}
+          keyExtractor={item => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{paddingHorizontal: 15}}
+        />
+      </View>
+
+      <View>
+      <Text style={styles.studioImages}>{constant.studioImages}</Text>
+          <Text style={styles.studio}>{constant.facilitiesAvailable}</Text>
+          <FlatList
+            data={studioDetails}
+            renderItem={({item, index}) => <StudioFacilitiesItems item={item} />}
+            keyExtractor={item => item.id}
+            numColumns={3}
+            columnWrapperStyle={styles.row}
+            contentContainerStyle={styles.grid}
+          />
+        </View>
+
+      {/* <View style={styles.deliveryTable}>
         <View style={styles.deliveryRow}>
-          <Image source={icons.rawDataIcon} />
+          <Image source={icons.rawDataIcon} style={styles.icon}/>
           <Text style={styles.deliveryText}>Raw Data - Offline - 20 days</Text>
         </View>
         <View style={styles.deliveryRow}>
-          <Image source={icons.editRawDataIcon} />
+          <Image source={icons.editRawDataIcon}  style={styles.icon}/>
           <Text style={styles.deliveryText}>Edited Data - Cloud sharing - 20 days</Text>
         </View>
-      </View>
+      </View> */}
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -172,13 +394,13 @@ const styles = StyleSheet.create({
   },
   infoBox: {
     alignItems: 'center',
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   infoText: {
     marginTop: 5,
     fontSize: 12,
-    fontFamily : Fonts.regular,
-    marginHorizontal: 5
+    fontFamily: Fonts.regular,
+    marginHorizontal: 5,
   },
   sectionTitle: {
     fontSize: 20,
@@ -198,6 +420,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
   },
+  line : {
+    backgroundColor: '#ccc',
+    height: '100%',
+    width: 1
+  }, 
   cardImage: {
     width: 120,
     height: 150,
@@ -209,7 +436,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     position: 'absolute',
     color: colors.white,
-    bottom:0,
+    bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     width: '100%',
     padding: 5,
@@ -276,14 +503,19 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 16,
     color: '#888',
+    fontFamily: Fonts.regular,
   },
   deliveryTable: {
     margin: 20,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: colors.textPrimary2,
   },
   deliveryRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 10,
+    paddingHorizontal: 10,
   },
   deliveryText: {
     marginLeft: 10,
@@ -295,22 +527,112 @@ const styles = StyleSheet.create({
   },
   infoOuterBox: {
     flexDirection: 'row',
-    alignItems: 'center', 
-    borderRadius: 25, 
-    borderWidth: 1, 
-    padding: 5, 
+    alignItems: 'center',
+    borderRadius: 25,
+    borderWidth: 1,
+    padding: 5,
     paddingHorizontal: 10,
-    marginVertical:5,
-    borderColor: '#ccc'
-    },
-    viewAll: {
-      fontSize: 14,
-      color: colors.appColor,
-      fontWeight: 'regular',
-      textAlign: 'right',
-      marginVertical: 10,
-      textDecorationLine: 'underline',
-    },
+    marginVertical: 5,
+    borderColor: '#ccc',
+  },
+  viewAll: {
+    fontSize: 14,
+    color: colors.appColor,
+    fontWeight: 'regular',
+    textAlign: 'right',
+    marginVertical: 10,
+    textDecorationLine: 'underline',
+  },
+  table: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    overflow: 'hidden',
+    margin: 10,
+  },
+  tableRowHeader: {
+    flexDirection: 'row',
+    backgroundColor: '#ddd',
+    paddingVertical: 10,
+  },
+  tableHeaderCell: {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: 12,
+    fontFamily: Fonts.medium,
+    color: '#c62828',
+  },
+  tableRow: {
+    flexDirection: 'row',
+    borderTopWidth: 1,
+    borderColor: '#ccc',
+    backgroundColor: '#fff',
+  },
+  tableCell: {
+    flex: 1,
+    // padding: 10,
+    marginVertical: 10,
+    marginHorizontal: 10,
+    fontFamily: Fonts.regular,
+    justifyContent: 'center',
+    textAlign: 'center',
+  },
+  iconTable: {
+    width: 20,
+    height: 20,
+    marginRight: 8,
+    justifyContent: 'center',
+    alignContent: 'center',
+    resizeMode: 'contain',
+    marginHorizontal: 10,
+    marginVertical: 10
+
+  },
+  cellText: {
+    fontSize: 16,
+    fontFamily: Fonts.medium,
+    marginVertical: 10,
+    marginHorizontal: 10,
+    width: 110
+  },
+  recommendedHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 10,
+    marginVertical: 5,
+  },
+  recommendedTitle: {
+    fontSize: 16,
+    // fontWeight: '600',
+    fontFamily: Fonts.medium,
+    marginVertical: 10,
+    marginLeft: 10,
+    color: colors.appColor,
+    marginTop: 10,
+  },
+  studioImages : {
+    fontSize: 16,
+    fontFamily: Fonts.medium,
+    marginLeft: 16,
+    color: colors.appColor,
+    marginTop: 10,
+  },
+  studio: {
+    fontSize: 15,
+    fontFamily: Fonts.regular,
+    color: colors.textPrimary2,
+    marginLeft: 16,
+    marginTop: 5,
+  },
+  grid: {
+    paddingHorizontal: 16,
+    paddingTop: 10,
+  },
+  row: {
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
 });
 
 export default PackageDetails;

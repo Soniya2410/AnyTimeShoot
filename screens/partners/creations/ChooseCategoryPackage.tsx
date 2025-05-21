@@ -22,11 +22,11 @@ const cardSize = (screenWidth - 64) / 3; // 3 columns, 16px padding on both side
 
 const categories = [
   {id: '1', title: 'Wedding', image: images.wedding},
-  {id: '2', title: 'Pre -Wedding', image: images.preWedding},
-  {id: '3', title: 'Maternity', image: images.wedding},
+  {id: '2', title: 'Pre -Wedding', image: images.baby1},
+  {id: '3', title: 'Maternity', image: images.maternity},
   {id: '4', title: 'New born', image: images.preWedding},
   {id: '5', title: 'Birthday party', image: images.wedding},
-  {id: '6', title: 'Small event', image: images.preWedding},
+  {id: '6', title: 'Small event', image: images.banner3},
   {id: '7', title: 'Portfolio', image: images.wedding},
   {id: '8', title: 'Product', image: images.preWedding},
   {id: '9', title: 'Food', image: images.wedding},
@@ -68,6 +68,7 @@ const ChooseCategoryPackage: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <View style={{ height: '90%'}}>
       <Text style={styles.title}>{constant.chooseCategory}</Text>
       <Text style={styles.subTitle}>{constant.selectCategory}</Text>
       <FlatList
@@ -78,13 +79,12 @@ const ChooseCategoryPackage: React.FC = () => {
         columnWrapperStyle={styles.row}
         contentContainerStyle={styles.grid}
       />
-      <View style={styles.bottomButtonContainer}>
+      </View>
       <ASButton
         title={constant.continue}
         customStyle={styles.continueButton}
         onPress={moveToAddDetailsScreen}
       />
-      </View>
     </View>
   );
 };
@@ -98,15 +98,16 @@ const styles = StyleSheet.create({
     color: colors.appColor,
     fontFamily: Fonts.medium,
     fontSize: 16,
-    marginLeft: 16,
+    marginHorizontal: 16,
     marginTop: 20,
-    marginBottom: 5,
   },
   subTitle: {
     color: colors.textPrimary2,
-    fontFamily: Fonts.regular,
+    fontFamily: Fonts.light,
     fontSize: 14,
-    marginLeft: 16,
+    marginHorizontal: 16,
+    marginVertical: 5
+
   },
   grid: {
     paddingHorizontal: 16,
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 13,
     color: colors.white,
-    fontFamily: Fonts.medium,
+    fontFamily: Fonts.regular,
     marginTop: 6,
     textAlign: 'center',
   },
@@ -155,14 +156,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     bottom: 15,
   },
-  bottomButtonContainer: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    backgroundColor: colors.white,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-  },
+
 });
 
 export default ChooseCategoryPackage;

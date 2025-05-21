@@ -34,7 +34,7 @@ const ExtraPerksPackageScreen: React.FC = () => {
   const [customPerk, setCustomPerk] = useState('');
 
   const moveToNextScreen = () => {
-  navigation.navigate('addSamplePackage');
+  navigation.navigate('additionalInformationPackage');
   };
 
   const togglePerk = (perk: string) => {
@@ -64,15 +64,16 @@ const ExtraPerksPackageScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <View style={{ height: '90%'}}>
       <KeyboardAvoidingView
         style={{flex: 1}}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.paddingView}>
-            <Text style={styles.title}>{constant.addRules}</Text>
-            <Text style={styles.subTitle}>{constant.addAnyExtra}</Text>
-
+            <Text style={styles.title}>{constant.extraPerks}</Text>
+            <Text style={styles.subTitle}>{constant.deliverSomethingExtra}</Text>
             {/* Selected Perks */}
+            <Text style={styles.sectionTitle}>{constant.yourPackageWillBe}</Text>
             <View style={styles.selectedContainer}>
               {selectedPerks.map((perk, index) => {
                 if (perk === 'Other' && showCustomInput) {
@@ -117,7 +118,7 @@ const ExtraPerksPackageScreen: React.FC = () => {
             </View>
 
             {/* Available Perks */}
-            <Text style={styles.sectionTitle}>Add extra perks:</Text>
+            <Text style={styles.sectionTitle}>Add extra  perks which you are giving in package:</Text>
             <View style={styles.perksContainer}>
               {defaultPerks.map((perk, index) => (
                 <TouchableOpacity
@@ -152,14 +153,16 @@ const ExtraPerksPackageScreen: React.FC = () => {
           </View>
         </ScrollView>
 
-        <View style={styles.bottomContainer}>
-          <ASButton
+        {/* <View style={styles.bottomContainer}> */}
+         
+        {/* </View> */}
+      </KeyboardAvoidingView>
+      </View>
+      <ASButton
             title={constant.continue}
             customStyle={styles.btnContinue}
             onPress={moveToNextScreen}
           />
-        </View>
-      </KeyboardAvoidingView>
     </View>
   );
 };

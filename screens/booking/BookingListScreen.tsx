@@ -12,14 +12,12 @@ import {
   FlatList,
 } from 'react-native';
 import {images} from '../utils/Images';
-import {constant} from '../utils/Constant';
-import {ASButton} from '../components/ASButton';
-import {RootStackNavigationProp, RootStackParamList} from '../../App';
-import {RouteProp, useNavigation} from '@react-navigation/native';
+import {RootStackNavigationProp} from '../../App';
+import {useNavigation} from '@react-navigation/native';
 import {colors} from '../utils/Colors';
 import {Fonts} from '../utils/Fonts';
 import CustomSlider from '../components/CustomSlider';
-import { icons } from '../utils/Icons';
+import { StackScreenProps } from '@react-navigation/stack';
 import { BookingListItem } from './component/BookingListItem';
 
 
@@ -31,12 +29,8 @@ type BookingStackParamList = {
   };
 };
 
-type BookingRouteProp = RouteProp<BookingStackParamList, 'BookingScreen'>;
+type Props = StackScreenProps<BookingStackParamList, 'BookingScreen'>;
 
-
-type Props = {
-  route: BookingRouteProp;
-};
 
 const {width, height} = Dimensions.get('screen');
 
@@ -69,7 +63,6 @@ const BookingListScreen: React.FC<Props> = ({route}) => {
   const {item} = route.params;
   console.log(item,"list");
 
-
   const moveToDetailPage = () => {
     if(item?.types == 'Upcoming') {
       navigation.navigate('upcomingbookingDetails');
@@ -83,7 +76,7 @@ const BookingListScreen: React.FC<Props> = ({route}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-       <CustomSlider/>
+      <CustomSlider/>
       <FlatList
         data={bookingDetails}
         keyExtractor={item => item.id}

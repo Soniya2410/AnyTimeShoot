@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     fontSize: 10,
     color: colors.black,
+    marginVertical: 10
   },
   noteHighlight: {
     fontFamily: Fonts.medium,

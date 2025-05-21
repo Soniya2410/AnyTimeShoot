@@ -62,16 +62,19 @@ const DeliverableDetailScreen: React.FC = () => {
     );
   };
 
-  const moveToNextScreen = () => {};
+  const moveToNextScreen = () => {
+    navigation.navigate('addDeliveryDetailsPackage')
+  };
 
   return (
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+        <View style={{ height: '90%'}}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.title}>{constant.deliverable}</Text>
         <Text style={styles.subTitle}>{constant.mentionDetails}</Text>
-        // Deliverable Details
+    
      {/* Deliverable Details */}
 
         {deliverables.map(item => (
@@ -79,10 +82,10 @@ const DeliverableDetailScreen: React.FC = () => {
             <TouchableOpacity onPress={() => toggleSelection(item.id)} style={styles.row}>
               <Text style={styles.itemText}>{item.id}. {item.name}</Text>
               {item.isSelected ? (
-                <Image source={images.selectedIcon} style={styles.selectedIcon} />
-              ) : (
-                <View style={styles.checkbox} />
-              )}
+              <Image source={images.selectedIcon} style={styles.selectedIcon} />
+            ) : (
+              <View style={styles.checkbox} />
+            )}
             </TouchableOpacity>
             {item.isSelected && (
               <>
@@ -107,7 +110,7 @@ const DeliverableDetailScreen: React.FC = () => {
             )}
           </View>
         ))}
-        // Custom Deliverable
+        {/*  Custom Deliverable */}
         <View style={styles.itemContainer}>
           <TouchableOpacity
             onPress={() =>
@@ -167,14 +170,14 @@ const DeliverableDetailScreen: React.FC = () => {
           )}
         </View>
       </ScrollView>
-
-      <View style={styles.bottomContainer}>
+      </View>
+      {/* <View style={styles.bottomContainer}> */}
         <ASButton
           title={constant.continue}
           customStyle={styles.btnContinue}
           onPress={moveToNextScreen}
         />
-      </View>
+      {/* </View> */}
     </KeyboardAvoidingView>
   );
 };
@@ -186,7 +189,8 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 16,
-    paddingBottom: 100,
+    height: '90%'
+    // paddingBottom: 100,
   },
   title: {
     fontFamily: Fonts.medium,
@@ -255,13 +259,13 @@ const styles = StyleSheet.create({
     color: colors.appColor,
   },
   helperText: {
-    fontSize: 12,
+    fontSize: 10,
     color: colors.textPrimary2,
     marginTop: 4,
     fontFamily: Fonts.regular,
   },
   highlightText: {
-    fontSize: 12,
+    fontSize: 10,
     color: colors.textPrimary2,
     fontFamily: Fonts.bold,
   },
@@ -300,10 +304,10 @@ const styles = StyleSheet.create({
   },
   selectedIcon: {
     width: 20,
-    height: 20,
-    resizeMode: 'contain',
+    height: 18,
+    resizeMode: 'center',
     backgroundColor: colors.appColor,
-    borderRadius: 6,
+    borderRadius: 5,
   },
   addButtonSelected: {
     backgroundColor: colors.appColor,

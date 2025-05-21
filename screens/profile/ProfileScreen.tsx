@@ -16,13 +16,13 @@ import {Fonts} from '../utils/Fonts';
 import {ASButton} from '../components/ASButton';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../App';
-import { icons } from '../utils/Icons';
+import {icons} from '../utils/Icons';
 
 const ProfileScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp<'login'>>();
 
   const moveToDetailPage = () => {
-   navigation.navigate('bookingDetail');
+    // navigation.navigate('bookingDetail');
   };
 
   const moveToEditProfile = () => {};
@@ -34,6 +34,7 @@ const ProfileScreen = () => {
       icon: icons.phoneIcon,
       width: 20,
       height: 20,
+      page: '',
     },
     {
       id: '2',
@@ -42,6 +43,7 @@ const ProfileScreen = () => {
       icon: icons.locationAppColorIcon,
       width: 15,
       height: 23,
+      page: '',
     },
     {
       id: '3',
@@ -50,6 +52,7 @@ const ProfileScreen = () => {
       icon: icons.heartAppColorIcon,
       width: 20,
       height: 19,
+      page: 'wishlist',
     },
     {
       id: '4',
@@ -58,6 +61,7 @@ const ProfileScreen = () => {
       icon: icons.humanIcon,
       width: 23,
       height: 25,
+      page: 'termsOfUse',
     },
     {
       id: '5',
@@ -66,6 +70,7 @@ const ProfileScreen = () => {
       icon: icons.cancellationIcon,
       width: 20,
       height: 20,
+      page: 'cancellationPolicy',
     },
     {
       id: '6',
@@ -74,6 +79,7 @@ const ProfileScreen = () => {
       icon: icons.starIcon,
       width: 20,
       height: 20,
+      page: '',
     },
     {
       id: '7',
@@ -82,6 +88,7 @@ const ProfileScreen = () => {
       icon: icons.deleteAccountIcon,
       width: 18,
       height: 20,
+      page: '',
     },
     {
       id: '8',
@@ -90,24 +97,41 @@ const ProfileScreen = () => {
       icon: icons.contact,
       width: 20,
       height: 20,
+      page: 'contactUs',
     },
   ];
+
+  const moveToRenderItem = (page : any) => {
+    console.log('page', page);
+    navigation.navigate(page)
+  }
 
   const renderItem = ({
     item,
   }: {
-    item: {id: string; title: string; value: string; icon: any; width: number, height: number};
+    item: {
+      id: string;
+      title: string;
+      value: string;
+      icon: any;
+      width: number;
+      height: number;
+      page: string;
+    };
   }) => (
     <TouchableOpacity style={styles.settingItem}>
-      {/* <View style={styles.settingLeftContainer}> */}
-        <View style={styles.iconBackground}>
-          <Image source={item.icon} style={styles.settingIcon} width={item.width} height={item.height}/>
-        </View>
-        <View style={styles.settingTextContainer}>
-          <Text style={styles.settingTitle}>{item.title}</Text>
-          <Text style={styles.settingValue}>{item.value}</Text>
-        </View>
-      {/* </View> */}
+      <View style={styles.iconBackground}>
+        <Image
+          source={item.icon}
+          style={styles.settingIcon}
+          width={item.width}
+          height={item.height}
+        />
+      </View>
+      <View style={styles.settingTextContainer}>
+        <Text style={styles.settingTitle}>{item.title}</Text>
+        <Text style={styles.settingValue}>{item.value}</Text>
+      </View>
       {item.title === constant.profilePhoneNumber ||
       item.title === constant.addres ? (
         <TouchableOpacity>
@@ -117,7 +141,10 @@ const ProfileScreen = () => {
           />
         </TouchableOpacity>
       ) : (
-        <Image source={images.rightAppNextArrow} style={styles.rightArrow} />
+        <TouchableOpacity
+          onPress={() => moveToRenderItem(item.page)}>
+          <Image source={images.rightAppNextArrow} style={styles.rightArrow} />
+        </TouchableOpacity>
       )}
     </TouchableOpacity>
   );
@@ -129,38 +156,38 @@ const ProfileScreen = () => {
       <View style={styles.container}>
         <View style={styles.profileHeader}>
           <Image source={images.profileImage} style={styles.profileImage} />
-            <View style={styles.profileInfo}>
-              <Text style={styles.name}>Harshit Rana</Text>
-              <Text style={styles.email}>harshit@gmail.com</Text>
-            </View>
-            <TouchableOpacity style={styles.arrowContainer} onPress={moveToDetailPage}>
-              <Image
-                source={images.rightAppNextArrow}
-                style={styles.rightArrow}
-              />
-            </TouchableOpacity>
+          <View style={styles.profileInfo}>
+            <Text style={styles.name}>Harshit Rana</Text>
+            <Text style={styles.email}>harshit@gmail.com</Text>
           </View>
+          <TouchableOpacity
+            style={styles.arrowContainer}
+            onPress={moveToDetailPage}>
+            <Image
+              source={images.rightAppNextArrow}
+              style={styles.rightArrow}
+            />
+          </TouchableOpacity>
+        </View>
         {/* </View> */}
 
         <View style={styles.lineContainer}></View>
 
         {/* Join Partner View */}
-        <TouchableOpacity style={styles.partnerContainer} onPress={()=> navigation.navigate('packageCreation')}>
-          {/* <View style={styles.profileInfoContainer}> */}
-            <View style={styles.partnerInfo}>
-              <Text style={styles.joinPartner}>{constant.joinPartner}</Text>
-              <Text style={styles.descText}>
-                {constant.itsEasyToGet}
-                <Text style={styles.highlight}>{constant.shoot}</Text>
-              </Text>
-            </View>
-            {/* <TouchableOpacity style={styles.profileTopImageContainer}> */}
-              <Image
-                source={images.profileTopImage}
-                style={styles.profileTopImage}
-              />
-            {/* </TouchableOpacity> */}
-          {/* </View> */}
+        <TouchableOpacity
+          style={styles.partnerContainer}
+          onPress={() => navigation.navigate('partnersOnboarding')}>
+          <View style={styles.partnerInfo}>
+            <Text style={styles.joinPartner}>{constant.joinPartner}</Text>
+            <Text style={styles.descText}>
+              {constant.itsEasyToGet}
+              <Text style={styles.highlight}>{constant.shoot}</Text>
+            </Text>
+          </View>
+          <Image
+            source={images.profileTopImage}
+            style={styles.profileTopImage}
+          />
         </TouchableOpacity>
 
         {/* Settings FlatList */}
@@ -263,11 +290,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 14,
     shadowColor: colors.appColor,
-    shadowOffset: { width: 0, height: 4},
+    shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.3,
     shadowRadius: 6,
     elevation: 5,
-    flexDirection:'row',
+    flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },

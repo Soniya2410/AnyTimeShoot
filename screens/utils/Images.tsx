@@ -113,5 +113,23 @@ export const images = {
   details2: require('../../assets/images/details_2.png'),
   details3: require('../../assets/images/details_3.png'),
   detailed: require('../../assets/images/detailed.png'),
+
+  //Partners
+  partnerOnboarding: require('../../assets/images/partners/onboarding.png'),
+  partner_1: require('../../assets/images/partners/partner_1.png'),
+  partner_2: require('../../assets/images/partners/partner_2.png'),
+  partner_3: require('../../assets/images/partners/partner_3.png'),
+  offerIcon: require('../../assets/images/partners/offerIcon.png'),
+  uploadIcon: require("../../assets/images/partners/upload.png"),
+  edit: require('../../assets/images/partners/edit.png'),
+  email: require('../../assets/images/partners/email.png'),
+  loaction: require('../../assets/images/partners/location.png'),
+  verified: require('../../assets/images/partners/verify.png'),
+  creation: require('../../assets/images/partners/creation.png'),
+  emailCode: require('../../assets/images/partners/emailCode.png'),
+  emailOtp: require('../../assets/images/partners/emailOtp.png'),
+  phoneOtp: require('../../assets/images/partners/phoneOtp.png'),
+  phoneCode: require('../../assets/images/partners/phoneCode.png'),
+  addIcon: require('../../assets/images/partners/addIcon.png')
 };
 

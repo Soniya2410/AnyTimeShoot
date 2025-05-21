@@ -7,7 +7,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import {constant} from '../../utils/Constant';
 import {Fonts} from '../../utils/Fonts';
@@ -18,6 +18,8 @@ import {RootStackNavigationProp} from '../../../App';
 import RNPickerSelect from 'react-native-picker-select';
 
 const AddDeliveryDetailScreen: React.FC = () => {
+  const [idTipsVisible, setIdTipsVisible] = useState(false);
+  
   const navigation =
     useNavigation<RootStackNavigationProp<'addDeliveryDetailsPackage'>>();
   const [rawDataDeliveryMode, setRawDataDeliveryMode] = useState<string | null>(
@@ -28,30 +30,27 @@ const AddDeliveryDetailScreen: React.FC = () => {
   >(null);
 
   const moveToNextScreen = () => {
-    navigation.navigate('pricingDetailPackage');
+    navigation.navigate('extraPerksPackage');
   };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={{flex: 1}}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        <ScrollView contentContainerStyle={styles.scrollContent}>
+        <View style={{ height: '92%'}}>
+        <ScrollView>
           <View style={styles.paddingView}>
             <Text style={styles.title}>{constant.deliveryDetails}</Text>
             <Text style={styles.subTitle}>{constant.descDelivery}</Text>
           </View>
           <View style={styles.paddingView}>
             <Text style={styles.rawData}>{constant.rawData}</Text>
-
             <View style={{marginTop: 5}}>
               <Text style={styles.deliveryMode}>{constant.deliveryMode}</Text>
-              {/* <TextInput
-                style={styles.input}
-                placeholder={constant.selectMode}
-                placeholderTextColor={colors.lineColor}></TextInput> */}
+              <View style={{ zIndex: 10 }}>
               <RNPickerSelect
-                onValueChange={value => setEditedDataDeliveryMode(value)}
-                value={editedDataDeliveryMode} 
+                onValueChange={value => setRawDataDeliveryMode(value)}
+                value={rawDataDeliveryMode} 
                 placeholder={{label: constant.selectMode, value: null}}
                 items={[
                   {label: constant.offline, value: constant.offline},
@@ -61,13 +60,30 @@ const AddDeliveryDetailScreen: React.FC = () => {
                 style={{
                   inputIOS: styles.input,
                   inputAndroid: styles.input,
+                  iconContainer: {
+                    top: 25,
+                    right: 10,
+                  },
                   placeholder: {
                     color: colors.lineColor,
                   },
                 }}
+                Icon={() => {
+                  return (
+                    <View style={{ 
+                      borderTopWidth: 6, 
+                      borderTopColor: colors.appColor,
+                      borderRightWidth: 6, 
+                      borderRightColor: 'transparent',
+                      borderLeftWidth: 6, 
+                      borderLeftColor: 'transparent', 
+                      width: 0, height: 0 }}
+                    />
+                  );
+                }}
               />
             </View>
-
+            </View>
             <View style={{marginTop: 10}}>
               <Text style={styles.deliveryMode}>{constant.deliveyTime}</Text>
               <TextInput
@@ -76,12 +92,12 @@ const AddDeliveryDetailScreen: React.FC = () => {
                 placeholderTextColor={colors.lineColor}></TextInput>
             </View>
           </View>
-          // Edited Data
+          {/* Edited Data */}
           <View style={styles.paddingView}>
             <Text style={styles.rawData}>{constant.editedData}</Text>
-
             <View style={{marginTop: 5}}>
               <Text style={styles.deliveryMode}>{constant.deliveryMode}</Text>
+              <View style={{ zIndex: 10 }}>
               <RNPickerSelect
                 onValueChange={value => setEditedDataDeliveryMode(value)}
                 placeholder={{label: constant.selectMode, value: null}}
@@ -94,11 +110,29 @@ const AddDeliveryDetailScreen: React.FC = () => {
                 style={{
                   inputIOS: styles.input,
                   inputAndroid: styles.input,
+                  iconContainer: {
+                    top: 25,
+                    right: 10,
+                  },
                   placeholder: {
                     color: colors.lineColor,
                   },
                 }}
+                Icon={() => {
+                  return (
+                    <View style={{ 
+                      borderTopWidth: 6, 
+                      borderTopColor: colors.appColor,
+                      borderRightWidth: 6, 
+                      borderRightColor: 'transparent',
+                      borderLeftWidth: 6, 
+                      borderLeftColor: 'transparent', 
+                      width: 0, height: 0 }}
+                    />
+                  );
+                }}
               />
+              </View>
             </View>
 
             <View style={{marginTop: 10}}>
@@ -109,16 +143,17 @@ const AddDeliveryDetailScreen: React.FC = () => {
                 placeholderTextColor={colors.lineColor}></TextInput>
             </View>
           </View>
-          <View style={styles.bottomContainer}>
+        </ScrollView>
+        </View>
+        {/* <View style={styles.bottomContainer}> */}
             <ASButton
               title={constant.continue}
               customStyle={styles.continueButton}
               onPress={moveToNextScreen}
             />
-          </View>
-        </ScrollView>
+          {/* </View> */}
       </KeyboardAvoidingView>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -143,14 +178,12 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.regular,
     fontSize: 14,
     color: colors.textPrimary2,
-    top: 10,
+    marginVertical: 10,
   },
   paddingView: {
     marginHorizontal: 16,
   },
-  scrollContent: {
-    paddingBottom: '70%',
-  },
+
   bottomContainer: {
     position: 'absolute',
     bottom: 0,
@@ -164,7 +197,7 @@ const styles = StyleSheet.create({
     margin: 16,
     paddingVertical: 14,
     borderRadius: 50,
-    paddingHorizontal: 16,
+    marginHorizontal: 16,
   },
   deliveryMode: {
     fontSize: 12,
@@ -187,6 +220,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: Platform.OS === 'ios' ? 12 : 8,
     marginTop: 5,
+  },
+  tipsToggle: {
+    color: colors.appColor,
+    marginTop: 8,
+    fontFamily: Fonts.semiBold
   },
 });
 

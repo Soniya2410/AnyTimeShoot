@@ -27,6 +27,7 @@ export const constant = {
   getStarted: "Get Started",
   specialOffer: "Special Offer",
   bestSeller: "Best Seller packages",
+  similarPackage: "Similar packages",
 
   //AnyTimeShoot Constant Images
    onBoardTitle1: "Capture Life's Moments, Anytime, Anywhere",
@@ -157,6 +158,7 @@ export const constant = {
    selectCategory: "Select category in which you want to create a package.",
    addDetails: "Add Details ",
    giveSome: "Give some details of your package",
+   provideTheOverAll:"Provide the overall cost of the package .",
    packageName: "Package Name",
    packageDesc: "Package Description",
    nameYourPackage: "Name your package",
@@ -194,7 +196,7 @@ export const constant = {
   facilitiesInclude: "Facilities included in the package",
   uploaded: "Uploaded",
 
-
+//PackageDetails
   includeInPackage: "Includes in package",
   deliveryDetails: "Delivery Details",
   descDelivery: "Describe the detailed schedule for your deliverables .",
@@ -206,12 +208,18 @@ export const constant = {
   editedData: "Edited Data *",
   offline: "Offline",
   cloudSharing: "Cloud Sharing",
+  whenYouWillGetDeliverables: "When you will get deliverables",
+  timelineAftershoot: 'Timeline after shoot',
 
   additionInformation: "Additional Information",
   chooseCancellationPolicy: "Choose Cancellation Policy",
   pickAcancellationPolicy: "Pick a cancellation policy",
   locationWhereYouAccepting: "Location where you accept booking",
   policy1: "Policy 1",
+  policy2: "Policy 2",
+  policy3: "Policy 3",
+  policy4: "Policy 4",
+  policy5: "Policy 5",
   gurugam: "Gurugam",
   pricingDetails: "Pricing Details",
   provideTheOverall: "Provide the overall cost of the package",
@@ -262,5 +270,30 @@ export const constant = {
   photoFrame: "Photo Frame",
   other10: "10. Other",
   images: "images",
+
+  //Partners Onboarding 
+  youCanEarnWith :'You can earn with',
+  estimateTime: "Estimate your learning based on location",
+  searchText: "Sector-23, Ghaziabad",
+  searchCategory: "Maternity Shoot",
+  describePhotography: "Describe Your Photography Business",
+  uploadDocument:  "Upload your Documents ",
+  enterBankDetails: "Enter Your Bank Details" ,
+  quickReviewBefore: "Quick review before submit !",
+  pleaseEnterYourInfo: "Please enter your information in the following fields.",
+  uploadingYourDocuments: "Uploading your documents will help us to verify your profile .",
+  forSmoothAndHassle:  "For smooth and hassle free pay outs , enter your bank details .",
+  reviewTheInfo: "Review the information you’ve providede before submitting .",
+  partner: "Partner",
+  yourArePartner: "You are a " ,
+  yourArePartner2: " Now !!",
+  createFirstPackage: "Create your first package to start accepting bookings on AnyTimeShoot",
+  doItLater: "I’ll do it later",
+  getOTP: "Get OTP via",
+  otpMsg: "Please enter the mode via you will get the OTP.",
+  verifyMsg: "Please enter 6 digit OTP received in your ",
+  giveSomeMoreDetails:"Give some more details of your package ."
+
+
 
 }

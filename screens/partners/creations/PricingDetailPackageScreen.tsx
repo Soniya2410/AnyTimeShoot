@@ -20,7 +20,7 @@ const PricingDetailPackageScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'pricingDetailPackage'>>();
 
   const moveToNextScreen = () => {
-    navigation.navigate('addRulesPackage')
+    navigation.navigate('successCreation')
   };
 
   return (
@@ -37,7 +37,7 @@ const PricingDetailPackageScreen: React.FC = () => {
             showsVerticalScrollIndicator={false}>
             
             <Text style={styles.title}>{constant.pricingDetails}</Text>
-            <Text style={styles.subTitle}>{constant.giveSome}</Text>
+            <Text style={styles.subTitle}>{constant.provideTheOverAll}</Text>
 
             <View style={styles.paddingView}>
               <Text style={styles.enterPrice}>{constant.enterPrice}</Text>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   pricingDetails: {
     fontFamily: Fonts.regular,
-    fontSize: 10,
+    fontSize: 11,
     color: colors.textPrimary2,
   },
   bottomContainer: {

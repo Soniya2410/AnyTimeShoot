@@ -64,7 +64,7 @@ const ProfileDetailSlider = ({isSingleImage = false, page = 'detail'}) => {
       scrollViewRef.current.scrollTo({
         x: index * ITEM_WIDTH,
         animated: true,
-        duration: 300, // Smoother animation
+        // duration: 300, // Smoother animation
       });
     }
   };
