@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { useState } from "react"
-import DocumentPicker from 'react-native-document-picker';
+// import DocumentPicker from 'react-native-document-picker';
 import { images } from "../../utils/Images";
 import { colors } from "../../utils/Colors";
 import { Fonts } from "../../utils/Fonts";
@@ -10,18 +10,18 @@ const Step_3: React.FC = () => {
   const [idTipsVisible, setIdTipsVisible] = useState(false);
 
   const handleFilePick = async (label : any) => {
-    try {
-      const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.images],
-      });
-      console.log(`${label} file selected:`, res);
-    } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        console.log('File selection cancelled');
-      } else {
-        console.error(err);
-      }
-    }
+    // try {
+    //   const res = await DocumentPicker.pick({
+    //     type: [DocumentPicker.types.images],
+    //   });
+    //   console.log(`${label} file selected:`, res);
+    // } catch (err) {
+    //   if (DocumentPicker.isCancel(err)) {
+    //     console.log('File selection cancelled');
+    //   } else {
+    //     console.error(err);
+    //   }
+    // }
   };
 
   const renderUploadBox = (label : any, onTipsToggle : any, tipsVisible : boolean) => (

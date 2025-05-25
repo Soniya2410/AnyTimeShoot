@@ -7,6 +7,7 @@ import {
   View,
   StyleSheet,
   FlatList,
+  SafeAreaView,
 } from 'react-native';
 import {icons} from '../utils/Icons';
 import {images} from '../utils/Images';
@@ -19,6 +20,7 @@ import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../App';
 import RecommendedCard from '../components/RecommendedCard';
 import { StudioFacilitiesItems } from './component/StudioFacilitiesItems';
+import { ASButton } from '../components/ASButton';
 
 const PackageDetails: React.FC = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -107,6 +109,12 @@ const PackageDetails: React.FC = () => {
     {id: 3, image: images.details3, text: 'Raw Videos\n2'},
   ];
 
+  const ExtraPerks = [
+    {id: 1, image: images.details1, text: 'Fast Past Production'},
+    {id: 2, image: images.details2, text: 'Door Step Shoot'},
+    {id: 3, image: images.details3, text: 'Easy Cancellation'},
+  ];
+
   const recommended = [
     {
       id: '1',
@@ -143,6 +151,17 @@ const PackageDetails: React.FC = () => {
     },
   ];
 
+  const gearList = [
+    {id: 1, name: "Primary Camera", count : 5, image: images.camera},
+    {id: 2, name: "Light Reflectors", count : 5, image: images.cameraFront},
+    {id: 3, name: "Mobile Device", count : 5, image: images.mobile},
+    {id: 4, name: "Primary Camera", count : 5, image: images.camera},
+    {id: 5, name: "Primary Camera", count : 5, image: images.cameraFront},
+  ]
+  const moveToBookNow = () => {
+
+  }
+
   const [recommendedList, setRecommendedList] = useState(recommended);
   const toggleLike = (id: string) => {
     const updatedList = recommendedList.map(item =>
@@ -163,10 +182,32 @@ const PackageDetails: React.FC = () => {
       </View>
     );
   };
+
+  const renderExtraPerks = ({item}: {item: any}) => {
+    return (
+      <View key={item.id} style={styles.Extracard}>
+        <Image source={item.image} style={styles.ExtracardImage} />
+        <Text style={styles.cardText}>{item.text}</Text>
+      </View>
+    );
+  };
+
+  const renderGearItems = ({item}: {item: any}) => {
+    return (
+      <View key={item.id} style={styles.Gearcard}>
+        <Image source={item.image} style={styles.GearcardImage} />
+        <View  style={styles.cardText}>
+        <Text style={styles.gearText}>{item.name}</Text>
+        <Text style={styles.gearText}>{item.count}</Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <ScrollView>
       <View>
-        {/* <BookingDetailSlider page={'detail'}/> */}
         {/* Shoot Info */}
         <ProfileDetailSlider />
         <View style={styles.shootInfo}>
@@ -244,12 +285,23 @@ const PackageDetails: React.FC = () => {
       )}
 
       {activeTabIndex == 1 && (
-        <Text style={styles.packageDescription}>
-          Our Wedding Photography Package captures your special day with
-          elegance and artistry. From candid moments to posed portraits, our
-          professional photographers ensure every significant moment is
-          beautifully documented.
-        </Text>
+        <View>
+           <FlatList
+            renderItem={renderGearItems}
+            data={gearList}
+            keyExtractor={item => item.id.toString()}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.imageRow}
+            style={{marginVertical: 10, }}
+          />
+        </View>
+        // <Text style={styles.packageDescription}>
+        //   Our Wedding Photography Package captures your special day with
+        //   elegance and artistry. From candid moments to posed portraits, our
+        //   professional photographers ensure every significant moment is
+        //   beautifully documented.
+        // </Text>
       )}
 
       {activeTabIndex == 2 && (
@@ -328,6 +380,19 @@ const PackageDetails: React.FC = () => {
           <Text style={styles.tableCell}>20 days</Text>
         </View>
       </View>
+      <View>
+      <Text style={styles.recommendedTitle}>{constant.extraPerks}</Text>
+      <Text style={styles.subTitle}>{constant.extraPerksIncluded}</Text>
+      <FlatList
+        renderItem={renderExtraPerks}
+        data={ExtraPerks}
+        keyExtractor={item => item.id.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.imageRow}
+        style={{marginTop: 10}}
+      />
+      </View>
 
       <View style={styles.recommendedHeader}>
         <Text style={styles.recommendedTitle}>{constant.specialOffer}</Text>
@@ -367,18 +432,37 @@ const PackageDetails: React.FC = () => {
             contentContainerStyle={styles.grid}
           />
         </View>
+        <Text style={styles.recommendedTitle}>{constant.bookingStats}</Text>
+        <View style={styles.statsRow}>
+        {/* Total Bookings Card */}
+        <View style={styles.statscard}>
+          <Text style={styles.cardTitle}>Total bookings</Text>
+          <Text style={styles.bigNumber}>500</Text>
+          <Text style={styles.subText}>+30 from last month</Text>
+        </View>
 
-      {/* <View style={styles.deliveryTable}>
-        <View style={styles.deliveryRow}>
-          <Image source={icons.rawDataIcon} style={styles.icon}/>
-          <Text style={styles.deliveryText}>Raw Data - Offline - 20 days</Text>
+        {/* Average Rating Card */}
+        <View style={styles.statscard}>
+          <Text style={styles.cardTitle}>Average Rating</Text>
+          <View style={styles.ratingRow}>
+            {/* <Icon name="star" size={20} color="#f5b50a" /> */}
+            <Text style={styles.bigNumber}>4.2</Text>
+          </View>
         </View>
-        <View style={styles.deliveryRow}>
-          <Image source={icons.editRawDataIcon}  style={styles.icon}/>
-          <Text style={styles.deliveryText}>Edited Data - Cloud sharing - 20 days</Text>
-        </View>
-      </View> */}
+      </View>
+        <View style={{ height: 50}}></View>
+       
     </ScrollView>
+    <View style={styles.bottomBar}>
+        <Text style={styles.priceText}>{constant.reviewPrice}</Text>
+        <ASButton
+          title={constant.bookNow}
+          customStyle={styles.bookButton}
+          textStyle={styles.bookButtonText}
+          onPress={moveToBookNow}
+        />
+        </View>
+    </SafeAreaView>
   );
 };
 
@@ -406,7 +490,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: Fonts.medium,
     // fontWeight: 'bold',
-    color: '#e53935',
+    color: colors.appColor,
     marginHorizontal: 15,
     marginTop: 20,
   },
@@ -420,6 +504,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
   },
+  Gearcard: {
+    width: 120,
+    height: 120,
+    marginRight: 15,
+    alignItems: 'center',
+    position: 'relative',
+    backgroundColor: colors.appColor30
+  },
+  Extracard: {
+    width: 180,
+    marginRight: 15,
+    alignItems: 'center',
+    position: 'relative',
+  },
   line : {
     backgroundColor: '#ccc',
     height: '100%',
@@ -428,6 +526,19 @@ const styles = StyleSheet.create({
   cardImage: {
     width: 120,
     height: 150,
+    borderRadius: 10,
+  },
+  GearcardImage: {
+    width: 70,
+    height: 70,
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius: 10,
+    marginTop: 5
+  },
+  ExtracardImage: {
+    width: 180,
+    height: 180,
     borderRadius: 10,
   },
   cardText: {
@@ -443,6 +554,15 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     fontFamily: Fonts.regular,
+  },
+  gearText: {
+    fontFamily: Fonts.regular,
+    color: colors.white,
+    fontSize: 12,
+    justifyContent:'center',
+    alignItems:'center',
+    textAlign:'center'
+
   },
   tabs: {
     flexDirection: 'row',
@@ -465,7 +585,7 @@ const styles = StyleSheet.create({
     // elevation: 5,
   },
   activeTab: {
-    backgroundColor: '#e53935',
+    backgroundColor: colors.appColor,
     paddingVertical: 13,
     paddingHorizontal: 20,
     borderRadius: 5,
@@ -560,7 +680,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 12,
     fontFamily: Fonts.medium,
-    color: '#c62828',
+    color: colors.appColor,
   },
   tableRow: {
     flexDirection: 'row',
@@ -599,17 +719,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     marginVertical: 5,
   },
   recommendedTitle: {
     fontSize: 16,
     // fontWeight: '600',
     fontFamily: Fonts.medium,
-    marginVertical: 10,
+    marginVertical: 5,
     marginLeft: 10,
     color: colors.appColor,
-    marginTop: 10,
+    marginTop: 15,
+  },
+  subTitle: {
+    fontSize: 13,
+    fontFamily: Fonts.regular,
+    marginLeft: 10,
+    color: colors.textPrimary2,
   },
   studioImages : {
     fontSize: 16,
@@ -632,6 +758,72 @@ const styles = StyleSheet.create({
   row: {
     justifyContent: 'space-between',
     marginBottom: 16,
+  },
+  bottomBar: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: colors.white,
+    padding: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderTopWidth: 1,
+    borderColor: colors.borderColor,
+  },
+  priceText: {
+    fontSize: 20,
+    fontFamily: Fonts.semiBold,
+    color: colors.appColor,
+  },
+  bookButton: {
+    backgroundColor: colors.appColor,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 25,
+  },
+  bookButtonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontFamily: Fonts.semiBold,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 16
+  },
+  cardTitle: {
+    fontSize: 14,
+    fontFamily: Fonts.regular,
+    color: colors.textPrimary2,
+  },
+  bigNumber: {
+    fontSize: 24,
+    fontFamily: Fonts.semiBold,
+    // color: colors.textPrimary2,
+    marginTop: 4,
+  },
+  subText: {
+    fontSize: 13,
+    color: colors.textPrimary2,
+    fontFamily: Fonts.regular,
+    marginTop: 2,
+  },
+  ratingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 4,
+    gap: 5,
+  },
+  statscard: {
+    flex: 1,
+    backgroundColor: colors.white,
+    borderRadius: 12,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#dcdcdc',
+    marginRight: 8,
   },
 });
 

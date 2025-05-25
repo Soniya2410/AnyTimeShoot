@@ -246,7 +246,7 @@ const App: React.FC = () => {
     <GestureHandlerRootView>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="homeScreen"
+          initialRouteName="onboard"
           screenOptions={{
             headerBackTitle: '', // This works differently in native-stack
             headerTintColor: '#000000', // Arrow color

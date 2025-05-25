@@ -234,6 +234,7 @@ export const constant = {
   rulesText: "Shoot will be done in the mentioned hours only and extra hours will charge extra.",
   save: "Save",
   extraPerks: "Extra Perks",
+  extraPerksIncluded:"Extra  perks included in this package",
   deliverSomethingExtra: "Deliver something extra to win over your customer.",
   yourPackageWillBe: "Your package will give:",
   addExtraPerks: "Add extra  perks which you are giving in package:",
@@ -292,8 +293,8 @@ export const constant = {
   getOTP: "Get OTP via",
   otpMsg: "Please enter the mode via you will get the OTP.",
   verifyMsg: "Please enter 6 digit OTP received in your ",
-  giveSomeMoreDetails:"Give some more details of your package ."
-
-
-
+  giveSomeMoreDetails: "Give some more details of your package .",
+  bookingStats: "Booking Stats",
+  totalBooking: "Total Booking",
+  lastMonth: "+30 from last month",
 }

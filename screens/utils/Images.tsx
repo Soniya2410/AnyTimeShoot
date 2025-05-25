@@ -130,6 +130,10 @@ export const images = {
   emailOtp: require('../../assets/images/partners/emailOtp.png'),
   phoneOtp: require('../../assets/images/partners/phoneOtp.png'),
   phoneCode: require('../../assets/images/partners/phoneCode.png'),
-  addIcon: require('../../assets/images/partners/addIcon.png')
+  addIcon: require('../../assets/images/partners/addIcon.png'),
+   //Booking
+   camera: require('../../assets/images/booking/camera.png'),
+   cameraFront: require('../../assets/images/booking/frontCamera.png'),
+   mobile: require('../../assets/images/booking/mobile.png'),
 };
 
