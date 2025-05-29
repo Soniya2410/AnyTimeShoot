@@ -25,7 +25,10 @@ const ProfileScreen = () => {
    navigation.navigate('bookingDetail');
   };
 
-  const moveToEditProfile = () => {};
+ const moveToEditProfile = () => {
+  navigation.navigate('gearAndSoftware');
+};
+
   const settingsData = [
     {
       id: '1',

@@ -24,4 +24,5 @@ export const colors = {
   reviewBackgroundColor: '#3F9BAC4',
   dayColor: '#1D1B20',
   calendarBackground: '#FFDCDC',
+  borderColors: "#DADADA",
 };

@@ -135,5 +135,38 @@ export const images = {
    camera: require('../../assets/images/booking/camera.png'),
    cameraFront: require('../../assets/images/booking/frontCamera.png'),
    mobile: require('../../assets/images/booking/mobile.png'),
-};
 
+   cameraIcon:require('../../assets/images/ic_cameraIcon.png'),
+   droneIcon:require('../../assets/images/ic_drone.png'),
+   lightsIcon:require('../../assets/images/ic_lightsIcon.png'),
+   otherAccessoriesIcon:require('../../assets/images/ic_otherAccessories.png'),
+   videoIcon:require('../../assets/images/ic_videoIcon.png'),
+   sotwareIcon:require('../../assets/images/ic_software.png'),
+   mobileIcon:require('../../assets/images/ic_mobileIcon.png'),
+   downIcon:require('../../assets/images/ic_down.png'),
+   rightIcon:require('../../assets/images/ic_nextIcon.png'),
+   ledIcon: require('../../assets/images/ledIcon.png'),
+   umberllaLightIcon: require('../../assets/images/umberllaLight.png'),
+   flashIcon: require('../../assets/images/flashes.png'),
+   filterIcon: require('../../assets/images/filter.png'),
+   reflectorIcon: require('../../assets/images/reflector.png'),
+   diffuserIcon: require('../../assets/images/diffuser.png'),
+
+   adobePhotoshop: require('../../assets/images/adobePhotoshop.png'),
+   adobeLightroom: require('../../assets/images/adobeLightroom.png'),
+   canva: require('../../assets/images/canva.png'),
+   adobePremierPro: require('../../assets/images/adobePremier.png'),
+   adobeAfterEffects: require('../../assets/images/adobeAfterEffects.png'),
+   davinciResolve: require('../../assets/images/davinciResolve.png'),
+
+   gimbalIcon: require('../../assets/images/gimbal.png'),
+   cranesIcon: require('../../assets/images/cranes.png'),
+   monopodIcon: require('../../assets/images/monopod.png'),
+   backDropIcon: require('../../assets/images/backDrop.png'),
+   ledScreenIcon: require('../../assets/images/ledScreen.png'),
+   tripodIcon: require('../../assets/images/tripod.png'),
+  
+   unselectedIcon: require('../../assets/images/ic_unselected.png'),
+   selectedCheck: require('../../assets/images/ic_selected.png'),
+
+}

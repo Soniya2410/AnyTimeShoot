@@ -71,6 +71,14 @@ import PackageCreationSuccessScreen from './screens/partners/onboarding/PackageC
 import PartnerOTPScreen from './screens/partners/onboarding/PartnerOTPScreen.tsx';
 import PartnerOTPVerificationScreen from './screens/partners/onboarding/PartnerOTPVerificationScreen.tsx';
 
+// Devices
+import GearsAndSoftwareScreen from './screens/partners/creations/GearsAndSoftwareScreen.tsx';
+import CameraGearsScreen from './screens/partners/creations/CameraGearsScreen.tsx';
+import MobilePhoneCameraScreen from './screens/partners/creations/MobilePhoneCameraScreen.tsx';
+import DroneScreen from './screens/partners/creations/DroneScreen.tsx';
+import LightsReflectorScreen from './screens/partners/creations/LightsReflectorScreen.tsx';
+import AccessoriesScreen from './screens/partners/creations/AccessoriesScreen.tsx';
+import SoftwareUsedScreen from './screens/partners/creations/SoftwareUsedScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -120,6 +128,13 @@ export type RootStackParamList = {
   packageCreationSuccess: undefined;
   partnerOTPScreen: undefined;
   partnerOTPVerify: {selectionOption: string};
+  cameraGear: undefined;
+  gearAndSoftware: undefined;
+  mobilePhoneCamera: undefined;
+  drone: undefined;
+  lightReflector: undefined;
+  softwareUsed: undefined;
+  accessories: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -663,7 +678,7 @@ const App: React.FC = () => {
               ),
             }}
           />
-           <Stack.Screen
+          <Stack.Screen
             name="notificationList"
             component={NotificationScreen}
             options={{
@@ -762,8 +777,8 @@ const App: React.FC = () => {
             }}
           />
 
-            <Stack.Screen
-            name='addDeliveryDetailsPackage'
+          <Stack.Screen
+            name="addDeliveryDetailsPackage"
             component={AddDeliveryDetailScreen}
             options={{
               headerTitle: '',
@@ -803,8 +818,8 @@ const App: React.FC = () => {
             }}
           />
 
-           <Stack.Screen
-            name='pricingDetailPackage'
+          <Stack.Screen
+            name="pricingDetailPackage"
             component={PricingDetailPackageScreen}
             options={{
               headerTitle: '',
@@ -844,8 +859,8 @@ const App: React.FC = () => {
             }}
           />
 
-           <Stack.Screen
-            name='addRulesPackage'
+          <Stack.Screen
+            name="addRulesPackage"
             component={AddRulesPackageScreen}
             options={{
               headerTitle: '',
@@ -886,7 +901,7 @@ const App: React.FC = () => {
           />
 
           <Stack.Screen
-            name='additionalInformationPackage'
+            name="additionalInformationPackage"
             component={AdditionalInformationPackageScreen}
             options={{
               headerTitle: '',
@@ -927,7 +942,7 @@ const App: React.FC = () => {
           />
 
           <Stack.Screen
-            name='extraPerksPackage'
+            name="extraPerksPackage"
             component={ExtraPerksPackageScreen}
             options={{
               headerTitle: '',
@@ -968,7 +983,7 @@ const App: React.FC = () => {
           />
 
           <Stack.Screen
-            name='addSamplePackage'
+            name="addSamplePackage"
             component={AddSamplePackageScreen}
             options={{
               headerTitle: '',
@@ -1011,7 +1026,7 @@ const App: React.FC = () => {
           />
 
           <Stack.Screen
-            name='deliverablePackage'
+            name="deliverablePackage"
             component={DeliverableDetailScreen}
             options={{
               headerTitle: '',
@@ -1074,7 +1089,7 @@ const App: React.FC = () => {
               headerTitle: 'Cancellation Policy',
             }}
           />
-           <Stack.Screen
+          <Stack.Screen
             name="partnersOnboarding"
             component={PartnerOnboardingScreen}
             options={{title: '', headerShown: false}}
@@ -1207,6 +1222,293 @@ const App: React.FC = () => {
             component={PartnerOTPVerificationScreen}
             options={{
               headerTitle: '',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'AnyTimeShoot',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="gearAndSoftware"
+            component={GearsAndSoftwareScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'AnyTimeShoot',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="cameraGear"
+            component={CameraGearsScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'AnyTimeShoot',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="mobilePhoneCamera"
+            component={MobilePhoneCameraScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'AnyTimeShoot',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="drone"
+            component={DroneScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'AnyTimeShoot',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="lightReflector"
+            component={LightsReflectorScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'AnyTimeShoot',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="accessories"
+            component={AccessoriesScreen}
+            options={{
+              headerTitle: 'Package Creation',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'AnyTimeShoot',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="softwareUsed"
+            component={SoftwareUsedScreen}
+            options={{
+              headerTitle: 'Package Creation',
               headerTitleAlign: 'left',
               headerBackTitle: 'AnyTimeShoot',
               headerBackground: () => (

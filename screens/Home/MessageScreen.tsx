@@ -16,6 +16,8 @@ import { constant } from '../utils/Constant';
 import { colors } from '../utils/Colors';
 import { Fonts } from '../utils/Fonts';
 import { icons } from '../utils/Icons';
+import { RootStackNavigationProp } from '../../App';
+import { useNavigation } from '@react-navigation/native';
 
 interface Message {
   id: string;
@@ -25,9 +27,14 @@ interface Message {
 }
 
 const MessageScreen: React.FC = () => {
+  const navigation = useNavigation<RootStackNavigationProp<'login'>>();
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const flatListRef = useRef<FlatList>(null);
+
+  const moveToNavigation = () => {
+    navigation.navigate('gearAndSoftware');
+  }
 
   // Load sample messages (in a real app, you'd fetch these from an API)
   useEffect(() => {
@@ -146,7 +153,7 @@ const MessageScreen: React.FC = () => {
           keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
         >
           <View style={styles.inputWrapper}>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton} onPress={moveToNavigation}>
               <Image 
                 source={icons.addImageIcon} 
                 style={styles.icon}
