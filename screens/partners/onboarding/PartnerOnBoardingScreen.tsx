@@ -476,6 +476,7 @@ const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingBottom: 10
   },
   joinButton: {
     height: 54,
@@ -483,7 +484,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginTop: 24,
     paddingHorizontal: 16,
-    width: '65%'
+    width: '64%'
   },
   help: {
     borderRadius: 40,
@@ -493,9 +494,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
     marginRight: 10,
-    height: 54,
+    minHeight: 50,
     marginTop: 24,
-    width: '25%'
+    justifyContent:'center',
+    width: '27%'
   
   },
   locationRow: {

@@ -15,8 +15,6 @@ import {constant} from '../../utils/Constant';
 import {Fonts} from '../../utils/Fonts';
 import {ASButton} from '../../components/ASButton';
 import {colors} from '../../utils/Colors';
-import {useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from '../../../App';
 import {images} from '../../utils/Images';
 
 const categories = [
@@ -153,6 +151,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.textPrimary2,
     marginBottom: 16,
+    fontFamily: Fonts.regular
   },
   card: {
     backgroundColor: colors.white,
@@ -225,10 +224,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   footer: {
-    padding: 16,
-    borderTopWidth: 1,
-    borderTopColor: colors.lightGray,
-    backgroundColor: colors.white,
+    paddingBottom: 16
   },
   expandedWrapper: {
     marginHorizontal: 10,

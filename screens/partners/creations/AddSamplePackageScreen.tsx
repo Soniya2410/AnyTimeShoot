@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   viewStyle : {
     marginHorizontal: 16,
-    height: '90%'
+    height: '94%'
   },
   title: {
     fontFamily: Fonts.medium,
@@ -113,10 +113,10 @@ const styles = StyleSheet.create({
   btnContinue: {
     backgroundColor: colors.appColor,
     // margin: 16,
-    paddingVertical: 14,
+    // paddingVertical: 14,
     borderRadius: 50,
     alignItems: 'center',
-    marginTop: 15,
+    // marginTop: 15,
   },
   
   thumbView: {

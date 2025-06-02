@@ -6,15 +6,21 @@ import { useState } from 'react';
 import { Fonts } from '../utils/Fonts';
 
 
-const AppHeaders = () => {
+const AppHeaders = ({isSearchFocused} : any) => {
   const [modalVisible, setModalVisible] = useState(true);
   return (
-    <View style={styles.header}>
-      <View style={styles.logoContainer}>
-        <Image source={images.logo} style={styles.logo} />
-        <Text style={styles.anyTimeLabel}>{constant.anyTime}<Text style={styles.shootLabel}>{constant.shoot}</Text>
-        </Text>
-      </View>
+     <View style={styles.header}>
+        {
+          isSearchFocused ? 
+          <View style={styles.logoContainer}>
+            <Text style={styles.anyTimeLabel}>Search</Text></View> :
+          <View style={styles.logoContainer}>
+            <Image source={images.logo} style={styles.logo} />
+            <Text style={styles.anyTimeLabel}>{constant.anyTime}
+              <Text style={styles.shootLabel}>{constant.shoot}</Text>
+            </Text>
+          </View>
+        }
     </View>
   );
 };

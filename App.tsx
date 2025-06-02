@@ -80,6 +80,7 @@ import DroneScreen from './screens/partners/creations/DroneScreen.tsx';
 import LightsReflectorScreen from './screens/partners/creations/LightsReflectorScreen.tsx';
 import AccessoriesScreen from './screens/partners/creations/AccessoriesScreen.tsx';
 import SoftwareUsedScreen from './screens/partners/creations/SoftwareUsedScreen.tsx';
+import SearchScreen from './screens/home/SearchScreen.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -137,6 +138,7 @@ export type RootStackParamList = {
   softwareUsed: undefined;
   accessories: undefined;
   filterBottom: undefined;
+  searchScreen: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -684,16 +686,32 @@ const App: React.FC = () => {
             name="notificationList"
             component={NotificationScreen}
             options={{
-              headerBackTitle: '',
-              headerTitle: 'Notification',
+              headerTitle: '',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'Notification',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
             }}
           />
           <Stack.Screen
             name="wishlist"
             component={WishlistScreen}
             options={{
-              headerBackTitle: '',
-              headerTitle: 'WishList',
+              headerTitle: '',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'Wishlist',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
             }}
           />
 
@@ -1513,6 +1531,47 @@ const App: React.FC = () => {
               headerTitle: '',
               headerTitleAlign: 'left',
               headerBackTitle: 'Package Creation',
+              headerBackground: () => (
+                <View style={{backgroundColor: colors.appColor, flex: 1}} />
+              ),
+              headerTitleStyle: {
+                color: colors.white,
+              },
+              headerTintColor: colors.white,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => {}}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.white,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpLightIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.white}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="searchScreen"
+            component={SearchScreen}
+            options={{
+              headerTitle: '',
+              headerTitleAlign: 'left',
+              headerBackTitle: 'Search',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),

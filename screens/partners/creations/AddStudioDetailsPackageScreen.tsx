@@ -79,22 +79,14 @@ const studioDetails = [
 ];
 
 const AddStudioDetailsPackageScreen: React.FC = () => {
-   const navigation = useNavigation<RootStackNavigationProp<'addStudioDetailsPackage'>>();
-
-
-  const [selectedStudio, setSelectedStudio] = useState<'Yes' | 'No' | null>(
-    null,
-  );
+  const navigation = useNavigation<RootStackNavigationProp<'addStudioDetailsPackage'>>();
   const moveToAddStudioDetails = () => {
     navigation.navigate('addSamplePackage');
   };
 
- 
-  
   return (
-    <View style={styles.container}>
     <KeyboardAvoidingView
-      style={{flex: 1}}
+      style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.title}>{constant.addStudioDetails}</Text>
@@ -146,7 +138,6 @@ const AddStudioDetailsPackageScreen: React.FC = () => {
             onPress={moveToAddStudioDetails} />
         </View>
       </KeyboardAvoidingView>
-    </View>
   );
 };
 
@@ -213,7 +204,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   scrollContent: {
-    paddingBottom: 100,
+    paddingBottom: 20,
   },
   fileContainer: {
     borderWidth: 1,
@@ -247,17 +238,10 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
   bottomContainer: {
-    padding: 16,
-    backgroundColor: colors.white,
-    borderTopWidth: 1,
-    borderColor: '#eee',
+    paddingBottom: 20
   },
   continueButton: {
-    backgroundColor: colors.appColor,
-    margin: 16,
-    paddingVertical: 14,
-    borderRadius: 50,
-    paddingHorizontal: 16,
+  
   },
   label: {
     fontSize: 13,

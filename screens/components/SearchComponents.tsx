@@ -31,17 +31,23 @@ const SearchComponents = (props : any) => {
     <View style={styles.searchLocationContainer}>
       <View style={styles.searchInputWrapper}>
         <Image source={images.search} style={styles.searchIcon} />
-        <TextInput
-          placeholder={constant.search_hint}
-          style={styles.searchInput}
-        />
+        <TouchableOpacity onPress={() => props.navigation.navigate('searchScreen')}>
+          <View pointerEvents="none">
+            <TextInput
+              placeholder={constant.search_hint}
+              style={styles.searchInput}
+              placeholderTextColor={colors.placeHolderColor}
+              editable={false}
+            />
+          </View>
+      </TouchableOpacity>
       </View>
       <View style={styles.iconsContainer}>
         <TouchableOpacity style={styles.iconContainer} onPress={() => notificationPage()}>
           <Image source={icons.bellIcon} style={styles.icon}/>
         </TouchableOpacity>
         {/* <TouchableOpacity style={styles.iconContainer} onPress={()=> wishListPage()}> */}
-        <TouchableOpacity style={styles.iconContainer} onPress={openFilterModal}>
+        <TouchableOpacity style={styles.iconContainer} onPress={wishListPage}>
           <Image source={icons.heartIcon}  style={styles.heartIcon}/>
         </TouchableOpacity>
         {/* <TouchableOpacity style={styles.iconContainer}>
@@ -58,10 +64,7 @@ const SearchComponents = (props : any) => {
           </TouchableOpacity>
         </View>
       </View>
-    <FilterBottomSheet  
-       visible={isFilterVisible}
-        onClose={() => setIsFilterVisible(false)}
-        onApply={applyFilters}/>
+   
     </View>
   );
 };
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     fontSize: 16,
     color: colors.black,
-    fontFamily: Fonts.medium
+    fontFamily: Fonts.medium,
   },
   searchIcon: {
     width: 20,

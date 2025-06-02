@@ -256,6 +256,7 @@ const HomeScreen: React.FC = () => {
   const [preweddingList, setPreweddingList] = useState(prewedding);
   const [bestSellerPackageList, setBestSellerPackageList] = useState(bestSeller);
   const [offerPackageList, setOfferSellerPackageList] = useState(bestSeller);
+  const [isSearchFocused, setIsSearchFocused] = useState(0);
   const categories = [
     {
       id: '1',
@@ -316,16 +317,13 @@ const HomeScreen: React.FC = () => {
     const isViewAll = item.title === 'View All';
     if(isViewAll) {
       return (
-        <View style={styles.categoryCard}>
+        <TouchableOpacity style={styles.categoryCard}
+        onPress={() => {}}>
           <View style={styles.greyImage}>
           <Image source={item.image}  style={styles.arrowIcon}/>
           </View>
-          <YourLocationPopupScreen
-            visible={modalVisible}
-            onClose={() => setModalVisible(false)}
-          />
           <Text style={styles.viewAllTitle}>{item.title}</Text>
-        </View>
+        </TouchableOpacity>
       );
     }
     return (
@@ -347,8 +345,9 @@ const HomeScreen: React.FC = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <AppHeaders />
-        <SearchComponents  navigation={navigation}/>
+        <AppHeaders isSearchFocused = {isSearchFocused} />
+        <SearchComponents  
+        navigation={navigation} setIsSearchFocused={setIsSearchFocused} isSearchFocused={isSearchFocused}/>
         <CustomSlider />
         <View style={{marginHorizontal: 5}}>
         <Text style={styles.sectionTitle}>{constant.top_booked_services}</Text>
@@ -383,9 +382,10 @@ const HomeScreen: React.FC = () => {
           />
         </View>
    {/* Wedding Package  */}
-   <View style={styles.weddingPackage}>
+      <View style={styles.weddingPackage}>
           <Text style={styles.recommendedTitle}>{constant.bestSeller}</Text>
           <TouchableOpacity onPress={() => {
+           navigation.navigate('packageList', {title: 'Best Seller', data: preweddingList});
           }}>
             <Text style={styles.viewAll}>{constant.view_all}</Text>
           </TouchableOpacity>
@@ -405,7 +405,9 @@ const HomeScreen: React.FC = () => {
         </View>
         <View style={styles.recommendedHeader}>
           <Text style={styles.recommendedTitle}>{constant.instant_bookings}</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() =>
+             navigation.navigate('packageList', {title: 'Instant Booking', data: instantBooking})
+          }>
             <Text style={styles.viewAll}>{constant.view_all}</Text>
           </TouchableOpacity>
         </View>
@@ -428,9 +430,11 @@ const HomeScreen: React.FC = () => {
           contentContainerStyle={styles.container}
           showsVerticalScrollIndicator={false}
         />
-         <View style={{marginHorizontal: 15}}>
+         <TouchableOpacity style={{marginHorizontal: 15}} onPress={() =>{
+            navigation.navigate('packageList', {title: 'Offer', data: offerPackageList})
+         }}>
           <Text style={styles.viewMore}>{constant.view_more}</Text>
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.weddingPackage}>
           <Text style={styles.recommendedTitle}>{constant.bestSeller_package}</Text>
@@ -447,6 +451,10 @@ const HomeScreen: React.FC = () => {
           contentContainerStyle={styles.container}
           showsVerticalScrollIndicator={false}
         />
+         <YourLocationPopupScreen
+            visible={modalVisible}
+            onClose={() => setModalVisible(false)}
+          />
       </ScrollView>
     </SafeAreaView>
   );

@@ -194,10 +194,10 @@ scrollContent: {
   // paddingBottom: 50, 
 },
 bottomContainer: {
-  padding: 16,
-  backgroundColor: colors.white,
-  borderTopWidth: 1,
-  borderColor: '#eee',
+  paddingBottom: 10,
+  // backgroundColor: colors.white,
+  // borderTopWidth: 1,
+  // borderColor: '#eee',
 },
   // bottomContainer: {
   //   position: 'absolute',
@@ -210,7 +210,7 @@ bottomContainer: {
   continueButton: {
     backgroundColor: colors.appColor,
     // margin: 16,
-    paddingVertical: 14,
+    // paddingVertical: 14,
     borderRadius: 50,
     // marginHorizontal: 16,
   },

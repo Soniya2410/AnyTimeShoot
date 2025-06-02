@@ -25,4 +25,6 @@ export const colors = {
   dayColor: '#1D1B20',
   calendarBackground: '#FFDCDC',
   borderColors: "#DADADA",
+  searchPlaceHolderColor: '#A5A5A5',
+  filterBorder: '#D9D9D9'
 };

@@ -45,10 +45,10 @@ const AdditionalInformationPackageScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{height: '90%', marginHorizontal: 16}}>
-        <KeyboardAvoidingView
-          style={{flex: 1}}
+    <KeyboardAvoidingView
+          style={{flex: 1, marginHorizontal: 16}}
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+            <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.title}>{constant.additionInformation}</Text>
           <Text style={styles.subTitle}>{constant.giveSomeMoreDetails}</Text>
 
@@ -122,14 +122,15 @@ const AdditionalInformationPackageScreen: React.FC = () => {
             style={styles.input}
             placeholder={constant.numberOfDays}
             placeholderTextColor={colors.lineColor} /> */}
+            </ScrollView>
         </KeyboardAvoidingView>
+        <View style={styles.bottomContainer}>
+          <ASButton
+            title={constant.continue}
+            onPress={moveToNextScreen}    
+          />
       </View>
-      <ASButton
-        title={constant.continue}
-        onPress={moveToNextScreen}
-        customStyle={styles.btnContinue}
-      />
-    </SafeAreaView>
+     </SafeAreaView>
   );
 };
 
@@ -153,14 +154,6 @@ const styles = StyleSheet.create({
     color: colors.textPrimary2,
     marginTop: 6,
   },
-  bottomContainer: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    backgroundColor: colors.white,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-  },
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -172,12 +165,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 10,
   },
-  btnContinue: {
-    backgroundColor: colors.appColor,
-    margin: 16,
-    paddingVertical: 14,
-    borderRadius: 50,
-    paddingHorizontal: 16,
+  bottomContainer: {
+  
+    paddingBottom: 10
   },
   input: {
     borderWidth: 1,

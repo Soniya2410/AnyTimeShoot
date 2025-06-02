@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.textPrimary2,
     marginBottom: 16,
+    fontFamily: Fonts.regular
   },
   blockContainer: {
     marginBottom: 20,
@@ -147,8 +148,8 @@ const styles = StyleSheet.create({
     color: colors.appColor,
   },
   footer: {
-    padding: 16,
-    backgroundColor: colors.white,
+    paddingBottom: 10,
+    // backgroundColor: colors.white,
   },
 });
 

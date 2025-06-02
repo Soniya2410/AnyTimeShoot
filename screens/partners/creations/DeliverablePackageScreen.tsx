@@ -71,14 +71,11 @@ const DeliverableDetailScreen: React.FC = () => {
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        {/* <View style={{ height: '90%'}}> */}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.title}>{constant.deliverable}</Text>
         <Text style={styles.subTitle}>{constant.mentionDetails}</Text>
-    
-     {/* Deliverable Details */}
-
         {deliverables.map(item => (
           <View key={item.id} style={styles.itemContainer}>
             <TouchableOpacity onPress={() => toggleSelection(item.id)} style={styles.row}>
@@ -112,67 +109,7 @@ const DeliverableDetailScreen: React.FC = () => {
             )}
           </View>
         ))}
-        {/*  Custom Deliverable */}
-        {/* <View style={styles.itemContainer}>
-          <TouchableOpacity
-            onPress={() =>
-              setCustomDeliverable(prev => ({
-                ...prev,
-                isSelected: !prev.isSelected,
-              }))
-            }
-            style={styles.row}>
-            <Text style={styles.itemText}>{constant.other10}</Text>
-            <View
-              style={[
-                styles.addButton,
-                customDeliverable.isSelected && styles.addButtonSelected,
-              ]}>
-              <Text
-                style={[
-                  styles.plus,
-                  customDeliverable.isSelected && styles.plusSelected,
-                ]}>
-                +
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          {customDeliverable.isSelected && (
-            <View>
-              <Text style={styles.otherText}>{constant.deliverable}</Text>
-              <TextInput
-                placeholder={constant.nameDeliverable}
-                style={styles.inputOther}
-                value={customDeliverable.name}
-                onChangeText={text =>
-                  setCustomDeliverable(prev => ({...prev, name: text}))
-                }
-              />
-              <Text style={styles.otherText}>{constant.quantity}</Text>
-              <TextInput
-                placeholder={constant.numberOfTheDeliverable}
-                keyboardType="number-pad"
-                style={styles.inputOther}
-                value={customDeliverable.quantity}
-                onChangeText={text =>
-                  setCustomDeliverable(prev => ({...prev, quantity: text}))
-                }
-              />
-              <Text style={styles.helperText}>
-                {constant.give}
-                <Text style={styles.highlightText}>
-                  {constant.minimum}
-                  <Text style={styles.helperText}>
-                    {constant.numberOfImage}
-                  </Text>
-                </Text>
-              </Text>
-            </View>
-          )}
-        </View> */}
       </ScrollView>
-      {/* </View> */}
       <View style={styles.bottomContainer}>
         <ASButton
           title={constant.continue}
@@ -191,8 +128,8 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 16,
-    height: '90%'
-    // paddingBottom: 100,
+    paddingBottom: 100, 
+    flexGrow: 1,   
   },
   title: {
     fontFamily: Fonts.medium,
@@ -285,14 +222,11 @@ const styles = StyleSheet.create({
     color: colors.appColor,
   },
   bottomContainer: {
-    padding: 16,
-    backgroundColor: colors.white,
-    borderTopWidth: 1,
-    borderColor: '#eee',
+    paddingBottom: 20,
   },
   btnContinue: {
     backgroundColor: colors.appColor,
-    paddingVertical: 14,
+    // paddingVertical: 14,
     borderRadius: 50,
     alignItems: 'center',
   },

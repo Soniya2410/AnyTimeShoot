@@ -127,13 +127,7 @@ const styles = StyleSheet.create({
     color: colors.textPrimary2,
   },
   bottomContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: colors.white,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
+   paddingBottom: 10,
   },
   continueButton: {
     backgroundColor: colors.appColor,

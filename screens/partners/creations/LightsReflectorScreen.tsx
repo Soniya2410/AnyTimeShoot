@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.textPrimary2,
     marginBottom: 16,
+    fontFamily: Fonts.regular
   },
   card: {
     backgroundColor: colors.white,
@@ -193,6 +194,7 @@ const styles = StyleSheet.create({
   qtyText: {
     color: colors.white,
     fontSize: 14,
+    textAlign:'center',
     fontWeight: 'bold',
   },
   qtyValue: {
@@ -222,10 +224,8 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   footer: {
-    padding: 16,
-    borderTopWidth: 1,
-    borderTopColor: colors.lightGray,
-    backgroundColor: colors.white,
+    paddingBottom: 10,
+    
   },
   expandedWrapper: {
     marginHorizontal: 10,

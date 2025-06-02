@@ -77,10 +77,12 @@ const PartnerRegistrationScreen: React.FC = () => {
        {renderStepComponent()}
       </View>
       </ScrollView>
+      <View style={styles.bottomView}>
       <ASButton
         title={"Contiune"}
         onPress={moveToNextScreen}
         />
+        </View>
     </SafeAreaView>
   )
 }
@@ -126,6 +128,9 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.light,
     marginBottom: 16,
   },
+  bottomView: {
+    paddingBottom: 10
+  }
 })
 
 export default PartnerRegistrationScreen;

@@ -30,12 +30,56 @@ const categories = [
   {label: constant.other},
 ];
 
+const OtherInputs = () => (
+  <>
+    <Text style={styles.otherLabel}>{constant.brandName}</Text>
+    <TextInput
+      style={styles.otherInput}
+      placeholder={constant.enterModelOfCompany}
+      placeholderTextColor={colors.textPrimary2}
+    />
+    <Text style={styles.otherLabel}>{constant.model}</Text>
+    <TextInput
+      style={styles.otherInput}
+      placeholder={constant.enterModelOfCamera}
+      placeholderTextColor={colors.textPrimary2}
+    />
+  </>
+);
+
+const BrandInputs = () => (
+  <>
+    <View style={styles.expandedContent}>
+      <TextInput
+        style={styles.input}
+        placeholder={constant.nameTheModel}
+        placeholderTextColor={colors.textPrimary2}
+      />
+      <Text style={styles.label}>{constant.model}</Text>
+    </View>
+    <View style={{marginLeft: 16, marginTop: 5}}>
+      <Text style={styles.nonHighlight}>
+        {constant.give}
+        <Text style={styles.highlight}>
+          {constant.modelName}
+          <Text style={styles.nonHighlight}>{constant.nameOfTheCamera}</Text>
+        </Text>
+      </Text>
+    </View>
+  </>
+);
+
 const CameraGearsScreen: React.FC = () => {
-  const navigation =
-    useNavigation<RootStackNavigationProp<'gearAndSoftware'>>();
-
+  const navigation = useNavigation<RootStackNavigationProp<'gearAndSoftware'>>();
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+const [quantities, setQuantities] = useState<{ [index: number]: number }>({});
 
+const updateQuantity = (index: number, delta: number) => {
+  setQuantities(prev => ({
+    ...prev,
+    [index]: Math.max((prev[index] || 1) + delta, 1), // prevent < 1
+  }));
+};
   const handleCategory = (index: number) => {
     setExpandedIndex(prev => (prev === index ? null : index));
   };
@@ -46,78 +90,47 @@ const CameraGearsScreen: React.FC = () => {
         <Text style={styles.title}>{constant.videoCameraGears}</Text>
         <Text style={styles.subtitle}>{constant.allTheDevies}</Text>
 
-        {categories.map((item, index) => (
-          <View key={index}>
-            <TouchableOpacity
-              style={styles.card}
-              onPress={() => handleCategory(index)}>
-              <View style={styles.cardContent}>
-                <Text style={styles.cardText}>{item.label}</Text>
+        {categories.map((item, index) => {
+          const isExpanded = expandedIndex === index;
+          const isOther = item.label === constant.other;
 
-                <Image
-                  source={
-                    item.label === constant.other
-                      ? images.addIcon
-                      : images.downIcon
-                  }
-                  resizeMethod="resize"
-                  style={[
-                    styles.nextIcon,
-                    {
-                      transform: [
-                        {rotate: expandedIndex === index ? '180deg' : '0deg'},
-                      ],
-                    },
-                  ]}
-                />
-              </View>
-            </TouchableOpacity>
+          return (
+            <View key={index}>
+             <TouchableOpacity style={styles.card} onPress={() => handleCategory(index)}>
+  <View style={styles.cardContent}>
+    <Text style={styles.cardText}>{item.label}</Text>
 
-            {expandedIndex === index && (
-              <View style={styles.expandedWrapper}>
-                {item.label === constant.other ? (
-                  <>
-                    <Text style={styles.otherLabel}>{constant.brandName}</Text>
-                    <TextInput
-                      style={styles.otherInput}
-                      placeholder={constant.enterModelOfCompany}
-                      placeholderTextColor={colors.textPrimary2}
-                    />
-                    <Text style={styles.otherLabel}>{constant.model}</Text>
-                    <TextInput
-                      style={styles.otherInput}
-                      placeholder={constant.enterModelOfCamera}
-                      placeholderTextColor={colors.textPrimary2}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <View style={styles.expandedContent}>
-                      <TextInput
-                        style={styles.input}
-                        placeholder={constant.nameTheModel}
-                        placeholderTextColor={colors.textPrimary2}
-                      />
-                      <Text style={styles.label}>{constant.model}</Text>
-                    </View>
+    {isExpanded ? (
+      <View style={styles.quantityControls}>
+        <TouchableOpacity onPress={() => updateQuantity(index, -1)} style={styles.qtyButton}>
+          <Text style={styles.qtyText}>-</Text>
+        </TouchableOpacity>
+       <Text style={styles.qtyValue}>{quantities[index] || 1}</Text>
+        <TouchableOpacity onPress={() => updateQuantity(index, 1)} style={styles.qtyButton}>
+         <Text style={styles.qtyText}>+</Text>
+        </TouchableOpacity>
+      </View>
+    ) : (
+      <Image
+        source={isOther ? images.addIcon : images.downIcon}
+        style={[
+          styles.nextIcon,
+          { transform: [{ rotate: isExpanded ? '180deg' : '0deg' }] },
+        ]}
+        resizeMethod="resize"
+      />
+    )}
+  </View>
+</TouchableOpacity>
 
-                    <View style={{marginLeft: 16}}>
-                      <Text style={styles.nonHighlight}>
-                        {constant.give}
-                        <Text style={styles.highlight}>
-                          {constant.modelName}
-                          <Text style={styles.nonHighlight}>
-                            {constant.nameOfTheCamera}
-                          </Text>
-                        </Text>
-                      </Text>
-                    </View>
-                  </>
-                )}
-              </View>
-            )}
-          </View>
-        ))}
+              {isExpanded && (
+                <View style={styles.expandedWrapper}>
+                  {isOther ? <OtherInputs /> : <BrandInputs />}
+                </View>
+              )}
+            </View>
+          );
+        })}
       </ScrollView>
 
       <View style={styles.footer}>
@@ -131,13 +144,8 @@ const CameraGearsScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
-  scrollContent: {
-    paddingBottom: 16,
-  },
+  container: { flex: 1, backgroundColor: colors.white },
+  scrollContent: { paddingBottom: 16 },
   title: {
     fontSize: 16,
     fontFamily: Fonts.medium,
@@ -150,6 +158,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.textPrimary2,
     marginBottom: 16,
+    fontFamily: Fonts.regular,
     marginHorizontal: 10,
   },
   card: {
@@ -165,26 +174,16 @@ const styles = StyleSheet.create({
     elevation: 2,
     marginHorizontal: 10,
   },
-  cardContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  cardText: {
-    flex: 1,
-    fontSize: 14,
-    fontFamily: Fonts.medium,
-  },
-  nextIcon: {
-    width: 12,
-    height: 12,
-  },
+  cardContent: { flexDirection: 'row', alignItems: 'center' },
+  cardText: { flex: 1, fontSize: 14, fontFamily: Fonts.medium },
+  nextIcon: { width: 18, height: 18 },
   expandedWrapper: {
     marginHorizontal: 10,
     marginBottom: 12,
   },
   expandedContent: {
     backgroundColor: colors.white,
-    padding: 12,
+    paddingHorizontal: 12,
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
     flexDirection: 'row',
@@ -197,10 +196,11 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   input: {
-    height: 28,
+    minHeight: 45,
     borderWidth: 1,
     borderColor: colors.borderColors,
     borderRadius: 8,
+    fontFamily: Fonts.regular,
     paddingHorizontal: 8,
     marginTop: 4,
     width: 178,
@@ -216,18 +216,16 @@ const styles = StyleSheet.create({
     color: colors.textPrimary2,
   },
   footer: {
-    padding: 16,
-    borderTopWidth: 1,
-    borderTopColor: colors.lightGray,
-    backgroundColor: colors.white,
+    paddingBottom: 10,
   },
   otherInput: {
-    height: 41,
+    minHeight: 45,
     borderWidth: 1,
     borderColor: colors.borderColors,
     borderRadius: 8,
     paddingHorizontal: 8,
     marginTop: 4,
+    fontFamily: Fonts.regular,
   },
   otherLabel: {
     fontSize: 15,
@@ -236,6 +234,38 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginLeft: 10,
   },
+  quantityControls: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: 8,
+},
+ qtyButton: {
+    backgroundColor: colors.appColor,
+    borderRadius: 10,
+    // marginHorizontal: 4,
+    justifyContent:'center',
+    alignItems:'center',
+    width: 20,
+    height: 20
+  },
+  qtyText: {
+    color: colors.white,
+    fontSize: 13,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  qtyValue: {
+    fontSize: 14,
+    width: 15,
+    textAlign:'center',
+    fontFamily: Fonts.medium,
+    color: colors.appColor,
+  },
+icon: {
+  width: 20,
+  height: 20,
+  tintColor: colors.appColor,
+},
 });
 
 export default CameraGearsScreen;

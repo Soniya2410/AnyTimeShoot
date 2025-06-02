@@ -14,6 +14,7 @@ export const icons = {
   profileInactiveIcon: require('../../assets/icons/profile_inactive.png'),
   closeIcon: require('../../assets/icons/close.png'),
   editIcon: require('../../assets/icons/edit.png'),
+   filterIcon: require('../../assets/icons/filter.png'),
   phoneIcon : require('../../assets/icons/phone.png'),
   locationAppColorIcon : require('../../assets/icons/location.png'),
   heartAppColorIcon : require('../../assets/icons/heart_appColor.png'),

@@ -18,7 +18,7 @@ import { RootStackNavigationProp } from '../../../App';
 
 const AddDetailsPackageScreen: React.FC = () => {
  const navigation = useNavigation<RootStackNavigationProp<'addDetailsPackage'>>();
-  const [selectedStudio, setSelectedStudio] = useState<'Yes' | 'No' | null>(null);
+  const [selectedStudio, setSelectedStudio] = useState<'Yes' | 'No' | null>('Yes');
 
   const moveToAddStudioDetails = () => {
     navigation.navigate('addStudioDetailsPackage');
@@ -192,12 +192,7 @@ const styles = StyleSheet.create({
     marginTop: 15,  
   },
   bottomButtonContainer: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    backgroundColor: colors.white,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
+    paddingBottom: 10
   },
   scrollContent: {
     paddingBottom: 100, 

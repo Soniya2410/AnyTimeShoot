@@ -121,10 +121,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   footer: {
-    padding: 16,
-    borderTopWidth: 1,
-    borderTopColor: colors.lightGray,
-    backgroundColor: colors.white,
+   paddingBottom: 10
   },
 });
 

@@ -79,17 +79,7 @@ const styles = StyleSheet.create({
     color: colors.appColor,
   },
   bottomBar: {
-    backgroundColor: colors.white,
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    paddingBottom: 30,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: -3},
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 10,
+   paddingBottom: 20
   },
   continueBtn: {
     height: 54,

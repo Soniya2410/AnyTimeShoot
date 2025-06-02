@@ -28,7 +28,7 @@ const defaultPerks = [
 ];
 
 const ExtraPerksPackageScreen: React.FC = () => {
-    const navigation = useNavigation<RootStackNavigationProp<'extraPerksPackage'>>();
+  const navigation = useNavigation<RootStackNavigationProp<'extraPerksPackage'>>();
   const [selectedPerks, setSelectedPerks] = useState<string[]>([]);
   const [showCustomInput, setShowCustomInput] = useState(false);
   const [customPerk, setCustomPerk] = useState('');
@@ -64,7 +64,6 @@ const ExtraPerksPackageScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={{ height: '90%'}}>
       <KeyboardAvoidingView
         style={{flex: 1}}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -153,17 +152,17 @@ const ExtraPerksPackageScreen: React.FC = () => {
           </View>
         </ScrollView>
 
-        {/* <View style={styles.bottomContainer}> */}
-         
-        {/* </View> */}
+        <View style={styles.bottomContainer}>
+        <ASButton
+        title={constant.continue}
+        customStyle={styles.btnContinue}
+        onPress={moveToNextScreen}
+      />
+         </View>
       </KeyboardAvoidingView>
+
       </View>
-      <ASButton
-            title={constant.continue}
-            customStyle={styles.btnContinue}
-            onPress={moveToNextScreen}
-          />
-    </View>
+    
   );
 };
 
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white
 },
   scrollContent: {
-    paddingBottom: 100
+    paddingBottom: 50
 },
   paddingView: {
     marginHorizontal: 16, 
@@ -271,15 +270,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   bottomContainer: {
-    backgroundColor: colors.white,
-    padding: 16,
-    marginBottom: 30,
+    // padding: 16,
+     paddingBottom: 20
   },
   btnContinue: {
-    backgroundColor: colors.appColor,
-    borderRadius: 50,
-    paddingVertical: 14,
     alignItems: 'center',
+   
   },
   otherChip: {
     borderWidth: 1,

@@ -38,11 +38,11 @@ const CancelledBookingScreen: React.FC = () => {
           </View>
         </View>
       </View>
-      <ASButton
+      {/* <ASButton
         title={constant.bookingNow}
         customStyle={styles.bookNowBtn}
         onPress={moveToBookingNow}
-      />
+      /> */}
     </View>
   );
 };
