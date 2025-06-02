@@ -247,12 +247,10 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
   bottomContainer: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
+    padding: 16,
     backgroundColor: colors.white,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
+    borderTopWidth: 1,
+    borderColor: '#eee',
   },
   continueButton: {
     backgroundColor: colors.appColor,

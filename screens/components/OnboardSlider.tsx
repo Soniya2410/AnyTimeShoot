@@ -73,6 +73,7 @@ const OnboardSlider = () => {
   }, [activeIndex, ImagesArray.length, navigation, scrollToIndex]);
 
   const moveToSkip = useCallback(() => {
+    navigation.navigate('login')
   }, [navigation]);
 
   return (

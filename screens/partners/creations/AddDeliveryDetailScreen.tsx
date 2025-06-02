@@ -34,11 +34,15 @@ const AddDeliveryDetailScreen: React.FC = () => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={{flex: 1}}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        <View style={{ height: '92%'}}>
-        <ScrollView>
+       <KeyboardAvoidingView
+          style={styles.flex}
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
+        >
+          <ScrollView
+            contentContainerStyle={styles.scrollContent}
+            keyboardShouldPersistTaps="handled"
+          >
           <View style={styles.paddingView}>
             <Text style={styles.title}>{constant.deliveryDetails}</Text>
             <Text style={styles.subTitle}>{constant.descDelivery}</Text>
@@ -144,14 +148,14 @@ const AddDeliveryDetailScreen: React.FC = () => {
             </View>
           </View>
         </ScrollView>
-        </View>
-        {/* <View style={styles.bottomContainer}> */}
+        {/* </View> */}
+        <View style={styles.bottomContainer}>
             <ASButton
               title={constant.continue}
               customStyle={styles.continueButton}
               onPress={moveToNextScreen}
             />
-          {/* </View> */}
+          </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -183,21 +187,32 @@ const styles = StyleSheet.create({
   paddingView: {
     marginHorizontal: 16,
   },
-
-  bottomContainer: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    backgroundColor: colors.white,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-  },
+ flex: {
+  flex: 1,
+},
+scrollContent: {
+  // paddingBottom: 50, 
+},
+bottomContainer: {
+  padding: 16,
+  backgroundColor: colors.white,
+  borderTopWidth: 1,
+  borderColor: '#eee',
+},
+  // bottomContainer: {
+  //   position: 'absolute',
+  //   bottom: 0,
+  //   width: '100%',
+  //   backgroundColor: colors.white,
+  //   paddingHorizontal: 16,
+  //   paddingVertical: 14,
+  // },
   continueButton: {
     backgroundColor: colors.appColor,
-    margin: 16,
+    // margin: 16,
     paddingVertical: 14,
     borderRadius: 50,
-    marginHorizontal: 16,
+    // marginHorizontal: 16,
   },
   deliveryMode: {
     fontSize: 12,

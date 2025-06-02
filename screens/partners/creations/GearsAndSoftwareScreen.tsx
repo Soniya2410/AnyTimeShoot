@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {
   Text,
   View,
   StyleSheet,
-  ScrollView,
+  FlatList,
   TouchableOpacity,
   Image,
   SafeAreaView,
@@ -17,80 +17,51 @@ import {constant} from '../../utils/Constant';
 import {RootStackNavigationProp} from '../../../App';
 
 const categories = [
-  {label: constant.cameraGears, icon: images.cameraIcon},
-  {label: constant.videoCameraGears, icon: images.videoIcon},
-  {label: constant.mobilePhoneCamera, icon: images.mobileIcon},
-  {label: constant.drone, icon: images.droneIcon},
-  {label: constant.lightsReflectors, icon: images.lightsIcon},
-  {label: constant.otherAccessories, icon: images.otherAccessoriesIcon},
-  {label: constant.softwareDetails, icon: images.sotwareIcon},
+  {label: constant.cameraGears, icon: images.cameraIcon, route: 'cameraGear'},
+  {label: constant.videoCameraGears, icon: images.videoIcon, route: 'cameraGear'},
+  {label: constant.mobilePhoneCamera, icon: images.mobileIcon, route: 'mobilePhoneCamera'},
+  {label: constant.drone, icon: images.droneIcon, route: 'drone'},
+  {label: constant.lightsReflectors, icon: images.lightsIcon, route: 'lightReflector'},
+  {label: constant.otherAccessories, icon: images.otherAccessoriesIcon, route: 'accessories'},
+  {label: constant.softwareDetails, icon: images.sotwareIcon, route: 'softwareUsed'},
 ];
 
 const GearsAndSoftwareScreen: React.FC = () => {
-  const navigation =
-    useNavigation<RootStackNavigationProp<'gearAndSoftware'>>();
+  const navigation = useNavigation<RootStackNavigationProp<'gearAndSoftware'>>();
 
-  const handleCategoryPress = (label: string) => {
-  console.log('Pressed:', label);
-  switch (label) {
-    case constant.cameraGears:
-      navigation.navigate('cameraGear');
-      break;
-    case constant.videoCameraGears:
-      navigation.navigate('cameraGear');
-      break;
-    case constant.mobilePhoneCamera:
-      navigation.navigate('mobilePhoneCamera');
-      break;
-    case constant.drone:
-      navigation.navigate('drone');
-      break;
-    case constant.lightsReflectors:
-      navigation.navigate('lightReflector');
-      break;
-    case constant.otherAccessories:
-      navigation.navigate('accessories');
-      break;
-    case constant.softwareDetails:
-      navigation.navigate('softwareUsed');
-      break;
-    default:
-      console.log('No matching category found');
-  }
-};
-  const moveToNavigation = () => {
-    navigation.navigate('cameraGear');
-  };
+  const handleCategoryPress = useCallback((route: string) => {
+    navigation.navigate(route as any);
+  }, [navigation]);
+
+  const renderCategoryItem = ({item}: {item: typeof categories[0]}) => (
+    <TouchableOpacity style={styles.card} onPress={() => handleCategoryPress(item.route)}>
+      <View style={{ width: '95%'}}>
+        <Image source={item.icon} style={styles.icon} />
+        <Text style={styles.cardText}>{item.label}</Text>
+      </View>
+      <View style={{ justifyContent: 'center'}}>
+        <Image source={images.rightIcon} style={styles.nextIcon} />
+       </View>
+    </TouchableOpacity>
+  );
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.title}>{constant.gearsAndSoftwares}</Text>
-        <Text style={styles.subtitle}>{constant.mentionDevies}</Text>
-
-        {categories.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.card}
-            onPress={() => handleCategoryPress(item.label)}>
-            <Image source={item.icon} style={styles.icon} />
-            <View style={styles.cardContent}>
-              <Text style={styles.cardText}>{item.label}</Text>
-              <Image
-                source={images.rightIcon}
-                resizeMethod="resize"
-                style={styles.nextIcon}
-              />
-            </View>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+      <FlatList
+        data={categories}
+        keyExtractor={(item, index) => index.toString()}
+        contentContainerStyle={styles.scrollContent}
+        ListHeaderComponent={
+          <>
+            <Text style={styles.title}>{constant.gearsAndSoftwares}</Text>
+            <Text style={styles.subtitle}>{constant.mentionDevies}</Text>
+          </>
+        }
+        renderItem={renderCategoryItem}
+      />
 
       <View style={styles.footer}>
-        <ASButton
-          title={constant.continue}
-          onPress={() => console.log('Continue pressed')}
-        />
+        <ASButton title={constant.continue} onPress={() => console.log('Continue pressed')} />
       </View>
     </SafeAreaView>
   );
@@ -100,18 +71,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-  },
-  header: {
-    backgroundColor: colors.appColor,
-    padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontFamily: Fonts.medium,
-    color: colors.white,
   },
   scrollContent: {
     padding: 16,
@@ -138,6 +97,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowRadius: 4,
     elevation: 2,
+    flexDirection: 'row'
   },
   cardContent: {
     flexDirection: 'row',
@@ -154,15 +114,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: Fonts.medium,
   },
+  nextIcon: {
+    width: 17,
+    height: 17,
+    justifyContent:'center',
+    alignItems: 'center'
+  },
   footer: {
     padding: 16,
     borderTopWidth: 1,
     borderTopColor: colors.lightGray,
     backgroundColor: colors.white,
-  },
-  nextIcon: {
-    width: 12,
-    height: 12,
   },
 });
 

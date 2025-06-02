@@ -22,15 +22,15 @@ import { ASButton } from '../../components/ASButton';
 import { RootStackNavigationProp } from '../../../App';
 import { useNavigation } from '@react-navigation/native';
 const data = [
-  { id: '1', title: 'Wedding Shoot', image: images.wedding },
-  { id: '2', title: 'Pre-Wedding Shoot', image: images.preWedding },
-  { id: '3', title: 'New Born Shoot', image: images.newBorn },
-  { id: '4', title: 'Maternity Shoot', image: images.maternity },
-  { id: '5', title: 'Anniversaries Shoot', image: images.baby1 },
-  { id: '6', title: 'Small Events Shoot', image: images.banner2 },
-  { id: '7', title: 'Portfolio Shoot', image: images.wedding },
-  { id: '8', title: 'Product Shoot', image: images.preWedding },
-  { id: '9', title: 'Product Shoot', image: images.preWedding },
+  { id: '1', title: 'Wedding', image: images.wedding },
+  { id: '2', title: 'Pre-Wedding', image: images.preWedding },
+  { id: '3', title: 'New Born', image: images.newBorn },
+  { id: '4', title: 'Maternity', image: images.maternity },
+  { id: '5', title: 'Anniversary', image: images.baby1 },
+  { id: '6', title: 'Small Events', image: images.banner2 },
+  { id: '7', title: 'Portfolio', image: images.wedding },
+  { id: '8', title: 'Product', image: images.preWedding },
+
 ];
 
 const partners = [
@@ -57,30 +57,51 @@ const offerCards = [
   },
 ];
 
-const { width } = Dimensions.get('window');
-const ITEM_WIDTH = width / 3 - 20;
+// const { width } = Dimensions.get('window');
+// const ITEM_WIDTH = width / 3 - 20;
+
+const numColumns = 3;
+const horizontalPadding = 32;
+const spacingBetweenCards = 16;
+const screenWidth = Dimensions.get('window').width;
+const totalSpacing = horizontalPadding + spacingBetweenCards * (numColumns - 1);
+const ITEM_WIDTH = (screenWidth - totalSpacing) / numColumns;
 
 const PartnerOnboardingScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'partnersOnboarding'>>();
   const [price, setPrice] = useState(5000);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollX = useRef(new Animated.Value(0)).current;
 
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const index = Math.round(event.nativeEvent.contentOffset.x / width);
-    setActiveIndex(index);
-  };
+const formatData = (data: any[], numColumns: number) => {
+  const numberOfFullRows = Math.floor(data.length / numColumns);
+  let numberOfElementsLastRow = data.length - numberOfFullRows * numColumns;
+
+  while (
+    numberOfElementsLastRow !== numColumns &&
+    numberOfElementsLastRow !== 0
+  ) {
+    data.push({ id: `blank-${numberOfElementsLastRow}`, empty: true });
+    numberOfElementsLastRow++;
+  }
+
+  return data;
+};
 
   const moveToNextScreen = ()=> {
     navigation.navigate('partnerRegister');
   }
 
-  const PackageCard = ({ title, image }: { title: string; image: any }) => (
+  const PackageCard = ({ item }: { item: { title: string; image: any; empty?: boolean } }) => {
+  if (item.empty) {
+    return <View style={[styles.card, styles.invisibleCard]} />;
+  }
+
+  return (
     <View style={styles.card}>
-      <Image source={image} style={styles.image} />
-      <Text style={styles.cardTitle}>{title}</Text>
+      <Image source={item.image} style={styles.image} />
+      <Text style={styles.cardTitle}>{item.title}</Text>
     </View>
   );
+};
 
     const moveToSkip = useCallback(() => {
       // navigation.navigate('login');
@@ -105,8 +126,8 @@ const PartnerOnboardingScreen: React.FC = () => {
           </Text>
           <Slider
             style={{width: '100%', height: 30}}
-            minimumValue={1000}
-            maximumValue={10000}
+             minimumValue={5000}
+            maximumValue={100000}
             step={500}
             value={price}
             minimumTrackTintColor={colors.appColor}
@@ -115,7 +136,7 @@ const PartnerOnboardingScreen: React.FC = () => {
             onValueChange={setPrice}
           />
           <Text style={styles.estimateText}>
-            shoots at an estimated <Text style={styles.amount}>Rs. 5000</Text>{' '}
+            shoots at an estimated <Text style={styles.amount}>Rs. {price}</Text>{' '}
             per package
           </Text>
         </View>
@@ -128,9 +149,9 @@ const PartnerOnboardingScreen: React.FC = () => {
             <Text style={styles.searchCategory}>{constant.searchCategory}</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.locationRow}>
+        {/* <TouchableOpacity style={styles.locationRow}>
           <Text style={styles.exploreText}>Why?</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
       <View style={styles.packagesView}>
         <Text style={styles.header}>Types of packages</Text>
@@ -138,10 +159,10 @@ const PartnerOnboardingScreen: React.FC = () => {
 
       {/* Grid */}
       <FlatList
-        data={data}
+        data={formatData(data, 3)}
         numColumns={3}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => <PackageCard title={item.title} image={item.image} />}
+        renderItem={({ item }) => <PackageCard item={item} />}
         columnWrapperStyle={{ justifyContent: 'space-between' }}
         contentContainerStyle={styles.gridContainer}
       />
@@ -259,12 +280,14 @@ const styles = StyleSheet.create({
   },
   estimateText: {
     fontSize: 15,
+    fontFamily: Fonts.regular,
     marginVertical: 8,
     textAlign: 'center',
     color: colors.textPrimary2
   },
   amount: {
     fontSize: 18,
+    fontFamily: Fonts.regular,
     color: colors.appColor,
     fontWeight: 'bold',
   },
@@ -273,6 +296,11 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 50,
   },
+  invisibleCard: {
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    elevation: 0,
+},
   centerImage: {
     height: 400,
     width: '98%',

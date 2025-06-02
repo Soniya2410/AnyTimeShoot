@@ -77,7 +77,7 @@ const LightsReflectorScreen: React.FC = () => {
                         styles.qtyButton,
                         {
                           backgroundColor:
-                            count > 0 ? colors.appColor : 'black',
+                            count > 0 ? colors.appColor : colors.textPrimary2,
                         },
                       ]}
                       onPress={() => handleDecrement(item.label)}>
@@ -91,7 +91,7 @@ const LightsReflectorScreen: React.FC = () => {
                         styles.qtyButton,
                         {
                           backgroundColor:
-                            count > 0 ? colors.appColor : 'black',
+                            count > 0 ? colors.appColor : colors.textPrimary2,
                         },
                       ]}
                       onPress={() => handleIncrement(item.label)}>
@@ -183,18 +183,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   qtyButton: {
-    borderRadius: 4,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
+    borderRadius: 10,
+    width: 20,
+    height: 20,
     marginHorizontal: 4,
+    justifyContent:'center',
+    alignItems:'center'
   },
   qtyText: {
     color: colors.white,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
   },
   qtyValue: {
     fontSize: 14,
+    width: 15,
+    textAlign:'center',
     fontFamily: Fonts.medium,
     color: colors.appColor,
   },

@@ -21,6 +21,7 @@ import { images } from '../../utils/Images';
 type Deliverable = {
   id: number;
   name: string;
+  type: string;
   quantity?: string;
   isSelected: boolean;
   isCustom?: boolean;
@@ -30,20 +31,21 @@ const DeliverableDetailScreen: React.FC = () => {
   const navigation =
     useNavigation<RootStackNavigationProp<'deliverablePackage'>>();
   const [deliverables, setDeliverables] = useState<Deliverable[]>([
-    {id: 1, name: 'Raw Images', isSelected: false},
-    {id: 2, name: 'Edited Images', isSelected: false},
-    {id: 3, name: 'Raw Video', isSelected: false},
-    {id: 4, name: 'Edited Videos', isSelected: false},
-    {id: 5, name: 'Reels', isSelected: false},
-    {id: 6, name: 'Video Teaser', isSelected: false},
-    {id: 7, name: 'Highlight Video', isSelected: false},
-    {id: 8, name: 'Album', isSelected: false},
-    {id: 9, name: 'Photo Frame', isSelected: false},
+    {id: 1, name: 'Raw Images', isSelected: false, type: 'image'},
+    {id: 2, name: 'Edited Images', isSelected: false, type: 'image'},
+    {id: 3, name: 'Raw Video', isSelected: false, type: 'video'},
+    {id: 4, name: 'Edited Videos', isSelected: false, type: 'video'},
+    {id: 5, name: 'Reels', isSelected: false, type: 'video'},
+    {id: 6, name: 'Video Teaser', isSelected: false, type: 'video'},
+    {id: 7, name: 'Highlight Video', isSelected: false, type: 'video'},
+    {id: 8, name: 'Album', isSelected: false, type: 'image'},
+    {id: 9, name: 'Photo Frame', isSelected: false, type: 'image'},
   ]);
   const [customDeliverable, setCustomDeliverable] = useState<Deliverable>({
     id: 10,
     name: '',
     quantity: '',
+    type: 'image',
     isSelected: false,
     isCustom: true,
   });
@@ -70,7 +72,7 @@ const DeliverableDetailScreen: React.FC = () => {
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        <View style={{ height: '90%'}}>
+        {/* <View style={{ height: '90%'}}> */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.title}>{constant.deliverable}</Text>
         <Text style={styles.subTitle}>{constant.mentionDetails}</Text>
@@ -97,13 +99,13 @@ const DeliverableDetailScreen: React.FC = () => {
                     value={item.quantity}
                     onChangeText={value => handleQuantityChange(item.id, value)}
                   />
-                  <Text style={styles.unitText}>{constant.images}</Text>
+                  <Text style={styles.unitText}>{item.type == 'image' ? constant.images : "Video"}</Text>
                 </View>
                 <Text style={styles.helperText}>
                   {constant.give}
                   <Text style={styles.highlightText}>
                     {constant.minimum}
-                    <Text style={styles.helperText}>{constant.numberOfImage}</Text>
+                    <Text style={styles.helperText}>{item.type == 'image' ? `${constant.numberOfImage} Image` : `${constant.numberOfImage} Video`} </Text>
                   </Text>
                 </Text>
               </>
@@ -111,7 +113,7 @@ const DeliverableDetailScreen: React.FC = () => {
           </View>
         ))}
         {/*  Custom Deliverable */}
-        <View style={styles.itemContainer}>
+        {/* <View style={styles.itemContainer}>
           <TouchableOpacity
             onPress={() =>
               setCustomDeliverable(prev => ({
@@ -168,16 +170,16 @@ const DeliverableDetailScreen: React.FC = () => {
               </Text>
             </View>
           )}
-        </View>
+        </View> */}
       </ScrollView>
-      </View>
-      {/* <View style={styles.bottomContainer}> */}
+      {/* </View> */}
+      <View style={styles.bottomContainer}>
         <ASButton
           title={constant.continue}
           customStyle={styles.btnContinue}
           onPress={moveToNextScreen}
         />
-      {/* </View> */}
+      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -283,12 +285,10 @@ const styles = StyleSheet.create({
     color: colors.appColor,
   },
   bottomContainer: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
+    padding: 16,
     backgroundColor: colors.white,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
+    borderTopWidth: 1,
+    borderColor: '#eee',
   },
   btnContinue: {
     backgroundColor: colors.appColor,

@@ -174,6 +174,21 @@ const PackageDetails: React.FC = () => {
     navigation.navigate('reviewScreen');
   };
 
+  const formatData = (data: any[], numColumns: number) => {
+  const numberOfFullRows = Math.floor(data.length / numColumns);
+  let numberOfElementsLastRow = data.length - numberOfFullRows * numColumns;
+
+  while (
+    numberOfElementsLastRow !== numColumns &&
+    numberOfElementsLastRow !== 0
+  ) {
+    data.push({ id: `blank-${numberOfElementsLastRow}`, empty: true });
+    numberOfElementsLastRow++;
+  }
+
+  return data;
+};
+
   const renderIncludesInPackage = ({item}: {item: any}) => {
     return (
       <View key={item.id} style={styles.card}>
@@ -381,6 +396,18 @@ const PackageDetails: React.FC = () => {
         </View>
       </View>
       <View>
+      <Text style={styles.studioImages}>{constant.studioImages}</Text>
+          <Text style={styles.studio}>{constant.facilitiesAvailable}</Text>
+          <FlatList
+            data={formatData(studioDetails,3)}
+            renderItem={({item, index}) => <StudioFacilitiesItems item={item} />}
+            keyExtractor={item => item.id}
+            numColumns={3}
+            columnWrapperStyle={styles.row}
+            contentContainerStyle={styles.grid}
+          />
+        </View>
+      <View>
       <Text style={styles.recommendedTitle}>{constant.extraPerks}</Text>
       <Text style={styles.subTitle}>{constant.extraPerksIncluded}</Text>
       <FlatList
@@ -395,11 +422,11 @@ const PackageDetails: React.FC = () => {
       </View>
 
       <View style={styles.recommendedHeader}>
-        <Text style={styles.recommendedTitle}>{constant.specialOffer}</Text>
+        <Text style={styles.recommendedTitle}>{constant.similarPackage}</Text>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('packageList', {
-              title: 'Special Offer',
+              title: 'Similar Packages',
               data: recommendedList,
             });
           }}>
@@ -420,18 +447,7 @@ const PackageDetails: React.FC = () => {
         />
       </View>
 
-      <View>
-      <Text style={styles.studioImages}>{constant.studioImages}</Text>
-          <Text style={styles.studio}>{constant.facilitiesAvailable}</Text>
-          <FlatList
-            data={studioDetails}
-            renderItem={({item, index}) => <StudioFacilitiesItems item={item} />}
-            keyExtractor={item => item.id}
-            numColumns={3}
-            columnWrapperStyle={styles.row}
-            contentContainerStyle={styles.grid}
-          />
-        </View>
+      
         <Text style={styles.recommendedTitle}>{constant.bookingStats}</Text>
         <View style={styles.statsRow}>
         {/* Total Bookings Card */}
@@ -719,7 +735,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // marginHorizontal: 10,
+    marginHorizontal: 10,
     marginVertical: 5,
   },
   recommendedTitle: {
@@ -728,6 +744,8 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     marginVertical: 5,
     marginLeft: 10,
+    marginRight: 10,
+    
     color: colors.appColor,
     marginTop: 15,
   },
@@ -801,7 +819,6 @@ const styles = StyleSheet.create({
   bigNumber: {
     fontSize: 24,
     fontFamily: Fonts.semiBold,
-    // color: colors.textPrimary2,
     marginTop: 4,
   },
   subText: {

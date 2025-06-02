@@ -8,8 +8,14 @@ import {
 } from 'react-native';
 import {colors} from '../../utils/Colors';
 import {Fonts} from '../../utils/Fonts';
+const numColumns = 3;
+const horizontalPadding = 32;
+const spacingBetweenCards = 16;
 const screenWidth = Dimensions.get('window').width;
-const cardSize = (screenWidth - 50) / 3;
+const totalSpacing = horizontalPadding + spacingBetweenCards * (numColumns - 1);
+const cardSize = (screenWidth - totalSpacing) / numColumns;
+// const screenWidth = Dimensions.get('window').width;
+// const cardSize = (screenWidth) / 4;
 
 const StudioFacilitiesItems = ({item}: any) => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -33,13 +39,13 @@ const StudioFacilitiesItems = ({item}: any) => {
         ]}>
         {item.title}
       </Text>
-      <Text
+      {/* <Text
         style={[
           styles.descText,
           {color: isSelected ? colors.white : colors.textPrimary2},
         ]}>
         {item.desc}
-      </Text>
+      </Text> */}
     </TouchableOpacity>
   );
 };

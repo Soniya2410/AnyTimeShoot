@@ -255,7 +255,7 @@ export const constant = {
   quantity: "Qunatity",
   give: "* Give",
   minimum: " minimum",
-  numberOfImage: " number of images",
+  numberOfImage: " number of ",
   nameDeliverable: "Name Deliverable",
   numberOfTheDeliverable: "Number of the Deliverable",
   mentionDetails:"Mention details of what will you deliver after the shoot .",

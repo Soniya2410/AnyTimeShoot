@@ -1262,9 +1262,9 @@ const App: React.FC = () => {
             name="gearAndSoftware"
             component={GearsAndSoftwareScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: 'AnyTimeShoot',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -1303,9 +1303,9 @@ const App: React.FC = () => {
             name="cameraGear"
             component={CameraGearsScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: 'AnyTimeShoot',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -1344,9 +1344,9 @@ const App: React.FC = () => {
             name="mobilePhoneCamera"
             component={MobilePhoneCameraScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: 'AnyTimeShoot',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -1385,9 +1385,9 @@ const App: React.FC = () => {
             name="drone"
             component={DroneScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: 'AnyTimeShoot',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -1426,9 +1426,9 @@ const App: React.FC = () => {
             name="lightReflector"
             component={LightsReflectorScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: 'AnyTimeShoot',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -1467,9 +1467,9 @@ const App: React.FC = () => {
             name="accessories"
             component={AccessoriesScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: 'AnyTimeShoot',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),
@@ -1508,9 +1508,9 @@ const App: React.FC = () => {
             name="softwareUsed"
             component={SoftwareUsedScreen}
             options={{
-              headerTitle: 'Package Creation',
+              headerTitle: '',
               headerTitleAlign: 'left',
-              headerBackTitle: 'AnyTimeShoot',
+              headerBackTitle: 'Package Creation',
               headerBackground: () => (
                 <View style={{backgroundColor: colors.appColor, flex: 1}} />
               ),

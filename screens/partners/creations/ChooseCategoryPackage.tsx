@@ -6,6 +6,9 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
   Dimensions,
 } from 'react-native';
 
@@ -17,8 +20,14 @@ import {ASButton} from '../../components/ASButton';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackNavigationProp} from '../../../App';
 
+// const screenWidth = Dimensions.get('window').width;
+// const cardSize = (screenWidth - 64) / 3; // 3 columns, 16px padding on both sides + 16px spacing
+const numColumns = 3;
+const horizontalPadding = 32;
+const spacingBetweenCards = 16;
 const screenWidth = Dimensions.get('window').width;
-const cardSize = (screenWidth - 64) / 3; // 3 columns, 16px padding on both sides + 16px spacing
+const totalSpacing = horizontalPadding + spacingBetweenCards * (numColumns - 1);
+const cardSize = (screenWidth - totalSpacing) / numColumns;
 
 const categories = [
   {id: '1', title: 'Wedding', image: images.wedding},
@@ -34,8 +43,7 @@ const categories = [
   {id: '11', title: 'Reels/shorts', image: images.wedding},
   {id: '12', title: 'Content', image: images.wedding},
   {id: '13', title: 'Pet', image: images.wedding},
-  {id: '14', title: 'Other', image: images.wedding},
-  {id: '15', title: 'Other', image: images.wedding},
+  {id: '14', title: 'Anniversay', image: images.wedding},
 ];
 
 const ChooseCategoryPackage: React.FC = () => {
@@ -48,6 +56,10 @@ const ChooseCategoryPackage: React.FC = () => {
   };
 
   const renderItem = ({item}: any) => {
+    if (item.empty) {
+    return <View style={[styles.card, styles.invisibleCard]} />;
+  }
+
     const isSelected = selectedId === item.id;
 
     return (
@@ -66,26 +78,48 @@ const ChooseCategoryPackage: React.FC = () => {
     );
   };
 
+  const formatData = (data: any[], numColumns: number) => {
+  const numberOfFullRows = Math.floor(data.length / numColumns);
+  let numberOfElementsLastRow = data.length - numberOfFullRows * numColumns;
+
+  while (
+    numberOfElementsLastRow !== numColumns &&
+    numberOfElementsLastRow !== 0
+  ) {
+    data.push({ id: `blank-${numberOfElementsLastRow}`, empty: true });
+    numberOfElementsLastRow++;
+  }
+
+  return data;
+};
+
   return (
-    <View style={styles.container}>
-      <View style={{ height: '90%'}}>
-      <Text style={styles.title}>{constant.chooseCategory}</Text>
-      <Text style={styles.subTitle}>{constant.selectCategory}</Text>
-      <FlatList
-        data={categories}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        numColumns={3}
-        columnWrapperStyle={styles.row}
-        contentContainerStyle={styles.grid}
-      />
+    <SafeAreaView style={styles.container}>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
+    >
+      <View style={styles.innerContainer}>
+        <Text style={styles.title}>{constant.chooseCategory}</Text>
+        <Text style={styles.subTitle}>{constant.selectCategory}</Text>
+        <FlatList
+          data={formatData(categories, 3)}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          numColumns={3}
+          columnWrapperStyle={styles.row}
+          contentContainerStyle={styles.grid}
+        />
       </View>
+
       <ASButton
         title={constant.continue}
         customStyle={styles.continueButton}
         onPress={moveToAddDetailsScreen}
       />
-    </View>
+    </KeyboardAvoidingView>
+  </SafeAreaView>
   );
 };
 
@@ -107,8 +141,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginHorizontal: 16,
     marginVertical: 5
-
   },
+  innerContainer: {
+  flex: 1,
+  paddingBottom: 16, 
+},
+  invisibleCard: {
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    elevation: 0,
+},
   grid: {
     paddingHorizontal: 16,
     paddingTop: 10,
@@ -154,7 +196,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     borderRadius: 50,
     alignItems: 'center',
-    bottom: 15,
+    // bottom: 15,
   },
 
 });

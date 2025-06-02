@@ -127,18 +127,22 @@ const styles = StyleSheet.create({
   },
   qtyButton: {
     backgroundColor: colors.appColor,
-    borderRadius: 20,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
+    borderRadius: 10,
     marginHorizontal: 4,
+    justifyContent:'center',
+    alignItems:'center',
+    width: 20,
+    height: 20
   },
   qtyText: {
     color: colors.white,
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
   },
   qtyValue: {
     fontSize: 14,
+    width: 15,
+    textAlign:'center',
     fontFamily: Fonts.medium,
     color: colors.appColor,
   },
