@@ -39,4 +39,5 @@ export const icons = {
   ovalLocationIcon: require('../../assets/icons/oval_location.png'),
   chatIcon: require('../../assets/icons/chat.png'),
   bookmarkIcon: require('../../assets/icons/bookmarkIcon.png'),
+  closeFilterIcon: require('../../assets/icons/ic_close_icon.png')
 }

@@ -70,6 +70,7 @@ import PartnerRegistrationScreen from './screens/partners/onboarding/PartnerRegi
 import PackageCreationSuccessScreen from './screens/partners/onboarding/PackageCreationSuccess.tsx';
 import PartnerOTPScreen from './screens/partners/onboarding/PartnerOTPScreen.tsx';
 import PartnerOTPVerificationScreen from './screens/partners/onboarding/PartnerOTPVerificationScreen.tsx';
+import FilterBottomSheet from './screens/partners/creations/FilterBottomSheet.tsx';
 
 // Devices
 import GearsAndSoftwareScreen from './screens/partners/creations/GearsAndSoftwareScreen.tsx';
@@ -135,6 +136,7 @@ export type RootStackParamList = {
   lightReflector: undefined;
   softwareUsed: undefined;
   accessories: undefined;
+  filterBottom: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =

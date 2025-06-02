@@ -312,7 +312,7 @@ const HomeScreen: React.FC = () => {
     setOfferSellerPackageList(updatedList);
   };
 
-  const   renderCategory = ({item}: any) => {
+  const renderCategory = ({item}: any) => {
     const isViewAll = item.title === 'View All';
     if(isViewAll) {
       return (

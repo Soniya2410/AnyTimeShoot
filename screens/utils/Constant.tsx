@@ -329,6 +329,16 @@ export const constant = {
   diffusers: "Diffusers",
   software: "Software",
   enterSoftwareName: "Enter Software Name",
+  pricing: "Pricing",
+  rating: "Rating",
+  filterDes: "Add Filter for personalized results",
+  apply: "Apply",
+  clearFilters: "Clear Filters",
+  above4: "4 & above",
+  above3: "4 & above",
+  above: "above",
+
+
 
   tripod: "Tripod",
   gimbal: "Gimpal",

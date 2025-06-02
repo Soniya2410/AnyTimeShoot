@@ -4,16 +4,28 @@ import {constant} from '../utils/Constant';
 import { icons } from '../utils/Icons';
 import { colors } from '../utils/Colors';
 import { Fonts } from '../utils/Fonts';
+import { useState } from 'react';
+import { FilterBottomSheet } from '../partners/creations/FilterBottomSheet';
 
 const SearchComponents = (props : any) => {
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+
   const notificationPage = () => {
     props.navigation.navigate('notificationList')
   }
 
   const wishListPage = () => {
     props.navigation.navigate('wishlist')
-    // props.navigation.navigate('reviewScreen')
   }
+
+  const openFilterModal = () => {
+    setIsFilterVisible(true);
+  };
+
+  const applyFilters = () => {
+    setIsFilterVisible(false);
+  };
+
   return (
     <View>
     <View style={styles.searchLocationContainer}>
@@ -28,7 +40,8 @@ const SearchComponents = (props : any) => {
         <TouchableOpacity style={styles.iconContainer} onPress={() => notificationPage()}>
           <Image source={icons.bellIcon} style={styles.icon}/>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer} onPress={()=> wishListPage()}>
+        {/* <TouchableOpacity style={styles.iconContainer} onPress={()=> wishListPage()}> */}
+        <TouchableOpacity style={styles.iconContainer} onPress={openFilterModal}>
           <Image source={icons.heartIcon}  style={styles.heartIcon}/>
         </TouchableOpacity>
         {/* <TouchableOpacity style={styles.iconContainer}>
@@ -45,6 +58,10 @@ const SearchComponents = (props : any) => {
           </TouchableOpacity>
         </View>
       </View>
+    <FilterBottomSheet  
+       visible={isFilterVisible}
+        onClose={() => setIsFilterVisible(false)}
+        onApply={applyFilters}/>
     </View>
   );
 };
