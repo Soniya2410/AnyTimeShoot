@@ -70,7 +70,8 @@ import PartnerRegistrationScreen from './screens/partners/onboarding/PartnerRegi
 import PackageCreationSuccessScreen from './screens/partners/onboarding/PackageCreationSuccess.tsx';
 import PartnerOTPScreen from './screens/partners/onboarding/PartnerOTPScreen.tsx';
 import PartnerOTPVerificationScreen from './screens/partners/onboarding/PartnerOTPVerificationScreen.tsx';
-import FilterBottomSheet from './screens/partners/creations/FilterBottomSheet.tsx';
+import {FilterBottomSheet} from './screens/partners/creations/FilterBottomSheet.tsx';
+import BookingTypeScreen from './screens/booking/BookingTypeScreen.tsx';
 
 // Devices
 import GearsAndSoftwareScreen from './screens/partners/creations/GearsAndSoftwareScreen.tsx';
@@ -139,6 +140,7 @@ export type RootStackParamList = {
   accessories: undefined;
   filterBottom: undefined;
   searchScreen: undefined;
+  bookingType: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -261,6 +263,15 @@ const BottomTabs: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  const handleSelectBookingType = (type: 'instant' | 'advance') => {
+    console.log('Selected booking type:', type);
+    // Navigate to appropriate screen or perform action
+  };
+
+  const handleCreatePackage = () => {
+    console.log('Create package pressed');
+    // Navigate to package creation screen
+  };
   return (
     <GestureHandlerRootView>
       <NavigationContainer>
@@ -1605,6 +1616,28 @@ const App: React.FC = () => {
               ),
             }}
           />
+
+          <Stack.Screen
+            name="bookingType"
+            options={{
+              headerTitle: 'AnyTimeShoot',
+              headerTitleAlign: 'left',
+              headerBackTitle: '',
+            }}>
+            {props => (
+              <BookingTypeScreen
+                {...props}
+                onSelect={type => {
+                  console.log('Selected type:', type);
+                  // props.navigation.navigate('SomeOtherScreen', { type });
+                }}
+                onCreatePackage={() => {
+                  console.log('Create Package tapped');
+                  // props.navigation.navigate('CreatePackage');
+                }}
+              />
+            )}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

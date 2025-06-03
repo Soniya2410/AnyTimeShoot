@@ -22,7 +22,8 @@ const ProfileScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp<'login'>>();
 
   const moveToDetailPage = () => {
-   navigation.navigate('bookingDetail');
+  //  navigation.navigate('bookingDetail');
+  navigation.navigate('bookingType');
   };
 
  const moveToEditProfile = () => {

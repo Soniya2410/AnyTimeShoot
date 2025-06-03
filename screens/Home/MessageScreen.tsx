@@ -33,7 +33,8 @@ const MessageScreen: React.FC = () => {
   const flatListRef = useRef<FlatList>(null);
 
   const moveToNavigation = () => {
-    navigation.navigate('gearAndSoftware');
+    // navigation.navigate('gearAndSoftware');
+    navigation.navigate('bookingType');
   }
 
   // Load sample messages (in a real app, you'd fetch these from an API)
