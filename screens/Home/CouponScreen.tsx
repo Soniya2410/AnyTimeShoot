@@ -1,39 +1,37 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, Image, Modal } from 'react-native';
 import { colors } from '../utils/Colors';
 import { Fonts } from '../utils/Fonts';
 import { constant } from '../utils/Constant';
 import { images } from '../utils/Images';
+import { icons } from '../utils/Icons';
 
 const coupons = [
-  { id: '1', type: '20% Off', amount: '₹1,000', code: 'NEW25', applied: true },
-  { id: '2', type: 'Cashback', amount: '₹2,500', code: 'NEW25', applied: true },
-  { id: '3', type: 'New Bee', amount: '₹1,000', code: 'NEW25', applied: false },
-  { id: '4', type: '20% Off', amount: '₹1,000', code: 'NEW25', applied: false },
+  { id: '1', type: '', amount: '₹1,000', code: 'SOMETHINGNEW25', applied: false },
+  { id: '2', type: 'Cashback', amount: '₹2,500', code: 'SOMETHINGNEW25', applied: false },
+  { id: '3', type: 'New Bee', amount: '₹1,000', code: 'SOMETHINGNEW25', applied: false },
+  { id: '4', type: '20% Off', amount: '₹1,000', code: 'SOMETHINGNEW25', applied: false },
 ];
 
 const CouponScreen = () => {
-  const [selectedCoupon, setSelectedCoupon] = useState(null);
+  const [inputCouponCode, setInputCouponCode] = useState('');
+  const [appliedCoupon,setAppliedCoupon] = useState<string[]>([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const applyCoupon = (id:any) => {
-    setSelectedCoupon(id);
+  const applyCoupon = (id:string) => {
+    setAppliedCoupon(prev => {return[...prev, id];});
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>{constant.applyCoupon}</Text>
-      <Text style={styles.cartValue}>{constant.yourCartValue}: ₹2,45,000</Text>
+  const removeCoupon = (id:string) => {
+    setAppliedCoupon(prev => prev.filter(couponId => couponId !== id));
+  };
 
-      <TextInput placeholder={constant.enterYourCoupon} style={styles.input} />
+  const renderItem = ({item} : any) => {
+    return(
+       <View style={styles.couponCard}>
 
-      <Text style={styles.bestOffers}>Best offers for you</Text>
-
-      <FlatList
-        data={coupons}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.couponCard}>
-            <View style={[styles.tag, item.type === 'Cashback' && styles.cashbackTag]}>
+            <View style={styles.tag}>
+              {/* <Image source={icons.couponIcon} style={{height: '100%'}}/> */}
               <Text style={styles.tagText}>{item.type}</Text>
             </View>
             <View style={styles.couponDetails}>
@@ -42,21 +40,76 @@ const CouponScreen = () => {
               <View style={styles.codeContainer}>
                 <Text style={styles.couponCode}>{item.code}</Text>
               </View>
-              <View style={styles.separator} />
-              {item.applied ? (
-                <View style={styles.appliedContainer}>
-                  <Image source={images.appliedCouponIcon} style={styles.appliedIcon} />
-                  <Text style={styles.appliedText}>{constant.applied}</Text>
-                </View>
-              ) : (
-                <TouchableOpacity style={styles.applyButton} onPress={() => applyCoupon(item.id)}>
-                  <Text style={styles.applyText}>{constant.tapToApply}</Text>
-                </TouchableOpacity>
-              )}
+              <View style={styles.applyBtnContainer}>
+                {(appliedCoupon.includes(item.id)) ? (
+                  <TouchableOpacity style={styles.appliedContainer} onPress={() => {
+                    removeCoupon(item.id);
+                    }}>
+                    <Image source={images.appliedCouponIcon} style={styles.appliedIcon} />
+                    <Text style={styles.appliedText}>{constant.applied}</Text>
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity style={styles.applyButton} onPress={() => {
+                    applyCoupon(item.id);
+                    setModalVisible(true);
+                    }}>
+                    <Text style={styles.applyText}>{constant.tapToApply}</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
             </View>
           </View>
-        )}
+    )
+  }
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>{constant.applyCoupon}</Text>
+      <Text style={styles.cartValue}>{constant.yourCartValue}: ₹2,45,000</Text>
+
+      <View style={styles.couponCodeInputContainer}>
+        <TextInput
+          placeholder='Enter Coupon Code'
+          placeholderTextColor={colors.placeHolderColor}
+          style={styles.input}
+          value={inputCouponCode}
+          onChangeText={setInputCouponCode}
+          />
+        <TouchableOpacity>
+          <Text style={[styles.inputApplyText, (inputCouponCode !== '') && {color: colors.appColor}]}>APPLY</Text>
+        </TouchableOpacity>
+      </View>
+
+      <Text style={styles.bestOffers}>Best offers for you</Text>
+
+      <FlatList
+        data={coupons}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
       />
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalCard}>
+            <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeBtnContainer}>
+              <Image source={icons.closeIcon} style={styles.closeIcon} />
+            </TouchableOpacity>
+            <Image source={images.couponSuccess} style={styles.couponSuccess} />
+            <View style={styles.successMsgContainer}>
+              <Text style={styles.successMsg}>Your Coupon applied, </Text>
+              <Text style={[styles.successMsg, {color:colors.appColor}]}>Successfully </Text>
+              <Text style={styles.successMsg}>!!!!</Text>
+            </View>
+            <TouchableOpacity style={styles.continueBtnContainer} onPress={() => setModalVisible(false)}>
+              <Text style={styles.continueText}>Continue</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -78,90 +131,99 @@ const styles = StyleSheet.create({
     color: colors.black,
     marginVertical: 10,
   },
-  input: {
+  couponCodeInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
-    borderColor: colors.placeHolderColor,
+    borderColor: '#D4D4D4',
+    borderRadius: 5,
+    paddingRight: 10,
+    // marginBottom: 16,
+  },
+  input: {
+    flex: 1,
+    color: colors.black,
     padding: 10,
-    borderRadius: 8,
-    marginBottom: 15,
-    height: 45,
+    fontFamily: Fonts.regular
+  },
+  inputApplyText: {
+    color: '#D4D4D4',
+    fontSize: 12,
+    fontFamily: Fonts.regular
   },
   bestOffers: {
     fontSize: 16,
-    fontFamily: Fonts.medium,
+    fontFamily: Fonts.regular,
     color: colors.appColor,
-    marginBottom: 10,
+    marginVertical: 10,
   },
   couponCard: {
     flexDirection: 'row',
     backgroundColor: colors.white,
     borderRadius: 8,
     marginVertical: 5,
-    padding: 10,
     borderWidth: 1,
     borderColor: colors.lineColor,
   },
   tag: {
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
     backgroundColor: colors.appColor,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
+    width: 50,
+    flexDirection: 'row',
     justifyContent: 'center',
-  },
-  cashbackTag: {
-    backgroundColor: colors.appColor,
-    width: 70,
     alignItems: 'center',
+    position: 'relative'
   },
   tagText: {
     color: colors.white,
     fontSize: 16,
     fontFamily: Fonts.semiBold,
+    transform: [{ rotate: '-90deg' }],
+    width: 100,
+    textAlign: 'center',
   },
   couponDetails: {
     flex: 1,
-    paddingLeft: 10,
   },
   discountText: {
     fontSize: 18,
     fontFamily: Fonts.medium,
     color: colors.textPrimary2,
     marginTop: 5,
+    paddingLeft: 10,
   },
   minPurchase: {
     fontSize: 10,
     color: colors.appColor,
     marginVertical: 5,
     fontFamily: Fonts.medium,
-    textAlign: 'center',
+    paddingLeft: 10,
   },
   codeContainer: {
-    padding: 5,
     borderWidth: 1,
     borderColor: colors.textPrimary2,
     borderRadius: 6,
     alignSelf: 'flex-start',
+    paddingHorizontal: 20,
+    paddingVertical: 4,
+    marginLeft: 10,
   },
   couponCode: {
     fontFamily: Fonts.medium,
     fontSize: 12,
     color: colors.textPrimary2,
   },
-  separator: {
-    height: 1,
-    backgroundColor: colors.lineColor,
-    marginVertical: 5,
-    paddingRight: 'auto',
-    paddingLeft: "auto",
-    width: '100%',
+  applyBtnContainer: {
     marginTop: 10,
+    borderTopWidth: 1,
+    borderColor: colors.lineColor,
   },
   appliedContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: "center",
-    marginTop: 5,
+    justifyContent: 'center',
+    padding: 10,
   },
   appliedIcon: {
     width: 17,
@@ -177,12 +239,57 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
-    marginTop: 10,
   },
   applyText: {
     color: colors.appColor,
     fontFamily: Fonts.medium,
     fontSize: 12,
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalCard: {
+    width: '80%',
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    padding: 20,
+  },
+  closeBtnContainer: {
+    alignSelf: 'flex-start',
+  },
+  closeIcon: {
+    width: 25,
+    height: 25,
+  },
+  couponSuccess: {
+    width: 280,
+    height: 220,
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
+  successMsgContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  successMsg: {
+    fontSize: 16,
+    fontFamily: Fonts.medium,
+  },
+  continueBtnContainer: {
+    backgroundColor: colors.appColor,
+    padding: 15,
+    borderRadius: 50,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  continueText: {
+    color: 'white',
+    fontFamily: Fonts.semiBold,
+    fontSize: 18
   },
 });
 

@@ -21,6 +21,7 @@ import { constant } from '../../utils/Constant';
 import { ASButton } from '../../components/ASButton';
 import { RootStackNavigationProp } from '../../../App';
 import { useNavigation } from '@react-navigation/native';
+import PartnerSlider from '../component/PartnerSlider';
 const data = [
   { id: '1', title: 'Wedding', image: images.wedding },
   { id: '2', title: 'Pre-Wedding', image: images.preWedding },
@@ -168,7 +169,7 @@ const formatData = (data: any[], numColumns: number) => {
       />
 
       {/* Footer */}
-      <Text style={styles.footer}>+Many more packages available on the app</Text>
+      {/* <Text style={styles.footer}>+Many more packages available on the app</Text> */}
         </View>
         {/* Our Partners */}
         <View style={{ marginHorizontal: 16}}>
@@ -194,7 +195,8 @@ const formatData = (data: any[], numColumns: number) => {
        <Text style={styles.OffersectionTitle}>Explore what We Offer</Text>
     
         {/* Offer Card */}
-        <View style={styles.offerCard}>
+        <PartnerSlider />
+        {/* <View style={styles.offerCard}>
           <Image
             source={images.offerIcon}
             style={styles.offerIcon}
@@ -203,13 +205,13 @@ const formatData = (data: any[], numColumns: number) => {
           <Text style={styles.offerText}>
             Receive your earnings quicker with efficient payout system.
           </Text>
-        </View>
+        </View> */}
           {/* Pagination Dots */}
-          <View style={styles.dotsContainer}>
+          {/* <View style={styles.dotsContainer}>
             {[0, 1, 2, 3, 4].map((i) => (
               <View key={i} style={[styles.dot, i === 0 && styles.activeDot]} />
             ))}
-            </View>
+            </View> */}
             <View style={styles.buttonRow}>
               <ASButton
                 title='Join as Partner'

@@ -274,7 +274,7 @@ export const constant = {
 
   //Partners Onboarding 
   youCanEarnWith :'You can earn with',
-  estimateTime: "Estimate your learning based on location",
+  estimateTime: "Estimate your earning based on location",
   searchText: "Sector-23, Ghaziabad",
   searchCategory: "Maternity Shoot",
   describePhotography: "Describe Your Photography Business",

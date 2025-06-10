@@ -14,9 +14,12 @@ import {constant} from '../utils/Constant';
 import {images} from '../utils/Images';
 import ProfileDetailSlider from '../components/ProfileDetailSlider';
 import { ASButton } from '../components/ASButton';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp } from '../../App';
 
 const ProfileDetailScreen = () => {
   const [expandedItems, setExpandedItems] = useState<number[]>([]);
+ const navigation = useNavigation<RootStackNavigationProp<'login'>>();
 
   const faqs = [
     {
@@ -52,7 +55,7 @@ const ProfileDetailScreen = () => {
   };
 
   const moveToDetailPage = () => {
-    // navigation.navigate('couponScreen');
+    navigation.navigate('couponScreen');
   };
 
   return (

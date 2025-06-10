@@ -168,5 +168,6 @@ export const images = {
   
    unselectedIcon: require('../../assets/images/ic_unselected.png'),
    selectedCheck: require('../../assets/images/ic_selected.png'),
+   couponSuccess: require('../../assets/images/CouponSuccess.png'),
 
 }
