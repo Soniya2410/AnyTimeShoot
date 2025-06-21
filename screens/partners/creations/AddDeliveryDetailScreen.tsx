@@ -149,13 +149,13 @@ const AddDeliveryDetailScreen: React.FC = () => {
           </View>
         </ScrollView>
         {/* </View> */}
-        <View style={styles.bottomContainer}>
+        {/* <View style={styles.bottomContainer}> */}
             <ASButton
               title={constant.continue}
               customStyle={styles.continueButton}
               onPress={moveToNextScreen}
             />
-          </View>
+          {/* </View> */}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -210,9 +210,10 @@ bottomContainer: {
   continueButton: {
     backgroundColor: colors.appColor,
     // margin: 16,
-    // paddingVertical: 14,
+    paddingVertical: 14,
     borderRadius: 50,
-    // marginHorizontal: 16,
+    alignItems: 'center',
+    // bottom: 15,
   },
   deliveryMode: {
     fontSize: 12,

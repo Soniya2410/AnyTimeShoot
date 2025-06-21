@@ -22,7 +22,7 @@ const ProfileScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp<'login'>>();
 
   const moveToDetailPage = () => {
-    // navigation.navigate('bookingDetail');
+    navigation.navigate('bookingDetail');
   };
 
   const moveToEditProfile = () => {};
@@ -95,6 +95,42 @@ const ProfileScreen = () => {
       title: constant.contactUs,
       value: constant.about,
       icon: icons.contact,
+      width: 20,
+      height: 20,
+      page: 'contactUs',
+    },
+      {
+      id: '9',
+      title: constant.managePackage,
+      value: constant.createAndEdit,
+      icon: icons.manage_package,
+      width: 20,
+      height: 20,
+      page: 'contactUs',
+    },
+    {
+      id: '10',
+      title: constant.earnings,
+      value: constant.earningDef,
+      icon: icons.earnings,
+      width: 20,
+      height: 20,
+      page: 'contactUs',
+    },
+    {
+      id: '11',
+      title: constant.calendar,
+      value: constant.calendarDef,
+      icon: icons.calendar,
+      width: 20,
+      height: 20,
+      page: 'contactUs',
+    },
+     {
+      id: '12',
+      title: constant.analytics,
+      value: constant.analyticsDef,
+      icon: icons.anayltics,
       width: 20,
       height: 20,
       page: 'contactUs',

@@ -23,21 +23,24 @@ import { RootStackNavigationProp } from '../../../App';
 import { useNavigation } from '@react-navigation/native';
 import PartnerSlider from '../component/PartnerSlider';
 const data = [
-  { id: '1', title: 'Wedding', image: images.wedding },
-  { id: '2', title: 'Pre-Wedding', image: images.preWedding },
-  { id: '3', title: 'New Born', image: images.newBorn },
-  { id: '4', title: 'Maternity', image: images.maternity },
-  { id: '5', title: 'Anniversary', image: images.baby1 },
-  { id: '6', title: 'Small Events', image: images.banner2 },
-  { id: '7', title: 'Portfolio', image: images.wedding },
-  { id: '8', title: 'Product', image: images.preWedding },
-
+  { id: '1', title: 'Wedding', image: images.category1 },
+  { id: '2', title: 'Pre-Wedding', image: images.category2 },
+  { id: '3', title: 'Maternity', image: images.category3 },
+   { id: '4', title: 'New Born', image: images.category4 },
+  { id: '5', title: 'Birthday', image: images.category5 },
+  { id: '6', title: 'Events', image: images.category6 },
+  { id: '7', title: 'Product', image: images.category7 },
+  { id: '8', title: 'Food', image: images.category8 },
+  { id: '9', title: 'Real Estate', image: images.category9 },
+  { id: '10', title: 'Reels', image: images.category10 },
+  { id: '11', title: 'Pet', image: images.category11 },
+  { id: '12', title: 'Other', image: images.category12 },
 ];
 
 const partners = [
-  { id: '1', image: images.partner_1 },
-  { id: '2', image: images.partner_2 },
-  { id: '3', image: images.partner_3 }, // Last one has a button overlay
+  { id: '1', image: images.partner1 },
+  { id: '2', image: images.partner2 },
+  { id: '3', image: images.partner3 }, // Last one has a button overlay
 ];
 
 const offerCards = [
@@ -72,6 +75,15 @@ const PartnerOnboardingScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'partnersOnboarding'>>();
   const [price, setPrice] = useState(5000);
 
+  const flatListRef = useRef<FlatList>(null);
+
+  const handleArrowPress = (index: number) => {
+    console.log(index);
+    const nextIndex = index + 1;
+    if (nextIndex < partners.length) {
+      flatListRef.current?.scrollToIndex({ index: nextIndex, animated: true });
+    }
+  };
 const formatData = (data: any[], numColumns: number) => {
   const numberOfFullRows = Math.floor(data.length / numColumns);
   let numberOfElementsLastRow = data.length - numberOfFullRows * numColumns;
@@ -88,7 +100,7 @@ const formatData = (data: any[], numColumns: number) => {
 };
 
   const moveToNextScreen = ()=> {
-    navigation.navigate('partnerRegister');
+    navigation.navigate('partnerRegister', {from: 'start'});
   }
 
   const PackageCard = ({ item }: { item: { title: string; image: any; empty?: boolean } }) => {
@@ -129,7 +141,7 @@ const formatData = (data: any[], numColumns: number) => {
             style={{width: '100%', height: 30}}
              minimumValue={5000}
             maximumValue={100000}
-            step={500}
+            step={5000}
             value={price}
             minimumTrackTintColor={colors.appColor}
             maximumTrackTintColor="#ccc"
@@ -176,6 +188,7 @@ const formatData = (data: any[], numColumns: number) => {
         <Text style={styles.sectionTitle}>Our current partners</Text>
         <FlatList
         data={partners}
+        ref={flatListRef}
         horizontal
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id}
@@ -183,9 +196,9 @@ const formatData = (data: any[], numColumns: number) => {
           <View style={styles.partnerCard}>
             <Image source={item.image} style={styles.partnerImage} />
             {index === partners.length - 1 && (
-              <View style={styles.arrowOverlay}>
+              <TouchableOpacity style={styles.arrowOverlay} onPress={() => handleArrowPress(index)}>
                 <Image source={images.skipArrow} style={styles.nextArrow}/>
-              </View>
+              </TouchableOpacity>
             )}
           </View>
         )}
@@ -408,6 +421,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
     position: 'relative',
+    borderColor: colors.appColor,
+    borderWidth:1
   },
   partnerImage: {
     width: 120,

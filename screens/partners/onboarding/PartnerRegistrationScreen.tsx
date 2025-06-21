@@ -16,9 +16,18 @@ import { RootStackNavigationProp } from "../../../App";
 
 const TOTAL_STEPS = 5;
 
-const PartnerRegistrationScreen: React.FC = () => {
+const PartnerRegistrationScreen: React.FC = ({route} : any) => {
   const navigation = useNavigation<RootStackNavigationProp<'partnersOnboarding'>>();
   const [currentStep, setCurrentStep] = useState(0);
+    const {from} = route.params;
+
+    useEffect(() => {
+      if(from == 'verify') {
+        setCurrentStep(1);
+      } else {
+        setCurrentStep(0)
+      }
+    },[from])
   
   const renderStepComponent = () => {
     switch (currentStep) {
@@ -46,7 +55,12 @@ const PartnerRegistrationScreen: React.FC = () => {
   }
 
   const moveToNextScreen = () => {
+    console.log(currentStep);
+      if(currentStep == 0) {
+        navigation.navigate('partnerOTPScreen')
+      }
     setCurrentStep(currentStep + 1);
+  
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -79,7 +93,7 @@ const PartnerRegistrationScreen: React.FC = () => {
       </ScrollView>
       <View style={styles.bottomView}>
       <ASButton
-        title={"Contiune"}
+        title={"Continue"}
         onPress={moveToNextScreen}
         />
         </View>

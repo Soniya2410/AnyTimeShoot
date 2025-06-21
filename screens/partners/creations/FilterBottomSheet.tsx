@@ -39,14 +39,13 @@ const FilterBottomSheet: React.FC<Props> = ({visible, onClose, onApply}) => {
     'Maternity',
     'New born',
     'Birthday',
-    'Small events',
-    'Portfolio shoot',
+    'Events',
     'Product',
     'Food',
-    'Real estate/Property',
-    'Reels/shorts',
-    'Content creators',
+    'Real Estate',
+    'Reels',
     'Pet',
+    'Other'
   ];
 
   const renderContent = () => {

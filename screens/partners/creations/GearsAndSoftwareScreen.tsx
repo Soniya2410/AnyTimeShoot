@@ -60,9 +60,9 @@ const GearsAndSoftwareScreen: React.FC = () => {
         renderItem={renderCategoryItem}
       />
 
-      <View style={styles.footer}>
+      {/* <View style={styles.footer}>
         <ASButton title={constant.continue} onPress={() => console.log('Continue pressed')} />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

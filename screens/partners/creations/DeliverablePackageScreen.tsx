@@ -9,6 +9,7 @@ import {
   Platform,
   TouchableOpacity,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import {ASButton} from '../../components/ASButton';
 import {constant} from '../../utils/Constant';
@@ -36,10 +37,10 @@ const DeliverableDetailScreen: React.FC = () => {
     {id: 3, name: 'Raw Video', isSelected: false, type: 'video'},
     {id: 4, name: 'Edited Videos', isSelected: false, type: 'video'},
     {id: 5, name: 'Reels', isSelected: false, type: 'video'},
-    {id: 6, name: 'Video Teaser', isSelected: false, type: 'video'},
-    {id: 7, name: 'Highlight Video', isSelected: false, type: 'video'},
-    {id: 8, name: 'Album', isSelected: false, type: 'image'},
-    {id: 9, name: 'Photo Frame', isSelected: false, type: 'image'},
+    // {id: 6, name: 'Video Teaser', isSelected: false, type: 'video'},
+    {id: 6, name: 'Highlight Video', isSelected: false, type: 'video'},
+    // {id: 8, name: 'Album', isSelected: false, type: 'image'},
+    // {id: 9, name: 'Photo Frame', isSelected: false, type: 'image'},
   ]);
   const [customDeliverable, setCustomDeliverable] = useState<Deliverable>({
     id: 10,
@@ -69,6 +70,7 @@ const DeliverableDetailScreen: React.FC = () => {
   };
 
   return (
+    <SafeAreaView style={styles.container} >
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -110,14 +112,15 @@ const DeliverableDetailScreen: React.FC = () => {
           </View>
         ))}
       </ScrollView>
-      <View style={styles.bottomContainer}>
+      {/* <View style={styles.bottomContainer}> */}
         <ASButton
           title={constant.continue}
           customStyle={styles.btnContinue}
           onPress={moveToNextScreen}
         />
-      </View>
+      {/* </View> */}
     </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
@@ -226,9 +229,11 @@ const styles = StyleSheet.create({
   },
   btnContinue: {
     backgroundColor: colors.appColor,
-    // paddingVertical: 14,
+    // margin: 16,
+    paddingVertical: 14,
     borderRadius: 50,
     alignItems: 'center',
+    // bottom: 15,
   },
   otherText: {
     color: colors.appColor,

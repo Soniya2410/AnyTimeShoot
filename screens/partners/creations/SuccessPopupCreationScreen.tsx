@@ -6,6 +6,7 @@ import {
   Dimensions,
   StyleSheet,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import {images} from '../../utils/Images';
 import {constant} from '../../utils/Constant';
@@ -25,7 +26,7 @@ const SuccessPopupCreationScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.imageContainer}>
           <Image source={images.confetti} style={styles.backgroundImage} />
@@ -41,14 +42,14 @@ const SuccessPopupCreationScreen: React.FC = () => {
         </Text>
       </ScrollView>
 
-      <View style={styles.bottomBar}>
+      {/* <View style={styles.bottomBar}> */}
         <ASButton
           title={constant.continue}
           customStyle={styles.continueBtn}
           onPress={moveToContinue}
         />
-      </View>
-    </View>
+      {/* </View> */}
+    </SafeAreaView>
   );
 };
 
@@ -82,9 +83,9 @@ const styles = StyleSheet.create({
    paddingBottom: 20
   },
   continueBtn: {
-    height: 54,
-    borderRadius: 30,
-    justifyContent: 'center',
+    backgroundColor: colors.appColor,
+    paddingVertical: 14,
+    borderRadius: 50,
     alignItems: 'center',
   },
   imageContainer: {

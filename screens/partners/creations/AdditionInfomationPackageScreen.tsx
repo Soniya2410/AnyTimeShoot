@@ -64,8 +64,6 @@ const AdditionalInformationPackageScreen: React.FC = () => {
                 {label: constant.policy1, value: constant.policy1},
                 {label: constant.policy2, value: constant.policy2},
                 {label: constant.policy3, value: constant.policy3},
-                {label: constant.policy4, value: constant.policy4},
-                {label: constant.policy5, value: constant.policy5},
               ]}
               useNativeAndroidPickerStyle={false}
               style={{
@@ -97,7 +95,9 @@ const AdditionalInformationPackageScreen: React.FC = () => {
               }}
             />
           </View>
-
+              <TouchableOpacity onPress={() => {navigation.navigate('cancellationPolicy')}} >
+                <Text style={styles.readMoreText}>Read More</Text>
+              </TouchableOpacity>
           <Text style={styles.deliveryMode}>
             {constant.locationWhereYouAccepting}
           </Text>
@@ -124,12 +124,13 @@ const AdditionalInformationPackageScreen: React.FC = () => {
             placeholderTextColor={colors.lineColor} /> */}
             </ScrollView>
         </KeyboardAvoidingView>
-        <View style={styles.bottomContainer}>
+        {/* <View style={styles.bottomContainer}> */}
           <ASButton
             title={constant.continue}
             onPress={moveToNextScreen}    
+            customStyle={styles.btnContinue}
           />
-      </View>
+      {/* </View> */}
      </SafeAreaView>
   );
 };
@@ -206,6 +207,22 @@ const styles = StyleSheet.create({
   icon : {
     height: 20,
     width: 20
+  },
+   btnContinue: {
+    backgroundColor: colors.appColor,
+    // margin: 16,
+    paddingVertical: 14,
+    borderRadius: 50,
+    alignItems: 'center',
+    // bottom: 15,
+  },
+  readMoreText : {
+    textDecorationColor: colors.appColor,
+    textDecorationLine: 'underline',
+    fontFamily: Fonts.medium,
+    fontSize: 12,
+    marginVertical: 10,
+    color: colors.appColor
   }
 });
 

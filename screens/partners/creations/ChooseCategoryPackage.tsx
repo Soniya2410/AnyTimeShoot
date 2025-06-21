@@ -30,22 +30,80 @@ const totalSpacing = horizontalPadding + spacingBetweenCards * (numColumns - 1);
 const cardSize = (screenWidth - totalSpacing) / numColumns;
 
 const categories = [
-  {id: '1', title: 'Wedding', image: images.wedding},
-  {id: '2', title: 'Pre -Wedding', image: images.baby1},
-  {id: '3', title: 'Maternity', image: images.maternity},
-  {id: '4', title: 'New born', image: images.preWedding},
-  {id: '5', title: 'Birthday party', image: images.wedding},
-  {id: '6', title: 'Small event', image: images.banner3},
-  {id: '7', title: 'Portfolio', image: images.wedding},
-  {id: '8', title: 'Product', image: images.preWedding},
-  {id: '9', title: 'Food', image: images.wedding},
-  {id: '10', title: 'Property', image: images.preWedding},
-  {id: '11', title: 'Reels/shorts', image: images.wedding},
-  {id: '12', title: 'Content', image: images.wedding},
-  {id: '13', title: 'Pet', image: images.wedding},
-  {id: '14', title: 'Anniversay', image: images.wedding},
-];
-
+    {
+      id: '1',
+      title: 'Wedding',
+      image: images.category1,
+      des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+    {
+      id: '2',
+      title: 'Pre-wedding',
+      image: images.category2,
+       des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+    {
+      id: '3',
+      title: 'Maternity',
+      image: images.category3,
+       des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+    {
+      id: '4',
+      title: 'New Born',
+      image: images.category4,
+       des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+    {
+      id: '6',
+      title: 'Birthday',
+      image: images.category5,
+      des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+    {
+      id: '7',
+      title: 'Events',
+      image: images.category6,
+      des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+    {
+      id: '8',
+      title: 'Product',
+      image: images.category7,
+      des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+     {
+      id: '9',
+      title: 'Food',
+      image: images.category8,
+      des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+     {
+      id: '10',
+      title: 'Real Estate',
+      image: images.category9,
+      des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+     {
+      id: '11',
+      title: 'Reels',
+      image: images.category10,
+      des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+      {
+      id: '12',
+      title: 'Pet',
+      image: images.category11,
+      des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+      {
+      id: '13',
+      title: 'Other',
+      image: images.category12,
+      des: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
+    },
+  ];
+  
 const ChooseCategoryPackage: React.FC = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const navigation =
@@ -192,7 +250,7 @@ const styles = StyleSheet.create({
   },
   continueButton: {
     backgroundColor: colors.appColor,
-    margin: 16,
+    // margin: 16,
     paddingVertical: 14,
     borderRadius: 50,
     alignItems: 'center',

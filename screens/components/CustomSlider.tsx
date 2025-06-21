@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   Dimensions,
   Image,
@@ -19,8 +19,8 @@ const CustomSlider = () => {
   const scrollViewRef = useRef<ScrollView>(null);
 
   const ImagesArray = [
-    { id: 1, uri: images.banner },
-    { id: 2, uri: images.bookingBanner },
+    { id: 1, uri: images.banner1 },
+    { id: 2, uri: images.banner2 },
     { id: 3, uri: images.banner3 },
     { id: 4, uri: images.banner4 },
     { id: 5, uri: images.banner5 },
@@ -38,6 +38,16 @@ const CustomSlider = () => {
       scrollViewRef.current.scrollTo({ x: index * viewportWidth, animated: true });
     }
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      let nextIndex = (activeIndex + 1) % ImagesArray.length;
+      scrollToIndex(nextIndex);
+    }, 3000); 
+
+    return () => clearInterval(interval); 
+  }, [activeIndex]); 
+
 
   return (
     <View style={styles.container}>

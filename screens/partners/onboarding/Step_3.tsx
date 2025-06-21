@@ -42,7 +42,7 @@ const Step_3: React.FC = () => {
         <Text style={styles.tipsToggle}>Tips {tipsVisible ? '▲' : '▼'}</Text>
       </TouchableOpacity>
 
-      {tipsVisible && (
+      {tipsVisible && label == "Profile Picture" && (
         <View>
         <Text style={styles.tipsContent}>
           1. Face should be clearly visible
@@ -55,6 +55,20 @@ const Step_3: React.FC = () => {
        </Text>
        <Text style={styles.tipsContent}>
           4. Preferably using natural light for the best clarity.
+       </Text>
+       </View>
+      )}
+
+      {tipsVisible && label == "Government ID" && (
+        <View>
+        <Text style={styles.tipsContent}>
+          1. Please upload a clear photo of your valid government-issued ID (Aadhaar, PAN, Voter ID, Passport, or Driving License).
+        </Text>
+         <Text style={styles.tipsContent}>
+          2. Ensure your ID is fully visible and all details are readable before uploading.
+       </Text>
+       <Text style={styles.tipsContent}>
+          3. Accepted formats: JPG, PNG, or PDF. Max file size: 2MB.
        </Text>
        </View>
       )}

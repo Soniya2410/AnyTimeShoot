@@ -24,7 +24,8 @@ const AddSamplePackageScreen: React.FC = () => {
     useNavigation<RootStackNavigationProp<'addSamplePackage'>>();
 
   const moveToNextScreen = () => {
-    navigation.navigate('deliverablePackage');
+    // navigation.navigate('deliverablePackage');
+    navigation.navigate('gearAndSoftware');
   };
 
   return (
@@ -33,7 +34,7 @@ const AddSamplePackageScreen: React.FC = () => {
         <Text style={styles.title}>{constant.addSampleForPackage}</Text>
         <Text style={styles.subTitle}>{constant.provideSample}</Text>
         <View style={styles.thumbView}>
-          <View>
+          <View style={{ width: '47%'}}>
             <Text style={styles.categoryTitle}>{constant.thumbnailImage}</Text>
             <TouchableOpacity style={styles.thumbBg}>
               <Image source={images.file} style={styles.image} />
@@ -41,7 +42,7 @@ const AddSamplePackageScreen: React.FC = () => {
               <Text style={styles.text2}>{constant.jpegOrPngFormats}</Text>
             </TouchableOpacity>
           </View>
-          <View>
+           <View style={{ width: '47%'}}>
             <Text style={styles.categoryTitle}>{constant.sampleVideo}</Text>
             <TouchableOpacity style={styles.thumbBg}>
               <Image source={images.file} style={styles.image} />

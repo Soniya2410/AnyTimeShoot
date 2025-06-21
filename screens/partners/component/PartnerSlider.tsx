@@ -24,20 +24,34 @@ const PartnerSlider = () => {
       id: 1,
       icon: images.offerIcon,
       title: 'Get Paid Faster',
-      description: 'Receive your earnings quicker with efficient payout system.',
+      description: 'Receive your earnings quicker with efficient payout system',
     },
     {
       id: 2,
       icon: images.offerIcon,
-      title: 'Secure Payments',
-      description: 'Your transactions are protected with top-level encryption.',
+      title: 'Flexible Calendar',
+      description: 'Be your own boss! Take control of your calendar and choose the dates on which available to take bookings.',
     },
     {
       id: 3,
       icon: images.offerIcon,
-      title: 'Track Your Earnings',
-      description: 'Monitor your income in real-time, anywhere.',
+      title: 'Instant Booking',
+      description: 'Perfect for photographers who enjoy the thrill of last-minute bookings.',
     },
+    {
+      id: 4,
+      icon: images.offerIcon,
+      title: 'Effortless Invoicing',
+      description: `Don't stress about invoicing! Complete and professional invoice will be generated on behalf of AnyTimesShoot, saving you time and effort`,
+    },
+    {
+      id: 5,
+      icon: images.offerIcon,
+      title: 'Safety First',
+      description: 'Have peace of mind with our 24/7 safety line for photographer support.',
+    },
+
+   
   ];
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {

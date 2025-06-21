@@ -136,7 +136,7 @@ const updateQuantity = (index: number, delta: number) => {
       <View style={styles.footer}>
         <ASButton
           title={constant.continue}
-          onPress={() => console.log('Continue pressed')}
+          onPress={() => navigation.navigate('deliverablePackage')}
         />
       </View>
     </SafeAreaView>

@@ -16,7 +16,7 @@ const PartnerOTPVerificationScreen = ({route} : any) => {
   const inputs = useRef<Array<TextInput | null>>([]);
 
   const moveToNextScreen = () => {
-    
+    navigation.navigate('partnerRegister', {from : 'verify'});
   }
 
   const handleChange = (text : any, index : number) => {

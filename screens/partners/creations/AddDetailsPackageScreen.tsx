@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
@@ -8,121 +8,134 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import {constant} from '../../utils/Constant';
 import {Fonts} from '../../utils/Fonts';
 import {ASButton} from '../../components/ASButton';
 import {colors} from '../../utils/Colors';
-import { useNavigation } from '@react-navigation/native';
-import { RootStackNavigationProp } from '../../../App';
+import {useNavigation} from '@react-navigation/native';
+import {RootStackNavigationProp} from '../../../App';
 
 const AddDetailsPackageScreen: React.FC = () => {
- const navigation = useNavigation<RootStackNavigationProp<'addDetailsPackage'>>();
-  const [selectedStudio, setSelectedStudio] = useState<'Yes' | 'No' | null>('Yes');
+  const navigation =
+    useNavigation<RootStackNavigationProp<'addDetailsPackage'>>();
+  const [selectedStudio, setSelectedStudio] = useState<'Yes' | 'No' | null>(
+    'Yes',
+  );
 
   const moveToAddStudioDetails = () => {
-    navigation.navigate('addStudioDetailsPackage');
+    if(selectedStudio == "Yes") {
+      navigation.navigate('addStudioDetailsPackage');
+    } else {
+      navigation.navigate('addSamplePackage');
+    }
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.title}>{constant.addDetails}</Text>
-        <Text style={styles.subTitle}>{constant.giveSome}</Text>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+        <ScrollView contentContainerStyle={styles.scrollContent}>
+          <Text style={styles.title}>{constant.addDetails}</Text>
+          <Text style={styles.subTitle}>{constant.giveSome}</Text>
 
-        <View style={styles.padingView}>
-          <Text style={styles.labelTitle}>{constant.packageName}</Text>
-          <TextInput placeholder={constant.nameYourPackage} placeholderTextColor= {colors.lineColor} style={styles.input} />
-        </View>
+          <View style={styles.padingView}>
+            <Text style={styles.labelTitle}>{constant.packageName}</Text>
+            <TextInput
+              placeholder={constant.nameYourPackage}
+              placeholderTextColor={colors.lineColor}
+              style={styles.input}
+            />
+          </View>
 
-        <View style={styles.padingView}>
-          <Text style={styles.labelTitle}>{constant.packageDesc}</Text>
-          <TextInput
-            placeholder={constant.addSomeBasic}
-            placeholderTextColor= {colors.lineColor}
-            style={[styles.input, styles.multilineInput]}
-            multiline
-            numberOfLines={4}
-            textAlignVertical="top"
-          />
-        </View>
+          <View style={styles.padingView}>
+            <Text style={styles.labelTitle}>{constant.packageDesc}</Text>
+            <TextInput
+              placeholder={constant.addSomeBasic}
+              placeholderTextColor={colors.lineColor}
+              style={[styles.input, styles.multilineInput]}
+              multiline
+              numberOfLines={4}
+              textAlignVertical="top"
+            />
+          </View>
 
-        <View style={styles.padingView}>
-       <Text style={styles.labelTitle}>{constant.shootIsStudio}</Text>
-       <View style={styles.yesNoContainer}>
-        <TouchableOpacity
-          style={[
-            styles.optionButton,
-            selectedStudio === 'Yes' && styles.selectedOption,
-          ]}
-          onPress={() => setSelectedStudio('Yes')}
-        >
-          <Text
-            style={[
-              styles.optionText,
-              selectedStudio === 'Yes' && styles.selectedOptionText,
-            ]}
-          >
-            Yes
-          </Text>
-        </TouchableOpacity>
+          <View style={styles.padingView}>
+            <Text style={styles.labelTitle}>{constant.shootIsStudio}</Text>
+            <View style={styles.yesNoContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.optionButton,
+                  selectedStudio === 'Yes' && styles.selectedOption,
+                ]}
+                onPress={() => setSelectedStudio('Yes')}>
+                <Text
+                  style={[
+                    styles.optionText,
+                    selectedStudio === 'Yes' && styles.selectedOptionText,
+                  ]}>
+                  Yes
+                </Text>
+              </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[
-            styles.optionButton,
-            selectedStudio === 'No' && styles.selectedOption,
-          ]}
-          onPress={() => setSelectedStudio('No')}
-        >
-          <Text
-            style={[
-              styles.optionText,
-              selectedStudio === 'No' && styles.selectedOptionText,
-            ]}
-          >
-            No
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+              <TouchableOpacity
+                style={[
+                  styles.optionButton,
+                  selectedStudio === 'No' && styles.selectedOption,
+                ]}
+                onPress={() => setSelectedStudio('No')}>
+                <Text
+                  style={[
+                    styles.optionText,
+                    selectedStudio === 'No' && styles.selectedOptionText,
+                  ]}>
+                  No
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
-        <View style={styles.padingView}>
-          <Text style={styles.labelTitle}>
-            {constant.shootDuration}
-            <Text style={styles.hoursHighlight}> {constant.inHours}</Text>
-          </Text>
-          <TextInput placeholder={constant.Eg} placeholderTextColor= {colors.lineColor} style={styles.input} />
-        </View>
-
-        <View style={styles.padingView}>
-          <Text style={styles.noteHighlight}>{constant.note}</Text>
-          <Text style={styles.hoursHighlight}>
-            {constant.shootHours}
-            <Text style={styles.hightlight}>{constant.hours}</Text>
-          </Text>
-          <Text style={styles.hoursHighlight}>
-            {constant.twoNumber}
-            <Text style={styles.hightlight}>
-              {constant.dont}
-              <Text style={styles.hoursHighlight}>{constant.mentionNumberofDays}</Text>
+          <View style={styles.padingView}>
+            <Text style={styles.labelTitle}>
+              {constant.shootDuration}
+              <Text style={styles.hoursHighlight}> {constant.inHours}</Text>
             </Text>
-          </Text>
-        </View>
-      </ScrollView>
+            <TextInput
+              placeholder={constant.Eg}
+              placeholderTextColor={colors.lineColor}
+              style={styles.input}
+            />
+          </View>
 
-      <View style={styles.bottomButtonContainer}>
+          <View style={styles.padingView}>
+            <Text style={styles.noteHighlight}>{constant.note}</Text>
+            <Text style={styles.hoursHighlight}>
+              {constant.shootHours}
+              <Text style={styles.hightlight}>{constant.hours}</Text>
+            </Text>
+            <Text style={styles.hoursHighlight}>
+              {constant.twoNumber}
+              <Text style={styles.hightlight}>
+                {constant.dont}
+                <Text style={styles.hoursHighlight}>
+                  {constant.mentionNumberofDays}
+                </Text>
+              </Text>
+            </Text>
+          </View>
+        </ScrollView>
+
         <ASButton
           title={constant.continue}
           customStyle={styles.continueButton}
           onPress={moveToAddStudioDetails}
         />
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -175,7 +188,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     fontSize: 10,
     color: colors.black,
-    marginVertical: 10
+    marginVertical: 10,
   },
   noteHighlight: {
     fontFamily: Fonts.medium,
@@ -185,17 +198,17 @@ const styles = StyleSheet.create({
   },
   continueButton: {
     backgroundColor: colors.appColor,
-    margin: 16,
+    // margin: 16,
     paddingVertical: 14,
     borderRadius: 50,
     alignItems: 'center',
-    marginTop: 15,  
+    // bottom: 15,
   },
   bottomButtonContainer: {
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   scrollContent: {
-    paddingBottom: 100, 
+    paddingBottom: 100,
   },
   multilineInput: {
     height: 100,

@@ -14,6 +14,8 @@ import {Fonts} from '../../utils/Fonts';
 import {ASButton} from '../../components/ASButton';
 import {colors} from '../../utils/Colors';
 import {images} from '../../utils/Images';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp } from '../../../App';
 
 const categories = [
   {label: constant.adobephotoshop, icon: images.adobePhotoshop},
@@ -26,6 +28,8 @@ const categories = [
 ];
 
 const SoftwareUsedScreen: React.FC = () => {
+  const navigation = useNavigation<RootStackNavigationProp<'pricingDetailPackage'>>();
+  
   const [selected, setSelected] = useState<number[]>([]);
   const [showOtherInput, setShowOtherInput] = useState(false);
 
@@ -104,12 +108,13 @@ const SoftwareUsedScreen: React.FC = () => {
         })}
       </ScrollView>
 
-      <View style={styles.footer}>
+      {/* <View style={styles.footer}> */}
         <ASButton
           title={constant.continue}
-          onPress={() => console.log('Continue pressed')}
+          onPress={() => navigation.navigate('deliverablePackage')}
+          customStyle={styles.continueButton}
         />
-      </View>
+      {/* </View> */}
     </SafeAreaView>
   );
 };
@@ -121,6 +126,12 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 16,
+  },
+  continueButton: {
+    backgroundColor: colors.appColor,
+    paddingVertical: 14,
+    borderRadius: 50,
+    alignItems: 'center',
   },
   title: {
     fontSize: 16,

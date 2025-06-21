@@ -8,6 +8,7 @@ import {
   Platform,
   TouchableOpacity,
   TextInput,
+  SafeAreaView,
 } from 'react-native';
 import {constant} from '../../utils/Constant';
 import {Fonts} from '../../utils/Fonts';
@@ -63,7 +64,7 @@ const ExtraPerksPackageScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={{flex: 1}}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -152,16 +153,16 @@ const ExtraPerksPackageScreen: React.FC = () => {
           </View>
         </ScrollView>
 
-        <View style={styles.bottomContainer}>
+        {/* <View style={styles.bottomContainer}> */}
         <ASButton
         title={constant.continue}
         customStyle={styles.btnContinue}
         onPress={moveToNextScreen}
       />
-         </View>
+         {/* </View> */}
       </KeyboardAvoidingView>
 
-      </View>
+      </SafeAreaView>
     
   );
 };
@@ -271,9 +272,12 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     // padding: 16,
-     paddingBottom: 20
+    //  paddingBottom: 20
   },
   btnContinue: {
+     backgroundColor: colors.appColor,
+    paddingVertical: 14,
+    borderRadius: 50,
     alignItems: 'center',
    
   },

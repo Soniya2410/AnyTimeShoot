@@ -7,7 +7,7 @@ import { images } from '../utils/Images';
 import { icons } from '../utils/Icons';
 
 const coupons = [
-  { id: '1', type: '', amount: '₹1,000', code: 'SOMETHINGNEW25', applied: false },
+  { id: '1', type: '10% Off', amount: '₹1,000', code: 'SOMETHINGNEW25', applied: false },
   { id: '2', type: 'Cashback', amount: '₹2,500', code: 'SOMETHINGNEW25', applied: false },
   { id: '3', type: 'New Bee', amount: '₹1,000', code: 'SOMETHINGNEW25', applied: false },
   { id: '4', type: '20% Off', amount: '₹1,000', code: 'SOMETHINGNEW25', applied: false },

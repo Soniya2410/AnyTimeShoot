@@ -41,5 +41,9 @@ export const icons = {
   chatIcon: require('../../assets/icons/chat.png'),
   bookmarkIcon: require('../../assets/icons/bookmarkIcon.png'),
   closeFilterIcon: require('../../assets/icons/ic_close_icon.png'),
-  couponIcon: require('../../assets/icons/coupon.png')
+  couponIcon: require('../../assets/icons/coupon.png'),
+  calendar: require('../../assets/icons/calendar.png'),
+  anayltics: require('../../assets/icons/anayltics.png'),
+  earnings: require('../../assets/icons/earnings.png'),
+  manage_package: require('../../assets/icons/manage_package.png')
 }

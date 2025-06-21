@@ -261,22 +261,22 @@ const HomeScreen: React.FC = () => {
     {
       id: '1',
       title: 'Wedding',
-      image: images.home1,
+      image: images.category1,
     },
     {
       id: '2',
       title: 'Pre-wedding',
-      image: images.home2,
+      image: images.category2,
     },
     {
       id: '3',
       title: 'Maternity',
-      image: images.home3,
+      image: images.category3,
     },
     {
       id: '4',
-      title: 'Product',
-      image: images.home4,
+      title: 'New Born',
+      image: images.category4,
     },
     {
       id: '6',
@@ -318,7 +318,7 @@ const HomeScreen: React.FC = () => {
     if(isViewAll) {
       return (
         <TouchableOpacity style={styles.categoryCard}
-        onPress={() => {}}>
+          onPress={() => {navigation.navigate('categoryList')}}>
           <View style={styles.greyImage}>
           <Image source={item.image}  style={styles.arrowIcon}/>
           </View>
@@ -405,13 +405,17 @@ const HomeScreen: React.FC = () => {
         </View>
         <View style={styles.recommendedHeader}>
           <Text style={styles.recommendedTitle}>{constant.instant_bookings}</Text>
-          <TouchableOpacity onPress={() =>
+          {/* <TouchableOpacity onPress={() =>
              navigation.navigate('packageList', {title: 'Instant Booking', data: instantBooking})
           }>
             <Text style={styles.viewAll}>{constant.view_all}</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
-          <InstantBooking instantBooking={instantBooking} />
+        <Image source={images.instantBooking} style={styles.instantContainer} />
+        {/* <View style={styles.instantContainer}>
+          <Text style={styles.instantText}>Coming Soon</Text>
+        </View> */}
+          {/* <InstantBooking instantBooking={instantBooking} /> */}
 
        
         {/* Offer Packages  */}
@@ -653,6 +657,19 @@ const styles = StyleSheet.create({
   arrowIcon: {
     width: 18,
     height: 29,
+  },
+  instantContainer : {
+    borderRadius: 5,
+    marginHorizontal: 16,
+    height: 150,
+    width: '93%',
+    borderWidth: 1,
+    borderColor: colors.appColor
+    
+  },
+  instantText : {
+    color: colors.textPrimary2,
+    fontFamily: Fonts.medium
   }
 });
 

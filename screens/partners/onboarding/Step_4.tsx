@@ -1,9 +1,10 @@
-import { View, TouchableOpacity, Image, Text, StyleSheet } from "react-native"
+import { View, TouchableOpacity, Image, Text, StyleSheet, Linking } from "react-native"
 import { ASInputField } from "../component/ASInputField"
 import { useState } from "react"
 import { images } from "../../utils/Images";
 import { colors } from "../../utils/Colors";
 import { Fonts } from "../../utils/Fonts";
+import { constant } from "../../utils/Constant";
 
 const Step_4: React.FC = () => {
   const [accHolderName, setAccHodlerName] = useState("");
@@ -40,10 +41,10 @@ const Step_4: React.FC = () => {
       />
       {/* Use Current Location */}
       <View style={{flexDirection: 'row'}}>
-      <TouchableOpacity style={styles.locationRow}>
+      <TouchableOpacity style={styles.locationRow} onPress={() => Linking.openURL(constant.payOuturl)}>
         <Text style={styles.exploreText}>Explore</Text>
       </TouchableOpacity>
-      <Text style={styles.locationText}>why we require details of you bank!</Text>
+      <Text style={styles.locationText}>{constant.whyYourBankDetails}</Text>
       </View>
     </View>
   )

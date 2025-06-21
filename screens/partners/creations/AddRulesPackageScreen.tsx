@@ -22,11 +22,10 @@ import {ASButton} from '../../components/ASButton';
 import {icons} from '../../utils/Icons';
 
 const rulesList = [
-  {id: '1', rule: constant.rulesText, isEditing: false, tempText: ''},
-  {id: '2', rule: constant.rulesText, isEditing: false, tempText: ''},
-  {id: '3', rule: constant.rulesText, isEditing: false, tempText: ''},
-  {id: '4', rule: constant.rulesText, isEditing: false, tempText: ''},
-  {id: '5', rule: constant.rulesText, isEditing: false, tempText: ''},
+  {id: '1', rule: constant.rulesText1, isEditing: false, tempText: ''},
+  {id: '2', rule: constant.rulesText2, isEditing: false, tempText: ''},
+  {id: '3', rule: constant.rulesText3, isEditing: false, tempText: ''},
+  {id: '4', rule: constant.rulesText4, isEditing: false, tempText: ''}
 ];
 
 const AddRulesPackageScreen: React.FC = () => {

@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import {constant} from '../../utils/Constant';
 import {Fonts} from '../../utils/Fonts';
@@ -85,6 +86,7 @@ const AddStudioDetailsPackageScreen: React.FC = () => {
   };
 
   return (
+    <SafeAreaView style={styles.container} >
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -131,13 +133,14 @@ const AddStudioDetailsPackageScreen: React.FC = () => {
           />
         </View>
         </ScrollView>
-        <View style={styles.bottomContainer}>
+        {/* <View style={styles.bottomContainer}> */}
           <ASButton
             customStyle={styles.continueButton}
             title={constant.continue}
             onPress={moveToAddStudioDetails} />
-        </View>
+        {/* </View> */}
       </KeyboardAvoidingView>
+      </SafeAreaView>
   );
 };
 
@@ -241,7 +244,12 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   },
   continueButton: {
-  
+   backgroundColor: colors.appColor,
+    // margin: 16,
+    paddingVertical: 14,
+    borderRadius: 50,
+    alignItems: 'center',
+    // bottom: 15,
   },
   label: {
     fontSize: 13,

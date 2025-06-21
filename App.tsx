@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   View,
   TouchableOpacity,
   Text,
+  Linking,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -82,6 +83,8 @@ import LightsReflectorScreen from './screens/partners/creations/LightsReflectorS
 import AccessoriesScreen from './screens/partners/creations/AccessoriesScreen.tsx';
 import SoftwareUsedScreen from './screens/partners/creations/SoftwareUsedScreen.tsx';
 import SearchScreen from './screens/home/SearchScreen.tsx';
+import CategoryList from './screens/home/components/CategoryList.tsx';
+import OurPartnersList from './screens/home/components/OurPartnersList.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -127,7 +130,7 @@ export type RootStackParamList = {
   cancellationPolicy: undefined;
   termsOfUse: undefined;
   partnersOnboarding: undefined;
-  partnerRegister: undefined;
+  partnerRegister: {from: string};
   packageCreationSuccess: undefined;
   partnerOTPScreen: undefined;
   partnerOTPVerify: {selectionOption: string};
@@ -141,6 +144,8 @@ export type RootStackParamList = {
   filterBottom: undefined;
   searchScreen: undefined;
   bookingType: undefined;
+  categoryList: undefined;
+  ourPartners: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -262,16 +267,17 @@ const BottomTabs: React.FC = () => {
   );
 };
 
+
 const App: React.FC = () => {
   const handleSelectBookingType = (type: 'instant' | 'advance') => {
     console.log('Selected booking type:', type);
     // Navigate to appropriate screen or perform action
   };
 
-  const handleCreatePackage = () => {
-    console.log('Create package pressed');
-    // Navigate to package creation screen
-  };
+
+  const callHelpCenter = useCallback(() => {
+    Linking.openURL(constant.helpCenter)
+  },[])
   return (
     <GestureHandlerRootView>
       <NavigationContainer>
@@ -361,7 +367,7 @@ const App: React.FC = () => {
               headerBackTitle: '',
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -393,7 +399,7 @@ const App: React.FC = () => {
               headerTitle: 'Bookings',
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -425,7 +431,7 @@ const App: React.FC = () => {
               headerTitle: 'Bookings',
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -457,7 +463,7 @@ const App: React.FC = () => {
               headerTitle: 'Bookings',
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -526,13 +532,25 @@ const App: React.FC = () => {
             }}
           />
 
-          {/* <Stack.Screen
-            name='completedPopup'
-            component={CompletedPopupScreen}
+          <Stack.Screen
+            name='categoryList'
+            component={CategoryList}
             options={{
-              headerTitle: '',
+              headerShown: true,
+              headerTitleAlign: 'left',
+              headerTitle: 'Categories',
             }}
-          /> */}
+          />
+
+        <Stack.Screen
+            name='ourPartners'
+            component={OurPartnersList}
+            options={{
+              headerShown: true,
+              headerTitleAlign: 'left',
+              headerTitle: 'Our Partners',
+            }}
+          />
 
           <Stack.Screen
             name="profileDetail"
@@ -625,7 +643,7 @@ const App: React.FC = () => {
 
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                   onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -668,7 +686,7 @@ const App: React.FC = () => {
 
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -742,7 +760,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                   onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -783,7 +801,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -824,7 +842,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -865,7 +883,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -906,7 +924,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -947,7 +965,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -988,7 +1006,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                   onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1030,7 +1048,7 @@ const App: React.FC = () => {
 
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                   onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1072,7 +1090,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                   onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1142,7 +1160,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                   onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1183,7 +1201,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                   onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1224,7 +1242,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                   onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1264,7 +1282,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1305,7 +1323,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1346,7 +1364,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1387,7 +1405,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1428,7 +1446,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1469,7 +1487,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1510,7 +1528,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1551,7 +1569,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1592,7 +1610,7 @@ const App: React.FC = () => {
               headerTintColor: colors.white,
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {}}
+                  onPress={callHelpCenter}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,

@@ -54,17 +54,18 @@ const PricingDetailPackageScreen: React.FC = () => {
               <Text style={styles.pricingDetails}>{constant.pricingDetail1}</Text>
               <Text style={styles.pricingDetails}>{constant.pricingDetail2}</Text>
               <Text style={styles.pricingDetails}>{constant.pricingDetail3}</Text>
+               <Text style={styles.pricingDetails}>{constant.pricingDetail4}</Text>
             </View>
           </ScrollView>
 
           {/* Fixed Bottom Button */}
-          <View style={styles.bottomContainer}>
+          {/* <View style={styles.bottomContainer}> */}
             <ASButton
               title={constant.continue}
               customStyle={styles.continueButton}
               onPress={moveToNextScreen}
             />
-          </View>
+          {/* </View> */}
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

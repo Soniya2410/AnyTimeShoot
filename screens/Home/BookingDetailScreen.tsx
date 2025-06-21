@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   View,
   Text,
@@ -6,25 +6,69 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Modal,
-  ScrollView
+  ScrollView,
+  FlatList,
+  Image
 } from 'react-native';
-import { Calendar, Agenda } from 'react-native-calendars';
-import { useNavigation } from '@react-navigation/native';
+import {Calendar, Agenda} from 'react-native-calendars';
+import {useNavigation} from '@react-navigation/native';
 import ProfileDetailSlider from '../components/ProfileDetailSlider';
-import { RootStackNavigationProp } from '../../App';
-import { constant } from '../utils/Constant';
-import { colors } from '../utils/Colors';
-import { Fonts } from '../utils/Fonts';
-
+import {RootStackNavigationProp} from '../../App';
+import {constant} from '../utils/Constant';
+import {colors} from '../utils/Colors';
+import {Fonts} from '../utils/Fonts';
+import {ASButton} from '../components/ASButton';
+import { CouponOffersItem } from './components/CouponOffersItem';
+import { images } from '../utils/Images';
+import { icons } from '../utils/Icons';
 
 const BookingDetailScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'bookingDetail'>>();
   const [selectedDate, setSelectedDate] = useState<string>('2025-08-17');
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [activeDropdown, setActiveDropdown] = useState<'month' | 'year' | null>(null);
+  const [activeDropdown, setActiveDropdown] = useState<'month' | 'year' | null>(
+    null,
+  );
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selected, setSelected] = useState('2025-08-17');
+  const [showCalendar, setShowCalendar] = useState(true);
 
+  const couponData = [
+  {
+    id: '1',
+    name: 'Robert Nelson',
+    role: 'Photographer',
+    offer: 'Get 20% off on booking photographers for a minimum purchase of ₹2,45,000/-',
+    startDate: 'Mon 20',
+    endDate: 'Sun 29',
+    image: 'https://randomuser.me/api/portraits/men/32.jpg',
+  },
+  {
+    id: '2',
+    name: 'Robert Nelson',
+    role: 'Photographer',
+    offer: 'Get 20% off on booking photographers for a minimum purchase of ₹2,45,000/-',
+    startDate: 'Mon 20',
+    endDate: 'Sun 29',
+    image: 'https://randomuser.me/api/portraits/men/32.jpg',
+  },
+  {
+    id: '3',
+    name: 'Robert Nelson',
+    role: 'Photographer',
+    offer: 'Get 20% off on booking photographers for a minimum purchase of ₹2,45,000/-',
+    startDate: 'Mon 20',
+    endDate: 'Sun 29',
+    image: 'https://randomuser.me/api/portraits/men/32.jpg',
+  },
+];
+const ratingData = [
+    { stars: 5, width: '85%' },
+    { stars: 4, width: '60%' },
+    { stars: 3, width: '45%' },
+    { stars: 2, width: '25%' },
+    { stars: 1, width: '10%' },
+  ];
   const handleDayPress = (day: any) => {
     setSelectedDate(day.dateString);
     setActiveDropdown(null);
@@ -44,6 +88,10 @@ const BookingDetailScreen: React.FC = () => {
     setActiveDropdown(null);
   };
 
+  const changeViewBasedOnSelection = useCallback(() => {
+    setShowCalendar(false);
+  }, []);
+
   const navigateMonth = (direction: 'prev' | 'next') => {
     const newDate = new Date(currentDate);
     newDate.setMonth(currentDate.getMonth() + (direction === 'next' ? 1 : -1));
@@ -52,213 +100,193 @@ const BookingDetailScreen: React.FC = () => {
 
   const navigateYear = (direction: 'prev' | 'next') => {
     const newDate = new Date(currentDate);
-    newDate.setFullYear(currentDate.getFullYear() + (direction === 'next' ? 1 : -1));
+    newDate.setFullYear(
+      currentDate.getFullYear() + (direction === 'next' ? 1 : -1),
+    );
     setCurrentDate(newDate);
   };
 
   const formatMonthYear = (date: Date) => {
     return {
-      month: date.toLocaleString('default', { month: 'long' }),
+      month: date.toLocaleString('default', {month: 'long'}),
       year: date.getFullYear(),
     };
   };
 
-  const { month, year } = formatMonthYear(currentDate);
+  const {month, year} = formatMonthYear(currentDate);
 
   // Generate month/year options
-  const months = Array.from({ length: 12 }, (_, i) => ({
-    name: new Date(currentDate.getFullYear(), i, 1).toLocaleString('default', { month: 'long' }),
-    value: i
+  const months = Array.from({length: 12}, (_, i) => ({
+    name: new Date(currentDate.getFullYear(), i, 1).toLocaleString('default', {
+      month: 'long',
+    }),
+    value: i,
   }));
-  
-  const years = Array.from({ length: 11 }, (_, i) => currentDate.getFullYear() - 5 + i);
+
+  const PricingView = () => {
+    return(
+      <View>
+      <Text style={styles.sectionTitle}>Pricing breakdown</Text>
+      <View style={styles.row}>
+        <Text style={styles.label}>Package Price</Text>
+        <Text style={styles.value}>₹1,50,000</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Platform Fee</Text>
+        <Text style={styles.value}>₹1500</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>GST(18%)</Text>
+        <Text style={styles.value}>₹2700</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Coupon</Text>
+        <Text style={styles.value}>₹1500</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Grand Total</Text>
+        <Text style={styles.value}>₹19200</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={[styles.label, { fontWeight: 'bold' }]}>Total Price(After Discount)</Text>
+        <Text style={[styles.value, styles.total]}>₹2,45,000</Text>
+      </View>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+      <Text style={styles.sectionTitle}>Coupons and Offers</Text>
+     <TouchableOpacity onPress={() => {navigation.navigate('couponScreen')}}>
+      <Text style={{ color: colors.appColor, textDecorationLine: 'underline', fontFamily: Fonts.regular}}>5 offers</Text>
+      </TouchableOpacity>
+      </View>
+      <FlatList
+          data={couponData}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <CouponOffersItem item={item} />
+          )}
+        />
+{/* Reviews Section */}
+        <Text style={styles.reviewsTitle}>Reviews</Text>
+        <View style={styles.reviewsContainer}>
+          <View style={styles.reviewBars}>
+            {ratingData.map((item, index) => (
+              <View key={index} style={styles.starRow}>
+                <Text>{item.stars} ⭐</Text>
+                <View style={styles.barBackground}>
+                  <View style={[styles.barFill ]} />
+                </View>
+              </View>
+            ))}
+          </View>
+          <View style={styles.reviewScoreContainer}>
+            <Text style={styles.reviewScore}>4.8</Text>
+            <Text style={styles.viewAll}>View all reviews</Text>
+          </View>
+        </View>
+
+        {/* Policy Cards */}
+        <View style={styles.card}>
+          <Image source={images.cancellationBooking} style={styles.icon} />
+          <View style={styles.cardText}>
+            <Text style={styles.cardTitle}>Cancellation policy</Text>
+            <Text style={styles.cardSubtitle}>By proceeding, you agree to our policy</Text>
+          </View>
+          <Image source={icons.nextArrowIcon} style={styles.arrowIcon}/>
+        </View>
+
+        <View style={styles.card}>
+          <Image source={images.coupounsBooking} style={styles.icon} />
+          <View style={styles.cardText}>
+            <Text style={styles.cardTitle}>Coupon applied</Text>
+            <Text style={styles.cardSubtitle}>You’re saving ₹1500</Text>
+          </View>
+          <Image source={icons.nextArrowIcon} style={styles.arrowIcon}/>
+        </View>
+
+        <View style={styles.card}>
+          <Image source={images.special} style={styles.icon} />
+          <View style={styles.cardText}>
+            <Text style={styles.cardTitle}>Special Instructions</Text>
+            <Text style={styles.cardSubtitle}>Add a note for photographer</Text>
+          </View>
+          <Image source={icons.nextArrowIcon} style={styles.arrowIcon}/>
+        </View>
+     
+
+      {/* Bottom Booking Bar */}
+     
+      </View>
+    )
+  }
+  const CalendarView = React.memo(({ selected, setSelected }: any) => {
+  return (
+    <View style={styles.calendarWrapper}>
+      <Calendar
+        style={{
+          borderWidth: 1,
+          borderColor: colors.appColor,
+          borderRadius: 5,
+          marginVertical: 10,
+        }}
+        current={selected}
+        onDayPress={day => setSelected(day.dateString)}
+        markedDates={{
+          [selected]: { selected: true, selectedColor: colors.appColor },
+        }}
+        theme={{
+          backgroundColor: '#F8D0D0',
+          calendarBackground: '#F8D0D0',
+          textSectionTitleColor: '#333',
+          selectedDayBackgroundColor: colors.appColor,
+          selectedDayTextColor: '#fff',
+          todayTextColor: colors.appColor,
+          dayTextColor: '#000',
+          textDisabledColor: '#d9e1e8',
+          arrowColor: colors.appColor,
+          monthTextColor: colors.appColor,
+          indicatorColor: colors.appColor,
+          textDayFontFamily: Fonts.bold,
+          textMonthFontFamily: Fonts.medium,
+          textDayHeaderFontFamily: Fonts.semiBold,
+          textDayFontWeight: '600',
+          textDayFontSize: 12,
+          textMonthFontSize: 20,
+          textDayHeaderFontSize: 12,
+        }}
+      />
+      <ASButton title="Apply" onPress={changeViewBasedOnSelection} />
+    </View>
+  );
+});
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView >
-      <ProfileDetailSlider />
-
-      <View style={styles.calContainer}>
-        <Text style={styles.title}>{constant.sheduledShoot}</Text>
-        <Text style={styles.subtitle}>{new Date(selectedDate).toDateString()}</Text>
-
-        <TouchableOpacity 
-          style={styles.selector} 
-          onPress={() => setModalVisible(true)}
-        >
-          <Text style={styles.selectorText}>Date</Text>
-        </TouchableOpacity>
-
-        {/* <Modal
-          visible={modalVisible}
-          transparent
-          animationType="slide"
-          onRequestClose={() => setModalVisible(false)}
-        > */}
-          {/* <View style={styles.modalContainer}> */}
-            {/* <View style={styles.bottomSheet}> */}
-              {/* Header with month/year selectors */}
-              {/* <View style={styles.headerRow}>
-                <View style={styles.monthControl}>
-                  <TouchableOpacity onPress={() => navigateMonth('prev')}>
-                    <Text style={styles.arrow}>{'<'}</Text>
-                  </TouchableOpacity>
-                  
-                  <TouchableOpacity 
-                    style={styles.selectorButton}
-                    onPress={() => setActiveDropdown(activeDropdown === 'month' ? null : 'month')}
-                  >
-                    <Text style={styles.headerText}>{month} ▼</Text>
-                  </TouchableOpacity>
-                  
-                  <TouchableOpacity onPress={() => navigateMonth('next')}>
-                    <Text style={styles.arrow}>{'>'}</Text>
-                  </TouchableOpacity>
-                </View>
-
-                <View style={styles.yearControl}>
-                  <TouchableOpacity onPress={() => navigateYear('prev')}>
-                    <Text style={styles.arrow}>{'<'}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity 
-                    style={styles.selectorButton}
-                    onPress={() => setActiveDropdown(activeDropdown === 'year' ? null : 'year')}
-                  >
-                    <Text style={styles.headerText}>{year} ▼</Text>
-                  </TouchableOpacity>
-                  
-                  <TouchableOpacity onPress={() => navigateYear('next')}>
-                    <Text style={styles.arrow}>{'>'}</Text>
-                  </TouchableOpacity>
-                </View>
-              </View> */}
-
-              {/* Calendar with absolute positioned dropdowns */}
-              <View style={styles.calendarWrapper}>
-              <Calendar
-                style={{
-                  borderWidth: 1,
-                  borderColor: '#D32F2F',
-                  borderRadius: 5,
-                  marginVertical: 10,
-                  // height: 350
-                }}
-              
-                  current={selected}
-                  onDayPress={(day) => setSelected(day.dateString)}
-                  markedDates={{
-                    [selected]: { selected: true, selectedColor: '#D32F2F' },
-                  }}
-                  theme={{
-                    backgroundColor: '#F8D0D0',
-                    calendarBackground: '#F8D0D0',
-                    textSectionTitleColor: '#333',
-                    selectedDayBackgroundColor: '#D32F2F',
-                    selectedDayTextColor: '#fff',
-                    todayTextColor: '#D32F2F',
-                    dayTextColor: '#000',
-                    textDisabledColor: '#d9e1e8',
-                    arrowColor: '#D32F2F',
-                    monthTextColor: '#D32F2F',
-                    indicatorColor: '#D32F2F',
-                    textDayFontFamily: Fonts.bold,
-                    textMonthFontFamily: Fonts.extraBold,
-                    textDayHeaderFontFamily: Fonts.extraBold,
-                    textDayFontSize: 12,
-                    textMonthFontSize: 20,
-                    textDayHeaderFontSize: 12,
-                  }}
-                />
-                {/* <Calendar
-                  key={currentDate.toISOString()}
-                  current={currentDate.toISOString().split('T')[0]}
-                  onDayPress={handleDayPress}
-                  markedDates={{
-                    [selectedDate]: {
-                      selected: true,
-                      selectedColor: colors.appColor,
-                    },
-                  }}
-                  hideArrows
-                  disableMonthChange
-                  renderHeader={() => null}
-                  theme={{
-                    calendarBackground: colors.calendarBackground,
-                    selectedDayBackgroundColor: colors.appColor,
-                    selectedDayTextColor: colors.white,
-                    todayTextColor: colors.appColor,
-                    dayTextColor: colors.dayColor,
-                    textDisabledColor: colors.textPrimary2,
-                  }}
-                  style={styles.calendarStyle}
-                /> */}
-
-                {/* Month Dropdown (overlapping) */}
-                {/* {activeDropdown === 'month' && (
-                  <View style={styles.overlayDropdown}>
-                    <ScrollView 
-                      style={styles.dropdownContainer}
-                      contentContainerStyle={styles.dropdownContent}
-                    >
-                      {months.map((monthItem, index) => (
-                        <TouchableOpacity
-                          key={index}
-                          style={[
-                            styles.dropdownItem,
-                            currentDate.getMonth() === monthItem.value && styles.selectedItem
-                          ]}
-                          onPress={() => changeMonth(monthItem.value)}
-                        >
-                          <Text style={styles.dropdownText}>{monthItem.name}</Text>
-                        </TouchableOpacity>
-                      ))}
-                    </ScrollView>
-                  </View>
-                )} */}
-
-                {/* Year Dropdown (overlapping) */}
-                {/* {activeDropdown === 'year' && (
-                  <View style={styles.overlayDropdown}>
-                    <ScrollView 
-                      style={styles.dropdownContainer}
-                      contentContainerStyle={styles.dropdownContent}
-                    >
-                      {years.map((yearValue) => (
-                        <TouchableOpacity
-                          key={yearValue}
-                          style={[
-                            styles.dropdownItem,
-                            currentDate.getFullYear() === yearValue && styles.selectedItem
-                          ]}
-                          onPress={() => changeYear(yearValue)}
-                        >
-                          <Text style={styles.dropdownText}>{yearValue}</Text>
-                        </TouchableOpacity>
-                      ))}
-                    </ScrollView>
-                  </View>
-                )} */}
-              </View>
-
-              {/* Footer */}
-              {/* <View style={styles.footer}>
-                <TouchableOpacity onPress={() => setSelectedDate('')}>
-                  <Text style={styles.clear}>{constant.clear}</Text>
-                </TouchableOpacity>
-                <View style={styles.rightButtons}>
-                  <TouchableOpacity onPress={() => setModalVisible(false)}>
-                    <Text style={styles.cancel}>{constant.cancel}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => setModalVisible(false)}>
-                    <Text style={styles.ok}>{constant.ok}</Text>
-                  </TouchableOpacity>
-                </View>
-              </View> */}
-            </View>
-          {/* </View> */}
-        {/* </Modal> */}
-      {/* </View> */}
+      <ScrollView style={{ marginBottom: 30}}>
+        <ProfileDetailSlider />
+        <View style={styles.calContainer}>
+          <Text style={styles.title}>{constant.sheduledShoot}</Text>
+          <Text style={styles.subtitle}>
+            {new Date(selectedDate).toDateString()}
+          </Text>
+          <TouchableOpacity
+            style={styles.selector}
+            onPress={changeViewBasedOnSelection}>
+            <Text style={styles.selectorText}>Date</Text>
+          </TouchableOpacity>
+         {showCalendar ? (
+          <CalendarView selected={selected} setSelected={setSelected} />
+      ) : null}
+  {!showCalendar ? <PricingView /> : null}
+        </View>
+       
       </ScrollView>
+        <View style={styles.bottomBar}>
+        <Text style={styles.price}>₹ 2,45,000</Text>
+        <TouchableOpacity style={styles.bookNowBtn}>
+        <Text style={styles.bookNowText}>Book Now</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -349,7 +377,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     elevation: 5,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
@@ -397,6 +425,157 @@ const styles = StyleSheet.create({
   },
   calendarStyle: {
     height: 300,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    marginVertical: 5,
+    fontFamily: Fonts.medium,
+    color: colors.appColor,
+    marginBottom: 10,
+    textTransform: 'capitalize',
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 4,
+  },
+  label: {
+    fontSize: 15,
+    color: colors.textPrimary2,
+    marginVertical: 3,
+    fontFamily: Fonts.medium,
+  },
+  value: {
+    fontSize: 15,
+    color: colors.black,
+    fontFamily: Fonts.medium,
+  },
+  total: {
+    color: colors.appColor,
+    fontSize: 17,
+    fontFamily: Fonts.bold
+  },
+  offerHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 24,
+    marginBottom: 10,
+  },
+  offerLink: {
+    color: colors.appColor,
+    fontWeight: '500',
+  },
+  bottomBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    backgroundColor: '#fff',
+    borderTopColor: '#eee',
+    borderTopWidth: 1,
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+  },
+  price: {
+    fontSize: 20,
+    fontFamily: Fonts.semiBold,
+    color: colors.appColor,
+  },
+  bookNowBtn: {
+    backgroundColor: colors.appColor,
+    borderRadius: 25,
+    paddingHorizontal: 24,
+    paddingVertical: 10,
+  },
+  bookNowText: {
+    color: '#fff',
+    fontFamily: Fonts.medium,
+    fontSize: 16,
+  },
+reviewsTitle: {
+    fontSize: 18,
+    color: colors.appColor,
+    fontFamily: Fonts.medium,
+    marginVertical: 10,
+  },
+  reviewsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  reviewBars: {
+    flex: 1,
+  },
+  starRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 6,
+  },
+  barBackground: {
+    height: 8,
+    backgroundColor: '#f5c6cd',
+    borderRadius: 4,
+    marginLeft: 6,
+    flex: 1,
+  },
+  barFill: {
+    height: 8,
+    backgroundColor: '#f58ca2',
+    borderRadius: 4,
+  },
+  reviewScoreContainer: {
+    alignItems: 'flex-end',
+    marginLeft: 10,
+  },
+  reviewScore: {
+    fontSize: 32,
+    fontFamily: Fonts.medium,
+    color: colors.appColor
+  },
+  viewAll: {
+    fontSize: 12,
+    color: colors.black,
+    fontFamily: Fonts.regular,
+    textDecorationLine: 'underline',
+  },
+  card: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderColor: '#e0e0e0',
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 12,
+    marginTop: 16,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    marginRight: 12,
+  },
+  arrowIcon: {
+    width: 13,
+    height: 18
+  },
+  cardText: {
+    flex: 1,
+  },
+  cardTitle: {
+    fontFamily: Fonts.medium,
+    fontSize: 16,
+  },
+  cardSubtitle: {
+    fontSize: 13,
+    fontFamily: Fonts.regular,
+    color: colors.textPrimary2
+  },
+
+  addIcon: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: colors.appColor
   },
 });
 

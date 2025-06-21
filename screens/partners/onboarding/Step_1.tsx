@@ -7,7 +7,9 @@ import { Fonts } from "../../utils/Fonts";
 
 const Step_1: React.FC = () => {
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("")
+  const [address, setAddress] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [email, setEmail] = useState("");
   return(
     <View>
     <ASInputField 
@@ -16,7 +18,18 @@ const Step_1: React.FC = () => {
       value={name}
       setValue={setName}
     />
-  
+    <ASInputField
+      title= {"Phone Number*"}
+      placeholder = {"Enter Phone Number"}
+      value={mobile}
+      setValue={setMobile}
+      />
+    <ASInputField
+    title= {"Email*"}
+    placeholder = {"Enter Email Id"}
+    value={email}
+    setValue={setEmail}
+    />
     <ASInputField
       title= {"Current Address*"}
       placeholder = {"Enter Address"}

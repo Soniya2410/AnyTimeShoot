@@ -65,7 +65,7 @@ const DroneScreen: React.FC = () => {
       <View style={styles.footer}>
         <ASButton
           title={constant.continue}
-          onPress={() => console.log('Continue pressed')}
+          onPress={() => navigation.navigate('deliverablePackage')}
         />
       </View>
     </SafeAreaView>
