@@ -20,8 +20,13 @@ const DroneScreen: React.FC = () => {
     useNavigation<RootStackNavigationProp<'drone'>>();
   const [blockCount, setBlockCount] = useState(1);
 
-  const handleAdd = () => setBlockCount(prev => prev + 1);
-  const handleRemove = () => setBlockCount(prev => (prev > 1 ? prev - 1 : 1));
+ const handleAdd = () => {
+  setBlockCount(prev => (prev < 5 ? prev + 1 : 5));
+};
+
+const handleRemove = () => {
+  setBlockCount(prev => (prev > 1 ? prev - 1 : 1));
+};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -48,14 +53,14 @@ const DroneScreen: React.FC = () => {
 
             <TextInput
               placeholder={constant.enterModelOfCompany}
-              placeholderTextColor={colors.textPrimary2}
+              placeholderTextColor={colors.appColor}
               style={styles.input}
             />
 
             <Text style={styles.label2}>{constant.model}</Text>
             <TextInput
               placeholder={constant.enterModelOfCamera}
-              placeholderTextColor={colors.textPrimary2}
+              placeholderTextColor={colors.appColor}
               style={styles.input}
             />
           </View>

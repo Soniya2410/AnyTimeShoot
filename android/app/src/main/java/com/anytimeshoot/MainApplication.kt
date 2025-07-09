@@ -1,4 +1,4 @@
-package com.anytimeshoot
+package com.app.anytimeshoot
 
 import android.app.Application
 import com.facebook.react.PackageList

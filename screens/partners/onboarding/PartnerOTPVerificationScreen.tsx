@@ -38,7 +38,7 @@ const PartnerOTPVerificationScreen = ({route} : any) => {
     console.log('Resend OTP');
   };
   
-  const {selectionOption} = route.params;
+  const {selectionOption} = route.params ?? 'phone';
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>

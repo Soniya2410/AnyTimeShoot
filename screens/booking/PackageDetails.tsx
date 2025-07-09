@@ -110,9 +110,9 @@ const PackageDetails: React.FC = () => {
   ];
 
   const ExtraPerks = [
-    {id: 1, image: images.details1, text: 'Fast Past Production'},
-    {id: 2, image: images.details2, text: 'Door Step Shoot'},
-    {id: 3, image: images.details3, text: 'Easy Cancellation'},
+    {id: 1, image: images.package3, text: 'Fast Past Production'},
+    {id: 2, image: images.package4, text: 'Door Step Shoot'},
+    {id: 3, image: images.package1, text: 'Easy Cancellation'},
   ];
 
   const recommended = [
@@ -158,8 +158,14 @@ const PackageDetails: React.FC = () => {
     {id: 4, name: "Primary Camera", count : 5, image: images.camera},
     {id: 5, name: "Primary Camera", count : 5, image: images.cameraFront},
   ]
-  const moveToBookNow = () => {
 
+  const imagesForStudio = [
+    images.package1,
+    images.package2,
+    images.baby1
+  ]
+  const moveToBookNow = () => {
+     navigation.navigate('bookingDetail');
   }
 
   const [recommendedList, setRecommendedList] = useState(recommended);
@@ -221,7 +227,7 @@ const PackageDetails: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.scrollContent}>
       <View>
         {/* Shoot Info */}
         <ProfileDetailSlider />
@@ -346,58 +352,28 @@ const PackageDetails: React.FC = () => {
             resizeMode="cover"
           />
         ))}
+        <View>
+          <Text style={styles.studioImages}>{constant.studioImages}</Text>
+          <Text style={styles.studio}>{constant.exploreStudio}</Text>
+          <FlatList
+              data={imagesForStudio}
+              horizontal
+              showsHorizontalScrollIndicator = {false}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <View style={styles.studioImageView}>
+                  <Image source={item} style={styles.image} />
+                </View>
+              )}
+              contentContainerStyle={{ paddingHorizontal: 10 }}
+              ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
+            />
 
-      {/* Delivery Details */}
-      <Text style={styles.sectionTitle}>{constant.deliveryDetails}</Text>
-      <Text style={styles.subtitle}>{constant.whenYouWillGetDeliverables}</Text>
-
-      {/* Delivery Table */}
-      <View style={styles.table}>
-        {/* Table Header */}
-        <View style={styles.tableRowHeader}>
-          <View style={[styles.tableHeaderCell]}></View>
-          <Text style={[styles.tableHeaderCell]}>Item</Text>
-          <Text style={styles.tableHeaderCell}>{constant.deliveryMode}</Text>
-          <Text style={styles.tableHeaderCell}>{constant.timelineAftershoot}</Text>
-        </View>
-
-        {/* Row 1 */}
-        <View style={styles.tableRow}>
-          {/* <View
-            style={[
-              styles.tableCell,
-              {flex: 2, flexDirection: 'row', alignItems: 'center'},
-            ]}> */}
-            <Image source={icons.rawDataIcon} style={styles.iconTable} />
-            <View style={styles.line}></View>
-            <Text style={styles.cellText}>{constant.rawData}</Text>
-            <View style={styles.line}></View>
-          {/* </View> */}
-          <Text style={styles.tableCell}>{constant.offline}</Text>
-          <View style={styles.line}></View>
-          <Text style={styles.tableCell}>20 days</Text>
-        </View>
-
-        {/* Row 2 */}
-        <View style={styles.tableRow}>
-          {/* <View
-            style={[
-              styles.tableCell,
-              {flex: 2, flexDirection: 'row', alignItems: 'center'},
-            ]}> */}
-            <Image source={icons.editRawDataIcon} style={styles.iconTable} />
-            <View style={styles.line}></View>
-            <Text style={styles.cellText}>{constant.editedData}</Text>
-          {/* </View> */}
-          <View style={styles.line}></View>
-          <Text style={styles.tableCell}>{constant.cloudSharing}</Text>
-          <View style={styles.line}></View>
-          <Text style={styles.tableCell}>20 days</Text>
-        </View>
+          
       </View>
       <View>
-      <Text style={styles.studioImages}>{constant.studioImages}</Text>
-          <Text style={styles.studio}>{constant.facilitiesAvailable}</Text>
+      <Text style={styles.studioImages}>{constant.studioFacilities}</Text>
+      <Text style={styles.studio}>{constant.facilitiesAvailable}</Text>
           <FlatList
             data={formatData(studioDetails,3)}
             renderItem={({item, index}) => <StudioFacilitiesItems item={item} />}
@@ -406,6 +382,39 @@ const PackageDetails: React.FC = () => {
             columnWrapperStyle={styles.row}
             contentContainerStyle={styles.grid}
           />
+        </View>
+
+        <View>
+           {/* Delivery Details */}
+      <Text style={styles.sectionTitle}>{constant.deliveryDetails}</Text>
+      <Text style={styles.subtitle}>{constant.whenYouWillGetDeliverables}</Text>
+
+      {/* Delivery Table */}
+      <View style={styles.table}>
+        {/* Table Header */}
+        <View style={styles.tableRowHeader}>
+          <Text style={[styles.tableHeaderCell]}>Item</Text>
+          <Text style={styles.tableHeaderCell}>{constant.deliveryMode}</Text>
+          <Text style={styles.tableHeaderCell}>{constant.timelineAftershoot}</Text>
+        </View>
+        <View style={styles.tableRow}>
+            <Image source={icons.rawDataIcon} style={styles.iconTable} />
+            <Text style={styles.cellText}>{constant.rawData}</Text>
+            <View style={styles.line}></View>
+          <Text style={styles.tableCell}>{constant.offline}</Text>
+          <View style={styles.line}></View>
+          <Text style={styles.tableCell}>20 days</Text>
+        </View>
+
+        <View style={styles.tableRow}>
+            <Image source={icons.editRawDataIcon} style={styles.iconTable} />
+            <Text style={styles.cellText}>{constant.editedData}</Text>
+          <View style={styles.line}></View>
+          <Text style={styles.tableCell}>{constant.cloudSharing}</Text>
+          <View style={styles.line}></View>
+          <Text style={styles.tableCell}>20 days</Text>
+        </View>
+      </View>
         </View>
       <View>
       <Text style={styles.recommendedTitle}>{constant.extraPerks}</Text>
@@ -461,7 +470,7 @@ const PackageDetails: React.FC = () => {
         <View style={styles.statscard}>
           <Text style={styles.cardTitle}>Average Rating</Text>
           <View style={styles.ratingRow}>
-            {/* <Icon name="star" size={20} color="#f5b50a" /> */}
+            <Text style={styles.starRating}> ★</Text>{' '}
             <Text style={styles.bigNumber}>4.2</Text>
           </View>
         </View>
@@ -508,7 +517,7 @@ const styles = StyleSheet.create({
     // fontWeight: 'bold',
     color: colors.appColor,
     marginHorizontal: 15,
-    marginTop: 20,
+    marginTop: 10,
   },
   imageRow: {
     marginTop: 10,
@@ -544,6 +553,10 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 10,
   },
+   starRating: {
+    color: colors.starColor,
+    fontSize: 16,
+  },
   GearcardImage: {
     width: 70,
     height: 70,
@@ -557,6 +570,9 @@ const styles = StyleSheet.create({
     height: 180,
     borderRadius: 10,
   },
+  scrollContent: {
+  paddingBottom: 50, 
+},
   cardText: {
     marginTop: 5,
     textAlign: 'center',
@@ -841,6 +857,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#dcdcdc',
     marginRight: 8,
+  },
+  studioImageView: {
+    borderRadius: 10,
+    marginTop: 10,
+    overflow: 'hidden',
+  },
+  image: {
+    width: 150,
+    height: 150,
+    resizeMode: 'cover',
   },
 });
 

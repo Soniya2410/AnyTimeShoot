@@ -37,6 +37,7 @@ const AddDetailsPackageScreen: React.FC = () => {
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+          <View style={styles.fullScreen}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <Text style={styles.title}>{constant.addDetails}</Text>
           <Text style={styles.subTitle}>{constant.giveSome}</Text>
@@ -129,9 +130,9 @@ const AddDetailsPackageScreen: React.FC = () => {
 
         <ASButton
           title={constant.continue}
-          customStyle={styles.continueButton}
           onPress={moveToAddStudioDetails}
         />
+        </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -239,6 +240,11 @@ const styles = StyleSheet.create({
   selectedOptionText: {
     color: colors.white,
   },
+  fullScreen: {
+  flex: 1,
+  justifyContent: 'space-between',
+  paddingBottom: 16,
+},
 });
 
 export default AddDetailsPackageScreen;

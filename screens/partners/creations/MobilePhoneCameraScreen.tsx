@@ -20,8 +20,13 @@ const MobilePhoneCameraScreen: React.FC = () => {
     useNavigation<RootStackNavigationProp<'mobilePhoneCamera'>>();
   const [blockCount, setBlockCount] = useState(1);
 
-  const handleAdd = () => setBlockCount(prev => prev + 1);
-  const handleRemove = () => setBlockCount(prev => (prev > 1 ? prev - 1 : 1));
+const handleAdd = () => {
+  setBlockCount(prev => (prev < 5 ? prev + 1 : 5));
+};
+
+const handleRemove = () => {
+  setBlockCount(prev => (prev > 1 ? prev - 1 : 1));
+};
 
   return (
     <SafeAreaView style={styles.container}>

@@ -158,6 +158,7 @@ const ChooseCategoryPackage: React.FC = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
     >
+      <View style={styles.fullScreen}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{constant.chooseCategory}</Text>
         <Text style={styles.subTitle}>{constant.selectCategory}</Text>
@@ -173,9 +174,10 @@ const ChooseCategoryPackage: React.FC = () => {
 
       <ASButton
         title={constant.continue}
-        customStyle={styles.continueButton}
+        // customStyle={styles.continueButton}
         onPress={moveToAddDetailsScreen}
       />
+      </View>
     </KeyboardAvoidingView>
   </SafeAreaView>
   );
@@ -220,14 +222,14 @@ const styles = StyleSheet.create({
   card: {
     width: cardSize,
     height: cardSize,
-    borderRadius: 12,
+    borderRadius: 10,
     backgroundColor: colors.white,
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start', 
     overflow: 'hidden',
     borderWidth: 1,
     borderColor: '#ddd',
@@ -240,6 +242,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '75%',
     resizeMode: 'cover',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
   label: {
     fontSize: 13,
@@ -247,6 +251,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.regular,
     marginTop: 6,
     textAlign: 'center',
+    
   },
   continueButton: {
     backgroundColor: colors.appColor,
@@ -256,6 +261,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // bottom: 15,
   },
+  fullScreen: {
+  flex: 1,
+  justifyContent: 'space-between',
+  paddingBottom: 16,
+},
 
 });
 

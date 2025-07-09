@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "841706001775",
+    "project_id": "anytimeshoot-beta",
+    "storage_bucket": "anytimeshoot-beta.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841706001775:android:4b074547b422d1e99dc49a",
+        "android_client_info": {
+          "package_name": "com.app.anytimeshoot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxMVRmWkCyoKPd6LdcK3XCfLX1vyUgfAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

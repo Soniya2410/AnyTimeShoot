@@ -361,11 +361,11 @@ const HomeScreen: React.FC = () => {
         />
         </View>
         <View style={styles.recommendedHeader}>
-          <Text style={styles.recommendedTitle}>{constant.specialOffer}</Text>
+          <Text style={styles.recommendedTitle}>{constant.explorePackages}</Text>
           <TouchableOpacity onPress={() => {
-            navigation.navigate('packageList', {title: 'Special Offer', data: recommendedList});
+            navigation.navigate('packageList', {title: 'Explore Packages', data: recommendedList});
           }}>
-            <Text style={styles.viewAll}>{constant.view_all}</Text>
+            {/* <Text style={styles.viewAll}>{constant.view_all}</Text> */}
           </TouchableOpacity>
         </View>
 
@@ -383,11 +383,11 @@ const HomeScreen: React.FC = () => {
         </View>
    {/* Wedding Package  */}
       <View style={styles.weddingPackage}>
-          <Text style={styles.recommendedTitle}>{constant.bestSeller}</Text>
+          <Text style={styles.recommendedTitle}>{constant.trendingNow}</Text>
           <TouchableOpacity onPress={() => {
-           navigation.navigate('packageList', {title: 'Best Seller', data: preweddingList});
+           navigation.navigate('packageList', {title: 'Trending Now', data: preweddingList});
           }}>
-            <Text style={styles.viewAll}>{constant.view_all}</Text>
+            {/* <Text style={styles.viewAll}>{constant.view_all}</Text> */}
           </TouchableOpacity>
         </View>
 
@@ -404,7 +404,7 @@ const HomeScreen: React.FC = () => {
           />
         </View>
         <View style={styles.recommendedHeader}>
-          <Text style={styles.recommendedTitle}>{constant.instant_bookings}</Text>
+          {/* <Text style={styles.recommendedTitle}>{constant.instant_bookings}</Text> */}
           {/* <TouchableOpacity onPress={() =>
              navigation.navigate('packageList', {title: 'Instant Booking', data: instantBooking})
           }>
@@ -421,6 +421,11 @@ const HomeScreen: React.FC = () => {
         {/* Offer Packages  */}
         <View style={styles.weddingPackage}>
           <Text style={styles.recommendedTitle}>{constant.upto_to}</Text>
+          <TouchableOpacity style={{marginHorizontal: 15}} onPress={() =>{
+            navigation.navigate('packageList', {title: 'Offer', data: offerPackageList})
+         }}>
+          <Text style={styles.viewAll}>{constant.view_all}</Text>
+        </TouchableOpacity>
         </View>
         <FlatList
           data={offerPackageList}
@@ -434,14 +439,13 @@ const HomeScreen: React.FC = () => {
           contentContainerStyle={styles.container}
           showsVerticalScrollIndicator={false}
         />
-         <TouchableOpacity style={{marginHorizontal: 15}} onPress={() =>{
+        <View style={styles.weddingPackage}>
+          <Text style={styles.recommendedTitle}>{constant.lifeStyle}</Text>
+           <TouchableOpacity style={{marginHorizontal: 15}} onPress={() =>{
             navigation.navigate('packageList', {title: 'Offer', data: offerPackageList})
          }}>
-          <Text style={styles.viewMore}>{constant.view_more}</Text>
+          <Text style={styles.viewAll}>{constant.view_all}</Text>
         </TouchableOpacity>
-
-        <View style={styles.weddingPackage}>
-          <Text style={styles.recommendedTitle}>{constant.bestSeller_package}</Text>
         </View>
         <FlatList
           data={bestSellerPackageList}

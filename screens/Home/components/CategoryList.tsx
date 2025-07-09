@@ -3,8 +3,12 @@ import { View, Text, FlatList } from 'react-native';
 import { images } from '../../utils/Images';
 import { icons } from '../../utils/Icons';
 import { CategoryItem } from './CategoryItem';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp } from '../../../App';
 
 const CategoryList = () => {
+
+const navigation = useNavigation<RootStackNavigationProp<'homeScreen'>>();
 const categories = [
     {
       id: '1',
@@ -80,6 +84,42 @@ const categories = [
     },
   ];
 
+  const recommended = [
+      {
+        id: '1',
+        title: 'Wedding Xperts',
+        description: 'Wedding Shoot:  5 Days',
+        price: '2,00,000/-',
+        offerPrice: '1,80,000/-',
+        image: images.wedding,
+        rating: 4.5,
+        liked: false,
+        offerText: 'Limited Offer'
+      },
+      {
+        id: '2',
+        title: 'Maternity Shoot',
+        description: 'Wedding Shoot:  5 Days',
+        price: '10,000/-',
+        offerPrice: '8,000/-',
+        image: images.baby1,
+        rating: 4.7,
+        liked: false,
+        offerText: 'Limited Offer'
+      },
+      {
+        id: '3',
+        title: 'Pre-Wedding Shoot',
+        description: 'Wedding Shoot:  5 Days',
+        price: '1,00,000/-',
+        offerPrice: '90,000/-',
+        image: images.marragie1,
+        rating: 4,
+        liked: false,
+        offerText: 'Limited Offer'
+      },
+    ];
+
   
   return(
     <View style={{ flex: 1}}>
@@ -87,7 +127,7 @@ const categories = [
       style={{marginTop: 10}}
         data={categories}
         renderItem={({item}) => 
-        <CategoryItem item={item} onPress={() => {}}/>}
+        <CategoryItem item={item} onPress={() => {navigation.navigate('packageList', {title: 'Package List', data: recommended})}}/>}
         />
     </View>
   )

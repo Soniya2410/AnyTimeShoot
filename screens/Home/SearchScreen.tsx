@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     borderColor: colors.appColor,
     borderRadius: 10,
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 5,
     flexDirection: 'row',
     alignItems: 'center',
     marginRight: 8,
@@ -210,8 +210,8 @@ const styles = StyleSheet.create({
     height: 20
   },
    filterIcons: {
-    width: 18,
-    height: 18
+    width: 15,
+    height: 15
   }
 });
 

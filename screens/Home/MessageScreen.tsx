@@ -34,7 +34,7 @@ const MessageScreen: React.FC = () => {
 
   const moveToNavigation = () => {
     // navigation.navigate('gearAndSoftware');
-    navigation.navigate('bookingType');
+    // navigation.navigate('bookingType');
   }
 
   // Load sample messages (in a real app, you'd fetch these from an API)
@@ -154,13 +154,13 @@ const MessageScreen: React.FC = () => {
           keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
         >
           <View style={styles.inputWrapper}>
-            <TouchableOpacity style={styles.iconButton} onPress={moveToNavigation}>
+            {/* <TouchableOpacity style={styles.iconButton} onPress={moveToNavigation}>
               <Image 
                 source={icons.addImageIcon} 
                 style={styles.icon}
                 resizeMode="contain"
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             
             <TextInput
               style={styles.input}

@@ -85,6 +85,7 @@ import SoftwareUsedScreen from './screens/partners/creations/SoftwareUsedScreen.
 import SearchScreen from './screens/home/SearchScreen.tsx';
 import CategoryList from './screens/home/components/CategoryList.tsx';
 import OurPartnersList from './screens/home/components/OurPartnersList.tsx';
+import PartnerDashBoard from './screens/partners/onboarding/PartnerDashboard.tsx';
 
 export type RootStackParamList = {
   onboard: undefined;
@@ -146,6 +147,7 @@ export type RootStackParamList = {
   bookingType: undefined;
   categoryList: undefined;
   ourPartners: undefined;
+  partnerDashBoard: undefined;
 };
 
 export type RootStackNavigationProp<T extends keyof RootStackParamList> =
@@ -278,6 +280,10 @@ const App: React.FC = () => {
   const callHelpCenter = useCallback(() => {
     Linking.openURL(constant.helpCenter)
   },[])
+
+const callCustomChat = useCallback(() => {
+ 
+}, []);
   return (
     <GestureHandlerRootView>
       <NavigationContainer>
@@ -367,7 +373,7 @@ const App: React.FC = () => {
               headerBackTitle: '',
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={callHelpCenter}
+                  onPress={callCustomChat}
                   style={{
                     borderRadius: 40,
                     borderWidth: 1,
@@ -1656,6 +1662,37 @@ const App: React.FC = () => {
               />
             )}
           </Stack.Screen>
+          <Stack.Screen
+            name="partnerDashBoard"
+            component={PartnerDashBoard}
+           options={{
+              headerTitle: 'DashBoard',
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={callHelpCenter}
+                  style={{
+                    borderRadius: 40,
+                    borderWidth: 1,
+                    borderColor: colors.black,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 4,
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.helpIcon}
+                    style={{
+                      width: 18,
+                      height: 20,
+                      marginRight: 10,
+                    }}
+                  />
+                  <Text style={{color: colors.black}}>{constant.help}</Text>
+                </TouchableOpacity>
+              ),
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

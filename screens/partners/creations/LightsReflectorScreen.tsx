@@ -33,15 +33,20 @@ const LightsReflectorScreen: React.FC = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const handleIncrement = (label: string) => {
-    setCounts(prev => ({...prev, [label]: (prev[label] || 0) + 1}));
-  };
+  setCounts(prev => {
+    const current = prev[label] || 0;
+    const newCount = Math.min(current + 1, 5); 
+    return { ...prev, [label]: newCount };
+  });
+};
 
-  const handleDecrement = (label: string) => {
-    setCounts(prev => {
-      const newCount = (prev[label] || 0) - 1;
-      return {...prev, [label]: newCount < 0 ? 0 : newCount};
-    });
-  };
+const handleDecrement = (label: string) => {
+  setCounts(prev => {
+    const current = prev[label] || 0;
+    const newCount = Math.max(current - 1, 0);
+    return { ...prev, [label]: newCount };
+  });
+};
 
   return (
     <SafeAreaView style={styles.container}>

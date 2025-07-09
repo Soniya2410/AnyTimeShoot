@@ -68,6 +68,7 @@ const ExtraPerksPackageScreen: React.FC = () => {
       <KeyboardAvoidingView
         style={{flex: 1}}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+          <View style={styles.fullScreen}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.paddingView}>
             <Text style={styles.title}>{constant.extraPerks}</Text>
@@ -156,9 +157,9 @@ const ExtraPerksPackageScreen: React.FC = () => {
         {/* <View style={styles.bottomContainer}> */}
         <ASButton
         title={constant.continue}
-        customStyle={styles.btnContinue}
         onPress={moveToNextScreen}
       />
+      </View>
          {/* </View> */}
       </KeyboardAvoidingView>
 
@@ -299,6 +300,13 @@ const styles = StyleSheet.create({
     marginLeft: 6,
     fontSize: 14,
   },
+  fullScreen: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingBottom: 16,
+},
+       
+
 });
 
 export default ExtraPerksPackageScreen;

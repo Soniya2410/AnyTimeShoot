@@ -118,10 +118,11 @@ const AddRulesPackageScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.paddingView}>
       <KeyboardAvoidingView
         style={{flex: 1}}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+          <View style={styles.fullScreen}>
+            <View style={{ marginHorizontal: 16}}>
           <Text style={styles.title}>{constant.addRules}</Text>
           <Text style={styles.subTitle}>{constant.addAnyExtra}</Text>
           <FlatList
@@ -130,13 +131,17 @@ const AddRulesPackageScreen: React.FC = () => {
             renderItem={renderItem}
             contentContainerStyle={styles.listStyle}
           />
-      </KeyboardAvoidingView>
-      </View>
-      <ASButton
+          </View>
+         
+            <ASButton
         title={constant.continue}
-        customStyle={styles.btnContinue}
+        // customStyle={styles.btnContinue}
         onPress={moveToNextScreen}
       />
+       </View>
+      </KeyboardAvoidingView>
+
+    
     </SafeAreaView>
   );
 };
@@ -147,7 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   paddingView: {
-    height:'90%',
+    // height:'90%',
     marginHorizontal: 16
   },
   title: {
@@ -170,6 +175,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
+  },
+   fullScreen: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingBottom: 16,
   },
   numberView: {
     width: 25,

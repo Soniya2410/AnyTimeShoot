@@ -30,7 +30,7 @@ const PricingDetailPackageScreen: React.FC = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
         
-        <View style={styles.container}>
+        <View style={styles.fullScreen}>
           <ScrollView
             contentContainerStyle={styles.scrollContent}
             keyboardShouldPersistTaps="handled"
@@ -62,7 +62,7 @@ const PricingDetailPackageScreen: React.FC = () => {
           {/* <View style={styles.bottomContainer}> */}
             <ASButton
               title={constant.continue}
-              customStyle={styles.continueButton}
+              // customStyle={styles.continueButton}
               onPress={moveToNextScreen}
             />
           {/* </View> */}
@@ -81,6 +81,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+   fullScreen: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingBottom: 16,
+},
   scrollContent: {
     paddingHorizontal: 16,
     paddingBottom: 100, 

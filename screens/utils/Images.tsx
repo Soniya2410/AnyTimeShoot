@@ -196,5 +196,9 @@ export const images = {
   appIcon: require('../../assets/images/booking/app.png'),
   cancellationBooking: require('../../assets/images/booking/cancellation.png'),
   coupounsBooking: require('../../assets/images/booking/coupouns.png'),
-  special: require('../../assets/images/booking/special_instruction.png')
+  special: require('../../assets/images/booking/special_instruction.png'),
+  package1: require('../../assets/images/package/package1.png'),
+  package2: require('../../assets/images/package/package2.png'),
+  package3: require('../../assets/images/package/package3.png'),
+  package4: require('../../assets/images/package/package4.png'),
 };

@@ -46,9 +46,10 @@ const AdditionalInformationPackageScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
     <KeyboardAvoidingView
-          style={{flex: 1, marginHorizontal: 16}}
+          style={{flex: 1,}}
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.fullScreen}>
+          <ScrollView showsVerticalScrollIndicator={false} style={{ marginHorizontal: 16}}>
           <Text style={styles.title}>{constant.additionInformation}</Text>
           <Text style={styles.subTitle}>{constant.giveSomeMoreDetails}</Text>
 
@@ -118,18 +119,16 @@ const AdditionalInformationPackageScreen: React.FC = () => {
           )}
         </View>
       ))}
-          {/* <TextInput
-            style={styles.input}
-            placeholder={constant.numberOfDays}
-            placeholderTextColor={colors.lineColor} /> */}
             </ScrollView>
+             <ASButton
+              title={constant.continue}
+              onPress={moveToNextScreen}    
+          />
+            </View>
         </KeyboardAvoidingView>
         {/* <View style={styles.bottomContainer}> */}
-          <ASButton
-            title={constant.continue}
-            onPress={moveToNextScreen}    
-            customStyle={styles.btnContinue}
-          />
+         
+          
       {/* </View> */}
      </SafeAreaView>
   );
@@ -223,7 +222,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginVertical: 10,
     color: colors.appColor
-  }
+  },
+  fullScreen: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingBottom: 16,
+},
 });
 
 export default AdditionalInformationPackageScreen;

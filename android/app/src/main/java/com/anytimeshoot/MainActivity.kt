@@ -1,4 +1,4 @@
-package com.anytimeshoot
+package com.app.anytimeshoot
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

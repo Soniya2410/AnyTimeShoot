@@ -39,13 +39,6 @@ const StudioFacilitiesItems = ({item}: any) => {
         ]}>
         {item.title}
       </Text>
-      {/* <Text
-        style={[
-          styles.descText,
-          {color: isSelected ? colors.white : colors.textPrimary2},
-        ]}>
-        {item.desc}
-      </Text> */}
     </TouchableOpacity>
   );
 };
@@ -76,7 +69,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: cardSize,
-    minHeight: cardSize,
+    minHeight: cardSize - 100,
     borderRadius: 12,
     backgroundColor: colors.white,
     elevation: 2,

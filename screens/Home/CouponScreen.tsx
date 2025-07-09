@@ -1,81 +1,107 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, Image, Modal } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Image,
+  Modal,
+} from 'react-native';
 import { colors } from '../utils/Colors';
 import { Fonts } from '../utils/Fonts';
 import { constant } from '../utils/Constant';
 import { images } from '../utils/Images';
 import { icons } from '../utils/Icons';
+import CouponSuccessModal from './components/CouponSuccessModal';
 
 const coupons = [
-  { id: '1', type: '10% Off', amount: '₹1,000', code: 'SOMETHINGNEW25', applied: false },
-  { id: '2', type: 'Cashback', amount: '₹2,500', code: 'SOMETHINGNEW25', applied: false },
-  { id: '3', type: 'New Bee', amount: '₹1,000', code: 'SOMETHINGNEW25', applied: false },
-  { id: '4', type: '20% Off', amount: '₹1,000', code: 'SOMETHINGNEW25', applied: false },
+  { id: '1', type: '10% Off', amount: '₹1,000', code: 'SOMETHINGNEW25' },
+  { id: '2', type: 'Cashback', amount: '₹2,500', code: 'SOMETHINGNEW25' },
+  { id: '3', type: 'New Bee', amount: '₹1,000', code: 'SOMETHINGNEW25' },
+  { id: '4', type: '20% Off', amount: '₹1,000', code: 'SOMETHINGNEW25' },
 ];
 
 const CouponScreen = () => {
   const [inputCouponCode, setInputCouponCode] = useState('');
-  const [appliedCoupon,setAppliedCoupon] = useState<string[]>([]);
+  const [appliedCoupons, setAppliedCoupons] = useState<string[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const applyCoupon = (id:string) => {
-    setAppliedCoupon(prev => {return[...prev, id];});
-  };
+  const applyCoupon = useCallback((id: string) => {
+    setAppliedCoupons(prev => [...prev, id]);
+    setModalVisible(true);
+  }, []);
 
-  const removeCoupon = (id:string) => {
-    setAppliedCoupon(prev => prev.filter(couponId => couponId !== id));
-  };
+  const removeCoupon = useCallback((id: string) => {
+    setAppliedCoupons(prev => prev.filter(couponId => couponId !== id));
+  }, []);
 
-  const renderItem = ({item} : any) => {
-    return(
-       <View style={styles.couponCard}>
+  const renderItem = useCallback(({ item }: { item: typeof coupons[0] }) => {
+    const isApplied = appliedCoupons.includes(item.id);
 
-            <View style={styles.tag}>
-              {/* <Image source={icons.couponIcon} style={{height: '100%'}}/> */}
-              <Text style={styles.tagText}>{item.type}</Text>
-            </View>
-            <View style={styles.couponDetails}>
-              <Text style={styles.discountText}>{constant.get} {item.type} {constant.upTo} {item.amount}</Text>
-              <Text style={styles.minPurchase}>{constant.get} {item.type} {constant.onBookingDesc}</Text>
-              <View style={styles.codeContainer}>
-                <Text style={styles.couponCode}>{item.code}</Text>
-              </View>
-              <View style={styles.applyBtnContainer}>
-                {(appliedCoupon.includes(item.id)) ? (
-                  <TouchableOpacity style={styles.appliedContainer} onPress={() => {
-                    removeCoupon(item.id);
-                    }}>
-                    <Image source={images.appliedCouponIcon} style={styles.appliedIcon} />
-                    <Text style={styles.appliedText}>{constant.applied}</Text>
-                  </TouchableOpacity>
-                ) : (
-                  <TouchableOpacity style={styles.applyButton} onPress={() => {
-                    applyCoupon(item.id);
-                    setModalVisible(true);
-                    }}>
-                    <Text style={styles.applyText}>{constant.tapToApply}</Text>
-                  </TouchableOpacity>
-                )}
-              </View>
-            </View>
+    return (
+      <View style={styles.couponCard}>
+        <View style={styles.tag}>
+          <Text style={styles.tagText}>{item.type}</Text>
+        </View>
+
+        <View style={styles.couponDetails}>
+          <Text style={styles.discountText}>
+            {constant.get} {item.type} {constant.upTo} {item.amount}
+          </Text>
+          <Text style={styles.minPurchase}>
+            {constant.get} {item.type} {constant.onBookingDesc}
+          </Text>
+
+          <View style={styles.codeContainer}>
+            <Text style={styles.couponCode}>{item.code}</Text>
           </View>
-    )
-  }
+
+          <View style={styles.applyBtnContainer}>
+            {isApplied ? (
+              <TouchableOpacity
+                style={styles.appliedContainer}
+                onPress={() => removeCoupon(item.id)}>
+                <Image source={images.appliedCouponIcon} style={styles.appliedIcon} />
+                <Text style={styles.appliedText}>{constant.applied}</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={styles.applyButton}
+                onPress={() => applyCoupon(item.id)}>
+                <Text style={styles.applyText}>{constant.tapToApply}</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
+      </View>
+    );
+  }, [appliedCoupons, applyCoupon, removeCoupon]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{constant.applyCoupon}</Text>
-      <Text style={styles.cartValue}>{constant.yourCartValue}: ₹2,45,000</Text>
+      <Text style={styles.cartValue}>
+        {constant.yourCartValue}: ₹2,45,000
+      </Text>
 
       <View style={styles.couponCodeInputContainer}>
         <TextInput
-          placeholder='Enter Coupon Code'
+          placeholder="Enter Coupon Code"
           placeholderTextColor={colors.placeHolderColor}
           style={styles.input}
           value={inputCouponCode}
           onChangeText={setInputCouponCode}
-          />
+        />
         <TouchableOpacity>
-          <Text style={[styles.inputApplyText, (inputCouponCode !== '') && {color: colors.appColor}]}>APPLY</Text>
+          <Text
+            style={[
+              styles.inputApplyText,
+              inputCouponCode !== '' && { color: colors.appColor },
+            ]}>
+            APPLY
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -83,37 +109,17 @@ const CouponScreen = () => {
 
       <FlatList
         data={coupons}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 20 }}
       />
 
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalCard}>
-            <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeBtnContainer}>
-              <Image source={icons.closeIcon} style={styles.closeIcon} />
-            </TouchableOpacity>
-            <Image source={images.couponSuccess} style={styles.couponSuccess} />
-            <View style={styles.successMsgContainer}>
-              <Text style={styles.successMsg}>Your Coupon applied, </Text>
-              <Text style={[styles.successMsg, {color:colors.appColor}]}>Successfully </Text>
-              <Text style={styles.successMsg}>!!!!</Text>
-            </View>
-            <TouchableOpacity style={styles.continueBtnContainer} onPress={() => setModalVisible(false)}>
-              <Text style={styles.continueText}>Continue</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      {/* Modal */}
+      <CouponSuccessModal visible={modalVisible} onClose={() => setModalVisible(false)} />
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -75,6 +75,7 @@ const DeliverableDetailScreen: React.FC = () => {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
+        <View style={styles.fullScreen}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.title}>{constant.deliverable}</Text>
         <Text style={styles.subTitle}>{constant.mentionDetails}</Text>
@@ -115,9 +116,10 @@ const DeliverableDetailScreen: React.FC = () => {
       {/* <View style={styles.bottomContainer}> */}
         <ASButton
           title={constant.continue}
-          customStyle={styles.btnContinue}
+          // customStyle={styles.btnContinue}
           onPress={moveToNextScreen}
         />
+        </View>
       {/* </View> */}
     </KeyboardAvoidingView>
     </SafeAreaView>
@@ -254,6 +256,11 @@ const styles = StyleSheet.create({
   plusSelected: {
     color: colors.white,
   },
+  fullScreen: {
+  flex: 1,
+  justifyContent: 'space-between',
+  paddingBottom: 16,
+},
 });
 
 export default DeliverableDetailScreen;

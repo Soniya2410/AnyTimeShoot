@@ -90,6 +90,7 @@ const AddStudioDetailsPackageScreen: React.FC = () => {
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <View style={styles.fullScreen}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.title}>{constant.addStudioDetails}</Text>
         <Text style={styles.subTitle}>{constant.giveSomeDetail}</Text>
@@ -133,12 +134,12 @@ const AddStudioDetailsPackageScreen: React.FC = () => {
           />
         </View>
         </ScrollView>
-        {/* <View style={styles.bottomContainer}> */}
+        <View style={styles.bottomButtonContainer}>
           <ASButton
-            customStyle={styles.continueButton}
             title={constant.continue}
             onPress={moveToAddStudioDetails} />
-        {/* </View> */}
+        </View>
+        </View>
       </KeyboardAvoidingView>
       </SafeAreaView>
   );
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   scrollContent: {
-    paddingBottom: 20,
+    paddingBottom: 100,
   },
   fileContainer: {
     borderWidth: 1,
@@ -240,9 +241,7 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     marginTop: 25,
   },
-  bottomContainer: {
-    paddingBottom: 20
-  },
+
   continueButton: {
    backgroundColor: colors.appColor,
     // margin: 16,
@@ -258,19 +257,18 @@ const styles = StyleSheet.create({
     marginTop: 6,
     textAlign: 'left',
   },
- 
-  cardContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 8,
-    paddingVertical: 10,
-    width: '100%',
-  },
   textContainer: {
     flex: 1,
     marginLeft: 8,
   },
-
+ fullScreen: {
+  flex: 1,
+  justifyContent: 'space-between',
+  paddingBottom: 16,
+},
+bottomButtonContainer: {
+  backgroundColor: colors.white,
+}
   
 });
 

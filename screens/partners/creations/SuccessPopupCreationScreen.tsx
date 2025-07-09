@@ -22,11 +22,16 @@ const SuccessPopupCreationScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp<'successCreation'>>();
   
   const moveToContinue = () => {
-   navigation.navigate('gearAndSoftware');
+  //  navigation.navigate('packageCreation');
+  navigation.navigate('partnerDashBoard');
+
+
+
   };
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.fullScreen}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.imageContainer}>
           <Image source={images.confetti} style={styles.backgroundImage} />
@@ -45,9 +50,10 @@ const SuccessPopupCreationScreen: React.FC = () => {
       {/* <View style={styles.bottomBar}> */}
         <ASButton
           title={constant.continue}
-          customStyle={styles.continueBtn}
+          // customStyle={styles.continueBtn}
           onPress={moveToContinue}
         />
+        </View>
       {/* </View> */}
     </SafeAreaView>
   );
@@ -79,6 +85,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.appColor,
   },
+    fullScreen: {
+  flex: 1,
+  justifyContent: 'space-between',
+  paddingBottom: 16,
+},
   bottomBar: {
    paddingBottom: 20
   },

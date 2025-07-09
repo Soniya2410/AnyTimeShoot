@@ -30,6 +30,7 @@ const AddSamplePackageScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.fullScreen}>
       <View style={styles.viewStyle}>
         <Text style={styles.title}>{constant.addSampleForPackage}</Text>
         <Text style={styles.subTitle}>{constant.provideSample}</Text>
@@ -62,9 +63,9 @@ const AddSamplePackageScreen: React.FC = () => {
         </View>
         <ASButton
           title={'Upload'}
-          customStyle={styles.btnContinue}
           onPress={moveToNextScreen}
         />
+        </View>
       </SafeAreaView>
   );
 };
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   },
   viewStyle : {
     marginHorizontal: 16,
-    height: '94%'
+    // height: '94%'
   },
   title: {
     fontFamily: Fonts.medium,
@@ -104,12 +105,9 @@ const styles = StyleSheet.create({
    
   },
   bottomContainer: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
     backgroundColor: colors.white,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
+    // paddingHorizontal: 16,
+    // paddingVertical: 14,
   },
   btnContinue: {
     backgroundColor: colors.appColor,
@@ -173,6 +171,11 @@ const styles = StyleSheet.create({
     minHeight: 150,
     marginVertical: 10
   },
+  fullScreen: {
+  flex: 1,
+  justifyContent: 'space-between',
+  paddingBottom: 16,
+},
 });
 
 export default AddSamplePackageScreen;

@@ -42,7 +42,10 @@ const PartnerOTPScreen = () => {
         <Text style={styles.stepText}>Step 1 of 5</Text>
 
         <TouchableOpacity
-          style={styles.optionBox}
+         style={[
+            styles.optionBox,
+            selectedOption === 'phone' && styles.selectedBox,
+          ]}
           onPress={() => setSelectedOption('phone')}>
           <Image source={images.phoneOtp} style={styles.icon} />
           <Text style={styles.optionLabel}>Phone number</Text>
@@ -60,7 +63,10 @@ const PartnerOTPScreen = () => {
         </View>
 
         <TouchableOpacity
-          style={styles.optionBox}
+           style={[
+            styles.optionBox,
+            selectedOption === 'email' && styles.selectedBox,
+          ]}
           onPress={() => setSelectedOption('email')}>
           <Image source={images.emailOtp} style={styles.emailIcon} />
           <Text style={styles.optionLabel}>E-Mail</Text>
@@ -168,6 +174,12 @@ const styles = StyleSheet.create({
   emailIcon: {
     width: 99,
     height: 80,
+  },
+  selectedBox: {
+    borderWidth: 2,
+    borderColor: colors.appColor,
+    borderRadius: 12,
+    backgroundColor: '#F8F8F8',
   },
 });
 

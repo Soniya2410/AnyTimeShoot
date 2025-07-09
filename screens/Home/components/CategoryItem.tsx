@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
       width: 100,
       height: 100,
       marginHorizontal: 10,
-      marginVertical: 10
-      // borderRadius: 5,
+      marginVertical: 10,
+      borderRadius: 50,
     },
     cardContent: {
       flex: 1,

@@ -106,6 +106,10 @@ const ratingData = [
     setCurrentDate(newDate);
   };
 
+  const callScreen = useCallback((screenName : any) => {
+    navigation.navigate(screenName)
+  },[])
+
   const formatMonthYear = (date: Date) => {
     return {
       month: date.toLocaleString('default', {month: 'long'}),
@@ -186,23 +190,23 @@ const ratingData = [
         </View>
 
         {/* Policy Cards */}
-        <View style={styles.card}>
+        <TouchableOpacity style={styles.card} onPress={() => callScreen("cancellationPolicy")}>
           <Image source={images.cancellationBooking} style={styles.icon} />
           <View style={styles.cardText}>
             <Text style={styles.cardTitle}>Cancellation policy</Text>
             <Text style={styles.cardSubtitle}>By proceeding, you agree to our policy</Text>
           </View>
           <Image source={icons.nextArrowIcon} style={styles.arrowIcon}/>
-        </View>
+        </TouchableOpacity>
 
-        <View style={styles.card}>
+        <TouchableOpacity style={styles.card} onPress={() => callScreen('couponScreen')}>
           <Image source={images.coupounsBooking} style={styles.icon} />
           <View style={styles.cardText}>
             <Text style={styles.cardTitle}>Coupon applied</Text>
             <Text style={styles.cardSubtitle}>You’re saving ₹1500</Text>
           </View>
           <Image source={icons.nextArrowIcon} style={styles.arrowIcon}/>
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.card}>
           <Image source={images.special} style={styles.icon} />
@@ -262,7 +266,7 @@ const ratingData = [
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={{ marginBottom: 30}}>
+      <ScrollView style={{ marginBottom: 80}}>
         <ProfileDetailSlider />
         <View style={styles.calContainer}>
           <Text style={styles.title}>{constant.sheduledShoot}</Text>

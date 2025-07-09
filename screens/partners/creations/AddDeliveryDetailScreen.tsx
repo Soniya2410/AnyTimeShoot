@@ -39,6 +39,7 @@ const AddDeliveryDetailScreen: React.FC = () => {
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
           keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
         >
+          <View style={styles.fullScreen}>
           <ScrollView
             contentContainerStyle={styles.scrollContent}
             keyboardShouldPersistTaps="handled"
@@ -152,9 +153,9 @@ const AddDeliveryDetailScreen: React.FC = () => {
         {/* <View style={styles.bottomContainer}> */}
             <ASButton
               title={constant.continue}
-              customStyle={styles.continueButton}
               onPress={moveToNextScreen}
             />
+            </View>
           {/* </View> */}
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -199,14 +200,11 @@ bottomContainer: {
   // borderTopWidth: 1,
   // borderColor: '#eee',
 },
-  // bottomContainer: {
-  //   position: 'absolute',
-  //   bottom: 0,
-  //   width: '100%',
-  //   backgroundColor: colors.white,
-  //   paddingHorizontal: 16,
-  //   paddingVertical: 14,
-  // },
+  fullScreen: {
+  flex: 1,
+  justifyContent: 'space-between',
+  paddingBottom: 16,
+},
   continueButton: {
     backgroundColor: colors.appColor,
     // margin: 16,
