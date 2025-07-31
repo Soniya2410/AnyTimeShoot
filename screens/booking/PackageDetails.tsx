@@ -481,7 +481,7 @@ const PackageDetails: React.FC = () => {
     <View style={styles.bottomBar}>
         <Text style={styles.priceText}>{constant.reviewPrice}</Text>
         <ASButton
-          title={constant.bookNow}
+          title={constant.selectDate}
           customStyle={styles.bookButton}
           textStyle={styles.bookButtonText}
           onPress={moveToBookNow}

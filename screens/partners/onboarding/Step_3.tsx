@@ -33,9 +33,9 @@ const Step_3: React.FC = () => {
       >
         <Image source={images.uploadIcon} />
         <Text style={styles.uploadText}>
-          Choose a file or drag & drop it here
+          Choose a file here
         </Text>
-        <Text style={styles.fileNote}>JPEG or PNG formats, up to 50MB</Text>
+        <Text style={styles.fileNote}>JPEG or PNG formats, up to 1MB</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={onTipsToggle}>

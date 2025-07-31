@@ -113,12 +113,12 @@ const UpcomingShootStartedScreen: React.FC = () => {
           </>
         {/* }
         ListFooterComponent={ */}
-          <ASButton
+          {/* <ASButton
             title={constant.generateInvoice}
             customStyle={styles.startShootButton}
             onPress={moveToInvoice}
             textStyle={styles.startShootButtonText}
-          />
+          /> */}
         {/* }
       /> */}
       </ScrollView>
